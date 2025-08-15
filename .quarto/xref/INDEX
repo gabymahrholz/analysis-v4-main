@@ -1,0 +1,59 @@
+{
+  "index.qmd": {
+    "index.html": "4533b02c"
+  },
+  "01-basics.qmd": {
+    "01-basics.html": "81ff5f66"
+  },
+  "02-wrangling.qmd": {
+    "02-wrangling.html": "331d685b"
+  },
+  "03-wrangling2.qmd": {
+    "03-wrangling2.html": "20617586"
+  },
+  "04-dataviz.qmd": {
+    "04-dataviz.html": "aa4a025e"
+  },
+  "05-dataviz2.qmd": {
+    "05-dataviz2.html": "52f8e92b"
+  },
+  "06-chi-square-one-sample.qmd": {
+    "06-chi-square-one-sample.html": "f1cccb37"
+  },
+  "07-independent.qmd": {
+    "07-independent.html": "41c99640"
+  },
+  "08-paired.qmd": {
+    "08-paired.html": "59b592e0"
+  },
+  "09-correlation.qmd": {
+    "09-correlation.html": "8d1975d1"
+  },
+  "10-regression.qmd": {
+    "10-regression.html": "e340af6a"
+  },
+  "11-multiple-regression.qmd": {
+    "11-multiple-regression.html": "d670a9de"
+  },
+  "12-one-way-anova.qmd": {
+    "12-one-way-anova.html": "0bcfeb39"
+  },
+  "13-factorial-anova.qmd": {
+    "13-factorial-anova.html": "418cb20a"
+  },
+  "appendix-a-installing-r.qmd": {
+    "appendix-a-installing-r.html": "e1610494"
+  },
+  "appendix-b-updating-packages.qmd": {
+    "appendix-b-updating-packages.html": "23e104db"
+  },
+  "appendix-d-symbols.qmd": {
+    "appendix-d-symbols.html": "01eab938"
+  },
+  "appendix-x-How-to-cite-R.qmd": {
+    "appendix-x-How-to-cite-R.html": "73b1e0a6"
+  },
+  "appendix-y-license.qmd": {
+    "appendix-y-license.html": "2bd7c538"
+  }
+}

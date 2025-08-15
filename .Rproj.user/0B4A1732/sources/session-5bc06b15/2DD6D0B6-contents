@@ -1,0 +1,943 @@
+# Multiple regression {#sec-reg_mult}
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+## Intended Learning Outcomes {.unnumbered}
+
+By the end of this chapter you should be able to:
+
+- Apply and interpret multiple linear regression models.
+- Interpret coefficients from individual predictors and interactions.
+- Visualise interactions as model predictions to understand and communicate your findings.
+- Calculate statistical power for a multiple regression model.
+
+In the previous chapter, we have looked at simple regressions - predicting an outcome variable using one predictor variable. In this chapter, we will expand on that and look at scenarios where we predict an outcome using more than one predictor in the model - hence, multiple regression.
+
+## [Individual Walkthrough]{style="color: #F39C12; text-transform: uppercase;"} {.unnumbered}
+
+
+## Activity 1: Setup & download the data
+
+This week, we will be working with a new dataset. Follow the steps below to set up your project:
+
+* **Create a new project** and name it something meaningful (e.g., "2B_chapter11", or "11_multiple_regression"). See @sec-project if you need some guidance.
+* **Create a new `.Rmd` file** and save it to your project folder. See @sec-rmd if you need help. 
+* Delete everything after the setup code chunk (e.g., line 12 and below) 
+* **Download the new dataset** here: [data_ch11.zip](data/data_ch11.zip "download"). The zip folder includes:
+  * the demographics data file (`Przybylski_2017_demographics.csv`)
+  * the screentime data file (`Przybylski_2017_screentime.csv`)
+  * the wellbeing data file (`Przybylski_2017_wellbeing.csv`), and the
+  * the codebook (`Przybylski_2017_Codebook.xlsx`).
+* Extract the data file from the zip folder and place it in your project folder. If you need help, see @sec-download_data_ch1.
+
+
+
+**Citation**
+
+> Przybylski, A. K., & Weinstein, N. (2017). A Large-Scale Test of the Goldilocks Hypothesis: Quantifying the Relations Between Digital-Screen Use and the Mental Well-Being of Adolescents. *Psychological Science, 28*(2), 204-215. [https://doi.org/10.1177/0956797616678438](https://doi.org/10.1177/0956797616678438){target="_blank"}
+
+
+
+
+**Abstract**
+
+> Although the time adolescents spend with digital technologies has sparked widespread concerns that their use might be negatively associated with mental well-being, these potential deleterious influences have not been rigorously studied. Using a preregistered plan for analyzing data collected from a representative sample of English adolescents (*n* = 120,115), we obtained evidence that the links between digital-screen time and mental well-being are described by quadratic functions. Further, our results showed that these links vary as a function of when digital technologies are used (i.e., weekday vs. weekend), suggesting that a full understanding of the impact of these recreational activities will require examining their functionality among other daily pursuits. Overall, the evidence indicated that moderate use of digital technology is not intrinsically harmful and may be advantageous in a connected world. The findings inform recommendations for limiting adolescents’ technology use and provide a template for conducting rigorous investigations into the relations between digital technology and children’s and adolescents’ health.
+
+The data is available on OSF: [https://osf.io/bk7vw/](https://osf.io/bk7vw/){target="_blank"}
+
+
+
+**Changes made to the dataset**
+
+* The original SPSS file was converted into a CSV format. Although a CSV file was available in the OSF folder, it lacked labels and value explanations, so we opted to work from the SPSS file, which contained more information.
+* We reduced the dataset by selecting some of the variables relating to demographics, screentime and wellbeing.
+* The data was split into three separate files: demographics, screentime, and wellbeing.
+* Screen time values were recoded to reflect hours according to the codebook.
+* Rows with missing values were removed from `screentime.csv` and `wellbeing.csv`.
+* A codebook was created for the selected variables.
+
+
+
+
+
+
+## Activity 2: Load in the library, read in the data, and familiarise yourself with the data
+
+Today, we will use the following packages `tidyverse`, `sjPlot`, `performance`, and `pwr`, along with the three data files from the Przybylski and Weinstein (2017) study.
+
+
+```{r eval=FALSE}
+???
+
+demo <- ???
+screentime <- ???
+wellbeing <- ???
+```
+
+
+```{r include=FALSE, message=TRUE}
+## I basically have to have 2 code chunks since I tell them to put the data files next to the project, and mine are in a separate folder called data - unless I'll turn this into a fixed path
+library(tidyverse)
+library(sjPlot)
+library(performance)
+library(pwr)
+
+demo <- read_csv("data/Przybylski_2017_demographics.csv")
+screentime <- read_csv("data/Przybylski_2017_screentime.csv")
+wellbeing <- read_csv("data/Przybylski_2017_wellbeing.csv")
+```
+
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r eval=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(performance)
+library(pwr)
+
+demo <- read_csv("Przybylski_2017_demographics.csv")
+screentime <- read_csv("Przybylski_2017_screentime.csv")
+wellbeing <- read_csv("Przybylski_2017_wellbeing.csv")
+```
+
+:::
+
+As always, take a moment to familiarise yourself with the data before starting your analysis.
+
+Once you have explored the data objects and the codebook, try and answer the following questions: 
+
+* The variable **Gender** is located in the object named `r mcq(c(answer = "demo", x = "wellbeing", x = "screentime"))`.
+* The **wellbeing data** is in `r mcq(c(x = "long", answer = "wide"))` format and contains observations from `r fitb(c("102580", "102,580"))` participants. 
+* The **wellbeing questionnaire** has `r fitb("14")` items.
+* Individual participants in this dataset are identified by the variable `r fitb(c("Serial"))`, which allows us to link information across the three tables.
+* Are there any missing data points? `r mcq(c(x = "Yes", answer = "No"))`
+
+
+#### Potential Research Question & Hypthesis {.unnumbered}
+
+There is ongoing debate about how smartphones affect well-being, particularly among children and teenagers. Therefore, we will examine whether smartphone use predicts mental well-being and whether this relationship varies by gender among adolescents.
+
+
+* **Potential research question**: "Does smartphone use predict mental well-being, and does this relationship differ between male and female adolescents?"
+* **Null Hypothesis (H~0~)**: "Smartphone use does not predict mental well-being, and there is no difference in this relationship between male and female adolescents."
+* **Alternative Hypothesis (H~1~)**: "Smartphone use is a significant predictor of mental well-being, and the effect of smartphone use on well-being differs between male and female adolescents."
+
+
+
+Note that in this analysis, we have:
+
+* A continuous dependent variable (DV)/Outcome: well-being
+* A continuous independent variable (IV)/Predictor: screen time
+* A categorical independent variable (IV)/Predictor: gender
+
+_* these variables are only quasi-continuous, inasmuch as only discrete values are possible. However, there are a sufficient number of discrete categories that we can treat them as effectively continuous._
+
+## Activity 3: Compute descriptives
+
+Today, most of the data wrangling will be done in the upcoming activities. To streamline the process, we will move "Computing descriptives" forward.
+
+
+### Well-being 
+
+We need to do some initial data wrangling on `wellbeing`.
+
+For each participant, compute the total score for the mental health questionnaire. Store the output in a new data object called `wemwbs`. 
+
+The new dataset should have two variables:
+
+* `Serial` - the participant ID.
+* `WEMWBS_sum` - the total WEMWBS score.
+
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution
+
+```{r}
+wemwbs <- wellbeing %>%
+  pivot_longer(cols = starts_with("WB"), # -Serial or WBOptimf:WBCheer also work
+               names_to = "Qs", 
+               values_to = "Score") %>%
+  group_by(Serial) %>%
+  summarise(WEMWBS_sum = sum(Score)) %>% 
+  ungroup()
+```
+
+:::
+
+
+In the original paper, Przybylski and Weinstein (2017) reported: "Scores ranged from 14 to 70 (M = 47.52, SD = 9.55)". Can you reproduce these values?
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+Means and standard deviations should not be an issue at this stage, but how would you calculate the minimum and the maximum? 
+
+We briefly covered this in @sec-wrangling, and the solution is more intuitive than you might think...
+
+
+:::
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+Yes, that's right! The functions `min()` and `max()` are used to calculate the minimum and maximum values, respectively.
+
+```{r}
+wemwbs %>% 
+  summarise(mean = mean(WEMWBS_sum),
+            sd = sd(WEMWBS_sum),
+            min = min(WEMWBS_sum),
+            max = max(WEMWBS_sum))
+```
+:::
+
+
+### Screentime
+
+We need to calculate the means and standard deviations for smartphone use (in hours) during the week and on the weekend.
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+At this stage, we are simply computing the values rather than storing them. However, if you’d like to save the output as an object in your `Global Environment`, feel free to do so.
+
+```{r}
+screentime %>% 
+  summarise(smart_weekday_mean = mean(Smart_wk),
+            smart_weekday_sd = sd(Smart_wk),
+            smart_weekend_mean = mean(Smart_we),
+            smart_weekend_sd = sd(Smart_we))
+```
+:::
+
+
+## Activity 4: Recreating the plot from the paper
+
+If there's a challenge in this session, this is it! Our task is to wrangle the data and recreate the plot from the original article (shown below).
+
+![Fig. 1. Mental well-being as a function of daily digital-screen time on weekdays and weekends. Results are shown separately for time spent (a) watching TV and movies, (b) playing video games, (c) using computers, and (d) using smartphones. Error bars denote the 95% confidence intervals for the observed means. (Przybylski & Weinstein, 2017)](images/figure_Przybylski.jpeg)
+
+The graph shows that smartphone use of more than 1 hour per day is associated with increasingly negative well-being.
+
+We can plot the relationship between well-being and hours of technology use, split into four categories of technology (video games, computers, smartphones, TV).
+
+This plot involves faceting, and some of the required functions may be new to you. Don't worry—we'll guide you through the process!
+
+::: {.callout-tip icon="false"}
+
+## Observations
+
+Let's start with some observations:
+
+A) We need data on screen time (x-axis) and mental well-being (y-axis), which are currently stored in `screentime` and `wellbeing`, respectively. This means we will need to join the two datasets at some point.
+
+B) The data needs to be restructured into long format so we can use the function `facet_wrap()`.
+
+C) Since the plot includes separate lines for weekday and weekend screen time, we need to create a variable with two levels (weekday, weekend) rather than storing this information in separate columns.
+
+D) We also need to compute the average well-being scores for each screen time level, separately for weekdays and weekends.
+
+E) The visualization requires both a line plot (`geom_line()`) and a scatterplot (`geom_point()`) to create a "line with dots".
+
+F) For clarity, it would be best to label the different technology categories directly in the plot rather than listing them in the figure caption.
+
+:::
+
+Now it's just figuring out which sequence we need them to be in. There are steps to do (or that easier to do) in the dataframe and then there is plotting. 
+
+Sooo, let's start with any changes we can apply to the dataframe `screentime`. We should store the new output in an object called `screen_long`.
+
+**Step 1**: Pivot `screentime` into long format.
+
+**Step 2**: Extracting technology type and time period
+To access information on weekday/weekend and the four categories of technology, we need to separate information currently stored in column names. Anything **before** the separator `_` represents the **technology type**. Anything **after** the separator `_` indicates whether the data is from **weekdays (`wk`) or weekends (`we`)**. (e.g., `Watch_we`, `Smart_wk`). Restructuring is easier when the data is in long format.
+
+**Step 3**: The current labels `Watch`, `Smart`, `we` or `wk` are not really informative. Since these labels will be displayed in the facets and legends of the final plot, we should rename them here to improve readability. Although legend labels can be adjusted later in the plot, facet labels are more difficult to modify, so it’s better to clean them now.
+
+* "Watch" $\rightarrow$ "Watching TV",
+* "Comp" $\rightarrow$ "Playing Video Games",
+* "Comph" $\rightarrow$ "Using Computers",
+* "Smart" $\rightarrow$ "Using Smartphone",
+* "wk" $\rightarrow$ "Weekdays", and
+* "we" $\rightarrow$ "Weekends".
+
+**Step 4**: To ensure all necessary information is in one place, join `screen_long` and `wemwbs` so that each participant has corresponding values from both dataframes.
+
+**Step 5**: For each technology type and screen time level, compute the average well-being scores separately for weekdays and weekends. 
+
+Since steps 4 and 5 contribute to creating a summary dataset rather than modifying individual records, it might be best to store the output in a new object called `dat_means`.
+
+::: {.callout-note collapse="true" icon="false"}
+## Hints
+
+* Step 1: uses `pivot_longer()`
+* Step 2: remember the `separate()` function. It will come in handy here. And the separator needs to be "_".
+* Step 3: requires a simple recoding of the values, no conditional statements necessary
+* Step 4: `inner_join()`
+* Step 5: think about what column you need to `group_by()` before you can `summarise()`
+
+
+:::
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+We are just computing the information rather than storing it. If you want to save it as an object to your `Global Environment`, feel free to do so.
+
+```{r}
+screen_long <- screentime %>%
+  # Step 1: Pivot into long format
+  pivot_longer(cols = -Serial, names_to = "headings", values_to = "hours") %>%
+  # Step 2: `separate()`
+  separate(col = headings, into = c("technology_type", "day"), sep = "_") %>% 
+  # Step 3: Recode the values
+  mutate(technology_type = case_match(technology_type,
+                                      "Watch" ~ "Watching TV",
+                                      "Comp" ~ "Playing Video Games",
+                                      "Comph" ~ "Using Computers",
+                                      "Smart" ~ "Using Smartphone"),
+         day = case_match(day,
+                          "wk" ~ "Weekdays",
+                          "we" ~ "Weekends"))
+
+dat_means <- inner_join(wemwbs, screen_long, by = "Serial") %>% # Step 4: joining
+  # Step 5: group_by & summarise
+  group_by(technology_type, day, hours) %>%
+  summarise(mean_wellbeing = mean(WEMWBS_sum))
+```
+:::
+
+Now we are ready to create the plot! This visualization includes a few new features related to line plots and point shapes. Take a moment to explore them.
+
+```{r}
+ggplot(dat_means, aes(x = hours, y = mean_wellbeing, linetype = day, shape = day)) +
+  geom_line() +
+  geom_point() +
+  scale_shape_manual(values=c(15, 16)) +
+  facet_wrap(~ technology_type) + 
+  theme_classic() + 
+  labs(x = "Hours of Technology Use",
+       y = "Mean Well-Being Score")
+```
+
+::: {.callout-tip collapse="true"}
+## More info on plot parameters
+
+* The `aes(linetype = …)` argument controls the type of line (e.g., solid or dotted). Here, we used it to differentiate between weekdays and weekends. More on line types can be found here: [https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html](https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html){target="_blank"}
+* To change the shape of the points, we set `shape` inside `aes()`, linking it to the day type. However, by default, the shapes appeared as dots and triangles, whereas the original plot suggests dots and squares. We corrected this using `scale_shape_manual()`. More on point shapes can be found here: [https://www.sthda.com/english/wiki/ggplot2-point-shapes](https://www.sthda.com/english/wiki/ggplot2-point-shapes){target="_blank"}
+
+If you are looking really closely, you will notice that the order of the categories is slightly different, and that the x- and y-axis ranges extend a bit further. Feel free to fix that yourself.
+
+Hmm. Actually, it seems the original authors created four separate plots and then combined them using a package like `patchwork`. Here, we used facets rather than creating those individual plots. That also means that the axis labels span across all plots rather than being repeated for each. Plus, the legend appears on the side instead of within each plot.
+
+Ah well! Let's call it a conceptual replication, then, shall we?
+
+:::
+
+
+
+## Activity 5: Dataframe for the regression model
+
+Now, we shift our focus to our hypothetical research question:
+
+>"Does smartphone use predict mental well-being, and does this relationship differ between male and female adolescents?"
+
+### Final data wrangling steps
+
+Create a new data object that contains the average daily smartphone use per participant, averaged across weekdays and weekends.
+
+Since Przybylski and Weinstein's findings suggest that smartphone use exceeding one hour per day is associated with increasingly negative well-being, we will filter the data to include only participants who use a smartphone for more than one hour per day.
+
+We have already structured much of the data when creating `screen_long`, so we have two options:
+
+* Start from `screen_long` to simplify the process, or
+* Return to the original `screentime` dataset, where smartphone use was recorded separately for weekdays and weekends.
+
+Next, we need to merge the wrangled data with well-being scores (as we did earlier) and also join it with the participant information, since we need the Gender variable for our analysis.
+
+Finally, store the cleaned dataset in an object called `data_smartphone`.
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hints: Option 1 (using `screen_long`)
+
+* Step 1: Only include smartphone use and exclude other technologies.
+* Step 2: Calculate the average smartphone use for each participant.
+* Step 3: Only include participants who use a smartphone for more than 1 hour per day.
+* Step 4: Join the filtered output with `wemwbs`, and `demo`, ensuring only participants with values in all three datasets are retained.
+* Step 5: Select all variables of interest (i.e., Participant ID, the well-being score, the average smartphone use, and gender information)
+:::
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution Option 1
+
+```{r}
+data_smartphone <- screen_long %>% 
+  # Step 1
+  filter(technology_type == "Using Smartphone") %>% 
+  # Step 2
+  group_by(Serial) %>% 
+  summarise(average_hours = mean(hours)) %>% 
+  # Step 3
+  filter(average_hours > 1) %>% 
+  # Step 4
+  inner_join(wemwbs) %>% 
+  inner_join(demo) %>% 
+  # Step 5
+  select(Serial, WEMWBS_sum, average_hours, Gender)
+  
+```
+:::
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hints Option 2 (using `screentime`)
+
+* Step 1: Select all relevant variables from `screentime`. 
+* Step 2: Calculate the average smartphone use for each participant. This can be done by pivoting, grouping, and summarising (as we typically do), or simply by computing the mean as `(col1 + col2) / 2`.
+* Step 3: Only include participants who use a smartphone for more than 1 hour per day.
+* Step 4: Join the filtered output with `wemwbs`, and `demo`, ensuring only participants with values in all three datasets are retained.
+* Step 5: Select all variables of interest (i.e., Participant ID, the well-being score, the average smartphone use, and gender information)
+
+:::
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution Option 2
+
+```{r}
+data_smartphone <- screentime %>% 
+  # Step 1
+  select(Serial, Smart_wk, Smart_we) %>% 
+  # Step 2 - different approach to computing averages
+  mutate(average_hours = (Smart_wk + Smart_we)/2) %>% 
+  # Step 3
+  filter(average_hours > 1) %>% 
+  # Step 4
+  inner_join(wemwbs) %>% 
+  inner_join(demo) %>% 
+  # Step 5
+  select(Serial, WEMWBS_sum, average_hours, Gender)
+  
+```
+:::
+
+### Mean-centering variables
+
+As you have seen in the lectures, when you have continuous variables in a regression model, it is often sensible to transform them by **mean centering**. You mean center a predictor `X` by subtracting the mean of the predictor (`X_centered = X - mean(X)`) or you can use the `scale()` function. This has two useful consequences:
+
+- The model intercept represents the predicted value of $Y$ when the predictor variable is at its mean, rather than at zero in the unscaled version.
+
+- When interactions are included in the model, significant effects can be interpreted as the overall effect of a predictor on the outcome (i.e., a main effect) rather than its effect at a specific level of another predictor (i.e., a simple effect).
+
+
+For categorical predictors with two levels, these become coded as -.5 and .5 (because the mean of these two values is 0). This is also known as deviation coding.
+
+If we used dummy coding (i.e., leaving the categorical predictor as "Male" and "Female or unknown; default for R) instead of deviation coding, the interpretation would change slightly:
+
+* **Dummy-coding interpretation**: The intercept represents the predicted outcome for the reference group (coded as 0), and the coefficient for the categorical predictor represents the difference in the outcome between the two groups.
+* **Deviation-coding interpretation**: The intercept represents the overall mean outcome across both groups, and the coefficient for the categorical predictor represents the average difference between the two groups, centered around zero.
+
+
+Use `mutate()` to add two new variables to `data_smartphone`: 
+
+* `average_hours_centered`: calculated as a mean-centered version of the `total_hours` predictor
+* `gender_recoded`: recode Gender .5 for "Male" and -.5 for "Female or unknown".
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r}
+data_smartphone <- data_smartphone %>%
+  mutate(average_hours_centered = average_hours - mean(average_hours),
+         #alternative with the scale function: 
+         #average_hours_centered = scale(average_hours, scale = FALSE),
+         gender_recoded = case_match(Gender,
+                                     "Male"  ~ 0.5,
+                                     "Female or unknown" ~ -0.5),
+         gender_recoded = factor(gender_recoded),
+         Gender = factor(Gender))
+```
+:::
+
+
+
+## Activity 6: Compute the regression, confidence intervals, and effect size
+
+For the data in `data_smartphone`, use the `lm()` function to calculate the multiple regression model:
+
+$Y_i = \beta_0 + \beta_1 X_{1i}  + \beta_2 X_{2i}  + \beta_3 X_{3i} + e_i$
+
+where
+
+- $Y_i$ is the well-being score for participant $i$;
+
+- $X_{1i}$ is the mean-centered smartphone use for participant $i$;
+
+- $X_{2i}$ is gender (coded as -0.5 = female, 0.5 = male);
+
+- $X_{3i}$ is the interaction between smartphone use and gender ($= X_{1i} \times X_{2i}$)
+
+In R, this model is specified as:
+
+```{r eval=FALSE}
+lm(Outcome ~ Predictor1 + Predictor2 + Interaction, data)
+```
+
+
+
+::: {.callout-tip}
+
+The formula `lm(Outcome ~ Predictor1 + Predictor2, data)` includes both predictors in the model, allowing you to examine their individual contributions (i.e., main effects) in explaining the outcome variable.
+
+However, if you are also interested in their interaction, you have two options:
+
+* Using the shorthand `*` operator: `lm(Outcome ~ Predictor1 * Predictor2, data)` automatically includes both main effects and their interaction. OR
+* Manually specifying the interaction term by using the `:` operator: `lm(Outcome ~ Predictor1 + Predictor2 + Predictor1:Predictor2, data)`. **Note:** The colon (`:`) specifies an interaction term without including the main effects, so both predictors must also be listed separately to ensure a full model.
+
+Both approaches yield the same results, but the `*` shorthand is often preferred for readability.
+
+:::
+
+::: {.callout-note icon="false"}
+
+## Your Turn
+
+* Save your model in an object `mod`. 
+* Run `summary(mod)` to see the output of the regression. 
+* Compute confidence intervals for the model coefficients.
+* Calculate the effect size ($f^2$).
+
+The functions you’ll use are the same as last time, except that this model includes multiple predictors and an interaction term.
+
+Answer the following questions:
+
+* The interaction between smartphone use and gender is shown by the variable `r mcq(c(x = "average_hours_centered", x = "gender_recoded0.5", answer = "average_hours_centered:gender_recoded0.5"))`, and this interaction was `r mcq(c(answer = "significant", x = "non-significant"))` at the $\alpha = .05$ level.
+
+* To 2 decimal places, adjusted $R^2$ suggests the overall model explains what percentage of the variance in well-being scores? `r fitb("9.38")`
+
+* The *p*-value for the overall model fit is `<2e-16`. Is this statistically significant? `r mcq(c(answer = "Yes", "No"))`. How would you note that p-value in APA style when writing up the results? `r fitb(c("p<.001", "p < .001"))`
+
+* What is the observed effect size (in $f^2$) for the study to 3 decimal places? `r fitb(c(.103, 0.103), num = TRUE, tol = .001)` 
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r}
+## model
+mod <- lm(formula = WEMWBS_sum ~ average_hours_centered * gender_recoded, 
+               data = data_smartphone)
+
+## regression output
+summary(mod)
+```
+
+
+```{r}
+## confidence intervals
+confint(mod)
+```
+
+
+```{r}
+## effect size
+r_sq_adj <- summary(mod)$adj.r.squared
+f_2 <- r_sq_adj/(1-r_sq_adj)
+f_2
+```
+
+:::
+
+:::
+
+## Activity 7: Visualising interactions {#ch11_act_7}
+
+It is very difficult to understand an interaction from the coefficient alone, so your best bet is visualising the interaction to help you understand the results and communicate your results to your readers. 
+
+There is a great package called `sjPlot` which takes regression models and helps you plot them in different ways. We will demonstrate plotting interactions, but for further information and options, see the [online documentation](https://strengejacke.github.io/sjPlot/articles/plot_interactions.html){target="_blank"}.
+
+To plot the interaction, you need the model object (not the summary), specify "pred" as the `type` as we want to plot predictions, and add the `terms` you want to plot. 
+
+```{r}
+plot_model(mod, 
+           type = "pred", 
+           terms = c("average_hours_centered", "gender_recoded"))
+```
+
+What is the most reasonable interpretation of the interaction? 
+
+`r longmcq(sample(c(x = "smartphone use harms girls more than boys", x = "smartphone use harms boys more than girls", x = "there is no evidence for gender differences in the relationship between smartphone use and well-being", answer = "smartphone use was more negatively associated with wellbeing for girls than for boys")))`
+
+
+
+::: {.callout-note} 
+
+`plot_model()` uses `ggplot2` in the background. You can add further customisation by adding layers after the initial function. You can also use `ggsave()` to save your plots and insert them into your work. 
+
+
+::: {.callout-caution collapse="true" icon="false"} 
+## Example of a more tidy plot
+
+For example, we can tidy up the axis labels and remove the title, and set a theme. 
+
+```{r}
+plot_model(mod, 
+           type = "pred", 
+           terms = c("average_hours_centered", "gender_recoded")) + 
+  labs(x = "Total Hours Smartphone Use",
+       y = "Total Well-Being Score",
+       title = "") + 
+  theme_classic()
+```
+
+:::
+
+:::
+
+
+## Activity 8: Check assumptions
+
+Now it's time to test those pesky assumptions. The assumptions for multiple regression are the same as simple regression but there is one additional assumption, that of multicollinearity. This is the idea that predictor variables should not be too highly correlated.
+
+Assumptions are:
+
+1. The outcome/DV is a interval/ratio level data, and the predictor variable is interval/ratio or categorical (with two levels).
+2. All values of the outcome variable are independent (i.e., each score should come from a different participant). 
+3. The predictors have non-zero variance.
+4. The relationship between outcome and predictor is linear.
+5. The residuals should be normally distributed.
+6. There should be homoscedasticity (homogeneity of variance, but for the residuals).
+7. Multicollinearity: predictor variables should not be too highly correlated.
+
+We can use the `plot()` function for diagnostic plots or the `check_model()` from the `performance` package. 
+
+One difference from when we used `check_model()` previously is that rather than just letting it run all the tests it wants, we are going to specify which tests to stop it throwing an error. 
+
+::: {.callout-important}
+
+A word of warning - these assumption tests will take longer than usual to run because it's such a big data set.
+
+:::
+
+```{r}
+check_model(mod, 
+            check = c("vif", 
+                      "qq", 
+                      "normality", 
+                      "linearity", 
+                      "homogeneity"))
+```
+
+#### Assumptions 1-3 {.unnumbered}
+
+From the work we have done so far, we know that we meet assumptions 1-3.
+
+
+#### Assumption 4: Linearity {.unnumbered}
+
+We already know from looking at the scatterplot that the relationship is linear, but the residual plot also confirms this.
+
+#### Assumption 5: Normality of residuals {.unnumbered}
+
+The residuals look good in both plots and this provides an excellent example of why it's often better to visualise than rely on statistics. With a sample size this large, any statistical diagnostic tests will be highly significant as they are sensitive to sample size.
+
+#### Assumption 6: Homoscedasticity {.unnumbered}
+
+The plot is missing the reference line. Fun fact, this took us several days of our lives and asking for help on social media to figure out. The reason the line is not there is because the data set is so large that is creates a memory issue. However, if you use the `plot()` version, it does show the reference line.
+
+```{r}
+plot(mod, which = 3)
+```
+
+It is not perfect, but the reference line is roughly flat to suggest there are no serious issues with homoscedasticity. 
+
+#### Assumption 7: Multicollinearity {.unnumbered}
+
+From the collinearity plot, we can see that both main effects and the interaction term are in the "green zone" which is great. Howeverm we can also test this statistically using `check_collinearity()` to produce VIF (variance inflation factor) and tolerance values.
+
+Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor is not actually adding any unique variance to the model, it's just really strongly related to other predictors. [You can read more about this online](https://statisticalhorizons.com/multicollinearity){target="_blank"}. Thankfully, VIF is not affected by large samples like other statistical diagnostic tests.
+
+There are various rules of thumb, but most converge on a **VIF of above 2 - 2.5** for any one predictor to be problematic. Here we are well under 2 for all 3 terms of the model.
+
+```{r}
+check_collinearity(mod)
+```
+
+## Activity 9: Sensitivity power analysis
+
+As usual, we want to calculate the smallest effect size that our study was able to detect, given our design and sample size.
+
+To do this, we use the `pwr.f2.test()` function from the `pwr` package. This is the same as in chapter 10 for simple linear regression. Remember the arguments for this function:
+
+
+* `u` = Numerator degrees of freedom. This the number of coefficients you have in your model (minus the intercept)
+* `v` = Denominator degrees of freedom. This is calculated as $v=n-u-1$, where $n$ is the number of participants.
+* `f2` = The effect size. Here we are solving the effect size, so this parameter is left out
+* `sig.level` = The significance level of your study. This is usually set to 0.05 
+* `power` = The power level of your study. This is usually set to 0.8, but let's go for 0.99 this time (just because we have such a large number of participants)
+
+
+Run the sensitivity power analysis and then answer the following questions:
+
+* To 4 decimal places, what is the smallest effect size that this study could reliably detect? `r fitb(".0004", "0.0004")`
+
+Since the observed effect size from our inferential statistics was `r mcq(c(x = "smaller", answer = "larger"))` than the effect you could reliably detect with this design, the test was `r mcq(c(answer = "sufficiently powered", "underpowered"))` to detect the observed effect. 
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r}
+pwr.f2.test(u = 3, v = 71029, sig.level = 0.05, power = 0.99)
+```
+
+The study was incredibly sensitive, where they would detect effects of 
+$f^2 = .0004$ with 99% power. Needless to say, this study was sufficiently powered.
+:::
+
+## Activity 10: The write-up
+
+All continuous predictors were mean-centered and deviation coding was used for categorical predictors. The results of the regression indicated that the model significantly predicted wellbeing $(F(3, 71029) = 2451, p < .001, R^2_{Adjusted} = .094, f^2 = 0.103)$, accounting for 9.4% of the variance. Total screen time was a significant negative predictor of wellbeing scores $(\beta = -0.77, 95\% CI = [-0.82, -0.73], p < .001$), as was gender $(\beta = 5.14, p < .001$), with girls having lower wellbeing scores than boys. Importantly, there was a significant interaction between screen time and gender $(\beta = 0.45, 95\% CI = [0.38, 0.52], p < .001$), meaning that smartphone use was more negatively associated with well-being for girls than for boys. 
+
+
+## [Pair-coding]{style="color: #F39C12; text-transform: uppercase;"} {.unnumbered}
+
+### Task 1: Open the R project for the lab {.unnumbered}
+
+### Task 2: Create a new `.Rmd` file {.unnumbered}
+
+### Task 3: Load in the library and read in the data {.unnumbered}
+
+The data should already be in your project folder. If you want a fresh copy, you can download the data again here: [data_pair_coding](data/data_pair_coding.zip "download").
+
+We are using the packages `tidyverse`, `sjPlot`, and `performance` today.
+
+Just like last week, we also need to read in `dog_data_clean_wide.csv`. 
+
+```{r reading in data for me, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(performance)
+
+dog_data_wide <- read_csv("data/dog_data_clean_wide.csv")
+
+dog_mult_reg <- dog_data_wide %>%
+  select(RID, Loneliness_post, Loneliness_pre, Flourishing_pre) %>% 
+  drop_na() %>% 
+  mutate(Flourishing_pre_centered = Flourishing_pre - mean(Flourishing_pre),
+         Loneliness_pre_centered = Loneliness_pre - mean(Loneliness_pre))
+
+```
+
+### Task 4: Tidy data & Selecting variables of interest {.unnumbered}
+
+Let's define a potential research question:
+
+**To what extent do pre-intervention loneliness and pre-intervention flourishing predict post-intervention loneliness, and is there an interaction between these predictors?**
+
+
+To get the data into shape, we should **select our variables of interest** from `dog_data_wide` and **remove any missing values** .
+
+
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r eval=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(performance)
+
+dog_data_wide <- read_csv("dog_data_clean_wide.csv")
+
+dog_mult_reg <- dog_data_wide %>%
+  select(RID, Loneliness_post, Loneliness_pre, Flourishing_pre) %>% 
+  drop_na() 
+  
+```
+
+:::
+
+Furthermore, we need to mean-center our two continuous predictors. Since this is a new concept, simply run the code below.
+
+```{r}
+dog_mult_reg <- dog_mult_reg %>% 
+  mutate(Flourishing_pre_centered = Flourishing_pre - mean(Flourishing_pre),
+         Loneliness_pre_centered = Loneliness_pre - mean(Loneliness_pre))
+```
+
+
+### Task 5: Model creating & Assumption checks {.unnumbered}
+
+Now, let's create our regression model. This follows the same approach as @sec-reg, but with additional predictors.
+
+According to our research question, we have the following model variables: 
+
+* Dependent Variable (DV)/Outcome: Loneliness post intervention
+* Independent Variable (IV1)/Predictor1: Flouring before the intervention
+* Independent Variable (IV2)/Predictor2: Loneliness before the intervention
+* Does our model require an interaction term? `r mcq(c(answer = "Yes", x = "No"))`
+
+As a reminder, the multiple linear regression model has the following structure:
+
+```{r eval=FALSE}
+lm(Outcome ~ Predictor1 * Predictor2, data)
+```
+
+The asterisk (`*`) means that the model includes main effects for both predictors (i.e., Pre-intervention flourishing & Pre-intervention loneliness) as well as their interaction term (which tests whether the effect of one predictor depends on the other).
+
+::: {.callout-note icon="false"}
+
+## Your Turn
+
+**Step 1: Create the model**
+
+Compute the linear regression model using the formula above. Store the model in an object called `mod`, ensuring that you use the mean-centered predictors rather than the unstandardised values.
+
+**Step 2: Run the regression**
+
+Just like last week, use the `summary()` function on `mod` to display the regression output.
+
+**Step 3: Check assumption**
+
+Use the `check_model()` function from the `performance` package to test whether the model meets its assumptions.
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r eval=FALSE}
+# Step 1
+mod <- lm(Loneliness_post~Loneliness_pre_centered*Flourishing_pre_centered, data = dog_mult_reg)
+
+# Step 2
+summary(mod)
+
+# Step 3
+check_model(mod)
+
+```
+
+:::
+
+Now, answer the following questions:
+
+1) Are all of the assumptions met? `r mcq(c(answer = "Yes", x = "No"))`
+
+2) How much of the variance is explained by the model? Enter the percentage value with 2 decimal places. `r fitb("82.93")`%
+
+3) Is the interaction term statistically significant? `r mcq(c(answer = "Yes", "No"))`
+
+4) What is the p-value for the interaction term? Enter the value with 3 decimal places. `r fitb(c("0.023", ".023"))`
+
+5) What is $\beta$ coefficient for pre-intervention loneliness? Enter the value rounded to two decimal places. `r fitb("0.87")`
+
+:::
+
+
+
+## [Test your knowledge]{style="color: #F39C12; text-transform: uppercase;"} {.unnumbered}
+
+#### Question 1 {.unnumbered}
+
+**What is the main purpose of a multiple regression analysis?**
+
+`r longmcq(sample(c( answer = "To predict or explain changes in an outcome variable based on multiple predictor variables.", x = "To determine whether there is an association between two variables, without assuming causality.", x = "To compare means between two groups and determine if they are significantly different.", x = "To test whether one predictor variable explains the outcome variable while ignoring other potential influences." )))`
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+Multiple regression extends simple regression by including multiple predictors to explain variance in the outcome variable. This allows researchers to assess the unique contribution of each predictor while controlling for others.
+
+* One incorrect option describes correlation rather than regression.
+* Another option describes a t-test, which compares means rather than predicting an outcome.
+* The final incorrect option incorrectly implies that multiple regression ignores other predictors, when in fact it accounts for them.
+
+:::
+
+#### Question 2 {.unnumbered}
+
+**A researcher investigates whether a student’s exam performance can be predicted by their hours of study and test anxiety levels.**
+
+**Which of the following correctly specifies the multiple regression model in R?**
+
+`r longmcq(sample(c( answer = "lm(Exam_Score ~ Study_Hours + Test_Anxiety, data = student_data)", x = "lm(Exam_Score ~ Study_Hours * Test_Anxiety, data = student_data)", x = "lm(Study_Hours ~ Exam_Score + Test_Anxiety, data = student_data)", x = "lm(Test_Anxiety ~ Study_Hours + Exam_Score, data = student_data)" )))`
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+In multiple regression, the **dependent variable (outcome)** is placed first, followed by the predictor variables (independent variables) after the tilde (~). Since we are predicting exam scores, this must be the first variable in the formula.
+
+* One incorrect option includes an interaction term (`*`), which was not specified in the task. A basic multiple regression only includes main effects (`+`).
+* Another incorrect option swaps the predictor and outcome, which would lead to an incorrect model specification.
+* The last incorrect option incorrectly treats test anxiety as the outcome, when it is actually a predictor in the model.
+:::
+
+
+#### Question 3 {.unnumbered}
+
+**A multiple regression model is used to predict life satisfaction based on sleep quality and daily screen time. The output includes the following regression equation:**
+
+$Life Satisfaction = 50.2 + 1.8 * Sleep Quality − 0.9 * ScreenTime$
+
+**How should the coefficient for Sleep Quality (1.8) be interpreted??**
+
+`r longmcq(sample(c(answer = "For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, holding screen time constant.", x = "For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, regardless of screen time.", x = "A one-unit increase in sleep quality always leads to a 1.8-point increase in life satisfaction.", x = "A one-unit increase in sleep quality may lead to a decrease in life satisfaction, depending on screen time.")))`
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+In multiple regression, the coefficient represents the expected change in the outcome variable (life satisfaction) for a one-unit increase in the predictor (sleep quality), holding all other predictors constant.
+
+Why are the other options incorrect?
+
+* One option ignores the need to hold other predictors constant, which is a key feature of multiple regression.
+* Another option implies a deterministic relationship, incorrectly stating that the increase always occurs.
+* The final incorrect option incorrectly suggests that sleep quality could have a negative effect on life satisfaction, when the model shows a clear positive relationship.
+
+:::
+
+
+
+#### Question 4 {.unnumbered}
+
+**A multiple regression model predicts self-esteem based on social support and stress levels. The output includes an interaction term for social support and stress with a p-value of .007. What does this suggest?**
+
+`r longmcq(sample(c(answer = "The relationship between stress and self-esteem depends on social support.", x = "Social support and stress both influence self-esteem, but they do not interact.", x = "Social support directly improves self-esteem, so the interaction term is unnecessary.", x = "The interaction term suggests that social support and stress are highly correlated and should be removed from the model." )))`
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+A significant interaction term $(p = .007)$ means that the effect of stress on self-esteem is different at different levels of social support.
+
+Why are the other options incorrect?
+
+* One option ignores the interaction effect, treating the predictors as independent influences.
+* Another incorrectly assumes that social support’s direct effect makes the interaction term unnecessary, when in reality, interactions test whether one predictor alters another’s effect.
+* The last incorrect option confuses interaction effects with multicollinearity. High correlation between predictors does not automatically mean an interaction term should be removed.
+
+:::
+
+
+
