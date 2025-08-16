@@ -1,0 +1,10 @@
+# 2B Lab 7 Week 9  {.unnumbered}
+
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+**This is the pair coding activity related to @sec-factorial.**
+
+

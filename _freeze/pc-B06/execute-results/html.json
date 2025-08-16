@@ -1,0 +1,14 @@
+{
+  "hash": "7a1e47689f372828cced3a1f1c866d07",
+  "result": {
+    "markdown": "# 2B Lab 7 Week 9  {.unnumbered}\n\n\n\n\n\n\n**This is the pair coding activity related to @sec-factorial.**\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

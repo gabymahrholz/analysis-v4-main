@@ -487,10 +487,6 @@ We conducted the same repeated measures ANOVA with interest as the dependent mea
 
 We also observed an interaction between time and type of experience, $F(1, 128) = 4.45, p = .037, η_p^2 = 0.034$. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 $(M = 4.04, SD = 1.09, 95\% CI = [3.76, 4.31])$ was lower than experienced interest at Time 2 $(M = 4.73, SD = 1.24, 95\% CI = [4.44, 5.03])$, $t(128) = -5.05, p < .001, d = -0.56$. Although predicted interest for extraordinary events at Time 1 $(M = 4.36, SD = 1.13, 95\% CI = [4.09, 4.63])$ was lower than experienced interest at Time 2 $(M = 4.65, SD = 1.14, 95\% CI = [4.36, 4.94])$, $t(128) = -2.12, p = .036, d = -0.31$, the magnitude of underestimation was smaller than for ordinary events.
 
-## [Pair-coding]{style="color: #F39C12; text-transform: uppercase;"} {.unnumbered}
-
-*to be added*
-
 
 
 ## [Test your knowledge]{style="color: #F39C12; text-transform: uppercase;"} {.unnumbered}

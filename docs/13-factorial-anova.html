@@ -60,7 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./appendix-a-installing-r.html" rel="next">
+<link href="./pc-A01.html" rel="next">
 <link href="./12-one-way-anova.html" rel="prev">
 <link href="./images/logos/logo_analysis.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./13-factorial-anova.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./13-factorial-anova.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -159,93 +159,193 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03-wrangling2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04-dataviz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data viz I</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05-dataviz2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data viz II</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-chi-square-one-sample.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07-independent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Two-sample t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-paired.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-multiple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-one-way-anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-factorial-anova.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-wrangling2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-dataviz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data viz I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dataviz2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data viz II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chi-square-one-sample.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-independent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Two-sample t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-paired.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-one-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-factorial-anova.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 1 Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 2 Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 3 Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 4 Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 5 Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 7 Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 8 Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 1 Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 2 Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 3 Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 4 Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 5 Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 7 Week 9</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
@@ -310,7 +410,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul>
 </li>
   <li><a href="#activity-9-the-write-up" id="toc-activity-9-the-write-up" class="nav-link" data-scroll-target="#activity-9-the-write-up"><span class="header-section-number">13.9</span> Activity 9: The write-up</a></li>
-  <li><a href="#pair-coding" id="toc-pair-coding" class="nav-link" data-scroll-target="#pair-coding"><span style="color: #F39C12; text-transform: uppercase;">Pair-coding</span></a></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></a></li>
   </ul></nav>
     </div>
@@ -1020,13 +1119,11 @@ Suppress error bars with: error = "none"</code></pre>
 <p>We can now replicate the write-up paragraph from the paper. However, note we report t-test for the post hoc comparison <em>(tbh, I have no clue why Zhang et al.&nbsp;decided on ANOVAs reporting when there is only 2 levels to compare)</em>:</p>
 <p>We conducted the same repeated measures ANOVA with interest as the dependent measure and again found a main effect of time, <span class="math inline">\(F(1, 128) = 25.88, p &lt; .001, η_p^2 = 0.168\)</span>; anticipated interest at Time 1 <span class="math inline">\((M = 4.20, SD = 1.12, 95\% CI = [4.01, 4.39])\)</span> was lower than actual interest at Time 2 <span class="math inline">\((M = 4.69, SD = 1.19, 95\% CI = [4.49, 4.90])\)</span>.</p>
 <p>We also observed an interaction between time and type of experience, <span class="math inline">\(F(1, 128) = 4.45, p = .037, η_p^2 = 0.034\)</span>. Pairwise comparisons revealed that for ordinary events, predicted interest at Time 1 <span class="math inline">\((M = 4.04, SD = 1.09, 95\% CI = [3.76, 4.31])\)</span> was lower than experienced interest at Time 2 <span class="math inline">\((M = 4.73, SD = 1.24, 95\% CI = [4.44, 5.03])\)</span>, <span class="math inline">\(t(128) = -5.05, p &lt; .001, d = -0.56\)</span>. Although predicted interest for extraordinary events at Time 1 <span class="math inline">\((M = 4.36, SD = 1.13, 95\% CI = [4.09, 4.63])\)</span> was lower than experienced interest at Time 2 <span class="math inline">\((M = 4.65, SD = 1.14, 95\% CI = [4.36, 4.94])\)</span>, <span class="math inline">\(t(128) = -2.12, p = .036, d = -0.31\)</span>, the magnitude of underestimation was smaller than for ordinary events.</p>
-</section><section id="pair-coding" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="pair-coding"><span style="color: #F39C12; text-transform: uppercase;">Pair-coding</span></h2>
-<p><em>to be added</em></p>
 </section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
 <section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
 <p><strong>A researcher wants to compare memory test scores across three different age groups (young adults, middle-aged adults, and older adults). What type of ANOVA should they use?</strong></p>
-<div id="radio_LJLPFEHWKX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LJLPFEHWKX" value="x"><span>Mixed factorial ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_LJLPFEHWKX" value="answer"><span>One-way between-subjects ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_LJLPFEHWKX" value="x"><span>One-way repeated-measures ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_LJLPFEHWKX" value="x"><span>Factorial ANOVA</span></label>
+<div id="radio_XGKKNXNHNQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XGKKNXNHNQ" value="x"><span>Factorial ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_XGKKNXNHNQ" value="x"><span>One-way repeated-measures ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_XGKKNXNHNQ" value="x"><span>Mixed factorial ANOVA</span></label><label><input type="radio" autocomplete="off" name="radio_XGKKNXNHNQ" value="answer"><span>One-way between-subjects ANOVA</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -1071,8 +1168,8 @@ Morning - Evening       -2.50    0.32   48   -7.81     &lt;.001
 contrast               estimate   SE    df  t.ratio   p.value
 Morning - Evening       -1.00    0.31   48   -3.23     0.005</code></pre>
 <p><strong>Which of the following statements best reflects these findings?</strong></p>
-<div id="radio_ZMBOCILLNN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZMBOCILLNN" value="answer"><span>Passive users showed a drop in self-esteem across the day, while both active user groups showed increases.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMBOCILLNN" value="x"><span>Self-esteem increased over the day in all three groups.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMBOCILLNN" value="x"><span>You cannot see the directionality of the comparison from the output, only that there is a significant difference.</span></label><label><input type="radio" autocomplete="off" name="radio_ZMBOCILLNN" value="x"><span>Only Active users show significant changes in self-esteem over time.</span></label>
+<div id="radio_FLRGHBZRJH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FLRGHBZRJH" value="answer"><span>Passive users showed a drop in self-esteem across the day, while both active user groups showed increases.</span></label><label><input type="radio" autocomplete="off" name="radio_FLRGHBZRJH" value="x"><span>Self-esteem increased over the day in all three groups.</span></label><label><input type="radio" autocomplete="off" name="radio_FLRGHBZRJH" value="x"><span>Only Active users show significant changes in self-esteem over time.</span></label><label><input type="radio" autocomplete="off" name="radio_FLRGHBZRJH" value="x"><span>You cannot see the directionality of the comparison from the output, only that there is a significant difference.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -1102,8 +1199,8 @@ Explain this answer
 </div>
 </section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
 <p><strong>Which of the following is the most appropriate method for checking whether the residuals in a mixed factorial ANOVA are normally distributed?</strong></p>
-<div id="radio_XUOXESNFKK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XUOXESNFKK" value="answer"><span>Generate a Q–Q plot of residuals</span></label><label><input type="radio" autocomplete="off" name="radio_XUOXESNFKK" value="x"><span>Check whether the independent variable is normally distributed in each condition</span></label><label><input type="radio" autocomplete="off" name="radio_XUOXESNFKK" value="x"><span>Visually inspect the spread of data points using a bar chart</span></label><label><input type="radio" autocomplete="off" name="radio_XUOXESNFKK" value="x"><span>Use Levene’s Test to compare variance across groups</span></label>
+<div id="radio_UJKIIFRAKR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UJKIIFRAKR" value="x"><span>Use Levene’s Test to compare variance across groups</span></label><label><input type="radio" autocomplete="off" name="radio_UJKIIFRAKR" value="x"><span>Check whether the independent variable is normally distributed in each condition</span></label><label><input type="radio" autocomplete="off" name="radio_UJKIIFRAKR" value="x"><span>Visually inspect the spread of data points using a bar chart</span></label><label><input type="radio" autocomplete="off" name="radio_UJKIIFRAKR" value="answer"><span>Generate a Q–Q plot of residuals</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
@@ -1133,8 +1230,8 @@ Explain this answer
 </div>
 </section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
 <p><strong>You run a 3 × 4 mixed factorial ANOVA and find a significant interaction. What is the most appropriate next step?</strong></p>
-<div id="radio_KWGXIZVOFP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KWGXIZVOFP" value="x"><span>Rerun the analysis using a one-way ANOVA for each group</span></label><label><input type="radio" autocomplete="off" name="radio_KWGXIZVOFP" value="answer"><span>Conduct post hoc comparisons to explore simple effects</span></label><label><input type="radio" autocomplete="off" name="radio_KWGXIZVOFP" value="x"><span>Interpret only the main effects of each factor</span></label><label><input type="radio" autocomplete="off" name="radio_KWGXIZVOFP" value="x"><span>Ignore the interaction since it complicates the interpretation</span></label>
+<div id="radio_VWZIUWUOVC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VWZIUWUOVC" value="x"><span>Rerun the analysis using a one-way ANOVA for each group</span></label><label><input type="radio" autocomplete="off" name="radio_VWZIUWUOVC" value="x"><span>Interpret only the main effects of each factor</span></label><label><input type="radio" autocomplete="off" name="radio_VWZIUWUOVC" value="answer"><span>Conduct post hoc comparisons to explore simple effects</span></label><label><input type="radio" autocomplete="off" name="radio_VWZIUWUOVC" value="x"><span>Ignore the interaction since it complicates the interpretation</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1749,8 +1846,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./appendix-a-installing-r.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./pc-A01.html" class="pagination-link">
+        <span class="nav-page-text">2A Lab 1 Week 2</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

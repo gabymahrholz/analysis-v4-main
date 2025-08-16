@@ -1,0 +1,209 @@
+# 2A Lab 3 Week 4  {.unnumbered}
+
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+**This is the pair coding activity related to @sec-wrangling2.**
+
+
+
+```{r reading in data for me, echo=FALSE, message=FALSE}
+library(tidyverse)
+
+dog_data_raw <- read_csv("data/dog_data_raw.csv")
+```
+
+We will once again be working with data from Binfet et al. (2021), which focuses on the randomised controlled trials data involving therapy dog interventions. Today, our goal is to calculate the average `Loneliness` score for each participant measured at time point 1 (pre-intervention) using the raw data file `dog_data_raw`. Currently, the data looks like this:
+
+```{r echo=FALSE}
+loneliness_brief <- dog_data_raw %>% 
+  select(RID, starts_with("L1"))
+
+head(loneliness_brief, n = 5)
+```
+
+<p></p>
+
+But we want the data to look like this:
+
+```{r echo=FALSE}
+loneliness_tidy <- dog_data_raw %>% 
+  select(RID, starts_with("L1")) %>% 
+  pivot_longer(cols = -RID, names_to = "Names", values_to = "Response") %>% 
+  mutate(Score_corrected = case_when(
+    Names %in% c("L1_1", "L1_5", "L1_6", "L1_9", "L1_10", "L1_15", "L1_16", "L1_19", "L1_20") ~ 5-Response,
+    .default = Response
+    )) %>% 
+  group_by(RID) %>% 
+  summarise(Loneliness_pre = mean(Score_corrected, na.rm = TRUE)) %>% 
+  ungroup()
+
+head(loneliness_tidy, n = 5)
+```
+
+This task is a bit more challenging compared to last week's lab activity, as the Loneliness scale includes some reverse-coded items.
+
+## Task 1: Open the R project for the lab {.unnumbered}
+
+## Task 2: Open your `.Rmd` file from last week or create a new `.Rmd` file {.unnumbered}
+
+You could continue the `.Rmd` file you used last week, or create a new `.Rmd`. If you need some guidance, have a look at @sec-rmd.
+
+## Task 3: Load in the library and read in the data {.unnumbered}
+
+The data should already be in your project folder. If you want a fresh copy, you can download the data again here: [data_pair_coding](data/data_pair_coding.zip "download").
+
+We are using the package `tidyverse` today, and the datafile we should read in is `dog_data_raw.csv`.
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+```{r eval=FALSE}
+# loading tidyverse into the library
+library(???)
+
+# reading in `dog_data_raw.csv`
+dog_data_raw <- read_csv("???")
+```
+
+:::
+
+## Task 4: Calculating the mean for `Loneliness_pre` {.unnumbered}
+
+* **Step 1**: Select all relevant columns, such as the participant ID and all 20 items of the `Loneliness` questionnaire completed by participants before the intervention. Store this data in an object called `data_loneliness`.
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+Look at the codebook. Try to figure out
+
+* the variable name of the column in which the participant id is stored, and
+* which items relate to the Loneliness scale at Stage "pre"
+
+::: {.callout-note collapse="true" icon="false"}
+
+## More concrete hint
+
+* the participant id column is called `RID`
+* The Loneliness items at pre-intervention stage start with `L1_`
+
+:::
+
+:::
+
+* **Step 2**: Pivot the data from wide format to long format so we can reverse-score and calculate the average score more easily (in step 3)
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+`pivot_`
+
+We also need 3 arguments in that function:
+
+* the columns we want to select (e.g., all the loneliness items),
+* the name of the column in which the current column headings will be stored (e.g., "Qs"), and
+* the name of the column that should store all the values (e.g., "Responses").
+
+::: {.callout-note collapse="true" icon="false"}
+
+## More concrete hint
+
+```{r eval=FALSE}
+  pivot_longer(cols = ???, names_to = "???", values_to = "???")
+```
+
+:::
+
+:::
+
+* **Step 3**: Reverse-scoring
+
+Identify the items on the `Loneliness` scale that are reverse-coded, and then reverse-score them accordingly.
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+We need to figure out:
+
+* which are the items of the loneliness scale we need to reverse-score
+* what is the measuring scale of loneliness so we can determine the new values
+* which function to use to create a new column that has the corrected scores in it
+* which one of the `case_` functions will get us there
+
+::: {.callout-note collapse="true" icon="false"}
+
+## More concrete hint
+
+* The items to be reverse-coded items can be found in the codebook: L1_1, L1_5, L1_6, L1_9, L1_10, L1_15, L1_16, L1_19, L1_20
+* the loneliness scale ranges from 1 to 4, so we need to replace 1 with 4, 2 with 3, 3 with 2, and 4 with 1
+* the function to create a new column `mutate()`
+* it's a conditional statement rather than "just" replacing values, hence we need `case_when()`
+
+```{r eval=FALSE}
+  mutate(Score_corrected = case_when(
+    ??? ~ ???,
+    .default = ???
+    ))
+```
+
+:::
+
+:::
+
+* **Step 4**: Calculate the average Loneliness score per participant. To match with the table above, we want to call this column `Loneliness_pre`
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hint
+
+grouping and summarising
+
+::: {.callout-note collapse="true" icon="false"}
+
+## More concrete hint
+
+```{r eval=FALSE}
+  group_by(???) %>% 
+  summarise(Loneliness_pre = ???(???)) %>% 
+  ungroup()
+```
+
+:::
+
+:::
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r eval=FALSE}
+# loading tidyverse into the library
+library(tidyverse)
+
+# reading in `dog_data_raw.csv`
+dog_data_raw <- read_csv("dog_data_raw.csv")
+
+# Task 4: Tidying 
+loneliness_tidy <- dog_data_raw %>% 
+  # Step 1
+  select(RID, starts_with("L1")) %>% # select(RID, L1_1:L1_20) also works
+  # Step 2
+  pivot_longer(cols = -RID, names_to = "Qs", values_to = "Response") %>% 
+  # Step 3
+  mutate(Score_corrected = case_when(
+    Qs %in% c("L1_1", "L1_5", "L1_6", "L1_9", "L1_10", "L1_15", "L1_16", "L1_19", "L1_20") ~ 5-Response,
+    .default = Response
+    )) %>% 
+  # Step 4
+  group_by(RID) %>% 
+  summarise(Loneliness_pre = mean(Score_corrected, na.rm = TRUE)) %>% 
+  ungroup()
+```
+
+:::

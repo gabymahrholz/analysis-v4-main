@@ -92,8 +92,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="site_libs/kePrint-0.0.1/kePrint.js"></script><link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
@@ -107,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-chi-square-one-sample.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./06-chi-square-one-sample.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -160,93 +159,193 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Overview</span></a>
   </div>
 </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./02-wrangling.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./03-wrangling2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./04-dataviz.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data viz I</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./05-dataviz2.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data viz II</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./06-chi-square-one-sample.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./07-independent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Two-sample t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./08-paired.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./10-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./11-multiple-regression.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./12-one-way-anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./13-factorial-anova.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
-  </div>
-</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
- <span class="menu-text">Appendices</span></a>
+ <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-wrangling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-wrangling2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-dataviz.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data viz I</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-dataviz2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Data viz II</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-chi-square-one-sample.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Chi-square and one-sample t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-independent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Two-sample t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-paired.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-multiple-regression.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-one-way-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-factorial-anova.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 1 Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 2 Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 3 Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 4 Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 5 Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 7 Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-A07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2A Lab 8 Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 1 Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 2 Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 3 Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 4 Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 5 Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pc-B06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2B Lab 7 Week 9</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Appendices</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
@@ -289,46 +388,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
 <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
-  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">6.1</span> Overview</a></li>
-  <li><a href="#activity-1-setup-download-the-data" id="toc-activity-1-setup-download-the-data" class="nav-link" data-scroll-target="#activity-1-setup-download-the-data"><span class="header-section-number">6.2</span> Activity 1: Setup &amp; download the data</a></li>
-  <li><a href="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" id="toc-activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">6.3</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</a></li>
-  <li><a href="#activity-3-data-wrangling" id="toc-activity-3-data-wrangling" class="nav-link" data-scroll-target="#activity-3-data-wrangling"><span class="header-section-number">6.4</span> Activity 3: Data wrangling</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#activity-1-setup-download-the-data" id="toc-activity-1-setup-download-the-data" class="nav-link" data-scroll-target="#activity-1-setup-download-the-data"><span class="header-section-number">6.1</span> Activity 1: Setup &amp; download the data</a></li>
+  <li><a href="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" id="toc-activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">6.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</a></li>
+  <li><a href="#activity-3-data-wrangling" id="toc-activity-3-data-wrangling" class="nav-link" data-scroll-target="#activity-3-data-wrangling"><span class="header-section-number">6.3</span> Activity 3: Data wrangling</a></li>
   <li>
-<a href="#sec-chi_square" id="toc-sec-chi_square" class="nav-link" data-scroll-target="#sec-chi_square"><span class="header-section-number">6.5</span> Activity 4: Cross-tabulation Chi-square test</a>
+<a href="#sec-chi_square" id="toc-sec-chi_square" class="nav-link" data-scroll-target="#sec-chi_square"><span class="header-section-number">6.4</span> Activity 4: Cross-tabulation Chi-square test</a>
   <ul class="collapse">
-<li><a href="#task-1-preparing-the-dataframe" id="toc-task-1-preparing-the-dataframe" class="nav-link" data-scroll-target="#task-1-preparing-the-dataframe"><span class="header-section-number">6.5.1</span> Task 1: Preparing the dataframe</a></li>
-  <li><a href="#task-2-compute-descriptives" id="toc-task-2-compute-descriptives" class="nav-link" data-scroll-target="#task-2-compute-descriptives"><span class="header-section-number">6.5.2</span> Task 2: Compute descriptives</a></li>
-  <li><a href="#task-3-check-assumptions" id="toc-task-3-check-assumptions" class="nav-link" data-scroll-target="#task-3-check-assumptions"><span class="header-section-number">6.5.3</span> Task 3: Check assumptions</a></li>
-  <li><a href="#task-4-create-an-appropriate-plot" id="toc-task-4-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-4-create-an-appropriate-plot"><span class="header-section-number">6.5.4</span> Task 4: Create an appropriate plot</a></li>
-  <li><a href="#task-5-compute-a-chi-square-test" id="toc-task-5-compute-a-chi-square-test" class="nav-link" data-scroll-target="#task-5-compute-a-chi-square-test"><span class="header-section-number">6.5.5</span> Task 5: Compute a chi-square test</a></li>
-  <li><a href="#task-6-the-write-up" id="toc-task-6-the-write-up" class="nav-link" data-scroll-target="#task-6-the-write-up"><span class="header-section-number">6.5.6</span> Task 6: The write-up</a></li>
+<li><a href="#task-1-preparing-the-dataframe" id="toc-task-1-preparing-the-dataframe" class="nav-link" data-scroll-target="#task-1-preparing-the-dataframe"><span class="header-section-number">6.4.1</span> Task 1: Preparing the dataframe</a></li>
+  <li><a href="#task-2-compute-descriptives" id="toc-task-2-compute-descriptives" class="nav-link" data-scroll-target="#task-2-compute-descriptives"><span class="header-section-number">6.4.2</span> Task 2: Compute descriptives</a></li>
+  <li><a href="#task-3-check-assumptions" id="toc-task-3-check-assumptions" class="nav-link" data-scroll-target="#task-3-check-assumptions"><span class="header-section-number">6.4.3</span> Task 3: Check assumptions</a></li>
+  <li><a href="#task-4-create-an-appropriate-plot" id="toc-task-4-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-4-create-an-appropriate-plot"><span class="header-section-number">6.4.4</span> Task 4: Create an appropriate plot</a></li>
+  <li><a href="#task-5-compute-a-chi-square-test" id="toc-task-5-compute-a-chi-square-test" class="nav-link" data-scroll-target="#task-5-compute-a-chi-square-test"><span class="header-section-number">6.4.5</span> Task 5: Compute a chi-square test</a></li>
+  <li><a href="#task-6-the-write-up" id="toc-task-6-the-write-up" class="nav-link" data-scroll-target="#task-6-the-write-up"><span class="header-section-number">6.4.6</span> Task 6: The write-up</a></li>
   </ul>
 </li>
   <li>
-<a href="#sec-onesample" id="toc-sec-onesample" class="nav-link" data-scroll-target="#sec-onesample"><span class="header-section-number">6.6</span> Activity 5: One-sample t-test</a>
+<a href="#sec-onesample" id="toc-sec-onesample" class="nav-link" data-scroll-target="#sec-onesample"><span class="header-section-number">6.5</span> Activity 5: One-sample t-test</a>
   <ul class="collapse">
-<li><a href="#task-1-preparing-the-dataframe-1" id="toc-task-1-preparing-the-dataframe-1" class="nav-link" data-scroll-target="#task-1-preparing-the-dataframe-1"><span class="header-section-number">6.6.1</span> Task 1: Preparing the dataframe</a></li>
-  <li><a href="#task-2-compute-descriptives-1" id="toc-task-2-compute-descriptives-1" class="nav-link" data-scroll-target="#task-2-compute-descriptives-1"><span class="header-section-number">6.6.2</span> Task 2: Compute descriptives</a></li>
-  <li><a href="#task-3-create-an-appropriate-plot" id="toc-task-3-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-3-create-an-appropriate-plot"><span class="header-section-number">6.6.3</span> Task 3: Create an appropriate plot</a></li>
-  <li><a href="#task-4-check-assumptions" id="toc-task-4-check-assumptions" class="nav-link" data-scroll-target="#task-4-check-assumptions"><span class="header-section-number">6.6.4</span> Task 4: Check assumptions</a></li>
-  <li><a href="#task-5-compute-a-one-sample-t-test-and-effect-size" id="toc-task-5-compute-a-one-sample-t-test-and-effect-size" class="nav-link" data-scroll-target="#task-5-compute-a-one-sample-t-test-and-effect-size"><span class="header-section-number">6.6.5</span> Task 5: Compute a One-sample t-test and effect size</a></li>
-  <li><a href="#task-6-sensitivity-power-analysis" id="toc-task-6-sensitivity-power-analysis" class="nav-link" data-scroll-target="#task-6-sensitivity-power-analysis"><span class="header-section-number">6.6.6</span> Task 6: Sensitivity power analysis</a></li>
-  <li><a href="#task-7-the-write-up" id="toc-task-7-the-write-up" class="nav-link" data-scroll-target="#task-7-the-write-up"><span class="header-section-number">6.6.7</span> Task 7: The write-up</a></li>
+<li><a href="#task-1-preparing-the-dataframe-1" id="toc-task-1-preparing-the-dataframe-1" class="nav-link" data-scroll-target="#task-1-preparing-the-dataframe-1"><span class="header-section-number">6.5.1</span> Task 1: Preparing the dataframe</a></li>
+  <li><a href="#task-2-compute-descriptives-1" id="toc-task-2-compute-descriptives-1" class="nav-link" data-scroll-target="#task-2-compute-descriptives-1"><span class="header-section-number">6.5.2</span> Task 2: Compute descriptives</a></li>
+  <li><a href="#task-3-create-an-appropriate-plot" id="toc-task-3-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-3-create-an-appropriate-plot"><span class="header-section-number">6.5.3</span> Task 3: Create an appropriate plot</a></li>
+  <li><a href="#task-4-check-assumptions" id="toc-task-4-check-assumptions" class="nav-link" data-scroll-target="#task-4-check-assumptions"><span class="header-section-number">6.5.4</span> Task 4: Check assumptions</a></li>
+  <li><a href="#task-5-compute-a-one-sample-t-test-and-effect-size" id="toc-task-5-compute-a-one-sample-t-test-and-effect-size" class="nav-link" data-scroll-target="#task-5-compute-a-one-sample-t-test-and-effect-size"><span class="header-section-number">6.5.5</span> Task 5: Compute a One-sample t-test and effect size</a></li>
+  <li><a href="#task-6-sensitivity-power-analysis" id="toc-task-6-sensitivity-power-analysis" class="nav-link" data-scroll-target="#task-6-sensitivity-power-analysis"><span class="header-section-number">6.5.6</span> Task 6: Sensitivity power analysis</a></li>
+  <li><a href="#task-7-the-write-up" id="toc-task-7-the-write-up" class="nav-link" data-scroll-target="#task-7-the-write-up"><span class="header-section-number">6.5.7</span> Task 7: The write-up</a></li>
   </ul>
 </li>
-  <li><a href="#sec-alternative_one_sample" id="toc-sec-alternative_one_sample" class="nav-link" data-scroll-target="#sec-alternative_one_sample"><span class="header-section-number">6.7</span> Activity 6: Non-parametric alternative</a></li>
-  <li>
-<a href="#pair-coding" id="toc-pair-coding" class="nav-link" data-scroll-target="#pair-coding"><span style="color: #F39C12; text-transform: uppercase;">Pair-coding</span></a>
-  <ul class="collapse">
-<li><a href="#task-1-open-the-r-project-for-the-lab" id="toc-task-1-open-the-r-project-for-the-lab" class="nav-link" data-scroll-target="#task-1-open-the-r-project-for-the-lab">Task 1: Open the R project for the lab</a></li>
-  <li><a href="#task-2-create-a-new-.rmd-file" id="toc-task-2-create-a-new-.rmd-file" class="nav-link" data-scroll-target="#task-2-create-a-new-.rmd-file">Task 2: Create a new <code>.Rmd</code> file</a></li>
-  <li><a href="#task-3-load-in-the-library-and-read-in-the-data" id="toc-task-3-load-in-the-library-and-read-in-the-data" class="nav-link" data-scroll-target="#task-3-load-in-the-library-and-read-in-the-data">Task 3: Load in the library and read in the data</a></li>
-  <li><a href="#task-4-tidy-data-for-a-chi-square-t-test" id="toc-task-4-tidy-data-for-a-chi-square-t-test" class="nav-link" data-scroll-target="#task-4-tidy-data-for-a-chi-square-t-test">Task 4: Tidy data for a Chi-Square t-test</a></li>
-  <li><a href="#task-5-compute-descriptives" id="toc-task-5-compute-descriptives" class="nav-link" data-scroll-target="#task-5-compute-descriptives">Task 5: Compute descriptives</a></li>
-  <li><a href="#task-6-check-assumptions" id="toc-task-6-check-assumptions" class="nav-link" data-scroll-target="#task-6-check-assumptions">Task 6: Check assumptions</a></li>
-  <li><a href="#task-7-compute-a-chi-square-test-interpret-the-output" id="toc-task-7-compute-a-chi-square-test-interpret-the-output" class="nav-link" data-scroll-target="#task-7-compute-a-chi-square-test-interpret-the-output">Task 7: Compute a chi-square test &amp; interpret the output</a></li>
-  </ul>
-</li>
+  <li><a href="#sec-alternative_one_sample" id="toc-sec-alternative_one_sample" class="nav-link" data-scroll-target="#sec-alternative_one_sample"><span class="header-section-number">6.6</span> Activity 6: Non-parametric alternative</a></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></a></li>
   </ul></nav>
     </div>
@@ -354,8 +441,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>compute a one-sample t-test and report the results</li>
 <li>understand when to use a non-parametric equivalent for the one-sample t-test, compute it, and report the results</li>
 </ul></section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
-</section><section id="overview" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="overview">
-<span class="header-section-number">6.1</span> Overview</h2>
+</section><section id="overview" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="overview">Overview</h2>
 <p>From here on, we will explore inferential statistics, including chi-square test, various t-tests, correlations, ANOVAs, and regression. Most of these tests belong to the General Linear Model (GLM) family, which helps us analyse relationships between variables using linear equations. The chi-square test, while not part of the GLM, is also included here as it’s useful for analysing categorical data.</p>
 <p>To help you choose the most appropriate test, refer to the simplified flowchart below. It guides you based on the types of variables - whether they are categorical or continuous.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -364,8 +450,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Each test is discussed in its respective chapter with guidance on when and how to apply it:</p>
 <ul>
-<li>Cross-tabulation chi-Square test (this chapter, <a href="#sec-chi_square"><span>Section&nbsp;6.5</span></a>)</li>
-<li>One-sample t-test (this chapter, <a href="#sec-onesample"><span>Section&nbsp;6.6</span></a>)</li>
+<li>Cross-tabulation chi-Square test (this chapter, <a href="#sec-chi_square"><span>Section&nbsp;6.4</span></a>)</li>
+<li>One-sample t-test (this chapter, <a href="#sec-onesample"><span>Section&nbsp;6.5</span></a>)</li>
 <li>Two-sample or independent t-test (between-subjects design, <a href="07-independent.html"><span>Chapter&nbsp;7</span></a>)</li>
 <li>Paired t-test (within-subjects design, <a href="08-paired.html"><span>Chapter&nbsp;8</span></a>)</li>
 <li>Correlation (<a href="09-correlation.html"><span>Chapter&nbsp;9</span></a>)</li>
@@ -373,8 +459,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Multiple regression (<a href="11-multiple-regression.html"><span>Chapter&nbsp;11</span></a>)</li>
 <li>One-way ANOVA (<a href="12-one-way-anova.html"><span>Chapter&nbsp;12</span></a>)</li>
 <li>Factorial ANOVA (<a href="13-factorial-anova.html"><span>Chapter&nbsp;13</span></a>)</li>
-</ul></section><section id="activity-1-setup-download-the-data" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="activity-1-setup-download-the-data">
-<span class="header-section-number">6.2</span> Activity 1: Setup &amp; download the data</h2>
+</ul></section><section id="activity-1-setup-download-the-data" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data">
+<span class="header-section-number">6.1</span> Activity 1: Setup &amp; download the data</h2>
 <p>This week, we will be working with a new dataset. Follow the steps below to set up your project:</p>
 <ul>
 <li>
@@ -401,8 +487,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We removed rows with missing values and categorical groupings with low observed frequencies for the purpose of this chapter.</li>
 <li>We won’t explore any associations related to gaming, but feel free to download the full dataset if you wish to investigate further.</li>
 <li>Unlike the original study, which applied strict inclusion criteria, we used more flexible criteria, resulting in a larger sample size than the original analysis.</li>
-</ul></section><section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data">
-<span class="header-section-number">6.3</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
+</ul></section><section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="6.2"><h2 data-number="6.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data">
+<span class="header-section-number">6.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
 <p>Today, we will be using the following packages: <code>tidyverse</code>, <code>lsr</code>, <code>scales</code>, <code>qqplotr</code>, <code>car</code>, <code>pwr</code>, and <code>rcompanion</code>. If you need to install any of them, do so via the console (see <a href="01-basics.html#sec-install_packages"><span>Section&nbsp;1.5.1</span></a> for more detail).</p>
 <p>Additionally, we will need to read in the data <code>data_ballou_reduced</code>.</p>
 <div class="cell">
@@ -440,8 +526,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="activity-3-data-wrangling" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="activity-3-data-wrangling">
-<span class="header-section-number">6.4</span> Activity 3: Data wrangling</h2>
+</section><section id="activity-3-data-wrangling" class="level2" data-number="6.3"><h2 data-number="6.3" class="anchored" data-anchor-id="activity-3-data-wrangling">
+<span class="header-section-number">6.3</span> Activity 3: Data wrangling</h2>
 <p>The categorical variables in our dataset look tidy, but we need to make a few adjustments to prepare for our analysis:</p>
 <ul>
 <li>
@@ -500,8 +586,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="sec-chi_square" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-chi_square">
-<span class="header-section-number">6.5</span> Activity 4: Cross-tabulation Chi-square test</h2>
+</section><section id="sec-chi_square" class="level2" data-number="6.4"><h2 data-number="6.4" class="anchored" data-anchor-id="sec-chi_square">
+<span class="header-section-number">6.4</span> Activity 4: Cross-tabulation Chi-square test</h2>
 <p>A Cross-Tabulation Chi-Square Test, also known as a Chi-Square Test of Association or Independence, tests how one variable is associated with the distribution of outcomes in another variable.</p>
 <p>We will be performing a Chi-Square test using the categorical variables <strong>gender</strong> and <strong>eduLevel</strong>:</p>
 <ul>
@@ -512,15 +598,15 @@ Solution
 <li>
 <strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Gender and level of education are not independent; there is an association between gender and level of education.”</li>
 </ul>
-<section id="task-1-preparing-the-dataframe" class="level3" data-number="6.5.1"><h3 data-number="6.5.1" class="anchored" data-anchor-id="task-1-preparing-the-dataframe">
-<span class="header-section-number">6.5.1</span> Task 1: Preparing the dataframe</h3>
+<section id="task-1-preparing-the-dataframe" class="level3" data-number="6.4.1"><h3 data-number="6.4.1" class="anchored" data-anchor-id="task-1-preparing-the-dataframe">
+<span class="header-section-number">6.4.1</span> Task 1: Preparing the dataframe</h3>
 <p>First, select your variables of interest - here participant id, gender, and education levels. This dataset does not contain missing values, but in future datasets that might, use <code>drop_na()</code> to remove them before converting categorical variables into factors.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>chi_square <span class="ot">&lt;-</span> data_ballou <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">select</span>(pid, gender, eduLevel)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="task-2-compute-descriptives" class="level3" data-number="6.5.2"><h3 data-number="6.5.2" class="anchored" data-anchor-id="task-2-compute-descriptives">
-<span class="header-section-number">6.5.2</span> Task 2: Compute descriptives</h3>
+</section><section id="task-2-compute-descriptives" class="level3" data-number="6.4.2"><h3 data-number="6.4.2" class="anchored" data-anchor-id="task-2-compute-descriptives">
+<span class="header-section-number">6.4.2</span> Task 2: Compute descriptives</h3>
 <p>Next, we need to calculate counts for each combination of the variables, which is best done in a frequency table - or more precisely a <strong>contingency table</strong> since we are looking at a combination of 2 categorical variables (sometimes they are called crosstabulation and two-way tables).</p>
 <p>This will also allow us to verify that there are no missing values in any cells, as the function we’re using cannot handle missing values</p>
 <div class="cell">
@@ -579,8 +665,8 @@ Solution
 </div>
 </div>
 <p>We should be fine here, even though the count for the non-binary/vocational category is quite low.</p>
-</section><section id="task-3-check-assumptions" class="level3" data-number="6.5.3"><h3 data-number="6.5.3" class="anchored" data-anchor-id="task-3-check-assumptions">
-<span class="header-section-number">6.5.3</span> Task 3: Check assumptions</h3>
+</section><section id="task-3-check-assumptions" class="level3" data-number="6.4.3"><h3 data-number="6.4.3" class="anchored" data-anchor-id="task-3-check-assumptions">
+<span class="header-section-number">6.4.3</span> Task 3: Check assumptions</h3>
 <section id="assumption-1-categorical-data" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-1-categorical-data">Assumption 1: Categorical data</h4>
 <p>Both variables should be categorical, measured at either the ordinal or nominal level.</p>
 <p>We can confirm that for our dataset. Gender is <select class="webex-select"><option value="blank"></option>
@@ -596,8 +682,8 @@ Solution
 </section><section id="assumption-4-expected-frequencies-are-sufficiently-large" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-4-expected-frequencies-are-sufficiently-large">Assumption 4: Expected frequencies are sufficiently large</h4>
 <p>Assumption 4 is not an assumption that is listed consistently across various sources. When it is, it suggests that expected frequencies are larger than 5 or at least 80% of the the expected frequencies are above 5 and none of them are below 1. However, Danielle Navarro points out that this seems to be a “somewhat conservative” criterion and should be taken as “rough guidelines” only (see <a href="https://learningstatisticswithr.com/book/chisquare.html#chisqassumptions" target="_blank">https://learningstatisticswithr.com/book/chisquare.html#chisqassumptions</a>.</p>
 <p>This is information, we can either compute manually (see lecture slides) or wait till we get the output from the inferential statistics later.</p>
-</section></section><section id="task-4-create-an-appropriate-plot" class="level3" data-number="6.5.4"><h3 data-number="6.5.4" class="anchored" data-anchor-id="task-4-create-an-appropriate-plot">
-<span class="header-section-number">6.5.4</span> Task 4: Create an appropriate plot</h3>
+</section></section><section id="task-4-create-an-appropriate-plot" class="level3" data-number="6.4.4"><h3 data-number="6.4.4" class="anchored" data-anchor-id="task-4-create-an-appropriate-plot">
+<span class="header-section-number">6.4.4</span> Task 4: Create an appropriate plot</h3>
 <p>Now we can create the appropriate plot. Which plot would you choose when building one from object <code>chi_square</code>? A <select class="webex-select"><option value="blank"></option>
 <option value="answer">Barchart</option>
 <option value="x">Histogram</option>
@@ -638,8 +724,8 @@ One possible solution
 </div>
 </div>
 </div>
-</section><section id="task-5-compute-a-chi-square-test" class="level3" data-number="6.5.5"><h3 data-number="6.5.5" class="anchored" data-anchor-id="task-5-compute-a-chi-square-test">
-<span class="header-section-number">6.5.5</span> Task 5: Compute a chi-square test</h3>
+</section><section id="task-5-compute-a-chi-square-test" class="level3" data-number="6.4.5"><h3 data-number="6.4.5" class="anchored" data-anchor-id="task-5-compute-a-chi-square-test">
+<span class="header-section-number">6.4.5</span> Task 5: Compute a chi-square test</h3>
 <p>Before we can do that, we need to turn our tibble into a dataframe - the <code>associationTest()</code> function we are using to compute the Chi-square test does not like tibbles. [<em>you have nooooo clue how long that took to figure out - let’s say the error message was not exactly helpful</em>]</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>chi_square_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(chi_square)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -707,11 +793,11 @@ Other information:
 </ul>
 <p>It also gives us a <strong>warning message</strong> saying that expected frequencies are too small and that the chi-squared approximation may be incorrect. This relates to Assumption 4. Depending on your stance on Assumption 4, you may choose to either address or ignore this warning.</p>
 <p>The p-value indicates that we do not reject the null hypothesis, as it is greater than 0.05.</p>
-</section><section id="task-6-the-write-up" class="level3" data-number="6.5.6"><h3 data-number="6.5.6" class="anchored" data-anchor-id="task-6-the-write-up">
-<span class="header-section-number">6.5.6</span> Task 6: The write-up</h3>
+</section><section id="task-6-the-write-up" class="level3" data-number="6.4.6"><h3 data-number="6.4.6" class="anchored" data-anchor-id="task-6-the-write-up">
+<span class="header-section-number">6.4.6</span> Task 6: The write-up</h3>
 <p>The Chi-Square test revealed that there is no statistically significant association between Gender and Level of Education, <span class="math inline">\(\chi^2(8) = 13.59, p = .093, V = .079\)</span>. The strength of the association between the variables is considered small. We therefore fail to reject the null hypothesis.</p>
-</section></section><section id="sec-onesample" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="sec-onesample">
-<span class="header-section-number">6.6</span> Activity 5: One-sample t-test</h2>
+</section></section><section id="sec-onesample" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-onesample">
+<span class="header-section-number">6.5</span> Activity 5: One-sample t-test</h2>
 <p>The one-sample t-test is used to determine whether a sample comes from a population with a specific mean. This population mean is not always known, but is sometimes hypothesised.</p>
 <p>We will perform a one-sample t-test using the continuous variable <strong>wemwbs_sum</strong>. The <a href="https://warwick.ac.uk/fac/sci/med/research/platform/wemwbs/using/howto/" target="_blank">official website for the Warwick-Edinburgh Mental Wellbeing Scales</a> states that the “WEMWBS has a mean score of 51.0 in general population samples in the UK with a standard deviation of 7 (Tennant et al., 2007)”.</p>
 <ul>
@@ -722,15 +808,15 @@ Other information:
 <li>
 <strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “The summed-up WEMWBS score of gamers is different from 51.0.”</li>
 </ul>
-<section id="task-1-preparing-the-dataframe-1" class="level3" data-number="6.6.1"><h3 data-number="6.6.1" class="anchored" data-anchor-id="task-1-preparing-the-dataframe-1">
-<span class="header-section-number">6.6.1</span> Task 1: Preparing the dataframe</h3>
+<section id="task-1-preparing-the-dataframe-1" class="level3" data-number="6.5.1"><h3 data-number="6.5.1" class="anchored" data-anchor-id="task-1-preparing-the-dataframe-1">
+<span class="header-section-number">6.5.1</span> Task 1: Preparing the dataframe</h3>
 <p>First, we need to select the variables of interest: participant ID and <code>wemwbs_sum</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>one_sample <span class="ot">&lt;-</span> data_ballou <span class="sc">%&gt;%</span> </span>
 <span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">select</span>(pid, wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="task-2-compute-descriptives-1" class="level3" data-number="6.6.2"><h3 data-number="6.6.2" class="anchored" data-anchor-id="task-2-compute-descriptives-1">
-<span class="header-section-number">6.6.2</span> Task 2: Compute descriptives</h3>
+</section><section id="task-2-compute-descriptives-1" class="level3" data-number="6.5.2"><h3 data-number="6.5.2" class="anchored" data-anchor-id="task-2-compute-descriptives-1">
+<span class="header-section-number">6.5.2</span> Task 2: Compute descriptives</h3>
 <p>Next, we want to compute means and standard deviations for our variable of interest. This should be straight forward. Try it yourself and then compare your result with the solution below.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -768,8 +854,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="task-3-create-an-appropriate-plot" class="level3" data-number="6.6.3"><h3 data-number="6.6.3" class="anchored" data-anchor-id="task-3-create-an-appropriate-plot">
-<span class="header-section-number">6.6.3</span> Task 3: Create an appropriate plot</h3>
+</section><section id="task-3-create-an-appropriate-plot" class="level3" data-number="6.5.3"><h3 data-number="6.5.3" class="anchored" data-anchor-id="task-3-create-an-appropriate-plot">
+<span class="header-section-number">6.5.3</span> Task 3: Create an appropriate plot</h3>
 <p>This is the plot you will want to include in your report, so make sure everything is clearly labelled. Which plot would you choose? Try creating one on your own first, then compare it with the solution below.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
@@ -797,8 +883,8 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="task-4-check-assumptions" class="level3" data-number="6.6.4"><h3 data-number="6.6.4" class="anchored" data-anchor-id="task-4-check-assumptions">
-<span class="header-section-number">6.6.4</span> Task 4: Check assumptions</h3>
+</section><section id="task-4-check-assumptions" class="level3" data-number="6.5.4"><h3 data-number="6.5.4" class="anchored" data-anchor-id="task-4-check-assumptions">
+<span class="header-section-number">6.5.4</span> Task 4: Check assumptions</h3>
 <section id="assumption-1-continuous-dv" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-1-continuous-dv">Assumption 1: Continuous DV</h4>
 <p>The dependent variable (DV) needs to be measured at interval or ratio level. We can confirm that by looking at <code>one_sample</code>.</p>
 </section><section id="assumption-2-data-are-independent" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-2-data-are-independent">Assumption 2: Data are independent</h4>
@@ -863,7 +949,7 @@ Alternatives to visually assess normality
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>Q-Q plot stands for Quantile-Quantile Plot and compare two distributions by matching a common set of quantiles. Essentially, it compares the distribution of your data to a normal distribution and plots the points along a 45-degree line.</p>
-<p><strong>If the dots in the Q-Q plot fall roughly along that line, we can assume the data is normally distributed. If they stray away from the line (and worse in some sort of pattern), we might not assume normality and conduct a non-parametric test instead. For the non-parametric equivalent, see <a href="#sec-alternative_one_sample"><span>Section&nbsp;6.7</span></a>.</strong></p>
+<p><strong>If the dots in the Q-Q plot fall roughly along that line, we can assume the data is normally distributed. If they stray away from the line (and worse in some sort of pattern), we might not assume normality and conduct a non-parametric test instead. For the non-parametric equivalent, see <a href="#sec-alternative_one_sample"><span>Section&nbsp;6.6</span></a>.</strong></p>
 <p>To create the Q-Q plot, you can use either the <code>car</code> or <code>qqplotr</code> package</p>
 <ul>
 <li>The <code>qqPlot()</code> function is a single line but requires BaseR syntax (i.e., the <code>$</code> symbol) to access the column within the data object. For example, <code>one_sample$wemwbs_sum</code> directs R to look for a column named <code>wemwbs_sum</code> that is located within the data object <code>one_sample</code>.</li>
@@ -948,8 +1034,8 @@ Report-writing Tip
 </ul>
 </div>
 </div>
-</section></section><section id="task-5-compute-a-one-sample-t-test-and-effect-size" class="level3" data-number="6.6.5"><h3 data-number="6.6.5" class="anchored" data-anchor-id="task-5-compute-a-one-sample-t-test-and-effect-size">
-<span class="header-section-number">6.6.5</span> Task 5: Compute a One-sample t-test and effect size</h3>
+</section></section><section id="task-5-compute-a-one-sample-t-test-and-effect-size" class="level3" data-number="6.5.5"><h3 data-number="6.5.5" class="anchored" data-anchor-id="task-5-compute-a-one-sample-t-test-and-effect-size">
+<span class="header-section-number">6.5.5</span> Task 5: Compute a One-sample t-test and effect size</h3>
 <p>To compute a one-sample t-test, we can use the <code>t.test() function</code>, which is part of Base R. And yes, you guessed it, our first argument should follow the pattern <code>data$column</code>. The second argument, <code>mu</code>, specifies the population mean we are testing our sample against (in this case, 51.0). The <code>alternative</code> is “two.sided” by default, so it can be omitted if you are conducting a two-sided test.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">t.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">51.0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -983,8 +1069,8 @@ mean of x
 <pre><code>[1] 0.5125662</code></pre>
 </div>
 </div>
-</section><section id="task-6-sensitivity-power-analysis" class="level3" data-number="6.6.6"><h3 data-number="6.6.6" class="anchored" data-anchor-id="task-6-sensitivity-power-analysis">
-<span class="header-section-number">6.6.6</span> Task 6: Sensitivity power analysis</h3>
+</section><section id="task-6-sensitivity-power-analysis" class="level3" data-number="6.5.6"><h3 data-number="6.5.6" class="anchored" data-anchor-id="task-6-sensitivity-power-analysis">
+<span class="header-section-number">6.5.6</span> Task 6: Sensitivity power analysis</h3>
 <p>A <strong>sensitivity power analysis allows you to determine the minimum effect size that the study could reliably detect</strong> given the number of participants you have in the sample (i.e., sample size), the alpha level at 0.05, and an assumed power of 0.8.</p>
 <p>To perform this calculation, we use the <code>pwr.t.test()</code> function from the <code>pwr</code> package. This function relies on four key factors — alpha, power, effect size, and sample size (APES). If you know three, you can calculate the fourth. Since we have three specified, we can solve for the effect size. Additionally, we need to specify the <code>type</code> argument to indicate we are using a one-sample t-test, and set <code>alternative</code> to “two.sided” for a non-directional hypothesis.</p>
 <div class="cell">
@@ -1001,11 +1087,11 @@ mean of x
 </div>
 </div>
 <p>So the smallest effect size we can detect with a sample size of 1083, an alpha level of 0.05, and power of 0.8 is 0.09. This is a smaller value than the actual effect size we calculated with our CohensD function above (i.e., 0.51) which means our analysis is sufficiently powered.</p>
-</section><section id="task-7-the-write-up" class="level3" data-number="6.6.7"><h3 data-number="6.6.7" class="anchored" data-anchor-id="task-7-the-write-up">
-<span class="header-section-number">6.6.7</span> Task 7: The write-up</h3>
+</section><section id="task-7-the-write-up" class="level3" data-number="6.5.7"><h3 data-number="6.5.7" class="anchored" data-anchor-id="task-7-the-write-up">
+<span class="header-section-number">6.5.7</span> Task 7: The write-up</h3>
 <p>A one-sample t-test was computed to determine whether the average mental well-being of gamers as measured by the WEMWBS was different to the population well-being mean. The average WEMWBS of the gamers <span class="math inline">\((N = 1083, M = 45.42, SD = 10.89)\)</span> was significantly lower than the population mean well-being score of 51.0, <span class="math inline">\(t(1082) = 16.87, p &lt; .001, d = .51\)</span>. The strength of the effect is considered medium and the study was sufficiently powered. We therefore reject the null hypothesis in favour of H<sub>1</sub>.</p>
-</section></section><section id="sec-alternative_one_sample" class="level2" data-number="6.7"><h2 data-number="6.7" class="anchored" data-anchor-id="sec-alternative_one_sample">
-<span class="header-section-number">6.7</span> Activity 6: Non-parametric alternative</h2>
+</section></section><section id="sec-alternative_one_sample" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="sec-alternative_one_sample">
+<span class="header-section-number">6.6</span> Activity 6: Non-parametric alternative</h2>
 <p>If any of the assumptions are violated, switch to the non-parametric alternative. For the one-sample t-test, this would be a <strong>One-sample Wilcoxon signed-rank test</strong>. Instead of the mean, it compares the median of a sample against a single value (i.e., the population median).</p>
 <p>That means we will need to determine the population median, and calculate some <strong>summary stats</strong> for our sample:</p>
 <ul>
@@ -1058,326 +1144,14 @@ alternative hypothesis: true location is not equal to 53</code></pre>
 </div>
 <p>Now we have all the numbers we need to <strong>write up the results</strong>:</p>
 <p>A One-sample Wilcoxon signed-rank test was used to compare Gamers’ mental-wellbeing median scores (Mdn = 46.0) to the population median of 53.0. The test showed a significant difference, <span class="math inline">\(Z = -19.12, p &lt; .001, r = .590\)</span>. The strength of the effect is considered medium. We therefore reject the null hypothesis in favour of H<sub>1</sub>.</p>
-</section><section id="pair-coding" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="pair-coding"><span style="color: #F39C12; text-transform: uppercase;">Pair-coding</span></h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This pair coding task is a bit long to fully complete in class. Try to progress as far as possible without compromising understanding, and treat the remaining section as a “Challenge Yourself” activity.</p>
-<p><strong>Intentions behind it?</strong></p>
-<p>The task is designed to walk you through conducting a full Chi-Square test on a dataset different from the one in the chapter. I did not want to cherry-pick specific steps from the Chi-Square test, as real-life data analysis requires computing descriptives and checking assumptions before conducting inferential statistics.</p>
-</div>
-</div>
-<section id="task-1-open-the-r-project-for-the-lab" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-1-open-the-r-project-for-the-lab">Task 1: Open the R project for the lab</h3>
-</section><section id="task-2-create-a-new-.rmd-file" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-2-create-a-new-.rmd-file">Task 2: Create a new <code>.Rmd</code> file</h3>
-<p>… and name it something useful. If you need help, have a look at <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a>.</p>
-</section><section id="task-3-load-in-the-library-and-read-in-the-data" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-3-load-in-the-library-and-read-in-the-data">Task 3: Load in the library and read in the data</h3>
-<p>The data should already be in your project folder. If you want a fresh copy, you can download the data again here: <a href="data/data_pair_coding.zip" title="download">data_pair_coding</a>.</p>
-<p>We are using the packages <code>tidyverse</code> and <code>lsr</code> today, and the data file we need to read in is <code>dog_data_clean_wide.csv</code>. I’ve named my data object <code>dog_data_wide</code> to shorten the name but feel free to use whatever object name sounds intuitive to you.</p>
-<p>If you have not worked through chapter 6 yet, you may need to install the package <code>lsr</code> before you can load it into the library. Run <code>install.packages("lsr")</code> in your <strong>CONSOLE</strong>.</p>
-</section><section id="task-4-tidy-data-for-a-chi-square-t-test" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-4-tidy-data-for-a-chi-square-t-test">Task 4: Tidy data for a Chi-Square t-test</h3>
-<p>Look at <code>dog_data_wide</code> and choose two categorical variables. To guide you through this example, I have selected Year of Study and whether or not the students owned pets as my categorical variable.</p>
-<ul>
-<li><p><strong>Step 1</strong>: Select all relevant columns from <code>dog_data_wide</code>. In my case, those would be the participant ID <code>RID</code>, <code>Year_of_Study</code>, and <code>Live_Pets</code>. Store this data in an object called <code>dog_chi</code>.</p></li>
-<li><p><strong>Step 2</strong>: Check if we have any missing values in the <code>dog_chi</code>. If so remove them with the function <code>drop_na()</code>.</p></li>
-<li><p><strong>Step 3</strong>: Convert <code>Year_of_Study</code> and <code>Live_Pets</code> into factors. Feel free to order the categories meaningfully.</p></li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hints
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>dog_chi <span class="ot">&lt;-</span> ??? <span class="sc">%&gt;%</span> </span>
-<span id="cb36-2"><a href="#cb36-2"></a>  <span class="co"># Step 1</span></span>
-<span id="cb36-3"><a href="#cb36-3"></a>  <span class="fu">select</span>(???, ???, ???) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-4"><a href="#cb36-4"></a>  <span class="co"># Step 2</span></span>
-<span id="cb36-5"><a href="#cb36-5"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb36-6"><a href="#cb36-6"></a>  <span class="co"># Step 3</span></span>
-<span id="cb36-7"><a href="#cb36-7"></a>  <span class="fu">mutate</span>(<span class="at">Year_of_Study =</span> ???(Year_of_Study,</span>
-<span id="cb36-8"><a href="#cb36-8"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"First"</span>, <span class="st">"Second"</span>, <span class="st">"Third"</span>, <span class="st">"Fourth"</span>, <span class="st">"Fifth or above"</span>)),</span>
-<span id="cb36-9"><a href="#cb36-9"></a>         <span class="at">Live_Pets =</span> ???(Live_Pets,</span>
-<span id="cb36-10"><a href="#cb36-10"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"yes"</span>, <span class="st">"no"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution for Tasks 3 and 4
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># loading tidyverse and lsr into the library</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb37-3"><a href="#cb37-3"></a><span class="fu">library</span>(lsr)</span>
-<span id="cb37-4"><a href="#cb37-4"></a></span>
-<span id="cb37-5"><a href="#cb37-5"></a><span class="co"># reading in `dog_data_clean_wide.csv`</span></span>
-<span id="cb37-6"><a href="#cb37-6"></a>dog_data_wide <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dog_data_clean_wide.csv"</span>)</span>
-<span id="cb37-7"><a href="#cb37-7"></a></span>
-<span id="cb37-8"><a href="#cb37-8"></a><span class="co"># Task 4: Tidying </span></span>
-<span id="cb37-9"><a href="#cb37-9"></a>dog_chi <span class="ot">&lt;-</span> dog_data_wide <span class="sc">%&gt;%</span> </span>
-<span id="cb37-10"><a href="#cb37-10"></a>  <span class="co"># Step 1</span></span>
-<span id="cb37-11"><a href="#cb37-11"></a>  <span class="fu">select</span>(RID, Year_of_Study, Live_Pets) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-12"><a href="#cb37-12"></a>  <span class="co"># Step 2</span></span>
-<span id="cb37-13"><a href="#cb37-13"></a>  <span class="fu">drop_na</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb37-14"><a href="#cb37-14"></a>  <span class="co"># Step 3</span></span>
-<span id="cb37-15"><a href="#cb37-15"></a>  <span class="fu">mutate</span>(<span class="at">Year_of_Study =</span> <span class="fu">factor</span>(Year_of_Study,</span>
-<span id="cb37-16"><a href="#cb37-16"></a>                                <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"First"</span>, <span class="st">"Second"</span>, <span class="st">"Third"</span>, <span class="st">"Fourth"</span>, <span class="st">"Fifth or above"</span>)),</span>
-<span id="cb37-17"><a href="#cb37-17"></a>         <span class="at">Live_Pets =</span> <span class="fu">factor</span>(Live_Pets,</span>
-<span id="cb37-18"><a href="#cb37-18"></a>                            <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"yes"</span>, <span class="st">"no"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="task-5-compute-descriptives" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-5-compute-descriptives">Task 5: Compute descriptives</h3>
-<p>Create a frequency table (or contingency table to be more exact) from <code>dog_chi</code>, i.e., we need counts for each combination of the variables. Store the data in a new data object <code>dog_chi_contingency</code>. <code>dog_chi_contingency</code> should look like this:</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small" data-quarto-postprocess="true">
-<thead><tr class="header">
-<th style="text-align: left;" data-quarto-table-cell-role="th">Year_of_Study</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">yes</th>
-<th style="text-align: right;" data-quarto-table-cell-role="th">no</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">First</td>
-<td style="text-align: right;">21</td>
-<td style="text-align: right;">89</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Second</td>
-<td style="text-align: right;">37</td>
-<td style="text-align: right;">64</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Third</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">22</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Fourth</td>
-<td style="text-align: right;">12</td>
-<td style="text-align: right;">18</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Fifth or above</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">2</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hints
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>dog_chi_contingency <span class="ot">&lt;-</span> dog_chi <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href="#cb38-2"></a>  <span class="fu">count</span>(???, ???) <span class="sc">%&gt;%</span> </span>
-<span id="cb38-3"><a href="#cb38-3"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> ???, <span class="at">values_from =</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Task 5: Frequency table</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>dog_chi_contingency <span class="ot">&lt;-</span> dog_chi <span class="sc">%&gt;%</span> </span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">count</span>(Live_Pets, Year_of_Study) <span class="sc">%&gt;%</span> </span>
-<span id="cb39-4"><a href="#cb39-4"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Live_Pets, <span class="at">values_from =</span> n)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="task-6-check-assumptions" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-6-check-assumptions">Task 6: Check assumptions</h3>
-<ol type="1">
-<li><p>Both variables should be categorical, measured at either the ordinal or nominal level. Answer: <select class="webex-select"><option value="blank"></option>
-<option value="answer">yes</option>
-<option value="x">no</option></select> as <code>Year_of_Study</code> is <select class="webex-select"><option value="blank"></option>
-<option value="answer">ordinal</option>
-<option value="x">nominal</option></select>, and <code>Live_Pets</code> is <select class="webex-select"><option value="blank"></option>
-<option value="x">ordinal</option>
-<option value="answer">nominal</option></select>.</p></li>
-<li><p>Each observation in the dataset has to be independent, meaning the value of one observation does not affect the value of any other. Answer: <select class="webex-select"><option value="blank"></option>
-<option value="answer">yes</option>
-<option value="x">no</option></select></p></li>
-<li><p>Cells in the contingency table are mutually exclusive. Answer: <select class="webex-select"><option value="blank"></option>
-<option value="answer">yes</option>
-<option value="x">no</option></select> because each individual can belong to <select class="webex-select"><option value="blank"></option>
-<option value="x">multiple cells</option>
-<option value="answer">only one cell</option></select> in the contingency table.</p></li>
-</ol></section><section id="task-7-compute-a-chi-square-test-interpret-the-output" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="task-7-compute-a-chi-square-test-interpret-the-output">Task 7: Compute a chi-square test &amp; interpret the output</h3>
-<ul>
-<li>
-<strong>Step 1</strong>: Use the function <code>as.data.frame</code> to turn <code>dog_chi</code> into a dataframe. Store this output in a new data object called <code>dog_chi_df</code>.</li>
-</ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Hints
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a>??? <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(???)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>dog_chi_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dog_chi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>
-<strong>Step 2</strong>: Run the <code>associationTest()</code> function from the <code>lsr</code> package to compute the Chi-Square test. The structure of the function is as follows:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="fu">associationTest</span>(<span class="at">formula =</span> <span class="sc">~</span> Variable1 <span class="sc">+</span> Variable2, <span class="at">data =</span> your_dataframe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">associationTest</span>(<span class="at">formula =</span> <span class="sc">~</span> Year_of_Study <span class="sc">+</span> Live_Pets, <span class="at">data =</span> dog_chi_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-<ul>
-<li>
-<strong>Step 3</strong>: Interpreting the output</li>
-</ul>
-<div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in associationTest(formula = ~Year_of_Study + Live_Pets, data =
-dog_chi_df): Expected frequencies too small: chi-squared approximation may be
-incorrect</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-     Chi-square test of categorical association
-
-Variables:   Year_of_Study, Live_Pets 
-
-Hypotheses: 
-   null:        variables are independent of one another
-   alternative: some contingency exists between variables
-
-Observed contingency table:
-                Live_Pets
-Year_of_Study    yes no
-  First           21 89
-  Second          37 64
-  Third           12 22
-  Fourth          12 18
-  Fifth or above   3  2
-
-Expected contingency table under the null hypothesis:
-                Live_Pets
-Year_of_Study      yes    no
-  First          33.39 76.61
-  Second         30.66 70.34
-  Third          10.32 23.68
-  Fourth          9.11 20.89
-  Fifth or above  1.52  3.48
-
-Test results: 
-   X-squared statistic:  12.276 
-   degrees of freedom:  4 
-   p-value:  0.015 
-
-Other information: 
-   estimated effect size (Cramer's v):  0.209 
-   warning: expected frequencies too small, results may be inaccurate</code></pre>
-</div>
-</div>
-<p>The Chi-Square test revealed that there is <select class="webex-select"><option value="blank"></option>
-<option value="answer">a statistically significant association</option>
-<option value="x">no statistically significant association</option></select> between Year of Study and whether students live with pets, <span class="math inline">\(\chi^2\)</span> (<input class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]">) = <input class="webex-solveme nospaces" size="5" data-answer="[&quot;12.28&quot;]">, p = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;.015&quot;]">, V = <input class="webex-solveme nospaces" size="4" data-answer="[&quot;.209&quot;]">. The strength of the association between the variables is considered <select class="webex-select"><option value="blank"></option>
-<option value="x">small</option>
-<option value="answer">moderate</option>
-<option value="x">strong</option></select>. We therefore <select class="webex-select"><option value="blank"></option>
-<option value="x">fail to reject the null hypothesis</option>
-<option value="answer">reject the null hypothesis</option></select>.</p>
-</section></section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+</section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
 <section id="question-1-conceptual-understanding---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1-conceptual-understanding---chi-square-test">Question 1: Conceptual Understanding - Chi-Square Test</h4>
 <p><strong>What is the primary purpose of a Chi-square test?</strong></p>
-<div id="radio_SGLAQYWEYX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_SGLAQYWEYX" value="x"><span>To compare means between two groups</span></label><label><input type="radio" autocomplete="off" name="radio_SGLAQYWEYX" value="x"><span>To test for differences in variances</span></label><label><input type="radio" autocomplete="off" name="radio_SGLAQYWEYX" value="x"><span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_SGLAQYWEYX" value="answer"><span>To test the relationship between categorical variables</span></label>
+<div id="radio_VZIKHYHMSC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="answer"><span>To test the relationship between categorical variables</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To compare means between two groups</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To test for differences in variances</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1386,7 +1160,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The Chi-square test evaluates whether there is an association or relationship between two categorical variables. Those variables can either be nominal or ordinal.</p>
 </div>
@@ -1394,11 +1168,11 @@ Explain this answer
 </div>
 </section><section id="question-2-application---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2-application---chi-square-test">Question 2: Application - Chi-Square Test</h4>
 <p><strong>Which of the following scenarios would require a Chi-square test?</strong></p>
-<div id="radio_UDKCJGRTYD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UDKCJGRTYD" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_UDKCJGRTYD" value="answer"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_UDKCJGRTYD" value="x"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_UDKCJGRTYD" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
+<div id="radio_PFZNZLSDQY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="answer"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1407,7 +1181,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The only option with 2 categorical variables is pizza topping (e.g., pepperoni, vegetarian, cheese) and region of residence (e.g., North, South, East, West).</p>
 </div>
@@ -1415,11 +1189,11 @@ Explain this answer
 </div>
 </section><section id="question-3-interpreting-output---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3-interpreting-output---chi-square-test">Question 3: Interpreting Output - Chi-Square Test</h4>
 <p><strong>In a Chi-square test, the p-value is .005. What does this imply if the significance level is set at .05?</strong></p>
-<div id="radio_YUCYGZNILL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_YUCYGZNILL" value="x"><span>The null hypothesis is not rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_YUCYGZNILL" value="x"><span>The null hypothesis is rejected; there is no significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_YUCYGZNILL" value="answer"><span>The null hypothesis is rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_YUCYGZNILL" value="x"><span>The null hypothesis is not rejected; there is no significant association.</span></label>
+<div id="radio_GCAKYOLGXX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is rejected; there is no significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is not rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="answer"><span>The null hypothesis is rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is not rejected; there is no significant association.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1428,7 +1202,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A p-value of .005 is less than the significance level (.05), indicating that the observed association between the variables is unlikely to have happened by chance.</p>
 </div>
@@ -1436,11 +1210,11 @@ Explain this answer
 </div>
 </section><section id="question-4-using-r---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4-using-r---chi-square-test">Question 4: Using R - Chi-Square Test</h4>
 <p><strong>Which of the following R functions is used to perform a Chi-square test and displays a Cramer’s V in the output?</strong></p>
-<div id="radio_UFDNUWVKYQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UFDNUWVKYQ" value="x"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_UFDNUWVKYQ" value="answer"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_UFDNUWVKYQ" value="x"><span>chisq.test()</span></label><label><input type="radio" autocomplete="off" name="radio_UFDNUWVKYQ" value="x"><span>one.sample()</span></label>
+<div id="radio_OXVPDXDIBS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>one.sample()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="answer"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>chisq.test()</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1449,7 +1223,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The <code>associationTest()</code> function from the <code>lsr</code> package performs a Chi-square test and directly provides Cramer’s V as part of the output. The <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> function exists it but does not compute Cramer’s V. The other options either don’t exist or don’t meet the criteria.</p>
 </div>
@@ -1457,11 +1231,11 @@ Explain this answer
 </div>
 </section><section id="question-5-conceptual-understanding---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-5-conceptual-understanding---one-sample-t-test">Question 5: Conceptual Understanding - One-sample t-test</h4>
 <p><strong>What is the null hypothesis in a one-sample t-test?</strong></p>
-<div id="radio_JAHQCHIWCD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JAHQCHIWCD" value="x"><span>The sample mean is greater than the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_JAHQCHIWCD" value="answer"><span>The sample mean is equal to the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_JAHQCHIWCD" value="x"><span>The population mean is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_JAHQCHIWCD" value="x"><span>The sample mean is less than the population mean</span></label>
+<div id="radio_BPMMZSENJP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The population mean is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The sample mean is less than the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="answer"><span>The sample mean is equal to the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The sample mean is greater than the population mean</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1470,7 +1244,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>The one-sample t-test tests whether the sample mean is significantly different from a known or hypothesised population mean.</p>
 </div>
@@ -1478,11 +1252,11 @@ Explain this answer
 </div>
 </section><section id="question-6-application---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-6-application---one-sample-t-test">Question 6: Application - One-sample t-test</h4>
 <p><strong>Which of the following scenarios would require a one-sample t-test?</strong></p>
-<div id="radio_NICBHMRRZO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NICBHMRRZO" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_NICBHMRRZO" value="x"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_NICBHMRRZO" value="answer"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_NICBHMRRZO" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
+<div id="radio_AYBUUFQJDQ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="answer"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1491,7 +1265,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-24" class="callout-24-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A one-sample t-test is appropriate when comparing the mean of a single sample (e.g., basketball players’ heights) to a known or hypothesised population mean (e.g., mean of the general population). The other options involve comparisons between groups (option 1), categorical associations (option 2), or repeated measures (option 4).</p>
 </div>
@@ -1499,11 +1273,11 @@ Explain this answer
 </div>
 </section><section id="question-7-interpreting-output---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7-interpreting-output---one-sample-t-test">Question 7: Interpreting Output - One-sample t-test</h4>
 <p><strong>If the p-value in a one-sample t-test is .15 and the significance level is .05, what is the conclusion?</strong></p>
-<div id="radio_LSYGZPGNBO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LSYGZPGNBO" value="answer"><span>The sample mean is not significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_LSYGZPGNBO" value="x"><span>The sample mean is significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_LSYGZPGNBO" value="x"><span>The sample mean is further from the population mean than expected by chance.</span></label><label><input type="radio" autocomplete="off" name="radio_LSYGZPGNBO" value="x"><span>The sample mean is equal to the population mean.</span></label>
+<div id="radio_INGXPCWNTU" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="answer"><span>The sample mean is not significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is further from the population mean than expected by chance.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is equal to the population mean.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1512,7 +1286,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Since the p-value (.15) is greater than the significance level (.05), we fail to reject the null hypothesis. This means there is no evidence to suggest that the sample mean is significantly different from the population mean.</p>
 <p>However, this does not mean we have evidence to confirm that the sample mean is exactly equal to the population mean. In statistics, ‘not significantly different’ is not the same as ‘equal.’ Therefore, the option ‘The sample mean is equal to the population mean’ is incorrect.</p>
@@ -1521,11 +1295,11 @@ Explain this answer
 </div>
 </section><section id="question-8-using-r---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-8-using-r---one-sample-t-test">Question 8: Using R - One-sample t-test</h4>
 <p><strong>Which of the following R functions is used to perform a one-sample t-test?</strong></p>
-<div id="radio_LKEBRELXAK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_LKEBRELXAK" value="answer"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_LKEBRELXAK" value="x"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_LKEBRELXAK" value="x"><span>chisq.test()</span></label><label><input type="radio" autocomplete="off" name="radio_LKEBRELXAK" value="x"><span>one.sample()</span></label>
+<div id="radio_QZOTIHHAPA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>one.sample()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="answer"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>chisq.test()</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1534,7 +1308,7 @@ Explain this answer
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> is the standard function in R for performing a one-sample t-test. In the next 2 weeks, we will see that the function can also be used for two-sample and paired t-tests.</p>
 <p>The function <code>one.sample()</code> does not exist.</p>

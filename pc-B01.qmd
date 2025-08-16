@@ -1,0 +1,245 @@
+# 2B Lab 1 Week 2  {.unnumbered}
+
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+**This is the pair coding activity related to @sec-paired.**
+
+
+
+## Task 1: Open the R project for the lab {.unnumbered}
+
+## Task 2: Create a new `.Rmd` file {.unnumbered}
+
+... and name it something useful. If you need help, have a look at @sec-rmd.
+
+## Task 3: Load in the library and read in the data {.unnumbered}
+
+The data should already be in your project folder. If you want a fresh copy, you can download the data again here: [data_pair_coding](data/data_pair_coding.zip "download").
+
+We are using the packages `rstatix`, `tidyverse`, `qqplotr`, `lsr` today.
+Make sure to load `rstatix` in before `tidyverse`.
+
+We also need to read in `dog_data_clean_wide.csv`. Again, I've named my data object `dog_data_wide` to shorten the name but feel free to use whatever object name sounds intuitive to you. 
+
+For the plot, we will need the data in long format. We can either read in `dog_data_clean_long.csv` to take a shortcut, or wrangle the data from `dog_data_wide`. I've taken the shortcut and named my data object `dog_data_long`.
+
+
+
+```{r reading in data for me, echo=FALSE, message=FALSE}
+library(rstatix)
+library(tidyverse)
+library(lsr)
+
+dog_data_wide <- read_csv("data/dog_data_clean_wide.csv")
+dog_data_long <- read_csv("data/dog_data_clean_long.csv")
+```
+
+## Task 4: Tidy data for a paired t-test {.unnumbered}
+
+Not much tidying to do for today. 
+
+Pick a variable of interest and select the pre- and post-scores, and calculate the difference score. Store them in a separate data object with a meaningful name.
+
+I will use Loneliness as an example and call my data object `dog_lonely`. Regardless of your chosen variable, your data object should look like/ similar to the table below. 
+
+```{r echo=FALSE, warning=FALSE, message=FALSE}
+dog_lonely <- dog_data_wide %>% 
+  select(RID, Loneliness_pre, Loneliness_post) %>% 
+  mutate(Loneliness_diff = Loneliness_post - Loneliness_pre)
+
+head(dog_lonely, n = 5)
+```
+
+In `dog_data_long`, we want to turn `Stage` into a factor so we can re-order the labels (i.e., "pre" before "post").
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution for Tasks 3 and 4
+
+```{r}
+## Task 3
+library(rstatix)
+library(tidyverse)
+library(lsr)
+
+dog_data_wide <- read_csv("data/dog_data_clean_wide.csv")
+dog_data_long <- read_csv("data/dog_data_clean_long.csv")
+
+## Task 4
+dog_lonely <- dog_data_wide %>% 
+  select(RID, Loneliness_pre, Loneliness_post) %>% 
+  mutate(Loneliness_diff = Loneliness_post - Loneliness_pre)
+
+dog_data_long <- dog_data_long %>% 
+  mutate(Stage = factor(Stage,
+                        levels = c("pre", "post")))
+```
+
+
+:::
+
+## Task 5: Compute descriptives {.unnumbered}
+
+We want to determine the mean and sd of:
+
+* the pre-scores
+* the post-scores, and
+* the difference scores
+
+Store them in a data object called `descriptives`.
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r}
+descriptives <- dog_lonely %>% 
+  summarise(mean_pre = mean(Loneliness_pre),
+            sd_pre = sd(Loneliness_pre),
+            mean_post = mean(Loneliness_post),
+            sd_post = sd(Loneliness_post),
+            diff = mean(Loneliness_diff),
+            sd_diff = sd(Loneliness_diff))
+```
+
+:::
+
+
+## Task 6: Check assumptions {.unnumbered}
+
+
+#### Assumption 1: Continuous DV {.unnumbered} 
+
+Is the dependent variable (DV) continuous? Answer: `r longmcq(sample(c(answer = "Yes. The DV is the difference in loneliness scores and it is continuous", x = "No. The DV is the difference in loneliness scores but it is categorical", x = "No. The DV is the pre- and post-stages and it is categorical")))`
+
+
+#### Assumption 2: Data are independent {.unnumbered} 
+
+Each pair of values in the dataset has to be independent, meaning each pair of values needs to be from a separate participant. Answer: `r mcq(c(answer = "yes", x = "no"))`
+
+#### Assumption 3: Normality {.unnumbered}
+
+Looking at the violin-boxplots below, do you think the assumption of normality holds?
+
+::: {.callout-note}
+The labels of Plot 2 turned out to be quite long here. I've used the escape character `\n` here. to break up the title across 2 lines.
+:::
+
+```{r eval = FALSE, message = FALSE}
+## Plot 1
+ggplot(dog_data_long, aes(x = Stage, y = Loneliness, fill = Stage)) +
+  geom_violin(alpha = 0.5) +
+  geom_boxplot(width = 0.4, alpha = 0.8) +
+  scale_fill_viridis_d(guide = "none") +
+  theme_classic() +
+  labs(x = "Time point", y = "mean Loneliness Scores")
+
+## Plot 2
+ggplot(dog_lonely, aes(x = "", y = Loneliness_diff)) +
+  geom_violin(fill = "#21908C", alpha = 0.5) +
+  geom_boxplot(fill = "#21908C", width = 0.4) +
+  theme_classic() +
+  labs(x = "",
+       y = "Difference in mean Loneliness scores \nbetween pre- and post- intervention") # \n forces a manual line break in the axis label
+
+```
+
+```{r fig.cap="Plots displayed to assess normality assumption", echo=FALSE}
+library(patchwork)
+
+## Plot 1
+p1 <- ggplot(dog_data_long, aes(x = Stage, y = Loneliness, fill = Stage)) +
+  geom_violin(alpha = 0.5) +
+  geom_boxplot(width = 0.4, alpha = 0.8) +
+  scale_fill_viridis_d(guide = "none") +
+  theme_classic() +
+  labs(x = "Time point", y = "mean Loneliness Scores") +
+  ggtitle("Plot 1")
+
+## Plot 2
+p2 <- ggplot(dog_lonely, aes(x = "", y = Loneliness_diff)) +
+  geom_violin(fill = "#21908C", alpha = 0.5) +
+  geom_boxplot(fill = "#21908C", width = 0.4) +
+  theme_classic() +
+  labs(x = "",
+       y = "Difference in mean Loneliness scores \nbetween pre- and post- intervention") +
+  ggtitle("Plot 2")
+
+p1 + p2 + plot_layout(nrow = 1)
+```
+
+
+
+
+Answer:
+
+`r longmcq(c(x = "yes, because both pre- and post-scores in Plot 1 are approximately normally distributed", answer = "yes, because the difference scores in Plot 2 are approximately normally distributed", x = "no, because both pre- and post-scores in Plot 1 are extremely skewed", x = "no, because the difference scores in Plot 2 are extremely skewed"))`
+
+#### Conclusion from assumption tests {.unnumbered}
+
+With all assumptions tested, which statistical test would you recommend for this analysis?
+
+Answer: `r longmcq(c(answer = "All assumptions held. We will conduct a paired-samples t-test.", x = "The assumption of normality was violated. We will conduct a Wilcoxon signed-rank test."))`
+
+
+
+## Task 7: Computing a paired-sample t-test with effect size & interpret the output {.unnumbered}
+
+
+* **Step 1**: Compute the paired-sample t-test. The structure of the function is as follows:
+
+```{r eval=FALSE}
+t.test(your_data$var1, your_data$var2, paired = TRUE)
+```
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r eval=FALSE}
+t.test(dog_lonely$Loneliness_pre, dog_lonely$Loneliness_post, paired = TRUE)
+```
+
+:::
+
+
+* **Step 2**: Calculate an effect size
+
+Calculate Cohen's D. The structure of the function is as follows:
+
+```{r eval=FALSE}
+cohensD(your_data$var1, your_data$var2, method = "paired")
+```
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r eval=FALSE}
+cohensD(dog_lonely$Loneliness_pre, dog_lonely$Loneliness_post, method = "paired")
+```
+
+:::
+
+
+* **Step 3**: Interpreting the output
+
+Below are the outputs for the **descriptive statistics** (table), **paired-samples t-test** (main output), and **Cohen’s D** (last line starting with [1]). Based on these, write up the results in APA style and provide an interpretation.
+
+```{r echo=FALSE}
+descriptives
+
+t.test(dog_lonely$Loneliness_pre, dog_lonely$Loneliness_post, paired = TRUE)
+
+cohensD(dog_lonely$Loneliness_pre, dog_lonely$Loneliness_post, method = "paired")
+```
+
+We hypothesised that there would be a significant difference between Loneliness measured before (*M* = `r fitb("2.04")`, *SD* = `r fitb("0.53")`) and after (*M* = `r fitb("1.91")`, *SD* = `r fitb("0.53")`) the dog intervention. On average, participants felt less lonely after the intervention (*M~diff~* = `r fitb("0.13")`, *SD~diff~* = `r fitb("0.23")`). 
+Using a paired-samples t-test, the effect was found to be `r mcq(c(answer = "significant", x = "non-significant"))` and of a `r mcq(c(answer = "small", x = "medium", x = "large"))` magnitude, *t*(`r fitb("283")`) = `r fitb("9.26")`, *p* `r fitb("< .001")`, *d* = `r fitb("0.55")`. We therefore `r mcq(c(x = "fail to reject the null hypothesis", answer = "reject the null hypothesis in favour of H1"))`.
+

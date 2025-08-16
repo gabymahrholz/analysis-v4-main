@@ -1,0 +1,143 @@
+# 2B Lab 4 Week 5  {.unnumbered}
+
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+**This is the pair coding activity related to @sec-reg_mult.**
+
+
+## Task 1: Open the R project for the lab {.unnumbered}
+
+## Task 2: Create a new `.Rmd` file {.unnumbered}
+
+## Task 3: Load in the library and read in the data {.unnumbered}
+
+The data should already be in your project folder. If you want a fresh copy, you can download the data again here: [data_pair_coding](data/data_pair_coding.zip "download").
+
+We are using the packages `tidyverse`, `sjPlot`, and `performance` today.
+
+Just like last week, we also need to read in `dog_data_clean_wide.csv`. 
+
+```{r reading in data for me, echo=FALSE, message=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(performance)
+
+dog_data_wide <- read_csv("data/dog_data_clean_wide.csv")
+
+dog_mult_reg <- dog_data_wide %>%
+  select(RID, Loneliness_post, Loneliness_pre, Flourishing_pre) %>% 
+  drop_na() %>% 
+  mutate(Flourishing_pre_centered = Flourishing_pre - mean(Flourishing_pre),
+         Loneliness_pre_centered = Loneliness_pre - mean(Loneliness_pre))
+
+```
+
+## Task 4: Tidy data & Selecting variables of interest {.unnumbered}
+
+Let's define a potential research question:
+
+**To what extent do pre-intervention loneliness and pre-intervention flourishing predict post-intervention loneliness, and is there an interaction between these predictors?**
+
+
+To get the data into shape, we should **select our variables of interest** from `dog_data_wide` and **remove any missing values** .
+
+
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r eval=FALSE}
+library(tidyverse)
+library(sjPlot)
+library(performance)
+
+dog_data_wide <- read_csv("dog_data_clean_wide.csv")
+
+dog_mult_reg <- dog_data_wide %>%
+  select(RID, Loneliness_post, Loneliness_pre, Flourishing_pre) %>% 
+  drop_na() 
+  
+```
+
+:::
+
+Furthermore, we need to mean-center our two continuous predictors. Since this is a new concept, simply run the code below.
+
+```{r}
+dog_mult_reg <- dog_mult_reg %>% 
+  mutate(Flourishing_pre_centered = Flourishing_pre - mean(Flourishing_pre),
+         Loneliness_pre_centered = Loneliness_pre - mean(Loneliness_pre))
+```
+
+
+## Task 5: Model creating & Assumption checks {.unnumbered}
+
+Now, let's create our regression model. This follows the same approach as @sec-reg, but with additional predictors.
+
+According to our research question, we have the following model variables: 
+
+* Dependent Variable (DV)/Outcome: Loneliness post intervention
+* Independent Variable (IV1)/Predictor1: Flouring before the intervention
+* Independent Variable (IV2)/Predictor2: Loneliness before the intervention
+* Does our model require an interaction term? `r mcq(c(answer = "Yes", x = "No"))`
+
+As a reminder, the multiple linear regression model has the following structure:
+
+```{r eval=FALSE}
+lm(Outcome ~ Predictor1 * Predictor2, data)
+```
+
+The asterisk (`*`) means that the model includes main effects for both predictors (i.e., Pre-intervention flourishing & Pre-intervention loneliness) as well as their interaction term (which tests whether the effect of one predictor depends on the other).
+
+::: {.callout-note icon="false"}
+
+## Your Turn
+
+**Step 1: Create the model**
+
+Compute the linear regression model using the formula above. Store the model in an object called `mod`, ensuring that you use the mean-centered predictors rather than the unstandardised values.
+
+**Step 2: Run the regression**
+
+Just like last week, use the `summary()` function on `mod` to display the regression output.
+
+**Step 3: Check assumption**
+
+Use the `check_model()` function from the `performance` package to test whether the model meets its assumptions.
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+```{r eval=FALSE}
+# Step 1
+mod <- lm(Loneliness_post~Loneliness_pre_centered*Flourishing_pre_centered, data = dog_mult_reg)
+
+# Step 2
+summary(mod)
+
+# Step 3
+check_model(mod)
+
+```
+
+:::
+
+Now, answer the following questions:
+
+1) Are all of the assumptions met? `r mcq(c(answer = "Yes", x = "No"))`
+
+2) How much of the variance is explained by the model? Enter the percentage value with 2 decimal places. `r fitb("82.93")`%
+
+3) Is the interaction term statistically significant? `r mcq(c(answer = "Yes", "No"))`
+
+4) What is the p-value for the interaction term? Enter the value with 3 decimal places. `r fitb(c("0.023", ".023"))`
+
+5) What is $\beta$ coefficient for pre-intervention loneliness? Enter the value rounded to two decimal places. `r fitb("0.87")`
+
+:::
+

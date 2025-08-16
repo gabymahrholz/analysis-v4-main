@@ -1,0 +1,172 @@
+# 2A Lab 1 Week 2  {.unnumbered}
+
+
+```{r include=FALSE}
+library(webexercises)
+```
+
+**This is the pair coding activity related to @sec-basics.**
+
+
+The data we will be using in the upcoming lab activities is a randomised controlled trials experiment by Binfet et al. (2021) that was conducted in Canada.
+
+**Citation**
+
+> Binfet, J. T., Green, F. L. L., & Draper, Z. A. (2021). The Importance of Client–Canine Contact in Canine-Assisted Interventions: A Randomized Controlled Trial. *Anthrozoös, 35*(1), 1–22. [https://doi.org/10.1080/08927936.2021.1944558](https://doi.org/10.1080/08927936.2021.1944558){target="_blank"}
+
+**Abstract**
+
+> Researchers have claimed that canine-assisted interventions (CAIs) contribute significantly to bolstering participants' wellbeing, yet the mechanisms within interactions have received little empirical attention. The aim of this study was to assess the impact of client–canine contact on wellbeing outcomes in a sample of 284 undergraduate college students (77% female; 21% male, 2% non-binary). Participants self-selected to participate and were randomly assigned to one of two canine interaction treatment conditions (touch or no touch) or to a handler-only condition with no therapy dog present. To assess self-reports of wellbeing, measures of flourishing, positive and negative affect, social connectedness, happiness, integration into the campus community, stress, homesickness, and loneliness were administered. Exploratory analyses were conducted to assess whether these wellbeing measures could be considered as measuring a unidimensional construct. This included both reliability analysis and exploratory factor analysis. Based on the results of these analyses we created a composite measure using participant scores on a latent factor. We then conducted the tests of the four hypotheses using these factor scores. Results indicate that participants across all conditions experienced enhanced wellbeing on several measures; however, only those in the direct contact condition reported significant improvements on all measures of wellbeing. Additionally, direct interactions with therapy dogs through touch elicited greater wellbeing benefits than did no touch/indirect interactions or interactions with only a dog handler. Similarly, analyses using scores on the wellbeing factor indicated significant improvement in wellbeing across all conditions (handler-only, *d* = 0.18, *p* = 0.041; indirect, *d* = 0.38, *p* \< 0.001; direct, *d* = 0.78, *p* \< 0.001), with more benefit when a dog was present (*d* = 0.20, *p* \< 0.001), and the most benefit coming from physical contact with the dog (*d* = 0.13, *p* = 0.002). The findings hold implications for post-secondary wellbeing programs as well as the organization and delivery of CAIs.
+
+
+However, we accessed the data via Ciaran Evans' github ([https://github.com/ciaran-evans/dog-data-analysis](https://github.com/ciaran-evans/dog-data-analysis){target="_blank"}). Evans et al. (2023) published a paper that reused the Binfet data for teaching statistics and research methods. If anyone is interested, the accompanying paper is:
+
+> Evans, C., Cipolli, W., Draper, Z. A., & Binfet, J. T. (2023). Repurposing a Peer-Reviewed Publication to Engage Students in Statistics: An Illustration of Study Design, Data Collection, and Analysis. *Journal of Statistics and Data Science Education, 31*(3), 236–247. [https://doi.org/10.1080/26939169.2023.2238018](https://doi.org/10.1080/26939169.2023.2238018){target="_blank"}
+
+**There are a few changes that Evans and we made to the data:**
+
+* Evans removed the demographics ethnicity and gender to make the study data available while protecting participant privacy. Which means we'll have limited demographic variables available, but we will make do with what we've got.
+* We modified some of the responses in the raw data csv - for example, we took out impossible response values and replaced them with `NA`.
+* We replaced some of the numbers with labels to increase the difficulty in the dataset for @sec-wrangling and @sec-wrangling2.
+
+#### Now, let's get started!!! {.unnumbered}
+
+## Task 1: Create a project folder for the lab activities {.unnumbered}
+
+Since we will be working with the same data throughout semester 1, create a separate project for the lab data. Name it something useful, like `lab_data` or `dogs_in_the_lab`. Make sure you are not placing it within the project you have already created today. If you need guidance, see @sec-project.
+
+
+
+## Task 2: Create a new `.Rmd` file {.unnumbered}
+
+... and name it something useful. If you need help, have a look at @sec-rmd.
+
+
+
+## Task 3: Download the data {.unnumbered}
+
+Download the data here: [data_pair_coding](data/data_pair_coding.zip "download"). The zip folder contains the raw data file with responses to individual questions, a cleaned version of the same data in long format and wide format, and the codebook describing the variables in the raw data file and the long format.
+
+**Unzip the folder and place the data files in the same folder as your project.**
+
+
+
+## Task 4: Familiarise yourself with the data {.unnumbered}
+
+Open the data files, look at the codebook, and perhaps skim over the original Binfet article (methods in particular) to see what kind of measures they used.
+
+Read in the raw data file as `dog_data_raw` and the cleaned-up data (long format) as `dog_data_long`. See if you can answer the following questions.
+
+```{r eval=FALSE}
+library(tidyverse)
+
+dog_data_raw <- read_csv("dog_data_raw.csv")
+dog_data_long <- read_csv("dog_data_clean_long.csv")
+```
+
+```{r echo=FALSE}
+library(tidyverse)
+
+dog_data_raw <- read_csv("data/dog_data_raw.csv")
+dog_data_long <- read_csv("data/dog_data_clean_long.csv")
+```
+
+## Task 5: Question Time {.unnumbered}
+
+Now that you have familiarised yourself with the data, you can answer the following questions.
+
+### Question 1 {.unnumbered}
+
+How many participants took part in the study? `r fitb("284")`
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+You can see this from `dog_data_raw`. Each participant ID is on a single row meaning the number of observations is the number of participants.
+
+If you look at `dog_data_long`, there are 568 observations. Each participant answered the questionnaires pre and post intervention, resulting in 2 rows per participant ID. This means you'd have to divide the number of observations by 2 to get to the number of participants.
+
+:::
+
+
+### Question 2 {.unnumbered}
+
+How many different questionnaires did the participants answer? `r fitb(c("9", "8"))`
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+The Binfet paper (e.g., Methods section and/or abstract), the codebook, and `dog_data_long` show it's 9 questionnaires - Flourishing scale (variable `Flourishing`), the UCLS Loneliness scale Version 3 (`Loneliness`), Positive and Negative affect scale (`PANAS_PA` and `PANAS_NA`), the Subjective Happiness scale (`SHS`), the Social connectedness scale (`SCS`), and 3 scales with 1 question each, i.e., perception of stress levels (`Stress`), self-reported level of homesickness (`Homesick`), and integration into the campus community (`Engagement`).
+
+However, if you thought `PANAS_PA` and `PANAS_NA` are a single questionnaire, 8 was also acceptable as an answer here.
+
+:::
+
+### Question 3 {.unnumbered}
+
+`dog_data_raw` has `r fitb("41")` character columns and `r fitb("95")` that are labeled as double. 
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+You can get information on column specification when reading in the data.
+
+![message from `read_csv()` when reading in the data](images/col_spec_pc.PNG)
+
+:::
+
+
+### Question 4 {.unnumbered}
+
+Select from the dropdown menu the variable type and their data types for each of the columns.
+
+```{r, include = FALSE}
+# variable type
+con <- c(answer = "continuous", x = "nominal", x = "ordinal")
+nom <- c(x = "continuous", answer = "nominal", x = "ordinal")
+ord <- c(x = "continuous", x = "nominal", answer = "ordinal")
+
+# data type
+num <- c(answer = "numeric", x = "character", x = "logical", x = "factor")
+chr <- c(x = "numeric", answer = "character", x = "logical", x = "factor")
+log <- c(x = "numeric", x = "character", answer = "logical", x = "factor")
+fctr <- c(x = "numeric", x = "character", x = "logical", answer = "factor")
+
+```
+
+In `dog_data_raw`:
+
+| Column               | Variable type | Data type     |
+|:---------------------|:--------------|:--------------|
+| `RID`                | `r mcq(nom)`  | `r mcq(num)`  |
+| `GroupAssignment`    | `r mcq(nom)`  | `r mcq(chr)`  |
+| `Age_Yrs`            | `r mcq(con)`  | `r mcq(num)`  |
+| `Year_of_Study`      | `r mcq(ord)`  | `r mcq(num)`  |
+| `PN1_1`              | `r mcq(ord)`  | `r mcq(num)`  |
+| `L2_1`               | `r mcq(ord)`  | `r mcq(chr)`  |
+| `SC2_1`              | `r mcq(ord)`  | `r mcq(chr)`  |
+
+
+
+In `dog_data_long`:
+
+| Column               | Variable type | Data type     |
+|:---------------------|:--------------|:--------------|
+| `Year_of_Study`      | `r mcq(ord)`  | `r mcq(chr)`  |
+| `Stage`              | `r mcq(ord)`  | `r mcq(chr)`  |
+| `Loneliness`         | `r mcq(con)`  | `r mcq(num)`  |
+| `SCS`                | `r mcq(con)`  | `r mcq(num)`  |
+
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Explain this answer
+
+The column `SC2_1` contains both numbers and words. Because `R` can store numbers as characters but cannot store words as numbers, the whole column is coded as `chr`.
+
+Most of the questionnaire items were answered on a Likert scale (e.g., *strongly disagree* to *strongly agree*, or *never*, *rarely*, *sometimes*, *often*). These are ordinal variables because the categories (whether shown as words or numbers) represent an order but not equal distances (see `dog_data_raw`). However, when you add up or average several items to calculate an overall questionnaire score (like `Loneliness` or `SCS` in `dog_data_long`), that score can be treated as continuous data. 
+
+:::
