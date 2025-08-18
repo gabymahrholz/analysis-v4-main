@@ -1157,7 +1157,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We could have also run a <strong>One-sample Wilcoxon signed-rank test</strong> on the difference score, but instead of comparing that to a population median (as we did in <a href="06-chi-square-one-sample.html#sec-alternative_one_sample"><span>Section&nbsp;6.7</span></a>), we would compare it to 0 to assess whether the median difference between paired observations is significantly different from zero.</p>
+<p>We could have also run a <strong>One-sample Wilcoxon signed-rank test</strong> on the difference score, but instead of comparing that to a population median (as we did in <a href="06-chi-square-one-sample.html#sec-alternative_one_sample"><span>Section&nbsp;6.6</span></a>), we would compare it to 0 to assess whether the median difference between paired observations is significantly different from zero.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">wilcox.test</span>(simon_effect<span class="sc">$</span>simon_effect, <span class="at">mu =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

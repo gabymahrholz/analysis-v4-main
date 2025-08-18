@@ -693,7 +693,7 @@ Your data object contains a column `Score` with numbers, but they have been read
 
 
 
-### Challenge yourself {.unnumbered}
+### Challenge yourself {.unnumbered} {#sec-challenge_03}
 
 ```{r reading in data for me, echo=FALSE, message=FALSE}
 library(tidyverse)
@@ -701,7 +701,7 @@ library(tidyverse)
 dog_data_raw <- read_csv("data/dog_data_raw.csv")
 ```
 
-If you want to **challenge yourself** and further apply the skills from Chapter 3, you could wrangle the data from `dog_data_raw` for one of the other questionnaires. There are plenty of options to choose from:
+If you want to **challenge yourself** and further apply the skills from Chapter 3, you could wrangle the data from `dog_data_raw` ([lab data](data/data_pair_coding.zip "download")) for one of the other questionnaires. There are plenty of options to choose from:
 
 ::: {.callout-tip collapse="true" icon="false"}
 

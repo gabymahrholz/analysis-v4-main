@@ -396,6 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="#for-the-full-sample-using-summarise" id="toc-for-the-full-sample-using-summarise" class="nav-link" data-scroll-target="#for-the-full-sample-using-summarise"><span class="header-section-number">2.3.1</span> … for the full sample using <code>summarise()</code></a></li>
   <li><a href="#per-gender-using-summarise-and-group_by" id="toc-per-gender-using-summarise-and-group_by" class="nav-link" data-scroll-target="#per-gender-using-summarise-and-group_by"><span class="header-section-number">2.3.2</span> … per gender using <code>summarise()</code> and <code>group_by()</code></a></li>
   <li><a href="#adding-percentages" id="toc-adding-percentages" class="nav-link" data-scroll-target="#adding-percentages"><span class="header-section-number">2.3.3</span> Adding percentages</a></li>
+  <li><a href="#filter-gender" id="toc-filter-gender" class="nav-link" data-scroll-target="#filter-gender"><span class="header-section-number">2.3.4</span> <code>filter()</code> gender</a></li>
   </ul>
 </li>
   <li><a href="#sec-ch2_act4" id="toc-sec-ch2_act4" class="nav-link" data-scroll-target="#sec-ch2_act4"><span class="header-section-number">2.4</span> Activity 4: Questionable Research Practices (QRPs)</a></li>
@@ -626,7 +627,7 @@ Show the unique values of <code>Age</code>.
 </div>
 <div class="columns">
 <div class="column">
-<p>One cell has the string “years” added to their number 25, which has converted the entire column into a character column.</p>
+<p>Aha! One cell has the string “years” added to their number 25, which has converted the entire column into a character column.</p>
 <p>We can easily fix this by extracting only the numbers from the column and converting it into a numeric data type. The <code>parse_number()</code> function, which is part of the <code>tidyverse</code> package, handles both steps in one go (so there’s no need to load additional packages).</p>
 <p>We will combine this with the <code>mutate()</code> function to create a new column called <code>Age</code> (containing those numeric values), effectively replacing the old <code>Age</code> column (which had the character values).</p>
 </div><div class="column">
@@ -876,12 +877,53 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 </div>
 </div>
 </div>
+</section><section id="filter-gender" class="level3" data-number="2.3.4"><h3 data-number="2.3.4" class="anchored" data-anchor-id="filter-gender">
+<span class="header-section-number">2.3.4</span> <code>filter()</code> gender</h3>
+<p>I know you used <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> plenty of times last year, so let’s just do a quick recap. Imagine we want to calculate summary statistics only for gender category 3. In this case, we need the Boolean expression <code>==</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>demo_gender3 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb14-4"><a href="#cb14-4"></a>            <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb14-5"><a href="#cb14-5"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If we want to focus on more than one gender category, we use the <code>%in%</code> operator along with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function (which combines values into a vector).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>demo_gender12 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb15-5"><a href="#cb15-5"></a>            <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb15-6"><a href="#cb15-6"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Character values instead of numbers?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Here, the gender categories are coded with numbers. If your data used character values instead, you’d need quotation marks around the labels, for example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="st">"Non-binary/third gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>OR</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section></section><section id="sec-ch2_act4" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="sec-ch2_act4">
 <span class="header-section-number">2.4</span> Activity 4: Questionable Research Practices (QRPs)</h2>
 <section id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1." class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1.">The main goal is to compute the mean QRP score per participant for time point 1.</h4>
 <p>At the moment, the data is in wide format. The table below shows data from the first 3 participants:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">head</span>(data_prp, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">head</span>(data_prp, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1381,18 +1423,18 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 </li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>qrp_t1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="co">#Step 1</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a>  <span class="fu">select</span>(Code, QRPs_1_Time1<span class="sc">:</span>QRPs_11_Time1) <span class="sc">%&gt;%</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a>  <span class="co"># Step 2</span></span>
-<span id="cb15-5"><a href="#cb15-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Code, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="#cb15-6"></a>  <span class="co"># Step 3</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">group_by</span>(Code) <span class="sc">%&gt;%</span> <span class="co"># grouping by participant id</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a>  <span class="fu">summarise</span>(<span class="at">QRPs_Acceptance_Time1_mean =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> <span class="co"># calculating the average Score</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a>  <span class="fu">ungroup</span>() <span class="co"># just make it a habit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>qrp_t1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="co">#Step 1</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">select</span>(Code, QRPs_1_Time1<span class="sc">:</span>QRPs_11_Time1) <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="co"># Step 2</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Code, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-6"><a href="#cb19-6"></a>  <span class="co"># Step 3</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>  <span class="fu">group_by</span>(Code) <span class="sc">%&gt;%</span> <span class="co"># grouping by participant id</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="fu">summarise</span>(<span class="at">QRPs_Acceptance_Time1_mean =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> <span class="co"># calculating the average Score</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>  <span class="fu">ungroup</span>() <span class="co"># just make it a habit</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1401,7 +1443,7 @@ Explain the individual functions
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -1414,11 +1456,11 @@ Explain the individual functions
 <p>The select function allows to include or exclude certain variables (columns). Here we want to focus on the participant ID column (i.e., <code>Code</code>) and the QRP items at time point 1. We can either list them all individually, i.e., Code, QRPs_1_Time1, QRPs_2_Time1, QRPs_3_Time1, and so forth (you get the gist), but that would take forever to type.</p>
 <p>A shortcut is to use the colon operator <code>:</code>. It allows us to select all columns that fall within the range of <code>first_column_name</code> to <code>last_column_name</code>. We can apply this here since the QRP items (1 to 11) are sequentially listed in <code>data_prp</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>qrp_step1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">select</span>(Code, QRPs_1_Time1<span class="sc">:</span>QRPs_11_Time1)</span>
-<span id="cb16-3"><a href="#cb16-3"></a></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co"># show first 5 rows of qrp_step1</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">head</span>(qrp_step1, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>qrp_step1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">select</span>(Code, QRPs_1_Time1<span class="sc">:</span>QRPs_11_Time1)</span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co"># show first 5 rows of qrp_step1</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="fu">head</span>(qrp_step1, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1542,11 +1584,11 @@ Explain the individual functions
 <li>the <code>values_to</code> argument. R creates this second column to store all responses the participants gave to the individual questions, i.e., all the numbers in this case. We named it “Scores” here, but you could have called it something different, like “Responses”</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>qrp_step2 <span class="ot">&lt;-</span> qrp_step1 <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Code, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># show first 15 rows of qrp_step2</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="fu">head</span>(qrp_step2, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>qrp_step2 <span class="ot">&lt;-</span> qrp_step1 <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Code, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>)</span>
+<span id="cb21-3"><a href="#cb21-3"></a></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="co"># show first 15 rows of qrp_step2</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="fu">head</span>(qrp_step2, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1660,10 +1702,10 @@ Tip
 <div class="callout-body-container callout-body">
 <p>You could <strong>rename the columns whilst selecting</strong> them. The pattern would be <code>select(new_name = old_name)</code>. For example, if we wanted to select variable <code>Code</code> and rename it as <code>Participant_ID</code>, we could do that.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>renaming_col <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">select</span>(<span class="at">Participant_ID =</span> Code)</span>
-<span id="cb18-3"><a href="#cb18-3"></a></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">head</span>(renaming_col, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>renaming_col <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2"></a>  <span class="fu">select</span>(<span class="at">Participant_ID =</span> Code)</span>
+<span id="cb22-3"><a href="#cb22-3"></a></span>
+<span id="cb22-4"><a href="#cb22-4"></a><span class="fu">head</span>(renaming_col, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1704,11 +1746,11 @@ Tip
 <p>To avoid having to repeat the same steps in the next chapter, it’s a good idea to save the data objects you’ve created today as csv files. You can do this by using the <code>write_csv()</code> function from the <code>readr</code> package. The csv files will appear in your project folder.</p>
 <p>The basic syntax is:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">write_csv</span>(data_object, <span class="st">"filename.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">write_csv</span>(data_object, <span class="st">"filename.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, let’s export the objects <code>data_prp</code> and <code>qrp_t1</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">write_csv</span>(data_prp, <span class="st">"data_prp_for_ch3.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">write_csv</span>(data_prp, <span class="st">"data_prp_for_ch3.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Here we named the file <code>data_prp_for_ch3.csv</code>, so we wouldn’t override the original data csv file <code>prp_data_reduced.csv</code>. However, feel free to choose a name that makes sense to you.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -1723,7 +1765,7 @@ Your Turn
 <div class="callout-body-container callout-body">
 <p>Export <code>qrp_t1</code>.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1732,10 +1774,10 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">write_csv</span>(qrp_t1, <span class="st">"qrp_t1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">write_csv</span>(qrp_t1, <span class="st">"qrp_t1.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1787,7 +1829,7 @@ Solution
 <option value="x">group_by()</option>
 <option value="answer">summarise()</option></select></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1796,7 +1838,7 @@ Explain these answers
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="table">
 <colgroup>
@@ -1842,60 +1884,21 @@ Explain these answers
 <p>Some of the code chunks contain mistakes and result in errors, while others do not produce the expected results. Your task is to identify any issues, explain why they occurred, and, if possible, fix them.</p>
 <p>We will use a few built-in datasets, such as <code>billboard</code> and <code>starwars</code>, to help you replicate the errors in your own R environment. You can view the data either by typing the dataset name directly into your console or by storing the data as a separate object in your <code>Global Environment</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>billboard</span>
-<span id="cb22-2"><a href="#cb22-2"></a></span>
-<span id="cb22-3"><a href="#cb22-3"></a>starwars_data <span class="ot">=</span> starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>billboard</span>
+<span id="cb26-2"><a href="#cb26-2"></a></span>
+<span id="cb26-3"><a href="#cb26-3"></a>starwars_data <span class="ot">=</span> starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="question-6" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-6">Question 6</h4>
 <p>Currently, the weekly song rankings for Billboard Top 100 in 2000 are in wide format, with each week in a separate column. The following code is supposed to transpose the wide-format <code>billboard</code> data into long format:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in `pivot_longer()`:
 ! `cols` must select at least one column.</code></pre>
 </div>
 </div>
 <p>What does this error message mean and how do you fix it?</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Explain the solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The error message indicates that the <code>cols</code> argument is missing in the function. This means the function doesn’t know which columns to transpose from wide format to long format.</p>
-<p>FIX: Add <code>cols = wk1:wk76</code> to the function to select columns from wk1 to wk76. Alternatively, <code>cols = starts_with("wk")</code> would also work since all columns start with the letter combination “wk”.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
-<span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> wk1<span class="sc">:</span>wk76, <span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span>
-<span id="cb25-3"><a href="#cb25-3"></a><span class="co"># OR</span></span>
-<span id="cb25-4"><a href="#cb25-4"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
-<span id="cb25-5"><a href="#cb25-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), <span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</div>
-</section><section id="question-7" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7">Question 7</h4>
-<p>The following code is intended to calculate the mean height of all the characters in the built-in <code>starwars</code> dataset, grouped by their gender.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
-dplyr 1.1.0.
-ℹ Please use `reframe()` instead.
-ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
-  always returns an ungrouped data frame and adjust accordingly.</code></pre>
-</div>
-</div>
-<p>The code runs, but it’s giving us some weird warning and the output is also not as expected. What steps should we take to fix this?</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1908,12 +1911,51 @@ Explain the solution
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>The error message indicates that the <code>cols</code> argument is missing in the function. This means the function doesn’t know which columns to transpose from wide format to long format.</p>
+<p>FIX: Add <code>cols = wk1:wk76</code> to the function to select columns from wk1 to wk76. Alternatively, <code>cols = starts_with("wk")</code> would also work since all columns start with the letter combination “wk”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> wk1<span class="sc">:</span>wk76, <span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="co"># OR</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
+<span id="cb29-5"><a href="#cb29-5"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"wk"</span>), <span class="at">names_to =</span> <span class="st">"weeks"</span>, <span class="at">values_to =</span> <span class="st">"rank"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section><section id="question-7" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7">Question 7</h4>
+<p>The following code is intended to calculate the mean height of all the characters in the built-in <code>starwars</code> dataset, grouped by their gender.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> height)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Returning more (or less) than 1 row per `summarise()` group was deprecated in
+dplyr 1.1.0.
+ℹ Please use `reframe()` instead.
+ℹ When switching from `summarise()` to `reframe()`, remember that `reframe()`
+  always returns an ungrouped data frame and adjust accordingly.</code></pre>
+</div>
+</div>
+<p>The code runs, but it’s giving us some weird warning and the output is also not as expected. What steps should we take to fix this?</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain the solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>The aggregation function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> is missing from within <code>summarise()</code>. Without it, the function does not perform any aggregation and returns <em>all</em> rows with only the columns for gender and height.</p>
 <p>FIX: Wrap the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function around the variable you want to aggregate, here <code>height</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1921,7 +1963,7 @@ Explain the solution
 </section><section id="question-8" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-8">Question 8</h4>
 <p>Following up on Question 7, we now have <code>summary_data</code> that looks approximately correct - it has the expected rows and column numbers, however, the cell values are “weird”.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -1949,7 +1991,7 @@ Explain the solution
 </div>
 <p>Can you explain what is happening here? And how can we modify the code to fix this?</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -1958,16 +2000,16 @@ Explain the solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Look at the original <code>starwars</code> data. You will notice that some of the characters with feminine and masculine gender entries have missing height values. However, all four characters without a specified gender have provided their height.</p>
 <p>FIX: We need to add <code>na.rm = TRUE</code> to the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function to ensure that R ignores missing values before aggregating the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
-<span id="cb30-3"><a href="#cb30-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb30-4"><a href="#cb30-4"></a></span>
-<span id="cb30-5"><a href="#cb30-5"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>  <span class="fu">summarise</span>(<span class="at">mean_height =</span> <span class="fu">mean</span>(height, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-4"><a href="#cb34-4"></a></span>
+<span id="cb34-5"><a href="#cb34-5"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -2005,7 +2047,7 @@ Explain the solution
 </ul>
 <p>The 3 steps are equivalent for those questionnaires - select, pivot, group_by and summarise; you just have to “replace” the questionnaire items involved.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -2014,90 +2056,90 @@ Solution for <strong>Challenge yourself</strong>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Flourishing post-intervention</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="do">## flourishing_post</span></span>
-<span id="cb31-2"><a href="#cb31-2"></a>flourishing_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb31-3"><a href="#cb31-3"></a>  <span class="co"># Step 1</span></span>
-<span id="cb31-4"><a href="#cb31-4"></a>  <span class="fu">select</span>(RID, <span class="fu">starts_with</span>(<span class="st">"F2"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-5"><a href="#cb31-5"></a>  <span class="co"># Step 2</span></span>
-<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Names"</span>, <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-7"><a href="#cb31-7"></a>  <span class="co"># Step 3</span></span>
-<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-9"><a href="#cb31-9"></a>  <span class="fu">summarise</span>(<span class="at">Flourishing_post =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-10"><a href="#cb31-10"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="do">## flourishing_post</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>flourishing_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3"></a>  <span class="co"># Step 1</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a>  <span class="fu">select</span>(RID, <span class="fu">starts_with</span>(<span class="st">"F2"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-5"><a href="#cb35-5"></a>  <span class="co"># Step 2</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Names"</span>, <span class="at">values_to =</span> <span class="st">"Response"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-7"><a href="#cb35-7"></a>  <span class="co"># Step 3</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">summarise</span>(<span class="at">Flourishing_post =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The PANAS could be solved more concisely with the skills we learn in <a href="03-wrangling2.html"><span>Chapter&nbsp;3</span></a>, but for now, you would have solved it this way:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># PANAS - positive affect pre</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>PANAS_PA_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb32-3"><a href="#cb32-3"></a>  <span class="co"># Step 1</span></span>
-<span id="cb32-4"><a href="#cb32-4"></a>  <span class="fu">select</span>(RID, PN1_3, PN1_5, PN1_7, PN1_8, PN1_10) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-5"><a href="#cb32-5"></a>  <span class="co"># Step 2</span></span>
-<span id="cb32-6"><a href="#cb32-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-7"><a href="#cb32-7"></a>  <span class="co"># Step 3</span></span>
-<span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_PA_pre =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-10"><a href="#cb32-10"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb32-11"><a href="#cb32-11"></a></span>
-<span id="cb32-12"><a href="#cb32-12"></a><span class="co"># PANAS - positive affect post</span></span>
-<span id="cb32-13"><a href="#cb32-13"></a>PANAS_PA_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb32-14"><a href="#cb32-14"></a>  <span class="co"># Step 1</span></span>
-<span id="cb32-15"><a href="#cb32-15"></a>  <span class="fu">select</span>(RID, PN2_3, PN2_5, PN2_7, PN2_8, PN2_10) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-16"><a href="#cb32-16"></a>  <span class="co"># Step 2</span></span>
-<span id="cb32-17"><a href="#cb32-17"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-18"><a href="#cb32-18"></a>  <span class="co"># Step 3</span></span>
-<span id="cb32-19"><a href="#cb32-19"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-20"><a href="#cb32-20"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_PA_post =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-21"><a href="#cb32-21"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb32-22"><a href="#cb32-22"></a></span>
-<span id="cb32-23"><a href="#cb32-23"></a><span class="co"># PANAS - negative affect pre</span></span>
-<span id="cb32-24"><a href="#cb32-24"></a>PANAS_NA_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb32-25"><a href="#cb32-25"></a>  <span class="co"># Step 1</span></span>
-<span id="cb32-26"><a href="#cb32-26"></a>  <span class="fu">select</span>(RID, PN1_1, PN1_2, PN1_4, PN1_6, PN1_9) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-27"><a href="#cb32-27"></a>  <span class="co"># Step 2</span></span>
-<span id="cb32-28"><a href="#cb32-28"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-29"><a href="#cb32-29"></a>  <span class="co"># Step 3</span></span>
-<span id="cb32-30"><a href="#cb32-30"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-31"><a href="#cb32-31"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_NA_pre =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-32"><a href="#cb32-32"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb32-33"><a href="#cb32-33"></a></span>
-<span id="cb32-34"><a href="#cb32-34"></a><span class="co"># PANAS - negative affect post</span></span>
-<span id="cb32-35"><a href="#cb32-35"></a>PANAS_NA_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb32-36"><a href="#cb32-36"></a>  <span class="co"># Step 1</span></span>
-<span id="cb32-37"><a href="#cb32-37"></a>  <span class="fu">select</span>(RID, PN2_1, PN2_2, PN2_4, PN2_6, PN2_9) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-38"><a href="#cb32-38"></a>  <span class="co"># Step 2</span></span>
-<span id="cb32-39"><a href="#cb32-39"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-40"><a href="#cb32-40"></a>  <span class="co"># Step 3</span></span>
-<span id="cb32-41"><a href="#cb32-41"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-42"><a href="#cb32-42"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_NA_post =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
-<span id="cb32-43"><a href="#cb32-43"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># PANAS - positive affect pre</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>PANAS_PA_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb36-3"><a href="#cb36-3"></a>  <span class="co"># Step 1</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a>  <span class="fu">select</span>(RID, PN1_3, PN1_5, PN1_7, PN1_8, PN1_10) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-5"><a href="#cb36-5"></a>  <span class="co"># Step 2</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-7"><a href="#cb36-7"></a>  <span class="co"># Step 3</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="#cb36-9"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_PA_pre =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-10"><a href="#cb36-10"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb36-11"><a href="#cb36-11"></a></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="co"># PANAS - positive affect post</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a>PANAS_PA_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb36-14"><a href="#cb36-14"></a>  <span class="co"># Step 1</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a>  <span class="fu">select</span>(RID, PN2_3, PN2_5, PN2_7, PN2_8, PN2_10) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-16"><a href="#cb36-16"></a>  <span class="co"># Step 2</span></span>
+<span id="cb36-17"><a href="#cb36-17"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-18"><a href="#cb36-18"></a>  <span class="co"># Step 3</span></span>
+<span id="cb36-19"><a href="#cb36-19"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-20"><a href="#cb36-20"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_PA_post =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-21"><a href="#cb36-21"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb36-22"><a href="#cb36-22"></a></span>
+<span id="cb36-23"><a href="#cb36-23"></a><span class="co"># PANAS - negative affect pre</span></span>
+<span id="cb36-24"><a href="#cb36-24"></a>PANAS_NA_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb36-25"><a href="#cb36-25"></a>  <span class="co"># Step 1</span></span>
+<span id="cb36-26"><a href="#cb36-26"></a>  <span class="fu">select</span>(RID, PN1_1, PN1_2, PN1_4, PN1_6, PN1_9) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-27"><a href="#cb36-27"></a>  <span class="co"># Step 2</span></span>
+<span id="cb36-28"><a href="#cb36-28"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-29"><a href="#cb36-29"></a>  <span class="co"># Step 3</span></span>
+<span id="cb36-30"><a href="#cb36-30"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-31"><a href="#cb36-31"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_NA_pre =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-32"><a href="#cb36-32"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb36-33"><a href="#cb36-33"></a></span>
+<span id="cb36-34"><a href="#cb36-34"></a><span class="co"># PANAS - negative affect post</span></span>
+<span id="cb36-35"><a href="#cb36-35"></a>PANAS_NA_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb36-36"><a href="#cb36-36"></a>  <span class="co"># Step 1</span></span>
+<span id="cb36-37"><a href="#cb36-37"></a>  <span class="fu">select</span>(RID, PN2_1, PN2_2, PN2_4, PN2_6, PN2_9) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-38"><a href="#cb36-38"></a>  <span class="co"># Step 2</span></span>
+<span id="cb36-39"><a href="#cb36-39"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Items"</span>, <span class="at">values_to =</span> <span class="st">"Scores"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-40"><a href="#cb36-40"></a>  <span class="co"># Step 3</span></span>
+<span id="cb36-41"><a href="#cb36-41"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-42"><a href="#cb36-42"></a>  <span class="fu">summarise</span>(<span class="at">PANAS_NA_post =</span> <span class="fu">mean</span>(Scores)) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-43"><a href="#cb36-43"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Happiness scale</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="co"># happiness_pre</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>happiness_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb33-3"><a href="#cb33-3"></a>  <span class="co"># Step 1</span></span>
-<span id="cb33-4"><a href="#cb33-4"></a>  <span class="fu">select</span>(RID, HA1_1, HA1_2, HA1_3) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-5"><a href="#cb33-5"></a>  <span class="co"># Step 2</span></span>
-<span id="cb33-6"><a href="#cb33-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Item"</span>, <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-7"><a href="#cb33-7"></a>  <span class="co"># Step 3</span></span>
-<span id="cb33-8"><a href="#cb33-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-9"><a href="#cb33-9"></a>  <span class="fu">summarise</span>(<span class="at">SHS_pre =</span> <span class="fu">mean</span>(Score)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-10"><a href="#cb33-10"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb33-11"><a href="#cb33-11"></a></span>
-<span id="cb33-12"><a href="#cb33-12"></a><span class="co">#happiness_post</span></span>
-<span id="cb33-13"><a href="#cb33-13"></a>happiness_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
-<span id="cb33-14"><a href="#cb33-14"></a>  <span class="co"># Step 1</span></span>
-<span id="cb33-15"><a href="#cb33-15"></a>  <span class="fu">select</span>(RID, HA2_1, HA2_2, HA2_3) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-16"><a href="#cb33-16"></a>  <span class="co"># Step 2</span></span>
-<span id="cb33-17"><a href="#cb33-17"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Item"</span>, <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-18"><a href="#cb33-18"></a>  <span class="co"># Step 3</span></span>
-<span id="cb33-19"><a href="#cb33-19"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-20"><a href="#cb33-20"></a>  <span class="fu">summarise</span>(<span class="at">SHS_post =</span> <span class="fu">mean</span>(Score)) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-21"><a href="#cb33-21"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># happiness_pre</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>happiness_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3"></a>  <span class="co"># Step 1</span></span>
+<span id="cb37-4"><a href="#cb37-4"></a>  <span class="fu">select</span>(RID, HA1_1, HA1_2, HA1_3) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-5"><a href="#cb37-5"></a>  <span class="co"># Step 2</span></span>
+<span id="cb37-6"><a href="#cb37-6"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Item"</span>, <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-7"><a href="#cb37-7"></a>  <span class="co"># Step 3</span></span>
+<span id="cb37-8"><a href="#cb37-8"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-9"><a href="#cb37-9"></a>  <span class="fu">summarise</span>(<span class="at">SHS_pre =</span> <span class="fu">mean</span>(Score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-10"><a href="#cb37-10"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb37-11"><a href="#cb37-11"></a></span>
+<span id="cb37-12"><a href="#cb37-12"></a><span class="co">#happiness_post</span></span>
+<span id="cb37-13"><a href="#cb37-13"></a>happiness_post <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
+<span id="cb37-14"><a href="#cb37-14"></a>  <span class="co"># Step 1</span></span>
+<span id="cb37-15"><a href="#cb37-15"></a>  <span class="fu">select</span>(RID, HA2_1, HA2_2, HA2_3) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-16"><a href="#cb37-16"></a>  <span class="co"># Step 2</span></span>
+<span id="cb37-17"><a href="#cb37-17"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>RID, <span class="at">names_to =</span> <span class="st">"Item"</span>, <span class="at">values_to =</span> <span class="st">"Score"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-18"><a href="#cb37-18"></a>  <span class="co"># Step 3</span></span>
+<span id="cb37-19"><a href="#cb37-19"></a>  <span class="fu">group_by</span>(RID) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-20"><a href="#cb37-20"></a>  <span class="fu">summarise</span>(<span class="at">SHS_post =</span> <span class="fu">mean</span>(Score)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-21"><a href="#cb37-21"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

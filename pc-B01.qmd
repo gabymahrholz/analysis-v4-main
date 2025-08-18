@@ -126,7 +126,7 @@ Each pair of values in the dataset has to be independent, meaning each pair of v
 Looking at the violin-boxplots below, do you think the assumption of normality holds?
 
 ::: {.callout-note}
-The labels of Plot 2 turned out to be quite long here. I've used the escape character `\n` here. to break up the title across 2 lines.
+The axis label of Plot 2 turned out to be quite long here. I've used the escape character `\n` to break it up across 2 lines.
 :::
 
 ```{r eval = FALSE, message = FALSE}

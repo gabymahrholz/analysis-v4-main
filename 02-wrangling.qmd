@@ -135,7 +135,7 @@ age_distinct
 
 ::: column
 
-One cell has the string "years" added to their number 25, which has converted the entire column into a character column.
+Aha! One cell has the string "years" added to their number 25, which has converted the entire column into a character column.
 
 We can easily fix this by extracting only the numbers from the column and converting it into a numeric data type. The `parse_number()` function, which is part of the `tidyverse` package, handles both steps in one go (so there’s no need to load additional packages).
 
@@ -259,6 +259,49 @@ demo_by_gender
 
 :::
 
+### `filter()` gender
+
+I know you used `filter()` plenty of times last year, so let's just do a quick recap. Imagine we want to calculate summary statistics only for gender category 3. In this case, we need the Boolean expression `==`.
+
+
+```{r}
+demo_gender3 <- data_prp %>% 
+  filter(Gender == 3) %>% 
+  summarise(n = n(), 
+            mean_age = mean(Age, na.rm = TRUE), 
+            sd_age = sd(Age, na.rm = TRUE)) %>%  
+  ungroup()
+```
+
+
+If we want to focus on more than one gender category, we use the `%in%` operator along with the `c()` function (which combines values into a vector).
+
+```{r}
+demo_gender12 <- data_prp %>% 
+  filter(Gender %in% c(1,2)) %>% 
+  group_by(Gender) %>% 
+  summarise(n = n(), 
+            mean_age = mean(Age, na.rm = TRUE), 
+            sd_age = sd(Age, na.rm = TRUE)) %>%  
+  ungroup()
+```
+
+::: callout-tip
+
+## Character values instead of numbers?
+
+Here, the gender categories are coded with numbers. If your data used character values instead, you’d need quotation marks around the labels, for example:
+
+```{r eval=FALSE}
+filter(Gender == "Non-binary/third gender")
+```
+
+OR
+
+```{r eval=FALSE}
+filter(Gender %in% c("Male","Female"))
+```
+:::
 
 
 ## Activity 4: Questionable Research Practices (QRPs) {#sec-ch2_act4}

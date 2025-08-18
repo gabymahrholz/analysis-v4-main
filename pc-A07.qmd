@@ -9,13 +9,6 @@ library(webexercises)
 
 
 
-::: {.callout-important}
-
-Similar to last week, this week's pair coding task may be a bit long to fully complete in class. Try to progress as far as possible without compromising understanding, and treat the remaining section as a "Challenge Yourself" activity.
-
-:::
-
-
 ## Task 1: Open the R project for the lab {.unnumbered}
 
 ## Task 2: Create a new `.Rmd` file {.unnumbered}
