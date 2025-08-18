@@ -693,7 +693,7 @@ Your data object contains a column `Score` with numbers, but they have been read
 
 
 
-### Challenge yourself {.unnumbered} {#sec-challenge_03}
+### Challenge yourself {.unnumbered}
 
 ```{r reading in data for me, echo=FALSE, message=FALSE}
 library(tidyverse)

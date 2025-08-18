@@ -208,4 +208,4 @@ loneliness_tidy <- dog_data_raw %>%
 
 :::
 
-**If you’d like to practise your data wrangling skills further, you can try the “challenge yourself” scenarios in Chapter 3 (@sec-challenge_03).**
+**If you’d like to practise your data wrangling skills further, you can try the “Challenge yourself” scenarios at the end of @sec-wrangling2.**
