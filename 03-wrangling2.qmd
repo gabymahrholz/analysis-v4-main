@@ -387,7 +387,7 @@ As you can see now in `sats_t1`, both columns `Scores_corrected` and `Scores_cor
 
 One way to **check whether our reverse-coding worked** is by examining the `distinct` values in the original `Response` column and comparing them with the `Scores_corrected`. We should also retain the `FW_RV` column to observe how the reverse-coding applied.
 
-To see the patterns more clearly, we can use `arrange()` to sort the values in a meaningful order. Remember, the default sorting order is ascending, so if you want to sort values in descending order, you’ll need to wrap your variable in the desc() function.
+To see the patterns more clearly, we can use `arrange()` to sort the values in a meaningful order. Remember, the default sorting order is ascending, so if you want to sort values in descending order, you’ll need to wrap your variable in the `desc()` function.
 
 ```{r}
 check_coding <- sats_t1 %>% 

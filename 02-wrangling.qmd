@@ -271,10 +271,12 @@ demo_gender3 <- data_prp %>%
             mean_age = mean(Age, na.rm = TRUE), 
             sd_age = sd(Age, na.rm = TRUE)) %>%  
   ungroup()
+
+demo_gender3
 ```
 
 
-If we want to focus on more than one gender category, we use the `%in%` operator along with the `c()` function (which combines values into a vector).
+If we want to focus on more than one gender category, we use the Boolean operator `%in%` along with the `c()` function (which combines values into a vector).
 
 ```{r}
 demo_gender12 <- data_prp %>% 
@@ -284,6 +286,8 @@ demo_gender12 <- data_prp %>%
             mean_age = mean(Age, na.rm = TRUE), 
             sd_age = sd(Age, na.rm = TRUE)) %>%  
   ungroup()
+
+demo_gender12
 ```
 
 ::: callout-tip

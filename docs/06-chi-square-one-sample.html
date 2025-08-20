@@ -400,7 +400,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-3-check-assumptions" id="toc-task-3-check-assumptions" class="nav-link" data-scroll-target="#task-3-check-assumptions"><span class="header-section-number">6.4.3</span> Task 3: Check assumptions</a></li>
   <li><a href="#task-4-create-an-appropriate-plot" id="toc-task-4-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-4-create-an-appropriate-plot"><span class="header-section-number">6.4.4</span> Task 4: Create an appropriate plot</a></li>
   <li><a href="#task-5-compute-a-chi-square-test" id="toc-task-5-compute-a-chi-square-test" class="nav-link" data-scroll-target="#task-5-compute-a-chi-square-test"><span class="header-section-number">6.4.5</span> Task 5: Compute a chi-square test</a></li>
-  <li><a href="#task-6-the-write-up" id="toc-task-6-the-write-up" class="nav-link" data-scroll-target="#task-6-the-write-up"><span class="header-section-number">6.4.6</span> Task 6: The write-up</a></li>
+  <li><a href="#task-6-sensitivity-power-analysis" id="toc-task-6-sensitivity-power-analysis" class="nav-link" data-scroll-target="#task-6-sensitivity-power-analysis"><span class="header-section-number">6.4.6</span> Task 6: Sensitivity power analysis</a></li>
+  <li><a href="#task-7-the-write-up" id="toc-task-7-the-write-up" class="nav-link" data-scroll-target="#task-7-the-write-up"><span class="header-section-number">6.4.7</span> Task 7: The write-up</a></li>
   </ul>
 </li>
   <li>
@@ -411,8 +412,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-3-create-an-appropriate-plot" id="toc-task-3-create-an-appropriate-plot" class="nav-link" data-scroll-target="#task-3-create-an-appropriate-plot"><span class="header-section-number">6.5.3</span> Task 3: Create an appropriate plot</a></li>
   <li><a href="#task-4-check-assumptions" id="toc-task-4-check-assumptions" class="nav-link" data-scroll-target="#task-4-check-assumptions"><span class="header-section-number">6.5.4</span> Task 4: Check assumptions</a></li>
   <li><a href="#task-5-compute-a-one-sample-t-test-and-effect-size" id="toc-task-5-compute-a-one-sample-t-test-and-effect-size" class="nav-link" data-scroll-target="#task-5-compute-a-one-sample-t-test-and-effect-size"><span class="header-section-number">6.5.5</span> Task 5: Compute a One-sample t-test and effect size</a></li>
-  <li><a href="#task-6-sensitivity-power-analysis" id="toc-task-6-sensitivity-power-analysis" class="nav-link" data-scroll-target="#task-6-sensitivity-power-analysis"><span class="header-section-number">6.5.6</span> Task 6: Sensitivity power analysis</a></li>
-  <li><a href="#task-7-the-write-up" id="toc-task-7-the-write-up" class="nav-link" data-scroll-target="#task-7-the-write-up"><span class="header-section-number">6.5.7</span> Task 7: The write-up</a></li>
+  <li><a href="#task-6-sensitivity-power-analysis-1" id="toc-task-6-sensitivity-power-analysis-1" class="nav-link" data-scroll-target="#task-6-sensitivity-power-analysis-1"><span class="header-section-number">6.5.6</span> Task 6: Sensitivity power analysis</a></li>
+  <li><a href="#task-7-the-write-up-1" id="toc-task-7-the-write-up-1" class="nav-link" data-scroll-target="#task-7-the-write-up-1"><span class="header-section-number">6.5.7</span> Task 7: The write-up</a></li>
   </ul>
 </li>
   <li><a href="#sec-alternative_one_sample" id="toc-sec-alternative_one_sample" class="nav-link" data-scroll-target="#sec-alternative_one_sample"><span class="header-section-number">6.6</span> Activity 6: Non-parametric alternative</a></li>
@@ -793,9 +794,79 @@ Other information:
 </ul>
 <p>It also gives us a <strong>warning message</strong> saying that expected frequencies are too small and that the chi-squared approximation may be incorrect. This relates to Assumption 4. Depending on your stance on Assumption 4, you may choose to either address or ignore this warning.</p>
 <p>The p-value indicates that we do not reject the null hypothesis, as it is greater than 0.05.</p>
-</section><section id="task-6-the-write-up" class="level3" data-number="6.4.6"><h3 data-number="6.4.6" class="anchored" data-anchor-id="task-6-the-write-up">
-<span class="header-section-number">6.4.6</span> Task 6: The write-up</h3>
-<p>The Chi-Square test revealed that there is no statistically significant association between Gender and Level of Education, <span class="math inline">\(\chi^2(8) = 13.59, p = .093, V = .079\)</span>. The strength of the association between the variables is considered small. We therefore fail to reject the null hypothesis.</p>
+</section><section id="task-6-sensitivity-power-analysis" class="level3" data-number="6.4.6"><h3 data-number="6.4.6" class="anchored" data-anchor-id="task-6-sensitivity-power-analysis">
+<span class="header-section-number">6.4.6</span> Task 6: Sensitivity power analysis</h3>
+<p>A <strong>sensitivity power analysis allows you to determine the minimum effect size that the study could reliably detect</strong> given the number of participants you have in the sample (i.e., sample size), the alpha level at 0.05, and an assumed power of 0.8. Remember, power analysis relies on four key factors — alpha, power, effect size, and sample size (APES). If you know three of these, you can calculate the fourth.</p>
+<p>For a Chi-square test, we use the <code>pwr.chisq.test()</code> function from the <code>pwr</code> package. In this case, we already know the alpha, power, and sample size, and we want to calculate the smallest effect size detectable with this design. The function also requires the degrees of freedom (<code>df</code>), which tells <code>R</code> how many groups are being compared. You can find the <code>df</code> value in the output of your Chi-square test (e.g., from <code>associationTest()</code>).</p>
+<p>The key arguments for this function are:</p>
+<ul>
+<li>
+<code>w</code> = Effect size (Cohen’s omega, ⍵). <em>(Leave this one out to calculate it.)</em>
+</li>
+<li>
+<code>N</code> = Total number of observations.</li>
+<li>
+<code>df</code> = Degree of freedom (from your Chi-square test).</li>
+<li>
+<code>sig.level</code> = The significance level of the study (usually set to 0.05).</li>
+<li>
+<code>power</code> = The power level of the study (usually set to 0.8).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">pwr.chisq.test</span>(<span class="at">N =</span> <span class="dv">1083</span>,</span>
+<span id="cb12-2"><a href="#cb12-2"></a>               <span class="at">df =</span> <span class="dv">8</span>,</span>
+<span id="cb12-3"><a href="#cb12-3"></a>               <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb12-4"><a href="#cb12-4"></a>               <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     Chi squared power calculation 
+
+              w = 0.1178008
+              N = 1083
+             df = 8
+      sig.level = 0.05
+          power = 0.8
+
+NOTE: N is the number of observations</code></pre>
+</div>
+</div>
+<p>This output gives us the smallest effect size detectable with this design. To interpret it, we need to compare it with the effect size from our test output. However, there’s a catch: the power analysis reports Cohen’s omega (⍵), while the Chi-square test reports Cramer’s V. To make them comparable, we need to convert Cramer’s V into Cohen’s omega.</p>
+<p>The formula to do so is:</p>
+<p><span class="math display">\[
+Cohen's \; \omega = Cramer's \; V * \sqrt(k-1)
+\]</span></p>
+<p>where <code>k</code> s the number of categories in the variable with fewer levels.</p>
+<p>For example, if one variable has 3 levels (e.g., <code>gender</code>) and the other has 5 (e.g., <code>eduLevel</code>), then <code>k = 3</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>w <span class="ot">=</span> <span class="fl">0.079</span> <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">3-1</span>)</span>
+<span id="cb14-2"><a href="#cb14-2"></a></span>
+<span id="cb14-3"><a href="#cb14-3"></a>w</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1117229</code></pre>
+</div>
+</div>
+<p><strong>Comparison:</strong></p>
+<p>With 1,083 observations, alpha = 0.05, and power = 0.8, the smallest detectable effect size is `⍵ = 0.118. Our calculated effect size from the Chi-square test was ⍵ = 0.112. Because 0.112 is smaller than 0.118, our study is slightly underpowered, meaning there’s a higher risk of missing an effect that actually exists (a Type II error). In this case, because our Chi-square test was non-significant, the lack of significance might reflect low power rather than the true absence of an effect.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If one of your categorical variables only has 2 levels (e.g., yes/no), then Cramer’s V and Cohen’s ⍵ are identical. In that case, you can compare them directly:</p>
+<ul>
+<li>if Cohen’s ⍵ (sensitivity) &lt; Cramer’s V (observed), your design is sufficiently powered.</li>
+<li>if Cramer’s V (observed) &lt; Cohen’s ⍵ (sensitivity), your study is underpowered, and you should be cautious about drawing strong conclusions.</li>
+</ul>
+</div>
+</div>
+</section><section id="task-7-the-write-up" class="level3" data-number="6.4.7"><h3 data-number="6.4.7" class="anchored" data-anchor-id="task-7-the-write-up">
+<span class="header-section-number">6.4.7</span> Task 7: The write-up</h3>
+<p>The Cross-Tabulation Chi-Square Test revealed a small association between Gender and Level of Education that was not statistically significant, <span class="math inline">\(\chi^2(8) = 13.59, p = .093, V = .079\)</span>. We therefore fail to reject the null hypothesis. However, a sensitivity power analysis indicated that the study was slightly underpowered, which means the non-significant result may reflect limited power rather than the true absence of an association.</p>
 </section></section><section id="sec-onesample" class="level2" data-number="6.5"><h2 data-number="6.5" class="anchored" data-anchor-id="sec-onesample">
 <span class="header-section-number">6.5</span> Activity 5: One-sample t-test</h2>
 <p>The one-sample t-test is used to determine whether a sample comes from a population with a specific mean. This population mean is not always known, but is sometimes hypothesised.</p>
@@ -812,14 +883,14 @@ Other information:
 <span class="header-section-number">6.5.1</span> Task 1: Preparing the dataframe</h3>
 <p>First, we need to select the variables of interest: participant ID and <code>wemwbs_sum</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>one_sample <span class="ot">&lt;-</span> data_ballou <span class="sc">%&gt;%</span> </span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="fu">select</span>(pid, wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>one_sample <span class="ot">&lt;-</span> data_ballou <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">select</span>(pid, wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section><section id="task-2-compute-descriptives-1" class="level3" data-number="6.5.2"><h3 data-number="6.5.2" class="anchored" data-anchor-id="task-2-compute-descriptives-1">
 <span class="header-section-number">6.5.2</span> Task 2: Compute descriptives</h3>
 <p>Next, we want to compute means and standard deviations for our variable of interest. This should be straight forward. Try it yourself and then compare your result with the solution below.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -828,14 +899,14 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>descriptives <span class="ot">&lt;-</span> one_sample <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">summarise</span>(<span class="at">mean_wemwbs =</span> <span class="fu">mean</span>(wemwbs_sum),</span>
-<span id="cb13-3"><a href="#cb13-3"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(wemwbs_sum))</span>
-<span id="cb13-4"><a href="#cb13-4"></a></span>
-<span id="cb13-5"><a href="#cb13-5"></a>descriptives</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>descriptives <span class="ot">&lt;-</span> one_sample <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="fu">summarise</span>(<span class="at">mean_wemwbs =</span> <span class="fu">mean</span>(wemwbs_sum),</span>
+<span id="cb17-3"><a href="#cb17-3"></a>            <span class="at">sd =</span> <span class="fu">sd</span>(wemwbs_sum))</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a>descriptives</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
 <table class="table table-sm table-striped small">
@@ -858,7 +929,7 @@ Solution
 <span class="header-section-number">6.5.3</span> Task 3: Create an appropriate plot</h3>
 <p>This is the plot you will want to include in your report, so make sure everything is clearly labelled. Which plot would you choose? Try creating one on your own first, then compare it with the solution below.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -867,17 +938,17 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> wemwbs_sum)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co"># alpha for opacity, fill for adding colour</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># change width of the boxes</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
-<span id="cb14-6"><a href="#cb14-6"></a>       <span class="at">y =</span> <span class="st">"Total WEMWBS Scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> wemwbs_sum)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">geom_violin</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span> <span class="co"># alpha for opacity, fill for adding colour</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="co"># change width of the boxes</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb18-6"><a href="#cb18-6"></a>       <span class="at">y =</span> <span class="st">"Total WEMWBS Scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -909,7 +980,7 @@ Important
 <p>We can already check normality from the violin-boxplot above but you could also use a histogram, a density plot, or a Q-Q plot as an alternative to assess normality visually.</p>
 <p>Each of these options shows that <strong>the data is normally distributed</strong>. This allows us to proceed with a parametric test, specifically a one-sample t-test.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -918,7 +989,7 @@ Alternatives to visually assess normality
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist">
@@ -930,20 +1001,20 @@ Alternatives to visually assess normality
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>We’ve already covered histograms in <a href="05-dataviz2.html"><span>Chapter&nbsp;5</span></a>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> wemwbs_sum)) <span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"magenta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> wemwbs_sum)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"magenta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>A density plot shows a smooth distribution curve of the data. Unlike a histogram, the height of the curve reflects the proportion of data within each range rather than the frequency of individual values. This means the curve shows where data points are concentrated, not how many times each value appears.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> wemwbs_sum)) <span class="sc">+</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"magenta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">x =</span> wemwbs_sum)) <span class="sc">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"magenta"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<p><img src="06-chi-square-one-sample_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </div>
@@ -955,8 +1026,8 @@ Alternatives to visually assess normality
 <li>The <code>qqPlot()</code> function is a single line but requires BaseR syntax (i.e., the <code>$</code> symbol) to access the column within the data object. For example, <code>one_sample$wemwbs_sum</code> directs R to look for a column named <code>wemwbs_sum</code> that is located within the data object <code>one_sample</code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Version 1 with the car package</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">qqPlot</span>(one_sample<span class="sc">$</span>wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Version 1 with the car package</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="fu">qqPlot</span>(one_sample<span class="sc">$</span>wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 295 394</code></pre>
 </div>
@@ -971,11 +1042,11 @@ Alternatives to visually assess normality
 <li>If you have gotten used to ggplot by now, and prefer avoiding BaseR, you can use the package <code>qqplotr</code>. The downside is that you have to add the points, the line, and the confidence envelope yourself. On the plus, it has layers like ggplot, and is more customisable (just in case you wanted to look at something more colourful in the 2 seconds it’ll take you to assess normality).</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Version 2 with package qqplotr</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">sample =</span> wemwbs_sum)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="fu">stat_qq_band</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> <span class="st">"#FB8D61"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="fu">stat_qq_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Version 2 with package qqplotr</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="fu">ggplot</span>(one_sample, <span class="fu">aes</span>(<span class="at">sample =</span> wemwbs_sum)) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>  <span class="fu">stat_qq_band</span>(<span class="at">fill =</span> <span class="st">"#FB8D61"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> <span class="st">"#FB8D61"</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">stat_qq_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div id="fig-qqplot2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><img src="06-chi-square-one-sample_files/figure-html/fig-qqplot2-1.png" class="img-fluid figure-img" width="672"></p>
@@ -1006,7 +1077,7 @@ Important
 </div>
 <p>The function in R for this test is <code><a href="https://rdrr.io/r/stats/shapiro.test.html">shapiro.test()</a></code> which is part of BaseR. This means, we need to specify our data object, use the <code>$</code>, and indicate the column we want to address.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">shapiro.test</span>(one_sample<span class="sc">$</span>wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">shapiro.test</span>(one_sample<span class="sc">$</span>wemwbs_sum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Shapiro-Wilk normality test
@@ -1038,7 +1109,7 @@ Report-writing Tip
 <span class="header-section-number">6.5.5</span> Task 5: Compute a One-sample t-test and effect size</h3>
 <p>To compute a one-sample t-test, we can use the <code>t.test() function</code>, which is part of Base R. And yes, you guessed it, our first argument should follow the pattern <code>data$column</code>. The second argument, <code>mu</code>, specifies the population mean we are testing our sample against (in this case, 51.0). The <code>alternative</code> is “two.sided” by default, so it can be omitted if you are conducting a two-sided test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">t.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">51.0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">t.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">51.0</span>, <span class="at">alternative =</span> <span class="st">"two.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     One Sample t-test
@@ -1064,17 +1135,17 @@ mean of x
 <p>What it doesn’t give us is an <strong>effect size</strong>. Meh. So we will need to compute one ourselves.</p>
 <p>We will calculate <strong>Cohen’s d</strong> using the function <code>cohensD()</code> from the <code>lsr</code> package. Similar to the t-test we just conducted, the first argument is <code>data$column</code>, the second argument is <code>mu</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">cohensD</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">51.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">cohensD</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">51.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.5125662</code></pre>
 </div>
 </div>
-</section><section id="task-6-sensitivity-power-analysis" class="level3" data-number="6.5.6"><h3 data-number="6.5.6" class="anchored" data-anchor-id="task-6-sensitivity-power-analysis">
+</section><section id="task-6-sensitivity-power-analysis-1" class="level3" data-number="6.5.6"><h3 data-number="6.5.6" class="anchored" data-anchor-id="task-6-sensitivity-power-analysis-1">
 <span class="header-section-number">6.5.6</span> Task 6: Sensitivity power analysis</h3>
 <p>A <strong>sensitivity power analysis allows you to determine the minimum effect size that the study could reliably detect</strong> given the number of participants you have in the sample (i.e., sample size), the alpha level at 0.05, and an assumed power of 0.8.</p>
 <p>To perform this calculation, we use the <code>pwr.t.test()</code> function from the <code>pwr</code> package. This function relies on four key factors — alpha, power, effect size, and sample size (APES). If you know three, you can calculate the fourth. Since we have three specified, we can solve for the effect size. Additionally, we need to specify the <code>type</code> argument to indicate we are using a one-sample t-test, and set <code>alternative</code> to “two.sided” for a non-directional hypothesis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">1083</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">pwr.t.test</span>(<span class="at">n =</span> <span class="dv">1083</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>, <span class="at">type =</span> <span class="st">"one.sample"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
      One-sample t test power calculation 
@@ -1087,7 +1158,7 @@ mean of x
 </div>
 </div>
 <p>So the smallest effect size we can detect with a sample size of 1083, an alpha level of 0.05, and power of 0.8 is 0.09. This is a smaller value than the actual effect size we calculated with our CohensD function above (i.e., 0.51) which means our analysis is sufficiently powered.</p>
-</section><section id="task-7-the-write-up" class="level3" data-number="6.5.7"><h3 data-number="6.5.7" class="anchored" data-anchor-id="task-7-the-write-up">
+</section><section id="task-7-the-write-up-1" class="level3" data-number="6.5.7"><h3 data-number="6.5.7" class="anchored" data-anchor-id="task-7-the-write-up-1">
 <span class="header-section-number">6.5.7</span> Task 7: The write-up</h3>
 <p>A one-sample t-test was computed to determine whether the average mental well-being of gamers as measured by the WEMWBS was different to the population well-being mean. The average WEMWBS of the gamers <span class="math inline">\((N = 1083, M = 45.42, SD = 10.89)\)</span> was significantly lower than the population mean well-being score of 51.0, <span class="math inline">\(t(1082) = 16.87, p &lt; .001, d = .51\)</span>. The strength of the effect is considered medium and the study was sufficiently powered. We therefore reject the null hypothesis in favour of H<sub>1</sub>.</p>
 </section></section><section id="sec-alternative_one_sample" class="level2" data-number="6.6"><h2 data-number="6.6" class="anchored" data-anchor-id="sec-alternative_one_sample">
@@ -1099,7 +1170,7 @@ mean of x
 <li>We can easily calculate the summary statistics using the function <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code>.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">summary</span>(one_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">summary</span>(one_sample)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     pid              wemwbs_sum   
  Length:1083        Min.   :14.00  
@@ -1112,7 +1183,7 @@ mean of x
 </div>
 <p>The function to <strong>compute a one-sample Wilcoxon test</strong> is <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> which is part of BaseR. Code-wise, it works very similar to the one-sample t-test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">wilcox.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">wilcox.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank test with continuity correction
@@ -1124,19 +1195,19 @@ alternative hypothesis: true location is not equal to 53</code></pre>
 </div>
 <p>As we can see, the output shows a V value, but for the final write-up, we need to report <strong>the standardised test statistic Z</strong> in the final write-up. Unfortunately, this requires manual calculation. According to Andy Field (2012, p.&nbsp;665), we need to use the qnorm function on the halved p-value from our Wilcoxon test above. Here, we store the p-value in the <code>Global Environment</code> as <code>p_wilcoxon</code>. This retains more decimal places than shown in the output, giving us a more precise Z value.”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># storing the p-value</span></span>
-<span id="cb32-2"><a href="#cb32-2"></a>p_wilcoxon <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>)<span class="sc">$</span>p.value</span>
-<span id="cb32-3"><a href="#cb32-3"></a></span>
-<span id="cb32-4"><a href="#cb32-4"></a><span class="co"># calculate the z value from half the p-value</span></span>
-<span id="cb32-5"><a href="#cb32-5"></a>z <span class="ot">=</span> <span class="fu">qnorm</span>(p_wilcoxon<span class="sc">/</span><span class="dv">2</span>)</span>
-<span id="cb32-6"><a href="#cb32-6"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># storing the p-value</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>p_wilcoxon <span class="ot">&lt;-</span> <span class="fu">wilcox.test</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>)<span class="sc">$</span>p.value</span>
+<span id="cb36-3"><a href="#cb36-3"></a></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="co"># calculate the z value from half the p-value</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a>z <span class="ot">=</span> <span class="fu">qnorm</span>(p_wilcoxon<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb36-6"><a href="#cb36-6"></a>z</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -19.12264</code></pre>
 </div>
 </div>
 <p>We also need to <strong>calculate the effect size <code>r</code></strong> for the One-sample Wilcoxon signed-rank test. This can be done using the <code>wilcoxonOneSampleR()</code> function from the <code>rcompanion</code> package. By default, the result is rounded to three decimal places, but you can adjust this by adding the <code>digits</code> argument.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">wilcoxonOneSampleR</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">wilcoxonOneSampleR</span>(one_sample<span class="sc">$</span>wemwbs_sum, <span class="at">mu =</span> <span class="fl">53.0</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    r 
 -0.59 </code></pre>
@@ -1147,29 +1218,8 @@ alternative hypothesis: true location is not equal to 53</code></pre>
 </section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
 <section id="question-1-conceptual-understanding---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1-conceptual-understanding---chi-square-test">Question 1: Conceptual Understanding - Chi-Square Test</h4>
 <p><strong>What is the primary purpose of a Chi-square test?</strong></p>
-<div id="radio_VZIKHYHMSC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="answer"><span>To test the relationship between categorical variables</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To compare means between two groups</span></label><label><input type="radio" autocomplete="off" name="radio_VZIKHYHMSC" value="x"><span>To test for differences in variances</span></label>
-</div>
-<div class="callout callout-style-default callout-caution no-icon callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Explain this answer
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The Chi-square test evaluates whether there is an association or relationship between two categorical variables. Those variables can either be nominal or ordinal.</p>
-</div>
-</div>
-</div>
-</section><section id="question-2-application---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2-application---chi-square-test">Question 2: Application - Chi-Square Test</h4>
-<p><strong>Which of the following scenarios would require a Chi-square test?</strong></p>
-<div id="radio_PFZNZLSDQY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="answer"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_PFZNZLSDQY" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
+<div id="radio_XWNFMVYXLR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XWNFMVYXLR" value="x"><span>To test for differences in variances</span></label><label><input type="radio" autocomplete="off" name="radio_XWNFMVYXLR" value="x"><span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_XWNFMVYXLR" value="x"><span>To compare means between two groups</span></label><label><input type="radio" autocomplete="off" name="radio_XWNFMVYXLR" value="answer"><span>To test the relationship between categorical variables</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1183,14 +1233,14 @@ Explain this answer
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The only option with 2 categorical variables is pizza topping (e.g., pepperoni, vegetarian, cheese) and region of residence (e.g., North, South, East, West).</p>
+<p>The Chi-square test evaluates whether there is an association or relationship between two categorical variables. Those variables can either be nominal or ordinal.</p>
 </div>
 </div>
 </div>
-</section><section id="question-3-interpreting-output---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3-interpreting-output---chi-square-test">Question 3: Interpreting Output - Chi-Square Test</h4>
-<p><strong>In a Chi-square test, the p-value is .005. What does this imply if the significance level is set at .05?</strong></p>
-<div id="radio_GCAKYOLGXX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is rejected; there is no significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is not rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="answer"><span>The null hypothesis is rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_GCAKYOLGXX" value="x"><span>The null hypothesis is not rejected; there is no significant association.</span></label>
+</section><section id="question-2-application---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2-application---chi-square-test">Question 2: Application - Chi-Square Test</h4>
+<p><strong>Which of the following scenarios would require a Chi-square test?</strong></p>
+<div id="radio_JZQWULQCCS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_JZQWULQCCS" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_JZQWULQCCS" value="answer"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_JZQWULQCCS" value="x"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_JZQWULQCCS" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
@@ -1204,14 +1254,14 @@ Explain this answer
 </div>
 <div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A p-value of .005 is less than the significance level (.05), indicating that the observed association between the variables is unlikely to have happened by chance.</p>
+<p>The only option with 2 categorical variables is pizza topping (e.g., pepperoni, vegetarian, cheese) and region of residence (e.g., North, South, East, West).</p>
 </div>
 </div>
 </div>
-</section><section id="question-4-using-r---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4-using-r---chi-square-test">Question 4: Using R - Chi-Square Test</h4>
-<p><strong>Which of the following R functions is used to perform a Chi-square test and displays a Cramer’s V in the output?</strong></p>
-<div id="radio_OXVPDXDIBS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>one.sample()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="answer"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_OXVPDXDIBS" value="x"><span>chisq.test()</span></label>
+</section><section id="question-3-interpreting-output---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3-interpreting-output---chi-square-test">Question 3: Interpreting Output - Chi-Square Test</h4>
+<p><strong>In a Chi-square test, the p-value is .005. What does this imply if the significance level is set at .05?</strong></p>
+<div id="radio_FCVXETFLKZ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FCVXETFLKZ" value="x"><span>The null hypothesis is not rejected; there is no significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_FCVXETFLKZ" value="x"><span>The null hypothesis is not rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_FCVXETFLKZ" value="answer"><span>The null hypothesis is rejected; there is a significant association.</span></label><label><input type="radio" autocomplete="off" name="radio_FCVXETFLKZ" value="x"><span>The null hypothesis is rejected; there is no significant association.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -1225,14 +1275,14 @@ Explain this answer
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The <code>associationTest()</code> function from the <code>lsr</code> package performs a Chi-square test and directly provides Cramer’s V as part of the output. The <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> function exists it but does not compute Cramer’s V. The other options either don’t exist or don’t meet the criteria.</p>
+<p>A p-value of .005 is less than the significance level (.05), indicating that the observed association between the variables is unlikely to have happened by chance.</p>
 </div>
 </div>
 </div>
-</section><section id="question-5-conceptual-understanding---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-5-conceptual-understanding---one-sample-t-test">Question 5: Conceptual Understanding - One-sample t-test</h4>
-<p><strong>What is the null hypothesis in a one-sample t-test?</strong></p>
-<div id="radio_BPMMZSENJP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The population mean is equal to zero</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The sample mean is less than the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="answer"><span>The sample mean is equal to the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_BPMMZSENJP" value="x"><span>The sample mean is greater than the population mean</span></label>
+</section><section id="question-4-using-r---chi-square-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4-using-r---chi-square-test">Question 4: Using R - Chi-Square Test</h4>
+<p><strong>Which of the following R functions is used to perform a Chi-square test and displays a Cramer’s V in the output?</strong></p>
+<div id="radio_TNVOCFWRBP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TNVOCFWRBP" value="x"><span>one.sample()</span></label><label><input type="radio" autocomplete="off" name="radio_TNVOCFWRBP" value="answer"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_TNVOCFWRBP" value="x"><span>chisq.test()</span></label><label><input type="radio" autocomplete="off" name="radio_TNVOCFWRBP" value="x"><span>t.test()</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
@@ -1246,14 +1296,14 @@ Explain this answer
 </div>
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The one-sample t-test tests whether the sample mean is significantly different from a known or hypothesised population mean.</p>
+<p>The <code>associationTest()</code> function from the <code>lsr</code> package performs a Chi-square test and directly provides Cramer’s V as part of the output. The <code><a href="https://rdrr.io/r/stats/chisq.test.html">chisq.test()</a></code> function exists it but does not compute Cramer’s V. The other options either don’t exist or don’t meet the criteria.</p>
 </div>
 </div>
 </div>
-</section><section id="question-6-application---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-6-application---one-sample-t-test">Question 6: Application - One-sample t-test</h4>
-<p><strong>Which of the following scenarios would require a one-sample t-test?</strong></p>
-<div id="radio_AYBUUFQJDQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="answer"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_AYBUUFQJDQ" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
+</section><section id="question-5-conceptual-understanding---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-5-conceptual-understanding---one-sample-t-test">Question 5: Conceptual Understanding - One-sample t-test</h4>
+<p><strong>What is the null hypothesis in a one-sample t-test?</strong></p>
+<div id="radio_HNJQBXNEIY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HNJQBXNEIY" value="x"><span>The sample mean is greater than the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_HNJQBXNEIY" value="x"><span>The sample mean is less than the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_HNJQBXNEIY" value="answer"><span>The sample mean is equal to the population mean</span></label><label><input type="radio" autocomplete="off" name="radio_HNJQBXNEIY" value="x"><span>The population mean is equal to zero</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
@@ -1267,14 +1317,14 @@ Explain this answer
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>A one-sample t-test is appropriate when comparing the mean of a single sample (e.g., basketball players’ heights) to a known or hypothesised population mean (e.g., mean of the general population). The other options involve comparisons between groups (option 1), categorical associations (option 2), or repeated measures (option 4).</p>
+<p>The one-sample t-test tests whether the sample mean is significantly different from a known or hypothesised population mean.</p>
 </div>
 </div>
 </div>
-</section><section id="question-7-interpreting-output---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7-interpreting-output---one-sample-t-test">Question 7: Interpreting Output - One-sample t-test</h4>
-<p><strong>If the p-value in a one-sample t-test is .15 and the significance level is .05, what is the conclusion?</strong></p>
-<div id="radio_INGXPCWNTU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="answer"><span>The sample mean is not significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is further from the population mean than expected by chance.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_INGXPCWNTU" value="x"><span>The sample mean is equal to the population mean.</span></label>
+</section><section id="question-6-application---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-6-application---one-sample-t-test">Question 6: Application - One-sample t-test</h4>
+<p><strong>Which of the following scenarios would require a one-sample t-test?</strong></p>
+<div id="radio_SZMVVVQCKN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SZMVVVQCKN" value="x"><span>Comparing the average exam scores of students in two classrooms</span></label><label><input type="radio" autocomplete="off" name="radio_SZMVVVQCKN" value="x"><span>Determining if there is an association between people’s favourite pizza topping and their region of residence</span></label><label><input type="radio" autocomplete="off" name="radio_SZMVVVQCKN" value="answer"><span>Testing whether the average height of basketball players differs from the general population</span></label><label><input type="radio" autocomplete="off" name="radio_SZMVVVQCKN" value="x"><span>Assessing whether the reaction times of drivers are influenced by caffeine consumption</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
@@ -1288,15 +1338,14 @@ Explain this answer
 </div>
 <div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Since the p-value (.15) is greater than the significance level (.05), we fail to reject the null hypothesis. This means there is no evidence to suggest that the sample mean is significantly different from the population mean.</p>
-<p>However, this does not mean we have evidence to confirm that the sample mean is exactly equal to the population mean. In statistics, ‘not significantly different’ is not the same as ‘equal.’ Therefore, the option ‘The sample mean is equal to the population mean’ is incorrect.</p>
+<p>A one-sample t-test is appropriate when comparing the mean of a single sample (e.g., basketball players’ heights) to a known or hypothesised population mean (e.g., mean of the general population). The other options involve comparisons between groups (option 1), categorical associations (option 2), or repeated measures (option 4).</p>
 </div>
 </div>
 </div>
-</section><section id="question-8-using-r---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-8-using-r---one-sample-t-test">Question 8: Using R - One-sample t-test</h4>
-<p><strong>Which of the following R functions is used to perform a one-sample t-test?</strong></p>
-<div id="radio_QZOTIHHAPA" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>one.sample()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="answer"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_QZOTIHHAPA" value="x"><span>chisq.test()</span></label>
+</section><section id="question-7-interpreting-output---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7-interpreting-output---one-sample-t-test">Question 7: Interpreting Output - One-sample t-test</h4>
+<p><strong>If the p-value in a one-sample t-test is .15 and the significance level is .05, what is the conclusion?</strong></p>
+<div id="radio_SFZAGXYSMY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_SFZAGXYSMY" value="x"><span>The sample mean is significantly different from the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_SFZAGXYSMY" value="x"><span>The sample mean is equal to the population mean.</span></label><label><input type="radio" autocomplete="off" name="radio_SFZAGXYSMY" value="x"><span>The sample mean is further from the population mean than expected by chance.</span></label><label><input type="radio" autocomplete="off" name="radio_SFZAGXYSMY" value="answer"><span>The sample mean is not significantly different from the population mean.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
@@ -1309,6 +1358,28 @@ Explain this answer
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Since the p-value (.15) is greater than the significance level (.05), we fail to reject the null hypothesis. This means there is no evidence to suggest that the sample mean is significantly different from the population mean.</p>
+<p>However, this does not mean we have evidence to confirm that the sample mean is exactly equal to the population mean. In statistics, ‘not significantly different’ is not the same as ‘equal.’ Therefore, the option ‘The sample mean is equal to the population mean’ is incorrect.</p>
+</div>
+</div>
+</div>
+</section><section id="question-8-using-r---one-sample-t-test" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-8-using-r---one-sample-t-test">Question 8: Using R - One-sample t-test</h4>
+<p><strong>Which of the following R functions is used to perform a one-sample t-test?</strong></p>
+<div id="radio_CEICISAOEN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CEICISAOEN" value="x"><span>chisq.test()</span></label><label><input type="radio" autocomplete="off" name="radio_CEICISAOEN" value="answer"><span>t.test()</span></label><label><input type="radio" autocomplete="off" name="radio_CEICISAOEN" value="x"><span>associationTest()</span></label><label><input type="radio" autocomplete="off" name="radio_CEICISAOEN" value="x"><span>one.sample()</span></label>
+</div>
+<div class="callout callout-style-default callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Explain this answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> is the standard function in R for performing a one-sample t-test. In the next 2 weeks, we will see that the function can also be used for two-sample and paired t-tests.</p>
 <p>The function <code>one.sample()</code> does not exist.</p>

@@ -886,9 +886,27 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
 <span id="cb14-4"><a href="#cb14-4"></a>            <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
 <span id="cb14-5"><a href="#cb14-5"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
-<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-6"><a href="#cb14-6"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb14-7"><a href="#cb14-7"></a></span>
+<span id="cb14-8"><a href="#cb14-8"></a>demo_gender3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean_age</th>
+<th style="text-align: right;">sd_age</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">21.33333</td>
+<td style="text-align: right;">1.1547</td>
+</tr></tbody>
+</table>
 </div>
-<p>If we want to focus on more than one gender category, we use the <code>%in%</code> operator along with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function (which combines values into a vector).</p>
+</div>
+</div>
+<p>If we want to focus on more than one gender category, we use the Boolean operator <code>%in%</code> along with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function (which combines values into a vector).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>demo_gender12 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
@@ -896,7 +914,35 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 <span id="cb15-4"><a href="#cb15-4"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
 <span id="cb15-5"><a href="#cb15-5"></a>            <span class="at">mean_age =</span> <span class="fu">mean</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
 <span id="cb15-6"><a href="#cb15-6"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(Age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span>  </span>
-<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-7"><a href="#cb15-7"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb15-8"><a href="#cb15-8"></a></span>
+<span id="cb15-9"><a href="#cb15-9"></a>demo_gender12</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="kable-table">
+<table class="table table-sm table-striped small">
+<thead><tr class="header">
+<th style="text-align: right;">Gender</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">mean_age</th>
+<th style="text-align: right;">sd_age</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">23.31250</td>
+<td style="text-align: right;">5.770254</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">69</td>
+<td style="text-align: right;">21.57353</td>
+<td style="text-align: right;">2.738973</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">

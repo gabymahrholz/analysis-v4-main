@@ -389,15 +389,15 @@ To perform this analysis, we use the `pwr.t.test()` from the `pwr` package. The 
 pwr.t.test(n = 80, sig.level = 0.05, power = 0.8, type = "two.sample", alternative = "two.sided")
 ```
 
-Sooo, the smallest effect size we can detect with a sample size of 80 participants in each group, an alpha level of .05, and power of .8 is **0.45**. This is larger than the actual effect size we calculated using the `CohensD()` function (i.e., 0.14). This indicates that our analysis is underpowered to detect such a small effect size.
+Sooo, the smallest effect size we can detect with a sample size of 80 participants in each group, an alpha level of .05, and power of .8 is **0.45**. Our observed effect size was only 0.15 (calculated with the `CohensD()` function). Because the observed effect is smaller than the smallest detectable effect, the analysis is underpowered, meaning it is unlikely to detect such a small effect reliably.
 
 #### Hypothetical Replication Study {.unnumbered}
 
-Out of curiosity, if we were to replicate this study and wanted to reliably detect an effect size as small as **0.14**, how many participants would we need?
+Out of curiosity, if we were to replicate this study and wanted to reliably detect an effect size as small as **0.15**, how many participants would we need?
 
-We can use the `pwr.t.test()` function again. This time, instead of specifying `n`, we provide the effect size (`d = 0.14`). The result shows that we would need approximately **1,500 participants in total** (750 per group). Ooft; that's quite a few people to recruit.
+We can use the `pwr.t.test()` function again. This time, instead of specifying `n`, we provide the effect size (`d = 0.145`). The result shows that we would need approximately **1,500 participants in total** (750 per group). Ooft; that's quite a few people to recruit.
 
-However, it’s worth noting that an effect size of 0.14 may not be practically meaningful, even if statistically detectable.
+However, it’s worth noting that an effect size of 0.15 may not be practically meaningful, even if statistically detectable.
 
 ```{r}
 pwr.t.test(d = 0.145, sig.level = 0.05, power = 0.8, type = "two.sample", alternative = "two.sided")
@@ -427,8 +427,7 @@ pwr.t2n.test(n1 = 80, n2= 80, sig.level = 0.05, power = 0.8, alternative = "two.
 
 ## Activity 10: The write-up
 
-We hypothesised that there would be a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, M = 35.99 \text{msec}, SD = 22.40 \text{msec})$ and those who received different stimuli $(N = 80, M = 32.86 \text{msec}, SD = 20.79 \text{msec})$. Using a Welch two-sample  t-test, the effect was found to be non-significant and of a small magnitude, $t(157.14) = 0.92, p = .360, d = 0.15$. The overall mean difference between groups was small $(M_{diff} = 3.14 \text{msec})$. Therefore, we fail to reject the null hypothesis.
-
+We hypothesised that there would be a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, M = 35.99 \ \text{msec}, SD = 22.40 \ \text{msec})$ and those who received different stimuli $(N = 80, M = 32.86 \ \text{msec}, SD = 20.79 \ \text{msec})$. A Welch two-sample  t-test revealed the small effect to be non-significant, $t(157.14) = 0.92, p = .360, d = 0.15$. Therefore, we fail to reject the null hypothesis. However, the analysis was underpowered to reliably detect such a small effect.
 
 
 ## Activity 11: Non-parametric alternative {#sec-alternative_two_sample}
@@ -481,7 +480,7 @@ wilcox_effsize(data = simon_effect, formula = simon_effect ~ similarity)
 This is once again considered a small effect. Anyway, we do have all the numbers now to **write up the results**:
 
 
-A Mann-Whitney U-test was conducted to determine whether there was a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, Mdn = 35.68 \text{msec})$ and those who received different stimuli $(N = 80, Mdn = 34.44 \text{msec})$. The results indicate that the median difference in response time was non-significant and of small magnitude, $W = 3001, Z = -0.68, p = .498, r = .054$. Therefore, we fail to reject the null hypothesis.
+A Mann-Whitney U-test was conducted to determine whether there was a significant difference in the Simon effect between participants who received the same stimuli in both sessions $(N = 80, Mdn = 35.68 \ \text{msec})$ and those who received different stimuli $(N = 80, Mdn = 34.44 \ \text{msec})$. The results indicate that the median difference in response time was non-significant and of small magnitude, $W = 3001, Z = -0.68, p = .498, r = .054$. Therefore, we fail to reject the null hypothesis.
 
 
 

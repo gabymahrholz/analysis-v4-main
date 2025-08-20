@@ -858,7 +858,7 @@ Solution for steps 1 and 2
 </div>
 </div>
 <p>One way to <strong>check whether our reverse-coding worked</strong> is by examining the <code>distinct</code> values in the original <code>Response</code> column and comparing them with the <code>Scores_corrected</code>. We should also retain the <code>FW_RV</code> column to observe how the reverse-coding applied.</p>
-<p>To see the patterns more clearly, we can use <code>arrange()</code> to sort the values in a meaningful order. Remember, the default sorting order is ascending, so if you want to sort values in descending order, you’ll need to wrap your variable in the desc() function.</p>
+<p>To see the patterns more clearly, we can use <code>arrange()</code> to sort the values in a meaningful order. Remember, the default sorting order is ascending, so if you want to sort values in descending order, you’ll need to wrap your variable in the <code>desc()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a>check_coding <span class="ot">&lt;-</span> sats_t1 <span class="sc">%&gt;%</span> </span>
 <span id="cb18-2"><a href="#cb18-2"></a>  <span class="fu">distinct</span>(FW_RV, Response, Scores_corrected) <span class="sc">%&gt;%</span> </span>

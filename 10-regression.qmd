@@ -516,7 +516,7 @@ With the design and sample size we have, we could have detected an effect as sma
 
 A simple linear regression was performed with Attitudes toward SPSS $(M = 3.50, SD = 0.73)$ as the outcome variable and Quantitative self-efficacy $(M = 3.39, SD = 0.78)$ as the predictor variable. 
 
-The results of the regression indicated that the model significantly predicted Attitudes toward SPSS $(F(1, 179) = 15.47 p < .001, R^2_{Adjusted} = .074, f^2 = 0.080)$, accounting for 7.4% of the variance. The effect of Quantitative self-efficacy was statistically significant, positive, and of small magnitude $(b = 0.26, 95\% CI = [.13, .40], p <.001)$.
+The results of the regression indicated that the model significantly predicted Attitudes toward SPSS $(F(1, 179) = 15.47 p < .001, R^2_{Adjusted} = .074, f^2 = 0.080)$, accounting for 7.4% of the variance. The effect of Quantitative self-efficacy was statistically significant, positive, and of small magnitude $(b = 0.26, 95\% CI = [.13, .40], p <.001)$. Therefore, we reject the null hypothesis in favour of H~1~. The analysis was sufficiently powered to detect this effect.
 
 
 

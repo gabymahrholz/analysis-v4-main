@@ -293,9 +293,70 @@ It also gives us a **warning message** saying that expected frequencies are too 
 
 The p-value indicates that we do not reject the null hypothesis, as it is greater than 0.05.
 
-### Task 6: The write-up
 
-The Chi-Square test revealed that there is no statistically significant association between Gender and Level of Education, $\chi^2(8) = 13.59, p = .093, V = .079$. The strength of the association between the variables is considered small. We therefore fail to reject the null hypothesis. 
+### Task 6: Sensitivity power analysis
+
+A **sensitivity power analysis allows you to determine the minimum effect size that the study could reliably detect** given the number of participants you have in the sample (i.e., sample size), the alpha level at 0.05, and an assumed power of 0.8. Remember, power analysis relies on four key factors — alpha, power, effect size, and sample size (APES). If you know three of these, you can calculate the fourth.
+
+
+For a Chi-square test, we use the `pwr.chisq.test()` function from the `pwr` package. In this case, we already know the alpha, power, and sample size, and we want to calculate the smallest effect size detectable with this design. The function also requires the degrees of freedom (`df`), which tells `R` how many groups are being compared. You can find the `df` value in the output of your Chi-square test (e.g., from `associationTest()`).
+
+The key arguments for this function are:
+
+* `w` = Effect size (Cohen's omega, ⍵). *(Leave this one out to calculate it.)*
+* `N` = Total number of observations.
+* `df` = Degree of freedom (from your Chi-square test).
+* `sig.level` = The significance level of the study (usually set to 0.05). 
+* `power` = The power level of the study (usually set to 0.8).
+
+
+
+```{r}
+pwr.chisq.test(N = 1083,
+               df = 8,
+               sig.level = 0.05,
+               power = 0.8)
+```
+
+This output gives us the smallest effect size detectable with this design. To interpret it, we need to compare it with the effect size from our test output. However, there’s a catch: the power analysis reports Cohen’s omega (⍵), while the Chi-square test reports Cramer’s V. To make them comparable, we need to convert Cramer’s V into Cohen’s omega.
+
+The formula to do so is: 
+
+$$
+Cohen's \; \omega = Cramer's \; V * \sqrt(k-1)
+$$
+
+where `k` s the number of categories in the variable with fewer levels.
+
+For example, if one variable has 3 levels (e.g., `gender`) and the other has 5 (e.g., `eduLevel`), then `k = 3`.
+
+```{r}
+w = 0.079 * sqrt(3-1)
+
+w
+```
+
+
+**Comparison:**
+
+With 1,083 observations, alpha = 0.05, and power = 0.8, the smallest detectable effect size is `⍵ = 0.118. Our calculated effect size from the Chi-square test was ⍵ = 0.112. Because 0.112 is smaller than 0.118, our study is slightly underpowered, meaning there’s a higher risk of missing an effect that actually exists (a Type II error). In this case, because our Chi-square test was non-significant, the lack of significance might reflect low power rather than the true absence of an effect.
+
+
+
+::: {.callout-note}
+
+If one of your categorical variables only has 2 levels (e.g., yes/no), then Cramer’s V and Cohen’s ⍵ are identical. In that case, you can compare them directly:
+
+* if Cohen's ⍵ (sensitivity) < Cramer's V (observed), your design is sufficiently powered.
+* if Cramer's V (observed) < Cohen's ⍵ (sensitivity), your study is underpowered, and you should be cautious about drawing strong conclusions.
+
+:::
+
+
+
+### Task 7: The write-up
+
+The Cross-Tabulation Chi-Square Test revealed a small association between Gender and Level of Education that was not statistically significant, $\chi^2(8) = 13.59, p = .093, V = .079$. We therefore fail to reject the null hypothesis. However, a sensitivity power analysis indicated that the study was slightly underpowered, which means the non-significant result may reflect limited power rather than the true absence of an association.
 
 
 

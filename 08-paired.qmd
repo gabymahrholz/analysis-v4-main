@@ -413,11 +413,11 @@ The function we will use again is `pwr.t.test()` from the `pwr` package. The arg
 pwr.t.test(n = 160, sig.level = 0.05, power = 0.8, type = "paired", alternative = "two.sided")
 ```
 
-The minimum effect size we could reliably detect is 0.22. Our actual effect size was 1.59, so this analysis was sufficiently powered. YAY
+The minimum effect size we could reliably detect is 0.22. Our actual effect size was 1.59, so this analysis was sufficiently powered. YAY!
 
 ## Activity 9: The write-up
 
-We hypothesised that there would be a significant difference in the response times between congruent $(M = 427.65 msec, SD = 74.17 msec)$ and incongruent trials $(M = 462.08 msec, SD = 74.70 msec)$ of a Simon task. On average, participants were faster in the congruent compared to the incongruent condition $(M_{diff} = 34.43 msec, SD_{diff} = 21.60 msec)$. Using a within-subjects t-test, the effect was found to be significant and of a large magnitude, $t(159) = 20.16, p < .001, d = 1.59$. Therefore, we reject the null hypothesis in favour of H~1~.
+We hypothesised that there would be a significant difference in the response times between congruent $(M = 427.65 msec, SD = 74.17 msec)$ and incongruent trials $(M = 462.08 msec, SD = 74.70 msec)$ of a Simon task. On average, participants were faster in the congruent compared to the incongruent condition $(M_{diff} = 34.43 msec, SD_{diff} = 21.60 msec)$. Using a within-subjects t-test, the effect was found to be significant and of a large magnitude, $t(159) = 20.16, p < .001, d = 1.59$. Therefore, we reject the null hypothesis in favour of H~1~. The analysis was sufficiently powered to detect this effect.
 
 
 ## Activity 10: Non-parametric alternative {#sec-alternative_paired}

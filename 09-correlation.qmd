@@ -702,7 +702,7 @@ According to the output above, the smallest `r` detectable with 244 participants
 
 ## Activity 10: The write-up
 
-Lopez et al. (2024) hypothesised a positive correlation between estimated calories of soup consumed $(M = 133.0 cal, SD = 121.3 cal)$ and actual consumption volume $(M = 8.87 oz, SD = 6.24 oz)$. A Pearson correlation revealed a moderately strong, positive, and statistically significant relationship between these two variables, $r(242) = .405, p < .001, 95\% CI = [.294, .504]$. The study was sufficiently powered. Lopez et al. rejected the null hypothesis in favour of H~1~. 
+Lopez et al. (2024) hypothesised a positive correlation between estimated calories of soup consumed $(M = 133.0 cal, SD = 121.3 cal)$ and actual consumption volume $(M = 8.87 oz, SD = 6.24 oz)$. A Pearson correlation revealed a moderately strong, positive, and statistically significant relationship between these two variables that was sufficiently powered, $r(242) = .405, p < .001, 95\% CI = [.294, .504]$. Lopez et al. rejected the null hypothesis in favour of H~1~.
 
 
 ## Activity 11: Non-parametric alternative
