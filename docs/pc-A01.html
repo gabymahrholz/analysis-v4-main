@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 2A Lab 1 Week 2</title>
+
+<title>2A Lab 1 Week 2 – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pc-A01.html">IN-LAB: PAIR-CODING</a></li><li class="breadcrumb-item"><a href="./pc-A01.html">2A Lab 1 Week 2</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pc-A01.html">IN-LAB: PAIR-CODING</a></li><li class="breadcrumb-item"><a href="./pc-A01.html">2A Lab 1 Week 2</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +187,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +273,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +362,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,32 +403,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#task-1-create-a-project-folder-for-the-lab-activities" id="toc-task-1-create-a-project-folder-for-the-lab-activities" class="nav-link active" data-scroll-target="#task-1-create-a-project-folder-for-the-lab-activities">Task 1: Create a project folder for the lab activities</a></li>
+  <li><a href="#task-1-create-a-project-folder-for-the-lab-activities" id="toc-task-1-create-a-project-folder-for-the-lab-activities" class="nav-link active" data-scroll-target="#task-1-create-a-project-folder-for-the-lab-activities">Task 1: Create a project folder for the lab activities</a></li>
   <li><a href="#task-2-create-a-new-.rmd-file" id="toc-task-2-create-a-new-.rmd-file" class="nav-link" data-scroll-target="#task-2-create-a-new-.rmd-file">Task 2: Create a new <code>.Rmd</code> file</a></li>
   <li><a href="#task-3-download-the-data" id="toc-task-3-download-the-data" class="nav-link" data-scroll-target="#task-3-download-the-data">Task 3: Download the data</a></li>
   <li><a href="#task-4-familiarise-yourself-with-the-data" id="toc-task-4-familiarise-yourself-with-the-data" class="nav-link" data-scroll-target="#task-4-familiarise-yourself-with-the-data">Task 4: Familiarise yourself with the data</a></li>
-  <li>
-<a href="#task-5-question-time" id="toc-task-5-question-time" class="nav-link" data-scroll-target="#task-5-question-time">Task 5: Question Time</a>
+  <li><a href="#task-5-question-time" id="toc-task-5-question-time" class="nav-link" data-scroll-target="#task-5-question-time">Task 5: Question Time</a>
   <ul class="collapse">
-<li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
+  <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   <li><a href="#question-3" id="toc-question-3" class="nav-link" data-scroll-target="#question-3">Question 3</a></li>
   <li><a href="#question-4" id="toc-question-4" class="nav-link" data-scroll-target="#question-4">Question 4</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pc-A01.html">IN-LAB: PAIR-CODING</a></li><li class="breadcrumb-item"><a href="./pc-A01.html">2A Lab 1 Week 2</a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title">2A Lab 1 Week 2</h1>
 </div>
 
@@ -416,7 +452,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><p><strong>This is the pair coding activity related to <a href="01-basics.html"><span>Chapter&nbsp;1</span></a>.</strong></p>
+
+</header>
+
+
+<p><strong>This is the pair coding activity related to <a href="01-basics.html" class="quarto-xref"><span>1&nbsp; Projects and R Markdown</span></a>.</strong></p>
 <p>The data we will be using in the upcoming lab activities is a randomised controlled trials experiment by Binfet et al.&nbsp;(2021) that was conducted in Canada.</p>
 <p><strong>Citation</strong></p>
 <blockquote class="blockquote">
@@ -434,17 +474,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Evans removed the demographics ethnicity and gender to make the study data available while protecting participant privacy. Which means we’ll have limited demographic variables available, but we will make do with what we’ve got.</li>
 <li>We modified some of the responses in the raw data csv - for example, we took out impossible response values and replaced them with <code>NA</code>.</li>
-<li>We replaced some of the numbers with labels to increase the difficulty in the dataset for <a href="02-wrangling.html"><span>Chapter&nbsp;2</span></a> and <a href="03-wrangling2.html"><span>Chapter&nbsp;3</span></a>.</li>
+<li>We replaced some of the numbers with labels to increase the difficulty in the dataset for <a href="02-wrangling.html" class="quarto-xref"><span>2&nbsp; Data wrangling I</span></a> and <a href="03-wrangling2.html" class="quarto-xref"><span>3&nbsp; Data wrangling II</span></a>.</li>
 </ul>
-<section id="now-lets-get-started" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="now-lets-get-started">Now, let’s get started!!!</h4>
-</section><section id="task-1-create-a-project-folder-for-the-lab-activities" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="task-1-create-a-project-folder-for-the-lab-activities">Task 1: Create a project folder for the lab activities</h2>
-<p>Since we will be working with the same data throughout semester 1, create a separate project for the lab data. Name it something useful, like <code>lab_data</code> or <code>dogs_in_the_lab</code>. Make sure you are not placing it within the project you have already created today. If you need guidance, see <a href="01-basics.html#sec-project"><span>Section&nbsp;1.2</span></a>.</p>
-</section><section id="task-2-create-a-new-.rmd-file" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="task-2-create-a-new-.rmd-file">Task 2: Create a new <code>.Rmd</code> file</h2>
-<p>… and name it something useful. If you need help, have a look at <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a>.</p>
-</section><section id="task-3-download-the-data" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="task-3-download-the-data">Task 3: Download the data</h2>
+<section id="now-lets-get-started" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="now-lets-get-started">Now, let’s get started!!!</h4>
+</section>
+<section id="task-1-create-a-project-folder-for-the-lab-activities" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-1-create-a-project-folder-for-the-lab-activities">Task 1: Create a project folder for the lab activities</h2>
+<p>Since we will be working with the same data throughout semester 1, create a separate project for the lab data. Name it something useful, like <code>lab_data</code> or <code>dogs_in_the_lab</code>. Make sure you are not placing it within the project you have already created today. If you need guidance, see <a href="01-basics.html#sec-project" class="quarto-xref"><span>1.2 Activity 1: Creating a new project</span></a>.</p>
+</section>
+<section id="task-2-create-a-new-.rmd-file" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-2-create-a-new-.rmd-file">Task 2: Create a new <code>.Rmd</code> file</h2>
+<p>… and name it something useful. If you need help, have a look at <a href="01-basics.html#sec-rmd" class="quarto-xref"><span>1.3 Activity 2: Create a new R Markdown file</span></a>.</p>
+</section>
+<section id="task-3-download-the-data" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-3-download-the-data">Task 3: Download the data</h2>
 <p>Download the data here: <a href="data/data_pair_coding.zip" title="download">data_pair_coding</a>. The zip folder contains the raw data file with responses to individual questions, a cleaned version of the same data in long format and wide format, and the codebook describing the variables in the raw data file and the long format.</p>
 <p><strong>Unzip the folder and place the data files in the same folder as your project.</strong></p>
-</section><section id="task-4-familiarise-yourself-with-the-data" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="task-4-familiarise-yourself-with-the-data">Task 4: Familiarise yourself with the data</h2>
+</section>
+<section id="task-4-familiarise-yourself-with-the-data" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-4-familiarise-yourself-with-the-data">Task 4: Familiarise yourself with the data</h2>
 <p>Open the data files, look at the codebook, and perhaps skim over the original Binfet article (methods in particular) to see what kind of measures they used.</p>
 <p>Read in the raw data file as <code>dog_data_raw</code> and the cleaned-up data (long format) as <code>dog_data_long</code>. See if you can answer the following questions.</p>
 <div class="cell">
@@ -483,9 +532,12 @@ dbl (12): RID, Age_Yrs, Consumer_BARK, Flourishing, PANAS_PA, PANAS_NA, SHS,...
 ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 </div>
-</section><section id="task-5-question-time" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="task-5-question-time">Task 5: Question Time</h2>
+</section>
+<section id="task-5-question-time" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="task-5-question-time">Task 5: Question Time</h2>
 <p>Now that you have familiarised yourself with the data, you can answer the following questions.</p>
-<section id="question-1" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h3>
+<section id="question-1" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h3>
 <p>How many participants took part in the study? <input class="webex-solveme nospaces" size="3" data-answer="[&quot;284&quot;]"></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -504,7 +556,9 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-2" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h3>
+</section>
+<section id="question-2" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h3>
 <p>How many different questionnaires did the participants answer? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;9&quot;,&quot;8&quot;]"></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -523,7 +577,9 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-3" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h3>
+</section>
+<section id="question-3" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h3>
 <p><code>dog_data_raw</code> has <input class="webex-solveme nospaces" size="2" data-answer="[&quot;41&quot;]"> character columns and <input class="webex-solveme nospaces" size="2" data-answer="[&quot;95&quot;]"> that are labeled as double.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -539,173 +595,104 @@ Explain this answer
 <div class="callout-body-container callout-body">
 <p>You can get information on column specification when reading in the data.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/col_spec_pc.PNG" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">message from <code>read_csv()</code> when reading in the data</figcaption></figure>
+<figure class="figure">
+<p><a href="images/col_spec_pc.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="message from read_csv() when reading in the data"><img src="images/col_spec_pc.PNG" class="img-fluid figure-img" alt="message from read_csv() when reading in the data"></a></p>
+<figcaption>message from <code>read_csv()</code> when reading in the data</figcaption>
+</figure>
 </div>
 </div>
 </div>
 </div>
-</section><section id="question-4" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h3>
+</section>
+<section id="question-4" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h3>
 <p>Select from the dropdown menu the variable type and their data types for each of the columns.</p>
 <p>In <code>dog_data_raw</code>:</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 42%">
 <col style="width: 28%">
 <col style="width: 28%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Column</th>
 <th style="text-align: left;">Variable type</th>
 <th style="text-align: left;">Data type</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>RID</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="answer">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="answer">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>GroupAssignment</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="answer">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="answer">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Age_Yrs</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Year_of_Study</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>PN1_1</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>L2_1</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>SC2_1</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 </tbody>
 </table>
 <p>In <code>dog_data_long</code>:</p>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 42%">
 <col style="width: 28%">
 <col style="width: 28%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Column</th>
 <th style="text-align: left;">Variable type</th>
 <th style="text-align: left;">Data type</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>Year_of_Study</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Stage</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>Loneliness</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>SCS</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 </tbody>
 </table>
@@ -728,239 +715,478 @@ Explain this answer
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1001,6 +1227,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1069,13 +1322,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1110,18 +1365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1153,11 +1397,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1167,8 +1450,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1180,7 +1472,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1224,6 +1639,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1249,6 +1665,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1307,28 +1749,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./13-factorial-anova.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./13-factorial-anova.html" class="pagination-link" aria-label="Factorial ANOVA">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Factorial ANOVA</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pc-A02.html" class="pagination-link">
+      <a href="./pc-A02.html" class="pagination-link" aria-label="2A Lab 2 Week 3">
         <span class="nav-page-text">2A Lab 2 Week 3</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":false,"closeEffect":"zoom","openEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

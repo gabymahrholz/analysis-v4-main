@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 2&nbsp; Data wrangling I</title>
+
+<title>2&nbsp; Data wrangling I – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./02-wrangling.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./02-wrangling.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +187,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +273,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +362,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,43 +403,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
   <li><a href="#activity-1-setup" id="toc-activity-1-setup" class="nav-link" data-scroll-target="#activity-1-setup"><span class="header-section-number">2.1</span> Activity 1: Setup</a></li>
   <li><a href="#activity-2-load-in-the-libraries-and-read-in-the-data" id="toc-activity-2-load-in-the-libraries-and-read-in-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-libraries-and-read-in-the-data"><span class="header-section-number">2.2</span> Activity 2: Load in the libraries and read in the data</a></li>
-  <li>
-<a href="#activity-3-calculating-demographics" id="toc-activity-3-calculating-demographics" class="nav-link" data-scroll-target="#activity-3-calculating-demographics"><span class="header-section-number">2.3</span> Activity 3: Calculating demographics</a>
+  <li><a href="#activity-3-calculating-demographics" id="toc-activity-3-calculating-demographics" class="nav-link" data-scroll-target="#activity-3-calculating-demographics"><span class="header-section-number">2.3</span> Activity 3: Calculating demographics</a>
   <ul class="collapse">
-<li><a href="#for-the-full-sample-using-summarise" id="toc-for-the-full-sample-using-summarise" class="nav-link" data-scroll-target="#for-the-full-sample-using-summarise"><span class="header-section-number">2.3.1</span> … for the full sample using <code>summarise()</code></a></li>
+  <li><a href="#for-the-full-sample-using-summarise" id="toc-for-the-full-sample-using-summarise" class="nav-link" data-scroll-target="#for-the-full-sample-using-summarise"><span class="header-section-number">2.3.1</span> … for the full sample using <code>summarise()</code></a></li>
   <li><a href="#per-gender-using-summarise-and-group_by" id="toc-per-gender-using-summarise-and-group_by" class="nav-link" data-scroll-target="#per-gender-using-summarise-and-group_by"><span class="header-section-number">2.3.2</span> … per gender using <code>summarise()</code> and <code>group_by()</code></a></li>
   <li><a href="#adding-percentages" id="toc-adding-percentages" class="nav-link" data-scroll-target="#adding-percentages"><span class="header-section-number">2.3.3</span> Adding percentages</a></li>
   <li><a href="#filter-gender" id="toc-filter-gender" class="nav-link" data-scroll-target="#filter-gender"><span class="header-section-number">2.3.4</span> <code>filter()</code> gender</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#sec-ch2_act4" id="toc-sec-ch2_act4" class="nav-link" data-scroll-target="#sec-ch2_act4"><span class="header-section-number">2.4</span> Activity 4: Questionable Research Practices (QRPs)</a></li>
   <li><a href="#activity-5-knitting" id="toc-activity-5-knitting" class="nav-link" data-scroll-target="#activity-5-knitting"><span class="header-section-number">2.5</span> Activity 5: Knitting</a></li>
   <li><a href="#activity-6-export-a-data-object-as-a-csv" id="toc-activity-6-export-a-data-object-as-a-csv" class="nav-link" data-scroll-target="#activity-6-export-a-data-object-as-a-csv"><span class="header-section-number">2.6</span> Activity 6: Export a data object as a csv</a></li>
-  <li>
-<a href="#test-your-knowledge-and-challenge-yourself" id="toc-test-your-knowledge-and-challenge-yourself" class="nav-link" data-scroll-target="#test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></a>
+  <li><a href="#test-your-knowledge-and-challenge-yourself" id="toc-test-your-knowledge-and-challenge-yourself" class="nav-link" data-scroll-target="#test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></a>
   <ul class="collapse">
-<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check">Knowledge check</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check">Knowledge check</a></li>
   <li><a href="#error-mode" id="toc-error-mode" class="nav-link" data-scroll-target="#error-mode">Error mode</a></li>
   <li><a href="#challenge-yourself" id="toc-challenge-yourself" class="nav-link" data-scroll-target="#challenge-yourself">Challenge yourself</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./02-wrangling.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="sec-wrangling" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span></h1>
 </div>
 
@@ -427,7 +461,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="intended-learning-outcomes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+
+</header>
+
+
+<section id="intended-learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>In the next two chapters, we will build on the data wrangling skills from level 1. We will revisit all the functions you have already encountered (and might have forgotten over the summer break) and introduce 2 or 3 new functions. These two chapters will provide an opportunity to revise and apply the functions to a novel dataset.</p>
 <p>By the end of this chapter, you should be able to:</p>
 <ul>
@@ -436,24 +475,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>realise there are several ways of getting to the results</li>
 <li>export data objects as csv files</li>
 </ul>
-<p>The main purpose of this chapter and <a href="03-wrangling2.html"><span>Chapter&nbsp;3</span></a> is to wrangle your data into shape for data visualisation (<a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> and <a href="05-dataviz2.html"><span>Chapter&nbsp;5</span></a>). For the two chapters, we will:</p>
+<p>The main purpose of this chapter and <a href="03-wrangling2.html" class="quarto-xref"><span>Chapter 3</span></a> is to wrangle your data into shape for data visualisation (<a href="04-dataviz.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="05-dataviz2.html" class="quarto-xref"><span>Chapter 5</span></a>). For the two chapters, we will:</p>
 <ol type="1">
 <li>calculate demographics</li>
 <li>tidy 3 different questionnaires with varying degrees of complexity</li>
 <li>solve an error mode problem</li>
 <li>join all data objects together</li>
-</ol></section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+</ol>
+</section>
+<section id="individual-walkthrough" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
 <p>Before we start, we need to set up some things.</p>
-</section><section id="activity-1-setup" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="activity-1-setup">
-<span class="header-section-number">2.1</span> Activity 1: Setup</h2>
+</section>
+<section id="activity-1-setup" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="activity-1-setup"><span class="header-section-number">2.1</span> Activity 1: Setup</h2>
 <ul>
 <li>We will be working on the <strong>dataset by Pownall et al.&nbsp;(2023)</strong> again, which means we can still use the project we created last week. The data files will already be there, so no need to download them again.</li>
 <li>To <strong>open the project</strong> in RStudio, go to the folder in which you stored the project and the data last time, and double click on the project icon.</li>
-<li>
-<strong>Create a new <code>.Rmd</code> file</strong> for chapter 2 and save it to your project folder. Name it something meaningful (e.g., “chapter_02.Rmd”, “02_data_wrangling.Rmd”). See <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a> if you need some guidance.</li>
+<li><strong>Create a new <code>.Rmd</code> file</strong> for chapter 2 and save it to your project folder. Name it something meaningful (e.g., “chapter_02.Rmd”, “02_data_wrangling.Rmd”). See <a href="01-basics.html#sec-rmd" class="quarto-xref"><span>Section 1.3</span></a> if you need some guidance.</li>
 <li>In your newly created <code>.Rmd</code> file, delete everything below line 12 (after the set-up code chunk).</li>
-</ul></section><section id="activity-2-load-in-the-libraries-and-read-in-the-data" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="activity-2-load-in-the-libraries-and-read-in-the-data">
-<span class="header-section-number">2.2</span> Activity 2: Load in the libraries and read in the data</h2>
+</ul>
+</section>
+<section id="activity-2-load-in-the-libraries-and-read-in-the-data" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="activity-2-load-in-the-libraries-and-read-in-the-data"><span class="header-section-number">2.2</span> Activity 2: Load in the libraries and read in the data</h2>
 <p>We will use <code>tidyverse</code> today, and we want to create a data object <code>data_prp</code> that stores the data from the file <code>prp_data_reduced.csv</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -493,17 +537,17 @@ Solution
 </div>
 </div>
 </div>
-<p>If you need a quick reminder what the dataset was about, have a look at the abstract in <a href="01-basics.html#sec-download_data_ch1"><span>Section&nbsp;1.4</span></a>. We also addressed the changes we made to the dataset there.</p>
+<p>If you need a quick reminder what the dataset was about, have a look at the abstract in <a href="01-basics.html#sec-download_data_ch1" class="quarto-xref"><span>Section 1.4</span></a>. We also addressed the changes we made to the dataset there.</p>
 <p>And remember to have a quick <code>glimpse()</code> at your data.</p>
-</section><section id="activity-3-calculating-demographics" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="activity-3-calculating-demographics">
-<span class="header-section-number">2.3</span> Activity 3: Calculating demographics</h2>
+</section>
+<section id="activity-3-calculating-demographics" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="activity-3-calculating-demographics"><span class="header-section-number">2.3</span> Activity 3: Calculating demographics</h2>
 <p>Let’s start with some simple data-wrangling steps to compute demographics for our original dataset, <code>data_prp</code>. First, we want to determine how many participants took part in the study by Pownall et al.&nbsp;(2023) and compute the mean age and the standard deviation of age for the sample.</p>
-<section id="for-the-full-sample-using-summarise" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="for-the-full-sample-using-summarise">
-<span class="header-section-number">2.3.1</span> … for the full sample using <code>summarise()</code>
-</h3>
-<p>The <code>summarise()</code> function is part of the <strong>“Wickham Six”</strong> alongside <code>group_by()</code>, <code>select()</code>, <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>, <code>mutate()</code>, and <code>arrange()</code>. You used them plenty of times last year.</p>
+<section id="for-the-full-sample-using-summarise" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="for-the-full-sample-using-summarise"><span class="header-section-number">2.3.1</span> … for the full sample using <code>summarise()</code></h3>
+<p>The <code>summarise()</code> function is part of the <strong>“Wickham Six”</strong> alongside <code>group_by()</code>, <code>select()</code>, <code>filter()</code>, <code>mutate()</code>, and <code>arrange()</code>. You used them plenty of times last year.</p>
 <p>Within <code>summarise()</code>, we can use the <code>n()</code> function, which calculates the number of rows in the dataset. Since each row corresponds to a unique participant, this gives us the total number of participants.</p>
-<p>To calculate the mean age and the standard deviation of age, we need to use the functions <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> on the column <code>Age</code> respectively.</p>
+<p>To calculate the mean age and the standard deviation of age, we need to use the functions <code>mean()</code> and <code>sd()</code> on the column <code>Age</code> respectively.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>demo_total <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># participant number</span></span>
@@ -520,17 +564,21 @@ Caused by warning in `mean.default()`:
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>demo_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">89</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -552,8 +600,8 @@ Answer
 </div>
 </div>
 </div>
-<section id="fixing-age" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="fixing-age">Fixing <code>Age</code>
-</h4>
+<section id="fixing-age" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="fixing-age">Fixing <code>Age</code></h4>
 <p>Might be wise to look at the unique answers in column <code>Age</code> to determine what is wrong. We can do that with the function <code>distinct()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>age_distinct <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
@@ -576,10 +624,12 @@ Show the unique values of <code>Age</code>.
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Age</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">22</td>
@@ -632,8 +682,10 @@ Show the unique values of <code>Age</code>.
 <p>We will combine this with the <code>mutate()</code> function to create a new column called <code>Age</code> (containing those numeric values), effectively replacing the old <code>Age</code> column (which had the character values).</p>
 </div><div class="column">
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/parse_number.png" class="img-fluid figure-img" style="width:95.0%"></p>
-<figcaption class="figure-caption">parse_number() illustration by Allison Horst (see <a href="https://allisonhorst.com/r-packages-functions" target="_blank">https://allisonhorst.com/r-packages-functions</a>)</figcaption></figure>
+<figure class="figure">
+<p><a href="images/parse_number.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="parse_number() illustration by Allison Horst (see https://allisonhorst.com/r-packages-functions)"><img src="images/parse_number.png" class="img-fluid figure-img" style="width:95.0%" alt="parse_number() illustration by Allison Horst (see https://allisonhorst.com/r-packages-functions)"></a></p>
+<figcaption>parse_number() illustration by Allison Horst (see <a href="https://allisonhorst.com/r-packages-functions" target="_blank">https://allisonhorst.com/r-packages-functions</a>)</figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -646,7 +698,9 @@ Show the unique values of <code>Age</code>.
 <pre><code>[1] "double"</code></pre>
 </div>
 </div>
-</section><section id="computing-summary-stats" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="computing-summary-stats">Computing summary stats</h4>
+</section>
+<section id="computing-summary-stats" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="computing-summary-stats">Computing summary stats</h4>
 <p>Excellent. Now that the numbers are in a numeric format, let’s try calculating the demographics for the total sample again.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>demo_total <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
@@ -657,17 +711,21 @@ Show the unique values of <code>Age</code>.
 <span id="cb9-6"><a href="#cb9-6"></a>demo_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">89</td>
 <td style="text-align: right;">NA</td>
 <td style="text-align: right;">NA</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -689,8 +747,10 @@ Answer
 </div>
 </div>
 </div>
-</section><section id="computing-summary-stats---third-attempt" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="computing-summary-stats---third-attempt">Computing summary stats - third attempt</h4>
-<p>To ensure R ignores missing values during calculations, we need to add the extra argument <code>na.rm = TRUE</code> to the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> and <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> functions.</p>
+</section>
+<section id="computing-summary-stats---third-attempt" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="computing-summary-stats---third-attempt">Computing summary stats - third attempt</h4>
+<p>To ensure R ignores missing values during calculations, we need to add the extra argument <code>na.rm = TRUE</code> to the <code>mean()</code> and <code>sd()</code> functions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>demo_total <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), <span class="co"># participant number</span></span>
@@ -700,25 +760,30 @@ Answer
 <span id="cb10-6"><a href="#cb10-6"></a>demo_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">89</td>
 <td style="text-align: right;">21.88506</td>
 <td style="text-align: right;">3.485603</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
 <p>Finally, we’ve got it! 🥳 Third time’s the charm!</p>
-</section></section><section id="per-gender-using-summarise-and-group_by" class="level3" data-number="2.3.2"><h3 data-number="2.3.2" class="anchored" data-anchor-id="per-gender-using-summarise-and-group_by">
-<span class="header-section-number">2.3.2</span> … per gender using <code>summarise()</code> and <code>group_by()</code>
-</h3>
+</section>
+</section>
+<section id="per-gender-using-summarise-and-group_by" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="per-gender-using-summarise-and-group_by"><span class="header-section-number">2.3.2</span> … per gender using <code>summarise()</code> and <code>group_by()</code></h3>
 <p>Now we want to compute the summary statistics for each gender. The code inside the <code>summarise()</code> function remains unchanged; we just need to use the <code>group_by()</code> function beforehand to tell R that we want to compute the summary statistics for each group separately. It’s also a good practice to use <code>ungroup()</code> afterwards, so you are not taking groupings forward unintentionally.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>demo_by_gender <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
@@ -731,13 +796,15 @@ Answer
 <span id="cb11-8"><a href="#cb11-8"></a>demo_by_gender</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">Gender</th>
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -762,8 +829,9 @@ Answer
 </div>
 </div>
 </div>
-</section><section id="adding-percentages" class="level3" data-number="2.3.3"><h3 data-number="2.3.3" class="anchored" data-anchor-id="adding-percentages">
-<span class="header-section-number">2.3.3</span> Adding percentages</h3>
+</section>
+<section id="adding-percentages" class="level3" data-number="2.3.3">
+<h3 data-number="2.3.3" class="anchored" data-anchor-id="adding-percentages"><span class="header-section-number">2.3.3</span> Adding percentages</h3>
 <p>Sometimes, it may be useful to calculate percentages, such as for the gender split. You can do this by adding a line within the <code>summarise()</code> function to perform the calculation. All we need to do is take the number of female, male, and non-binary participants (stored in the <code>n</code> column of <code>demo_by_gender</code>), divide it by the total number of participants (stored in the <code>n</code> column of <code>demo_total</code>), and multiply by 100. Let’s add <code>percentage</code> to the <code>summarise()</code> function of <code>demo_by_gender</code>. Make sure that the code for <code>percentages</code> is placed after the value for <code>n</code> has been computed.</p>
 <p>Accessing the value of <code>n</code> for the different gender categories is straightforward because we can refer back to it directly. However, since the total number of participants is stored in a different data object, we need to use a base R function to access it – specifically the <code>$</code> operator. To do this, you simply type the name of the data object (in this case, <code>demo_total</code>), followed by the <code>$</code> symbol (with no spaces), and then the name of the column you want to retrieve (in this case, <code>n</code>). The general pattern is <code>data$column</code>.</p>
 <div class="cell">
@@ -779,14 +847,16 @@ Answer
 <span id="cb12-10"><a href="#cb12-10"></a>demo_by_gender</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">Gender</th>
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">percentage</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -820,13 +890,13 @@ Answer
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code>
+Tip for decimal places - use <code>round()</code>
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Not super important, because you could round the values by yourself when writing up your reports, but if you wanted to tidy up the decimal places in the output, you can do that using the <code><a href="https://rdrr.io/r/base/Round.html">round()</a></code> function. You would need to “wrap” it around your computations and specify how many decimal places you want to display (for example <code>mean(Age)</code> would turn into <code>round(mean(Age), 1)</code>). It may look odd for <code>percentage</code>, just make sure the number that specifies the decimal places is placed <strong>within</strong> the round function. The default value is 0 (meaning no decimal spaces).</p>
+<p>Not super important, because you could round the values by yourself when writing up your reports, but if you wanted to tidy up the decimal places in the output, you can do that using the <code>round()</code> function. You would need to “wrap” it around your computations and specify how many decimal places you want to display (for example <code>mean(Age)</code> would turn into <code>round(mean(Age), 1)</code>). It may look odd for <code>percentage</code>, just make sure the number that specifies the decimal places is placed <strong>within</strong> the round function. The default value is 0 (meaning no decimal spaces).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>demo_by_gender <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb13-2"><a href="#cb13-2"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> </span>
@@ -839,14 +909,16 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 <span id="cb13-9"><a href="#cb13-9"></a>demo_by_gender</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">Gender</th>
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">percentage</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -877,9 +949,10 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 </div>
 </div>
 </div>
-</section><section id="filter-gender" class="level3" data-number="2.3.4"><h3 data-number="2.3.4" class="anchored" data-anchor-id="filter-gender">
-<span class="header-section-number">2.3.4</span> <code>filter()</code> gender</h3>
-<p>I know you used <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> plenty of times last year, so let’s just do a quick recap. Imagine we want to calculate summary statistics only for gender category 3. In this case, we need the Boolean expression <code>==</code>.</p>
+</section>
+<section id="filter-gender" class="level3" data-number="2.3.4">
+<h3 data-number="2.3.4" class="anchored" data-anchor-id="filter-gender"><span class="header-section-number">2.3.4</span> <code>filter()</code> gender</h3>
+<p>I know you used <code>filter()</code> plenty of times last year, so let’s just do a quick recap. Imagine we want to calculate summary statistics only for gender category 3. In this case, we need the Boolean expression <code>==</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>demo_gender3 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">==</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span> </span>
@@ -891,22 +964,26 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 <span id="cb14-8"><a href="#cb14-8"></a>demo_gender3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">3</td>
 <td style="text-align: right;">21.33333</td>
 <td style="text-align: right;">1.1547</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
-<p>If we want to focus on more than one gender category, we use the Boolean operator <code>%in%</code> along with the <code><a href="https://rdrr.io/r/base/c.html">c()</a></code> function (which combines values into a vector).</p>
+<p>If we want to focus on more than one gender category, we use the Boolean operator <code>%in%</code> along with the <code>c()</code> function (which combines values into a vector).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>demo_gender12 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(Gender <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
@@ -919,13 +996,15 @@ Tip for decimal places - use <code><a href="https://rdrr.io/r/base/Round.html">r
 <span id="cb15-9"><a href="#cb15-9"></a>demo_gender12</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">Gender</th>
 <th style="text-align: right;">n</th>
 <th style="text-align: right;">mean_age</th>
 <th style="text-align: right;">sd_age</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -964,15 +1043,18 @@ Character values instead of numbers?
 </div>
 </div>
 </div>
-</section></section><section id="sec-ch2_act4" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="sec-ch2_act4">
-<span class="header-section-number">2.4</span> Activity 4: Questionable Research Practices (QRPs)</h2>
-<section id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1." class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1.">The main goal is to compute the mean QRP score per participant for time point 1.</h4>
+</section>
+</section>
+<section id="sec-ch2_act4" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="sec-ch2_act4"><span class="header-section-number">2.4</span> Activity 4: Questionable Research Practices (QRPs)</h2>
+<section id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1." class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-qrp-score-per-participant-for-time-point-1.">The main goal is to compute the mean QRP score per participant for time point 1.</h4>
 <p>At the moment, the data is in wide format. The table below shows data from the first 3 participants:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">head</span>(data_prp, <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 0%">
 <col style="width: 0%">
@@ -1066,7 +1148,8 @@ Character values instead of numbers?
 <col style="width: 0%">
 <col style="width: 0%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Code</th>
 <th style="text-align: right;">Gender</th>
 <th style="text-align: right;">Age</th>
@@ -1158,7 +1241,8 @@ Character values instead of numbers?
 <th style="text-align: right;">Supervisor_13</th>
 <th style="text-align: right;">Supervisor_14</th>
 <th style="text-align: right;">Supervisor_15_R</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Tr10</td>
@@ -1448,25 +1532,16 @@ Character values instead of numbers?
 </p>
 <p>Looking at the QRP data at time point 1, you determine that</p>
 <ul>
-<li>individual item columns are <select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option></select>, and</li>
-<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option>
-<option value="answer">no</option>
-<option value="x">some</option></select> reverse-coded items in this questionnaire.</li>
+<li>individual item columns are <select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option></select>, and</li>
+<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option><option value="answer">no</option><option value="x">some</option></select> reverse-coded items in this questionnaire.</li>
 </ul>
 <p>According to the codebook and the data table above, we just have to <strong>compute the average score for QRP items <input class="webex-solveme nospaces" size="1" data-answer="[&quot;1&quot;]"> to <input class="webex-solveme nospaces" size="2" data-answer="[&quot;11&quot;]"></strong>, since items <input class="webex-solveme nospaces" size="2" data-answer="[&quot;12&quot;]"> to <input class="webex-solveme nospaces" size="2" data-answer="[&quot;15&quot;]"> are distractor items. Seems quite straightforward.</p>
 <p>However, as you can see in the table above, each item is in a separate column, meaning the data is in <strong>wide format</strong>. It would be much easier to calculate the mean scores if the items were arranged in <strong>long format</strong>.</p>
 <p>Let’s tackle this problem step by step. It’s best to create a separate data object for this. If we tried to compute it within <code>data_prp</code>, it could quickly become messy.</p>
 <ul>
-<li>
-<strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and <code>QRPs_1_Time1</code> to <code>QRPs_11_Time1</code> and store them in an object called <code>qrp_t1</code>
-</li>
-<li>
-<strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can calculate the average score more easily (in step 3)</li>
-<li>
-<strong>Step 3</strong>: Calculate the average QRP score (<code>QRPs_Acceptance_Time1_mean</code>) per participant using <code>group_by()</code> and <code>summarise()</code>
-</li>
+<li><strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and <code>QRPs_1_Time1</code> to <code>QRPs_11_Time1</code> and store them in an object called <code>qrp_t1</code></li>
+<li><strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can calculate the average score more easily (in step 3)</li>
+<li><strong>Step 3</strong>: Calculate the average QRP score (<code>QRPs_Acceptance_Time1_mean</code>) per participant using <code>group_by()</code> and <code>summarise()</code></li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>qrp_t1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
@@ -1492,11 +1567,7 @@ Explain the individual functions
 <div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page"><code>select ()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><code>pivot_longer()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false"><code>group_by()</code> and <code>summarise()</code></a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page"><code>select ()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false"><code>pivot_longer()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false"><code>group_by()</code> and <code>summarise()</code></a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>The select function allows to include or exclude certain variables (columns). Here we want to focus on the participant ID column (i.e., <code>Code</code>) and the QRP items at time point 1. We can either list them all individually, i.e., Code, QRPs_1_Time1, QRPs_2_Time1, QRPs_3_Time1, and so forth (you get the gist), but that would take forever to type.</p>
@@ -1509,7 +1580,7 @@ Explain the individual functions
 <span id="cb20-5"><a href="#cb20-5"></a><span class="fu">head</span>(qrp_step1, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 3%">
 <col style="width: 8%">
@@ -1524,7 +1595,8 @@ Explain the individual functions
 <col style="width: 9%">
 <col style="width: 9%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Code</th>
 <th style="text-align: right;">QRPs_1_Time1</th>
 <th style="text-align: right;">QRPs_2_Time1</th>
@@ -1537,7 +1609,8 @@ Explain the individual functions
 <th style="text-align: right;">QRPs_9_Time1</th>
 <th style="text-align: right;">QRPs_10_Time1</th>
 <th style="text-align: right;">QRPs_11_Time1</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Tr10</td>
@@ -1616,10 +1689,8 @@ Explain the individual functions
 </div>
 <p>How many rows/observations and columns/variables do we have in <code>qrp_step1</code>?</p>
 <ul>
-<li>rows/observations: <input class="webex-solveme nospaces" size="2" data-answer="[&quot;89&quot;]">
-</li>
-<li>columns/variables: <input class="webex-solveme nospaces" size="2" data-answer="[&quot;12&quot;]">
-</li>
+<li>rows/observations: <input class="webex-solveme nospaces" size="2" data-answer="[&quot;89&quot;]"></li>
+<li>columns/variables: <input class="webex-solveme nospaces" size="2" data-answer="[&quot;12&quot;]"></li>
 </ul>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
@@ -1637,12 +1708,14 @@ Explain the individual functions
 <span id="cb21-5"><a href="#cb21-5"></a><span class="fu">head</span>(qrp_step2, <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Code</th>
 <th style="text-align: left;">Items</th>
 <th style="text-align: right;">Scores</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Tr10</td>
@@ -1729,7 +1802,7 @@ Explain the individual functions
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>This follows exactly the same sequence we used when calculating descriptive statistics by gender. The only difference is that we are now grouping the data by the participant’s <code>Code</code> instead of <code>Gender</code>.</p>
 <p><code>summarise()</code> works exactly the same way: <code>summarise(new_column_name = function_to_calculate_something(column_name_of_numeric_values))</code></p>
-<p>The <code>function_to_calculate_something</code> can be <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code>, <code><a href="https://rdrr.io/r/stats/sd.html">sd()</a></code> or <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> for mean scores, standard deviations, or summed-up scores respectively. You could also use <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> or <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> if you wanted to determine the lowest or the highest score for each participant.</p>
+<p>The <code>function_to_calculate_something</code> can be <code>mean()</code>, <code>sd()</code> or <code>sum()</code> for mean scores, standard deviations, or summed-up scores respectively. You could also use <code>min()</code> or <code>max()</code> if you wanted to determine the lowest or the highest score for each participant.</p>
 </div>
 </div>
 </div>
@@ -1754,10 +1827,12 @@ Tip
 <span id="cb22-4"><a href="#cb22-4"></a><span class="fu">head</span>(renaming_col, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Participant_ID</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Tr10</td>
@@ -1781,14 +1856,17 @@ Tip
 </div>
 </div>
 </div>
-</section></section><section id="activity-5-knitting" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="activity-5-knitting">
-<span class="header-section-number">2.5</span> Activity 5: Knitting</h2>
+</section>
+</section>
+<section id="activity-5-knitting" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="activity-5-knitting"><span class="header-section-number">2.5</span> Activity 5: Knitting</h2>
 <p>Once you’ve completed your R Markdown file, the final step is to “knit” it, which converts the <code>.Rmd</code> file into a HTML file. Knitting combines your code, text, and output (like tables and plots) into a single cohesive document. This is a really good way to check your code is working.</p>
 <p>To knit the file, <strong>click the Knit button</strong> at the top of your RStudio window. The document will be generated and, depending on your setting, automatically opened in the viewer in the <code>Output pane</code> or an external browser window.</p>
 <p>If any errors occur during knitting, RStudio will show you an error message with details to help you troubleshoot.</p>
 <p>If you want to <strong>intentionally keep any errors</strong> we tackled today to keep a reference on how you solved them, you could add <code>error=TRUE</code> or <code>eval=FALSE</code> to the code chunk that isn’t running.</p>
-</section><section id="activity-6-export-a-data-object-as-a-csv" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="activity-6-export-a-data-object-as-a-csv">
-<span class="header-section-number">2.6</span> Activity 6: Export a data object as a csv</h2>
+</section>
+<section id="activity-6-export-a-data-object-as-a-csv" class="level2" data-number="2.6">
+<h2 data-number="2.6" class="anchored" data-anchor-id="activity-6-export-a-data-object-as-a-csv"><span class="header-section-number">2.6</span> Activity 6: Export a data object as a csv</h2>
 <p>To avoid having to repeat the same steps in the next chapter, it’s a good idea to save the data objects you’ve created today as csv files. You can do this by using the <code>write_csv()</code> function from the <code>readr</code> package. The csv files will appear in your project folder.</p>
 <p>The basic syntax is:</p>
 <div class="cell">
@@ -1832,48 +1910,30 @@ Solution
 </div>
 <p>Check that your csv files have appeared in your project folder, and you’re all set!</p>
 <p><strong>That’s it for Chapter 2: Individual Walkthrough.</strong></p>
-</section><section id="test-your-knowledge-and-challenge-yourself" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></h2>
-<section id="knowledge-check" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="knowledge-check">Knowledge check</h3>
-<section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
-<p>Which function of the Wickham Six would you use to include or exclude certain variables (columns)? <select class="webex-select"><option value="blank"></option>
-<option value="answer">select()</option>
-<option value="x">filter()</option>
-<option value="x">mutate()</option>
-<option value="x">arrange()</option>
-<option value="x">group_by()</option>
-<option value="x">summarise()</option></select></p>
-</section><section id="question-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
-<p>Which function of the Wickham Six would you use to create new columns or modify existing columns in a dataframe? <select class="webex-select"><option value="blank"></option>
-<option value="x">select()</option>
-<option value="x">filter()</option>
-<option value="answer">mutate()</option>
-<option value="x">arrange()</option>
-<option value="x">group_by()</option>
-<option value="x">summarise()</option></select></p>
-</section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
-<p>Which function of the Wickham Six would you use to organise data into groups based on one or more columns? <select class="webex-select"><option value="blank"></option>
-<option value="x">select()</option>
-<option value="x">filter()</option>
-<option value="x">mutate()</option>
-<option value="x">arrange()</option>
-<option value="answer">group_by()</option>
-<option value="x">summarise()</option></select></p>
-</section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
-<p>Which function of the Wickham Six would you use to sort the rows of a dataframe based on the values in one or more columns? <select class="webex-select"><option value="blank"></option>
-<option value="x">select()</option>
-<option value="x">filter()</option>
-<option value="x">mutate()</option>
-<option value="answer">arrange()</option>
-<option value="x">group_by()</option>
-<option value="x">summarise()</option></select></p>
-</section><section id="question-5" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-5">Question 5</h4>
-<p>Which function of the Wickham Six would NOT modify the original dataframe? <select class="webex-select"><option value="blank"></option>
-<option value="x">select()</option>
-<option value="x">filter()</option>
-<option value="x">mutate()</option>
-<option value="x">arrange()</option>
-<option value="x">group_by()</option>
-<option value="answer">summarise()</option></select></p>
+</section>
+<section id="test-your-knowledge-and-challenge-yourself" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></h2>
+<section id="knowledge-check" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="knowledge-check">Knowledge check</h3>
+<section id="question-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+<p>Which function of the Wickham Six would you use to include or exclude certain variables (columns)? <select class="webex-select"><option value="blank"></option><option value="answer">select()</option><option value="x">filter()</option><option value="x">mutate()</option><option value="x">arrange()</option><option value="x">group_by()</option><option value="x">summarise()</option></select></p>
+</section>
+<section id="question-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+<p>Which function of the Wickham Six would you use to create new columns or modify existing columns in a dataframe? <select class="webex-select"><option value="blank"></option><option value="x">select()</option><option value="x">filter()</option><option value="answer">mutate()</option><option value="x">arrange()</option><option value="x">group_by()</option><option value="x">summarise()</option></select></p>
+</section>
+<section id="question-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+<p>Which function of the Wickham Six would you use to organise data into groups based on one or more columns? <select class="webex-select"><option value="blank"></option><option value="x">select()</option><option value="x">filter()</option><option value="x">mutate()</option><option value="x">arrange()</option><option value="answer">group_by()</option><option value="x">summarise()</option></select></p>
+</section>
+<section id="question-4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+<p>Which function of the Wickham Six would you use to sort the rows of a dataframe based on the values in one or more columns? <select class="webex-select"><option value="blank"></option><option value="x">select()</option><option value="x">filter()</option><option value="x">mutate()</option><option value="answer">arrange()</option><option value="x">group_by()</option><option value="x">summarise()</option></select></p>
+</section>
+<section id="question-5" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-5">Question 5</h4>
+<p>Which function of the Wickham Six would NOT modify the original dataframe? <select class="webex-select"><option value="blank"></option><option value="x">select()</option><option value="x">filter()</option><option value="x">mutate()</option><option value="x">arrange()</option><option value="x">group_by()</option><option value="answer">summarise()</option></select></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1886,22 +1946,24 @@ Explain these answers
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
 <col style="width: 79%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Function</th>
 <th style="text-align: left;">Description</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>select()</code></td>
 <td style="text-align: left;">Include or exclude certain variables/columns</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code></td>
+<td style="text-align: left;"><code>filter()</code></td>
 <td style="text-align: left;">Include or exclude certain observations/rows</td>
 </tr>
 <tr class="odd">
@@ -1922,11 +1984,14 @@ Explain these answers
 </tr>
 </tbody>
 </table>
-<p>Technically, the first five functions operate on the existing data object, making adjustments like sorting the data (e.g., with <code>arrange()</code>), reducing the number of rows (e.g., with <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code>), reducing the number of columns (e.g., with <code>select()</code>), or adding new columns (e.g., with <code>mutate()</code>). In contrast, <code>summarise()</code> fundamentally alters the structure of the original dataframe by generating a completely new dataframe that contains only summary statistics, rather than retaining the original rows and columns.</p>
+<p>Technically, the first five functions operate on the existing data object, making adjustments like sorting the data (e.g., with <code>arrange()</code>), reducing the number of rows (e.g., with <code>filter()</code>), reducing the number of columns (e.g., with <code>select()</code>), or adding new columns (e.g., with <code>mutate()</code>). In contrast, <code>summarise()</code> fundamentally alters the structure of the original dataframe by generating a completely new dataframe that contains only summary statistics, rather than retaining the original rows and columns.</p>
 </div>
 </div>
 </div>
-</section></section><section id="error-mode" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="error-mode">Error mode</h3>
+</section>
+</section>
+<section id="error-mode" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="error-mode">Error mode</h3>
 <p>Some of the code chunks contain mistakes and result in errors, while others do not produce the expected results. Your task is to identify any issues, explain why they occurred, and, if possible, fix them.</p>
 <p>We will use a few built-in datasets, such as <code>billboard</code> and <code>starwars</code>, to help you replicate the errors in your own R environment. You can view the data either by typing the dataset name directly into your console or by storing the data as a separate object in your <code>Global Environment</code>.</p>
 <div class="cell">
@@ -1934,7 +1999,8 @@ Explain these answers
 <span id="cb26-2"><a href="#cb26-2"></a></span>
 <span id="cb26-3"><a href="#cb26-3"></a>starwars_data <span class="ot">=</span> starwars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="question-6" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-6">Question 6</h4>
+<section id="question-6" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-6">Question 6</h4>
 <p>Currently, the weekly song rankings for Billboard Top 100 in 2000 are in wide format, with each week in a separate column. The following code is supposed to transpose the wide-format <code>billboard</code> data into long format:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>long_data <span class="ot">&lt;-</span> billboard <span class="sc">%&gt;%</span> </span>
@@ -1969,7 +2035,9 @@ Explain the solution
 </div>
 </div>
 </div>
-</section><section id="question-7" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-7">Question 7</h4>
+</section>
+<section id="question-7" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-7">Question 7</h4>
 <p>The following code is intended to calculate the mean height of all the characters in the built-in <code>starwars</code> dataset, grouped by their gender.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
@@ -1996,8 +2064,8 @@ Explain the solution
 </div>
 <div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The aggregation function <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> is missing from within <code>summarise()</code>. Without it, the function does not perform any aggregation and returns <em>all</em> rows with only the columns for gender and height.</p>
-<p>FIX: Wrap the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function around the variable you want to aggregate, here <code>height</code>.</p>
+<p>The aggregation function <code>mean()</code> is missing from within <code>summarise()</code>. Without it, the function does not perform any aggregation and returns <em>all</em> rows with only the columns for gender and height.</p>
+<p>FIX: Wrap the <code>mean()</code> function around the variable you want to aggregate, here <code>height</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
@@ -2006,17 +2074,21 @@ Explain the solution
 </div>
 </div>
 </div>
-</section><section id="question-8" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-8">Question 8</h4>
+</section>
+<section id="question-8" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-8">Question 8</h4>
 <p>Following up on Question 7, we now have <code>summary_data</code> that looks approximately correct - it has the expected rows and column numbers, however, the cell values are “weird”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">gender</th>
 <th style="text-align: right;">mean_height</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">feminine</td>
@@ -2049,7 +2121,7 @@ Explain the solution
 <div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Look at the original <code>starwars</code> data. You will notice that some of the characters with feminine and masculine gender entries have missing height values. However, all four characters without a specified gender have provided their height.</p>
-<p>FIX: We need to add <code>na.rm = TRUE</code> to the <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> function to ensure that R ignores missing values before aggregating the data.</p>
+<p>FIX: We need to add <code>na.rm = TRUE</code> to the <code>mean()</code> function to ensure that R ignores missing values before aggregating the data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>summary_data <span class="ot">&lt;-</span> starwars <span class="sc">%&gt;%</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a>  <span class="fu">group_by</span>(gender) <span class="sc">%&gt;%</span></span>
@@ -2058,11 +2130,13 @@ Explain the solution
 <span id="cb34-5"><a href="#cb34-5"></a>summary_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">gender</th>
 <th style="text-align: right;">mean_height</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">feminine</td>
@@ -2084,7 +2158,10 @@ Explain the solution
 </div>
 </div>
 </div>
-</section></section><section id="challenge-yourself" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="challenge-yourself">Challenge yourself</h3>
+</section>
+</section>
+<section id="challenge-yourself" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="challenge-yourself">Challenge yourself</h3>
 <p>If you want to <strong>challenge yourself</strong> and further apply the skills from Chapter 2, you can wrangle the data from <code>dog_data_raw</code> for additional questionnaires from either the pre- and/or post-intervention stages:</p>
 <ul>
 <li>Calculate the mean score for <code>flourishing_post</code> for each participant.</li>
@@ -2117,7 +2194,7 @@ Solution for <strong>Challenge yourself</strong>
 <span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">summarise</span>(<span class="at">Flourishing_post =</span> <span class="fu">mean</span>(Response)) <span class="sc">%&gt;%</span> </span>
 <span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">ungroup</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The PANAS could be solved more concisely with the skills we learn in <a href="03-wrangling2.html"><span>Chapter&nbsp;3</span></a>, but for now, you would have solved it this way:</p>
+<p>The PANAS could be solved more concisely with the skills we learn in <a href="03-wrangling2.html" class="quarto-xref"><span>Chapter 3</span></a>, but for now, you would have solved it this way:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># PANAS - positive affect pre</span></span>
 <span id="cb36-2"><a href="#cb36-2"></a>PANAS_PA_pre <span class="ot">&lt;-</span> dog_data_raw <span class="sc">%&gt;%</span> </span>
@@ -2192,239 +2269,478 @@ Solution for <strong>Challenge yourself</strong>
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2465,6 +2781,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2533,13 +2876,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2574,18 +2919,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2617,11 +2951,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2631,8 +3004,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2644,7 +3026,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2688,6 +3193,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2713,6 +3219,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2771,28 +3303,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./01-basics.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./01-basics.html" class="pagination-link" aria-label="Projects and R Markdown">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./03-wrangling2.html" class="pagination-link">
+      <a href="./03-wrangling2.html" class="pagination-link" aria-label="Data wrangling II">
         <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":false,"descPosition":"bottom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

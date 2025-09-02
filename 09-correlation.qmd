@@ -540,7 +540,7 @@ ggplot(lopez_control_no_na, aes(x = CalEstimate, y = M_postsoup)) +
 
 :::
 
-**Verdict:** This is another assumption that feels borderline to me. There appears to be slight heteroscedasticity. In the Scale-Location plot, the red line should ideally be flat and horizontal, but ours has a slight slope and could be flatter. If you prefer looking at the scatterplot, you can observe the data points moving slightly further away from the line of best fit as the x and y values increase. this is kinda forming a slight funnel shape rather than the roughly random spread of data points shown in last week’s lecture slides. Nevertheless, the authors took a more lenient approach and considered the assumption to be met.
+**Verdict:** This is another assumption that feels borderline to me. There appears to be slight heteroscedasticity. In the Scale-Location plot, the red line should ideally be flat and horizontal, but ours has a slight slope and could be flatter. If you prefer looking at the scatterplot, you can observe the data points moving slightly further away from the line of best fit as the x and y values increase. This is kinda forming a slight funnel shape rather than the roughly random spread of data points shown in last week’s lecture slides. Nevertheless, the authors took a more lenient approach and considered the assumption to be met.
 
 
 #### Assumption 7: Absence of outliers {.unnumbered}

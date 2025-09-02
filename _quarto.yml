@@ -45,8 +45,8 @@ book:
     pinned: true
     header: ''
     footer: ''
-  margin-header: ''
-  page-footer: CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel
+  margin-header: margin-header.html
+  page-footer: CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel
   chapters:
   - index.qmd
   - part: "INDIVIDUAL WALKTHROUGH CHAPTERS"
@@ -89,6 +89,7 @@ bibliography: include/references.bib
 csl: include/apa.csl
 format:
   html:
+    link-external-icon: false
     theme:
       light:
       - flatly
@@ -103,6 +104,7 @@ format:
     - include/glossary.css
     - include/style.css
     - include/custom.scss
+    - include/styles.css
     df-print: kable
     code-link: true
     code-fold: false

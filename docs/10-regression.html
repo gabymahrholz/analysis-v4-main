@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 10&nbsp; Simple regression</title>
+
+<title>10&nbsp; Simple regression – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./10-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./10-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +216,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +302,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +391,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,16 +432,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
   <li><a href="#activity-1-setup-download-the-data" id="toc-activity-1-setup-download-the-data" class="nav-link" data-scroll-target="#activity-1-setup-download-the-data"><span class="header-section-number">10.1</span> Activity 1: Setup &amp; download the data</a></li>
   <li><a href="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" id="toc-activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">10.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</a></li>
@@ -398,10 +461,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#activity-8-sensitivity-power-analysis" id="toc-activity-8-sensitivity-power-analysis" class="nav-link" data-scroll-target="#activity-8-sensitivity-power-analysis"><span class="header-section-number">10.8</span> Activity 8: Sensitivity power analysis</a></li>
   <li><a href="#activity-9-the-write-up" id="toc-activity-9-the-write-up" class="nav-link" data-scroll-target="#activity-9-the-write-up"><span class="header-section-number">10.9</span> Activity 9: The write-up</a></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./10-regression.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="sec-reg" class="quarto-section-identifier"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span></h1>
 </div>
 
@@ -415,25 +482,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="intended-learning-outcomes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+
+</header>
+
+
+<section id="intended-learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter you should be able to:</p>
 <ul>
 <li>Compute a Simple linear regression.</li>
 <li>Read and interpret the output.</li>
 <li>Report the results.</li>
-</ul></section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
-</section><section id="activity-1-setup-download-the-data" class="level2" data-number="10.1"><h2 data-number="10.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data">
-<span class="header-section-number">10.1</span> Activity 1: Setup &amp; download the data</h2>
+</ul>
+</section>
+<section id="individual-walkthrough" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+</section>
+<section id="activity-1-setup-download-the-data" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data"><span class="header-section-number">10.1</span> Activity 1: Setup &amp; download the data</h2>
 <p>This week, we will be working with a new dataset. Follow the steps below to set up your project:</p>
 <ul>
-<li>
-<strong>Create a new project</strong> and name it something meaningful (e.g., “2B_chapter10”, or “10_regression”). See <a href="01-basics.html#sec-project"><span>Section&nbsp;1.2</span></a> if you need some guidance.</li>
-<li>
-<strong>Create a new <code>.Rmd</code> file</strong> and save it to your project folder. See <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a> if you need help.</li>
+<li><strong>Create a new project</strong> and name it something meaningful (e.g., “2B_chapter10”, or “10_regression”). See <a href="01-basics.html#sec-project" class="quarto-xref"><span>Section 1.2</span></a> if you need some guidance.</li>
+<li><strong>Create a new <code>.Rmd</code> file</strong> and save it to your project folder. See <a href="01-basics.html#sec-rmd" class="quarto-xref"><span>Section 1.3</span></a> if you need help.</li>
 <li>Delete everything after the setup code chunk (e.g., line 12 and below)</li>
-<li>
-<strong>Download the new dataset</strong> here: <a href="data/data_ch10.zip" title="download">data_ch10.zip</a>. The zip folder includes the data file and the codebook.</li>
-<li>Extract the data file from the zip folder and place it in your project folder. If you need help, see <a href="01-basics.html#sec-download_data_ch1"><span>Section&nbsp;1.4</span></a>.</li>
+<li><strong>Download the new dataset</strong> here: <a href="data/data_ch10.zip" title="download">data_ch10.zip</a>. The zip folder includes the data file and the codebook.</li>
+<li>Extract the data file from the zip folder and place it in your project folder. If you need help, see <a href="01-basics.html#sec-download_data_ch1" class="quarto-xref"><span>Section 1.4</span></a>.</li>
 </ul>
 <p><strong>Citation</strong></p>
 <blockquote class="blockquote">
@@ -450,8 +523,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>We aggregated the main scales (columns 50-57) by reverse-scoring all reverse-coded items (as specified in the codebook), and then computed an average score for each scale.</li>
 <li>However, responses to the individual questionnaire items (columns 1-49) remain as raw data and have not been reverse-coded. If you’d like to practice your data-wrangling skills, feel free to do so!</li>
 <li>We tidied the columns <code>RaceEthE</code>, <code>GradesE</code>, and <code>MajorE</code>, but we’ve left Gender and Student Status for you to clean.</li>
-</ul></section><section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="10.2"><h2 data-number="10.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data">
-<span class="header-section-number">10.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
+</ul>
+</section>
+<section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">10.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
 <p>Today, we will be using the packages <code>tidyverse</code>, <code>performance</code>, and <code>pwr</code>, along with the dataset <code>Alter_2024_data.csv</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>???</span>
@@ -498,110 +573,71 @@ Your Turn
 <li><p>How many columns are <code>col_double</code> or <code>dbl</code> data type? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;60&quot;]"></p></li>
 <li><p>From the dropdown menu, select the variable type and the data type for each of the following variables.</p></li>
 </ul>
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 42%">
 <col style="width: 28%">
 <col style="width: 28%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Column</th>
 <th style="text-align: left;">Variable type</th>
 <th style="text-align: left;">Data type</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;"><code>AgeE</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>GenderE</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="answer">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="answer">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>GPAE</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>StuStaE</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;"><code>MA1E</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="x">continuous</option>
-<option value="x">nominal</option>
-<option value="answer">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="x">continuous</option><option value="x">nominal</option><option value="answer">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 <tr class="even">
 <td style="text-align: left;"><code>Mean_MA</code></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">continuous</option>
-<option value="x">nominal</option>
-<option value="x">ordinal</option></select></td>
-<td style="text-align: left;"><select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option>
-<option value="x">logical</option>
-<option value="x">factor</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">continuous</option><option value="x">nominal</option><option value="x">ordinal</option></select></td>
+<td style="text-align: left;"><select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option><option value="x">logical</option><option value="x">factor</option></select></td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<section id="potential-research-question-hypthesis" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="potential-research-question-hypthesis">Potential Research Question &amp; Hypthesis</h4>
+<section id="potential-research-question-hypthesis" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="potential-research-question-hypthesis">Potential Research Question &amp; Hypthesis</h4>
 <p>Let’s assume that individuals who are confident in quantitative reasoning are more likely to feel comfortable using statistical software.</p>
 <ul>
-<li>
-<strong>Potential research question</strong>: “Does quantitative self-efficacy predict attitudes toward SPSS, as measured by the VSSL Scale?”</li>
-<li>
-<strong>Null Hypothesis (H<sub>0</sub>)</strong>: “Quantitative self-efficacy does not significantly predict attitudes toward SPSS (VSSL scores).”</li>
-<li>
-<strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Quantitative self-efficacy significantly predicts attitudes toward SPSS (VSSL scores), such that higher quantitative self-efficacy is associated with more positive attitudes toward SPSS.”</li>
+<li><strong>Potential research question</strong>: “Does quantitative self-efficacy predict attitudes toward SPSS, as measured by the VSSL Scale?”</li>
+<li><strong>Null Hypothesis (H<sub>0</sub>)</strong>: “Quantitative self-efficacy does not significantly predict attitudes toward SPSS (VSSL scores).”</li>
+<li><strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Quantitative self-efficacy significantly predicts attitudes toward SPSS (VSSL scores), such that higher quantitative self-efficacy is associated with more positive attitudes toward SPSS.”</li>
 </ul>
 <p>Thus, in this hypothetical scenario, the regression model would be:</p>
 <ul>
 <li>Independent Variable (IV)/ Predictor: Quantitative self-efficacy</li>
 <li>Dependent Variable (DV)/ Outcome: Attitudes toward SPSS (measured by the VSSL Scale)</li>
-</ul></section></section><section id="activity-3-preparing-the-dataframe" class="level2" data-number="10.3"><h2 data-number="10.3" class="anchored" data-anchor-id="activity-3-preparing-the-dataframe">
-<span class="header-section-number">10.3</span> Activity 3: Preparing the dataframe</h2>
+</ul>
+</section>
+</section>
+<section id="activity-3-preparing-the-dataframe" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="activity-3-preparing-the-dataframe"><span class="header-section-number">10.3</span> Activity 3: Preparing the dataframe</h2>
 <p>The dataframe is already tidy for most variables, except for Gender and Student Status. This means we’re all set for this week.</p>
 <p>However, working with a smaller subset of the data will be beneficial. Select the relevant variables of interest and store the results in a new data object called <code>data_alter_reduced</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -664,7 +700,7 @@ Challenge yourself: Easy (recoding Gender)
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Recode column <code>GenderE</code> so the values read “Female”, “Male”, and “Non-Binary” instead of 1, 2, and 3. Use the codebook to guide you. We have done this quite a few times now, but if you need a hint, recoding values was covered in <a href="03-wrangling2.html#sec-wrangling2_act3"><span>Section&nbsp;3.3</span></a>.</p>
+<p>Recode column <code>GenderE</code> so the values read “Female”, “Male”, and “Non-Binary” instead of 1, 2, and 3. Use the codebook to guide you. We have done this quite a few times now, but if you need a hint, recoding values was covered in <a href="03-wrangling2.html#sec-wrangling2_act3" class="quarto-xref"><span>Section 3.3</span></a>.</p>
 <p>Might as well turn <code>Gender</code> into a factor while we are at it.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -723,10 +759,12 @@ Solution to identify distinct categories
 <span id="cb5-2"><a href="#cb5-2"></a>  <span class="fu">distinct</span>(StuStaE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">StuStaE</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">4</td>
@@ -767,7 +805,7 @@ Solution to identify distinct categories
 </div>
 </div>
 <p>Now that we have identified the distinct values of column <code>StuStaE</code>, we can use a conditional statement to recode those distinct categories to obtain the categorical labels in the codebook.</p>
-<p>Do you remember how conditional recoding is done? If not, get some inspiration from <a href="03-wrangling2.html#sec-wrangling2_act4"><span>Section&nbsp;3.4</span></a>.</p>
+<p>Do you remember how conditional recoding is done? If not, get some inspiration from <a href="03-wrangling2.html#sec-wrangling2_act4" class="quarto-xref"><span>Section 3.4</span></a>.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -829,8 +867,9 @@ Solution for Student Status: Option 2
 </div>
 </div>
 </div>
-</section><section id="activity-4-compute-descriptives" class="level2" data-number="10.4"><h2 data-number="10.4" class="anchored" data-anchor-id="activity-4-compute-descriptives">
-<span class="header-section-number">10.4</span> Activity 4: Compute descriptives</h2>
+</section>
+<section id="activity-4-compute-descriptives" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="activity-4-compute-descriptives"><span class="header-section-number">10.4</span> Activity 4: Compute descriptives</h2>
 <p>Now, we can calculate the <strong>means</strong> and <strong>standard deviations</strong> for our predictor and outcome variables.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -854,15 +893,20 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="activity-5-create-an-appropriate-plot" class="level2" data-number="10.5"><h2 data-number="10.5" class="anchored" data-anchor-id="activity-5-create-an-appropriate-plot">
-<span class="header-section-number">10.5</span> Activity 5: Create an appropriate plot</h2>
+</section>
+<section id="activity-5-create-an-appropriate-plot" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="activity-5-create-an-appropriate-plot"><span class="header-section-number">10.5</span> Activity 5: Create an appropriate plot</h2>
 <p>Now, let’s <strong><em>re</em></strong>create the following appropriate plot using <code>data_alter_reduced</code>:</p>
 <div class="cell">
 <div class="cell-output cell-output-stderr">
 <pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
 <div class="cell-output-display">
-<p><img src="10-regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="10-regression_files/figure-html/unnamed-chunk-12-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="10-regression_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
@@ -885,22 +929,30 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="activity-6-check-assumptions" class="level2" data-number="10.6"><h2 data-number="10.6" class="anchored" data-anchor-id="activity-6-check-assumptions">
-<span class="header-section-number">10.6</span> Activity 6: Check assumptions</h2>
-<section id="assumption-1-levels-of-measurement" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-1-levels-of-measurement">Assumption 1: Levels of measurement</h4>
+</section>
+<section id="activity-6-check-assumptions" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="activity-6-check-assumptions"><span class="header-section-number">10.6</span> Activity 6: Check assumptions</h2>
+<section id="assumption-1-levels-of-measurement" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-1-levels-of-measurement">Assumption 1: Levels of measurement</h4>
 <ul>
 <li>The <strong>outcome variable</strong> must be interval/ratio (continuous)</li>
 <li>The <strong>predictor variable</strong> must be either interval/ratio (continuous) or categorical (with two levels)</li>
 </ul>
 <p>In our case, both the predictor variable (Quantitative self-efficacy) and the outcome variable (Attitudes toward SPSS as measured by the VSSL Scale) are continuous. The assumption holds.</p>
-</section><section id="assumption-2-independence-of-casesobservations" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-2-independence-of-casesobservations">Assumption 2: Independence of cases/observations</h4>
+</section>
+<section id="assumption-2-independence-of-casesobservations" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-2-independence-of-casesobservations">Assumption 2: Independence of cases/observations</h4>
 <p>We must assume that each <strong>observation is independent of the others</strong>, meaning that each score comes from a different participant. Like assumption 1, this assumption is determined by the study design and it holds.</p>
-</section><section id="assumption-3-non-zero-variance" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-3-non-zero-variance">Assumption 3: Non-zero variance</h4>
+</section>
+<section id="assumption-3-non-zero-variance" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-3-non-zero-variance">Assumption 3: Non-zero variance</h4>
 <p>Simply put, we need to have some spread in the data. The <strong>variance must be greater than zero</strong>.</p>
 <p>We can check this by looking at the scatterplot: both the x-axis (predictor) and y-axis (outcome) should show variability. Similarly, we computed standard deviations for both variables in Activity 4, and both of them had values different to 0. So this assumption holds as well.</p>
-</section><section id="assumption-4-linearity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-4-linearity">Assumption 4: Linearity</h4>
+</section>
+<section id="assumption-4-linearity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-4-linearity">Assumption 4: Linearity</h4>
 <p>Since we will need the linear model for the next few assumptions and later for inferential statistics, we should first save it to the <code>Global Environment</code> as an object called <code>mod</code>.</p>
-<p>The linear model function <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> requires the following arguments:</p>
+<p>The linear model function <code>lm()</code> requires the following arguments:</p>
 <ul>
 <li>The outcome variable, followed by a tilde (<code>~</code>), followed by the the predictor variable</li>
 <li>The dataset</li>
@@ -909,40 +961,62 @@ Solution
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Mean_SPSS<span class="sc">~</span>Mean_QSE, <span class="at">data =</span> data_alter_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can continue with the assumption check of linearity. The relationship between the two variables must be linear.</p>
-<p>We can assess linearity visually, just as we did in the correlation chapter, by using a <strong>Residuals vs Fitted plot</strong>. We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function on our linear model (<code>mod</code>) with the which argument set to 1.</p>
+<p>We can assess linearity visually, just as we did in the correlation chapter, by using a <strong>Residuals vs Fitted plot</strong>. We can use the <code>plot()</code> function on our linear model (<code>mod</code>) with the which argument set to 1.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="10-regression_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="10-regression_files/figure-html/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="10-regression_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p><strong>Verdict:</strong> The red line is roughly horizontal and flat, indicating that the relationship between the predictor and outcome is linear. This assumption holds.</p>
-</section><section id="assumption-5-normality" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-5-normality">Assumption 5: Normality</h4>
+</section>
+<section id="assumption-5-normality" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-5-normality">Assumption 5: Normality</h4>
 <p>Residuals for both variables should follow a <strong>bivariate normal distribution</strong> (i.e., both together normally distributed).</p>
-<p>We can visually check this assumption using a <strong>Q-Q plot</strong>. To generate it, we use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function on our linear model <code>mod</code>, setting the <code>which</code> argument to 2. Again, this is the same approach we used in the correlation chapter to check for normality.</p>
+<p>We can visually check this assumption using a <strong>Q-Q plot</strong>. To generate it, we use the <code>plot()</code> function on our linear model <code>mod</code>, setting the <code>which</code> argument to 2. Again, this is the same approach we used in the correlation chapter to check for normality.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="10-regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="10-regression_files/figure-html/unnamed-chunk-16-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="10-regression_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p><strong>Verdict:</strong> Doesn’t this look beautiful? ✨ The points closely follow the diagonal line, indicating that the assumption of normality holds.</p>
-</section><section id="assumption-6-homoscedasticity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-6-homoscedasticity">Assumption 6: Homoscedasticity</h4>
+</section>
+<section id="assumption-6-homoscedasticity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-6-homoscedasticity">Assumption 6: Homoscedasticity</h4>
 <p>Homoscedasticity assumes that the <strong>spread of residuals is consistent</strong> across all levels of the predictor variable, meaning that the data is evenly distributed around the line of best fit, with no visible pattern. We can assess this assumption visually using a <strong>Scale-Location plot</strong>.</p>
-<p>To generate it, we use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function on our linear model <code>mod</code>, setting the <code>which</code> argument to 3:</p>
+<p>To generate it, we use the <code>plot()</code> function on our linear model <code>mod</code>, setting the <code>which</code> argument to 3:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="10-regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="10-regression_files/figure-html/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="10-regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p><strong>Verdict:</strong> The variance of the residual is constant along the values of predictor variable as indicated by this roughly flat and horizontal red line. Hence, we consider this assumption met.</p>
-</section><section id="checking-assumptions-differently-using-check_model-from-the-performance-package" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="checking-assumptions-differently-using-check_model-from-the-performance-package">Checking Assumptions Differently: Using <code>check_model()</code> from the <code>performance</code> package</h4>
-<p>Assumptions 4-6 can also be tested using the <code>check_model()</code> function from the <code>performance</code> package. This function provides the same diagnostic checks as <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code>, but with a cleaner presentation and useful reminders of what to look for.</p>
+</section>
+<section id="checking-assumptions-differently-using-check_model-from-the-performance-package" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="checking-assumptions-differently-using-check_model-from-the-performance-package">Checking Assumptions Differently: Using <code>check_model()</code> from the <code>performance</code> package</h4>
+<p>Assumptions 4-6 can also be tested using the <code>check_model()</code> function from the <code>performance</code> package. This function provides the same diagnostic checks as <code>plot()</code>, but with a cleaner presentation and useful reminders of what to look for.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">check_model</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="10-regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="10-regression_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="10-regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p>One key difference is that you get a posterior predictive check, which compares observed values to the model’s predictions. Additionally, the Q-Q plot for normality of residuals is displayed different. Instead of a diagonal reference line, residuals are plotted as deviations from a horizontal line. This visualisation can sometimes exaggerate small deviations, so focus on identifying clear overall patterns rather than minor fluctuations.</p>
@@ -960,10 +1034,12 @@ Tip
 </div>
 </div>
 <p>But again; all assumptions are met. Let’s move on to inferential statistics!</p>
-</section></section><section id="activity-7-compute-the-regression-confidence-intervals-and-effect-size" class="level2" data-number="10.7"><h2 data-number="10.7" class="anchored" data-anchor-id="activity-7-compute-the-regression-confidence-intervals-and-effect-size">
-<span class="header-section-number">10.7</span> Activity 7: Compute the regression, confidence intervals, and effect size</h2>
-<p>The <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function from Base R is the main function to estimate a <strong><em>L</em></strong>inear <strong><em>M</em></strong>odel (hence the function name <code>lm</code>). And if you’re experiencing a hint of déjà vu, you’re onto something! We have actually already used this function to store our linear model for assumption checks (remember the object called <code>mod</code>???).</p>
-<p>Just to recap, the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function uses formula syntax with the following arguments:</p>
+</section>
+</section>
+<section id="activity-7-compute-the-regression-confidence-intervals-and-effect-size" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="activity-7-compute-the-regression-confidence-intervals-and-effect-size"><span class="header-section-number">10.7</span> Activity 7: Compute the regression, confidence intervals, and effect size</h2>
+<p>The <code>lm()</code> function from Base R is the main function to estimate a <strong><em>L</em></strong>inear <strong><em>M</em></strong>odel (hence the function name <code>lm</code>). And if you’re experiencing a hint of déjà vu, you’re onto something! We have actually already used this function to store our linear model for assumption checks (remember the object called <code>mod</code>???).</p>
+<p>Just to recap, the <code>lm()</code> function uses formula syntax with the following arguments:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">lm</span>(OutcomeVariable <span class="sc">~</span> PredictorVariable, data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -977,7 +1053,7 @@ Tip
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(Mean_SPSS<span class="sc">~</span>Mean_QSE, <span class="at">data =</span> data_alter_reduced)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As you can see in the <code>Global Environment</code>, <code>mod</code> stores a list of 12 elements, containing quite a bit of information about the regression model.</p>
-<p>To view the results of our simple linear regression, use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function on the <code>mod</code> object:</p>
+<p>To view the results of our simple linear regression, use the <code>summary()</code> function on the <code>mod</code> object:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1020,7 +1096,7 @@ Does it matter if the slope is positive or negative?
 </div>
 </div>
 <p>Sooo. We already have several key values, but we still need confidence intervals and effect sizes to fully report our results.</p>
-<p>R has a built-in function called <code><a href="https://rdrr.io/r/stats/confint.html">confint()</a></code> to calculate <strong>confidence intervals</strong> using our linear model object <code>mod</code>.</p>
+<p>R has a built-in function called <code>confint()</code> to calculate <strong>confidence intervals</strong> using our linear model object <code>mod</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">confint</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1047,21 +1123,17 @@ f^2 = \frac{R^2_{Adjusted}}{1-R^2_{Adjusted}}
 </div>
 </div>
 <p>Now, we have all the necessary values to write up the results!</p>
-</section><section id="activity-8-sensitivity-power-analysis" class="level2" data-number="10.8"><h2 data-number="10.8" class="anchored" data-anchor-id="activity-8-sensitivity-power-analysis">
-<span class="header-section-number">10.8</span> Activity 8: Sensitivity power analysis</h2>
+</section>
+<section id="activity-8-sensitivity-power-analysis" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="activity-8-sensitivity-power-analysis"><span class="header-section-number">10.8</span> Activity 8: Sensitivity power analysis</h2>
 <p>As usual, we can calculate the smallest effect size that our study was able to detect, given our design and sample size.</p>
 <p>To do this, we use the <code>pwr.f2.test()</code> function from the <code>pwr</code> package. This function requires the following arguments:</p>
 <ul>
-<li>
-<code>u</code> = Numerator degrees of freedom. This the number of coefficients you have in your model (minus the intercept)</li>
-<li>
-<code>v</code> = Denominator degrees of freedom. This is calculated as <span class="math inline">\(v=n-u-1\)</span>, where <span class="math inline">\(n\)</span> is the number of participants.</li>
-<li>
-<code>f2</code> = The effect size. Here we are solving the effect size, so this parameter is left out</li>
-<li>
-<code>sig.level</code> = The significance level of your study</li>
-<li>
-<code>power</code> = The power level of your study</li>
+<li><code>u</code> = Numerator degrees of freedom. This the number of coefficients you have in your model (minus the intercept)</li>
+<li><code>v</code> = Denominator degrees of freedom. This is calculated as <span class="math inline">\(v=n-u-1\)</span>, where <span class="math inline">\(n\)</span> is the number of participants.</li>
+<li><code>f2</code> = The effect size. Here we are solving the effect size, so this parameter is left out</li>
+<li><code>sig.level</code> = The significance level of your study</li>
+<li><code>power</code> = The power level of your study</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">pwr.f2.test</span>(<span class="at">u =</span> <span class="dv">1</span>, <span class="at">v =</span> <span class="dv">179</span>, <span class="at">sig.level =</span> <span class="fl">0.05</span>, <span class="at">power =</span> <span class="fl">0.8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1077,15 +1149,19 @@ f^2 = \frac{R^2_{Adjusted}}{1-R^2_{Adjusted}}
 </div>
 </div>
 <p>With the design and sample size we have, we could have detected an effect as small as <span class="math inline">\(f^2 = 0.044\)</span>. Since the observed effect size from our inferential statistics was larger (<span class="math inline">\(f^2 = 0.080\)</span>), this means our test was sufficiently powered to detect the observed effect.</p>
-</section><section id="activity-9-the-write-up" class="level2" data-number="10.9"><h2 data-number="10.9" class="anchored" data-anchor-id="activity-9-the-write-up">
-<span class="header-section-number">10.9</span> Activity 9: The write-up</h2>
+</section>
+<section id="activity-9-the-write-up" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="activity-9-the-write-up"><span class="header-section-number">10.9</span> Activity 9: The write-up</h2>
 <p>A simple linear regression was performed with Attitudes toward SPSS <span class="math inline">\((M = 3.50, SD = 0.73)\)</span> as the outcome variable and Quantitative self-efficacy <span class="math inline">\((M = 3.39, SD = 0.78)\)</span> as the predictor variable.</p>
 <p>The results of the regression indicated that the model significantly predicted Attitudes toward SPSS <span class="math inline">\((F(1, 179) = 15.47 p &lt; .001, R^2_{Adjusted} = .074, f^2 = 0.080)\)</span>, accounting for 7.4% of the variance. The effect of Quantitative self-efficacy was statistically significant, positive, and of small magnitude <span class="math inline">\((b = 0.26, 95\% CI = [.13, .40], p &lt;.001)\)</span>. Therefore, we reject the null hypothesis in favour of H<sub>1</sub>. The analysis was sufficiently powered to detect this effect.</p>
-</section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
-<section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+</section>
+<section id="test-your-knowledge" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+<section id="question-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
 <p><strong>What is the main purpose of a simple regression analysis?</strong></p>
-<div id="radio_IGHDVUUMQN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_IGHDVUUMQN" value="x"><span>To compare means between two groups and determine if they are significantly different.</span></label><label><input type="radio" autocomplete="off" name="radio_IGHDVUUMQN" value="answer"><span>To predict or explain changes in an outcome variable based on changes in a predictor variable.</span></label><label><input type="radio" autocomplete="off" name="radio_IGHDVUUMQN" value="x"><span>To determine whether there is an association between two variables, without assuming causality.</span></label><label><input type="radio" autocomplete="off" name="radio_IGHDVUUMQN" value="x"><span>To assess whether multiple independent variables jointly predict an outcome variable.</span></label>
+<div id="radio_HIGCYANQGX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HIGCYANQGX" value="x"> <span>To compare means between two groups and determine if they are significantly different.</span></label><label><input type="radio" autocomplete="off" name="radio_HIGCYANQGX" value="x"> <span>To assess whether multiple independent variables jointly predict an outcome variable.</span></label><label><input type="radio" autocomplete="off" name="radio_HIGCYANQGX" value="answer"> <span>To predict or explain changes in an outcome variable based on changes in a predictor variable.</span></label><label><input type="radio" autocomplete="off" name="radio_HIGCYANQGX" value="x"> <span>To determine whether there is an association between two variables, without assuming causality.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
@@ -1103,11 +1179,13 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+</section>
+<section id="question-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
 <p><strong>A sports scientist wants to examine whether an athlete’s reaction time (in milliseconds) can predict their sprint speed (in seconds) in a 100m race.</strong></p>
 <p><strong>Which of the following correctly specifies the simple regression model in R?</strong></p>
-<div id="radio_PSXOCWGKZQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_PSXOCWGKZQ" value="answer"><span>lm(Sprint_Speed ~ Reaction_Time, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_PSXOCWGKZQ" value="x"><span>lm(Sprint_Speed ~ Reaction_Time + Training_Hours, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_PSXOCWGKZQ" value="x"><span>lm(Reaction_Time ~ Sprint_Speed + Age, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_PSXOCWGKZQ" value="x"><span>lm(Reaction_Time ~ Sprint_Speed, data = data)</span></label>
+<div id="radio_IYBOPNJNIP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_IYBOPNJNIP" value="x"> <span>lm(Sprint_Speed ~ Reaction_Time + Training_Hours, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_IYBOPNJNIP" value="x"> <span>lm(Reaction_Time ~ Sprint_Speed, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_IYBOPNJNIP" value="x"> <span>lm(Reaction_Time ~ Sprint_Speed + Age, data = data)</span></label><label><input type="radio" autocomplete="off" name="radio_IYBOPNJNIP" value="answer"> <span>lm(Sprint_Speed ~ Reaction_Time, data = data)</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
@@ -1127,14 +1205,16 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+</section>
+<section id="question-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
 <p><strong>In a simple regression model where reaction time (milliseconds) predicts sprint speed (seconds), the regression output shows:</strong></p>
 <p><span class="math display">\[
 Sprint Speed = 10.2 + 0.08 × Reaction Time
 \]</span></p>
 <p><strong>How should the slope be interpreted?</strong></p>
-<div id="radio_WPLYAUCFQS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPLYAUCFQS" value="answer"><span>A 1-millisecond increase in reaction time is associated with a 0.08-second increase in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_WPLYAUCFQS" value="x"><span>A 1-millisecond increase in reaction time is associated with a 10.2-second decrease in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_WPLYAUCFQS" value="x"><span>A 1-millisecond increase in reaction time is associated with a 0.08-second decrease in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_WPLYAUCFQS" value="x"><span>A 1-millisecond increase in reaction time is associated with a 10.2-second increase in sprint speed.</span></label>
+<div id="radio_UXOFEGTSYB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UXOFEGTSYB" value="x"> <span>A 1-millisecond increase in reaction time is associated with a 0.08-second decrease in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_UXOFEGTSYB" value="answer"> <span>A 1-millisecond increase in reaction time is associated with a 0.08-second increase in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_UXOFEGTSYB" value="x"> <span>A 1-millisecond increase in reaction time is associated with a 10.2-second decrease in sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_UXOFEGTSYB" value="x"> <span>A 1-millisecond increase in reaction time is associated with a 10.2-second increase in sprint speed.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
@@ -1152,10 +1232,12 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+</section>
+<section id="question-4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
 <p><strong>A simple regression analysis finds an <span class="math inline">\(R^2_{Adjusted} = 0.62\)</span> when predicting sprint speed from reaction time. What does this mean?</strong></p>
-<div id="radio_OLJXKXAWFY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OLJXKXAWFY" value="x"><span>The model does not fit well because the adjusted <span class="math inline">\(R^2\)</span> is too high.</span></label><label><input type="radio" autocomplete="off" name="radio_OLJXKXAWFY" value="answer"><span>62% of the variance in sprint speed is explained by reaction time.</span></label><label><input type="radio" autocomplete="off" name="radio_OLJXKXAWFY" value="x"><span>The predictor fully explains the outcome.</span></label><label><input type="radio" autocomplete="off" name="radio_OLJXKXAWFY" value="x"><span>62% of the variance in reaction time is explained by sprint speed.</span></label>
+<div id="radio_WGHDYLPIMG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WGHDYLPIMG" value="x"> <span>The predictor fully explains the outcome.</span></label><label><input type="radio" autocomplete="off" name="radio_WGHDYLPIMG" value="x"> <span>The model does not fit well because the adjusted <span class="math inline">\(R^2\)</span> is too high.</span></label><label><input type="radio" autocomplete="off" name="radio_WGHDYLPIMG" value="x"> <span>62% of the variance in reaction time is explained by sprint speed.</span></label><label><input type="radio" autocomplete="off" name="radio_WGHDYLPIMG" value="answer"> <span>62% of the variance in sprint speed is explained by reaction time.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
@@ -1181,239 +1263,478 @@ Explain this answer
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1454,6 +1775,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1522,13 +1870,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1563,18 +1913,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1606,11 +1945,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1620,8 +1998,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1633,7 +2020,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1677,6 +2187,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1702,6 +2213,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1760,28 +2297,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./09-correlation.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-correlation.html" class="pagination-link" aria-label="Correlations">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./11-multiple-regression.html" class="pagination-link">
+      <a href="./11-multiple-regression.html" class="pagination-link" aria-label="Multiple regression">
         <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

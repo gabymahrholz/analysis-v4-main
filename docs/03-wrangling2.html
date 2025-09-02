@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 3&nbsp; Data wrangling II</title>
+
+<title>3&nbsp; Data wrangling II – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,72 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./03-wrangling2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./03-wrangling2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +187,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +273,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +362,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,16 +403,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
   <li><a href="#activity-1-setup" id="toc-activity-1-setup" class="nav-link" data-scroll-target="#activity-1-setup"><span class="header-section-number">3.1</span> Activity 1: Setup</a></li>
   <li><a href="#activity-2-load-in-the-libraries-and-read-in-the-data" id="toc-activity-2-load-in-the-libraries-and-read-in-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-libraries-and-read-in-the-data"><span class="header-section-number">3.2</span> Activity 2: Load in the libraries and read in the data</a></li>
@@ -395,17 +429,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#activity-5-error-mode-perceptions-of-supervisory-support" id="toc-activity-5-error-mode-perceptions-of-supervisory-support" class="nav-link" data-scroll-target="#activity-5-error-mode-perceptions-of-supervisory-support"><span class="header-section-number">3.5</span> Activity 5 (Error Mode): Perceptions of supervisory support</a></li>
   <li><a href="#activity-6-join-everything-together-with-_join" id="toc-activity-6-join-everything-together-with-_join" class="nav-link" data-scroll-target="#activity-6-join-everything-together-with-_join"><span class="header-section-number">3.6</span> Activity 6: Join everything together with <code>???_join()</code></a></li>
   <li><a href="#activity-7-knit-and-export" id="toc-activity-7-knit-and-export" class="nav-link" data-scroll-target="#activity-7-knit-and-export"><span class="header-section-number">3.7</span> Activity 7: Knit and export</a></li>
-  <li>
-<a href="#test-your-knowledge-and-challenge-yourself" id="toc-test-your-knowledge-and-challenge-yourself" class="nav-link" data-scroll-target="#test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></a>
+  <li><a href="#test-your-knowledge-and-challenge-yourself" id="toc-test-your-knowledge-and-challenge-yourself" class="nav-link" data-scroll-target="#test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></a>
   <ul class="collapse">
-<li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check">Knowledge check</a></li>
+  <li><a href="#knowledge-check" id="toc-knowledge-check" class="nav-link" data-scroll-target="#knowledge-check">Knowledge check</a></li>
   <li><a href="#challenge-yourself" id="toc-challenge-yourself" class="nav-link" data-scroll-target="#challenge-yourself">Challenge yourself</a></li>
+  </ul></li>
   </ul>
-</li>
-  </ul></nav>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./03-wrangling2.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="sec-wrangling2" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Data wrangling II</span></span></h1>
 </div>
 
@@ -419,22 +455,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="intended-learning-outcomes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+
+</header>
+
+
+<section id="intended-learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter, you should be able to:</p>
 <ul>
 <li>apply familiar data wrangling functions to novel datasets</li>
 <li>read and interpret error messages</li>
 <li>realise there are several ways of getting to the results</li>
 </ul>
-<p>In this chapter, we will pick up where we left off in <a href="02-wrangling.html"><span>Chapter&nbsp;2</span></a>. We will calculate average scores for two of the questionnaires, address an error mode problem, and finally, join all data objects together. This will finalise our data for the upcoming data visualization sections (<a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> and <a href="05-dataviz2.html"><span>Chapter&nbsp;5</span></a>).</p>
-</section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
-</section><section id="activity-1-setup" class="level2" data-number="3.1"><h2 data-number="3.1" class="anchored" data-anchor-id="activity-1-setup">
-<span class="header-section-number">3.1</span> Activity 1: Setup</h2>
+<p>In this chapter, we will pick up where we left off in <a href="02-wrangling.html" class="quarto-xref"><span>Chapter 2</span></a>. We will calculate average scores for two of the questionnaires, address an error mode problem, and finally, join all data objects together. This will finalise our data for the upcoming data visualization sections (<a href="04-dataviz.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="05-dataviz2.html" class="quarto-xref"><span>Chapter 5</span></a>).</p>
+</section>
+<section id="individual-walkthrough" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+</section>
+<section id="activity-1-setup" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="activity-1-setup"><span class="header-section-number">3.1</span> Activity 1: Setup</h2>
 <ul>
 <li>Go to the project folder we have been using in the last two weeks and double-click on the project icon to <strong>open the project</strong> in RStudio</li>
-<li>Either <strong>Create a new <code>.Rmd</code> file</strong> for chapter 3 and save it to your project folder or continue the one from last week. See <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a> if you need some guidance.</li>
-</ul></section><section id="activity-2-load-in-the-libraries-and-read-in-the-data" class="level2" data-number="3.2"><h2 data-number="3.2" class="anchored" data-anchor-id="activity-2-load-in-the-libraries-and-read-in-the-data">
-<span class="header-section-number">3.2</span> Activity 2: Load in the libraries and read in the data</h2>
+<li>Either <strong>Create a new <code>.Rmd</code> file</strong> for chapter 3 and save it to your project folder or continue the one from last week. See <a href="01-basics.html#sec-rmd" class="quarto-xref"><span>Section 1.3</span></a> if you need some guidance.</li>
+</ul>
+</section>
+<section id="activity-2-load-in-the-libraries-and-read-in-the-data" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="activity-2-load-in-the-libraries-and-read-in-the-data"><span class="header-section-number">3.2</span> Activity 2: Load in the libraries and read in the data</h2>
 <p>Today, we will be using <code>tidyverse</code> along with the two csv files created at the end of the last chapter: <code>data_prp_for_ch3.csv</code> and <code>qrp_t1.csv</code>. If you need to download them again for any reason, click on the following links: <a href="data/data_prp_for_ch3.csv" title="download">data_prp_for_ch3.csv</a> and <a href="data/qrp_t1.csv" title="download">qrp_t1.csv</a>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
@@ -476,36 +522,31 @@ Solution
 </div>
 </div>
 </div>
-<p>If you need a quick reminder what the dataset was about, have a look at the abstract in <a href="01-basics.html#sec-download_data_ch1"><span>Section&nbsp;1.4</span></a>. We also addressed the changes we made to the dataset there.</p>
+<p>If you need a quick reminder what the dataset was about, have a look at the abstract in <a href="01-basics.html#sec-download_data_ch1" class="quarto-xref"><span>Section 1.4</span></a>. We also addressed the changes we made to the dataset there.</p>
 <p>And remember to have a quick <code>glimpse()</code> at your data.</p>
-</section><section id="sec-wrangling2_act3" class="level2" data-number="3.3"><h2 data-number="3.3" class="anchored" data-anchor-id="sec-wrangling2_act3">
-<span class="header-section-number">3.3</span> Activity 3: Confidence in understanding Open Science practices</h2>
-<section id="the-main-goal-is-to-compute-the-mean-understanding-score-per-participant." class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-understanding-score-per-participant.">The main goal is to compute the mean Understanding score per participant.</h4>
+</section>
+<section id="sec-wrangling2_act3" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-wrangling2_act3"><span class="header-section-number">3.3</span> Activity 3: Confidence in understanding Open Science practices</h2>
+<section id="the-main-goal-is-to-compute-the-mean-understanding-score-per-participant." class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-understanding-score-per-participant.">The main goal is to compute the mean Understanding score per participant.</h4>
 <p>The mean Understanding score for time point 2 has already been calculated (in the <code>Time2_Understanding_OS</code> column), but we still need to compute it for time point 1.</p>
 <p>Looking at the Understanding data at time point 1, you determine that</p>
 <ul>
-<li>individual item columns are <select class="webex-select"><option value="blank"></option>
-<option value="x">numeric</option>
-<option value="answer">character</option></select>, and</li>
-<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option>
-<option value="answer">no</option>
-<option value="x">some</option></select> reverse-coded items in this questionnaire.</li>
+<li>individual item columns are <select class="webex-select"><option value="blank"></option><option value="x">numeric</option><option value="answer">character</option></select>, and</li>
+<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option><option value="answer">no</option><option value="x">some</option></select> reverse-coded items in this questionnaire.</li>
 </ul>
 <p>The steps are quite similar to those for QRP, but we need to add an extra step: converting the character labels into numbers.</p>
 <p>Again, let’s do this step by step:</p>
 <ul>
-<li>
-<strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and every Understanding column from time point 1 (e.g., from <code>Understanding_OS_1_Time1</code> to <code>Understanding_OS_12_Time1</code>) and store them in an object called <code>understanding_t1</code>
-</li>
-<li>
-<strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can recode the labels into values (step 3) and calculate the average score (in step 4) more easily</li>
-<li>
-<strong>Step 3</strong>: Recode the values “Not at all confident” as 1 and “Entirely confident” as 7. All other values are already numbers. We can use functions <code>mutate()</code> in combination with <code>case_match()</code> for that</li>
-<li>
-<strong>Step 4</strong>: Calculate the average Understanding Open Science score (<code>Time1_Understanding_OS</code>) per participant using <code>group_by()</code> and <code>summarise()</code>
-</li>
-</ul></section><section id="steps-1-and-2-select-and-pivot" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="steps-1-and-2-select-and-pivot">Steps 1 and 2: Select and pivot</h4>
-<p>How about you try the first 2 steps yourself using the code from Chapter 2 Activity 4 (<a href="02-wrangling.html#sec-ch2_act4"><span>Section&nbsp;2.4</span></a>) as a template?</p>
+<li><strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and every Understanding column from time point 1 (e.g., from <code>Understanding_OS_1_Time1</code> to <code>Understanding_OS_12_Time1</code>) and store them in an object called <code>understanding_t1</code></li>
+<li><strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can recode the labels into values (step 3) and calculate the average score (in step 4) more easily</li>
+<li><strong>Step 3</strong>: Recode the values “Not at all confident” as 1 and “Entirely confident” as 7. All other values are already numbers. We can use functions <code>mutate()</code> in combination with <code>case_match()</code> for that</li>
+<li><strong>Step 4</strong>: Calculate the average Understanding Open Science score (<code>Time1_Understanding_OS</code>) per participant using <code>group_by()</code> and <code>summarise()</code></li>
+</ul>
+</section>
+<section id="steps-1-and-2-select-and-pivot" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="steps-1-and-2-select-and-pivot">Steps 1 and 2: Select and pivot</h4>
+<p>How about you try the first 2 steps yourself using the code from Chapter 2 Activity 4 (<a href="02-wrangling.html#sec-ch2_act4" class="quarto-xref"><span>Section 2.4</span></a>) as a template?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>understanding_t1 <span class="ot">&lt;-</span> data_prp <span class="sc">%&gt;%</span> </span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="fu">select</span>(???) <span class="sc">%&gt;%</span> <span class="co"># Step 1</span></span>
@@ -533,7 +574,9 @@ Solution for steps 1 and 2
 </div>
 </div>
 </div>
-</section><section id="step-3-recoding-the-values" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="step-3-recoding-the-values">Step 3: recoding the values</h4>
+</section>
+<section id="step-3-recoding-the-values" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="step-3-recoding-the-values">Step 3: recoding the values</h4>
 <p>OK, we now want to recode the values in the <code>Responses</code> column (or whatever name you picked for your column that has some of the numbers in it) so that “Not at all confident” = 1 and “Entirely confident” = 7. We want to keep all other values as they are (2-6 look already quite “numeric”).</p>
 <p>Let’s create a new column <code>Responses_corrected</code> that stores the new values with <code>mutate()</code>. Then we can combine that with the <code>case_match()</code> function.</p>
 <ul>
@@ -573,14 +616,10 @@ Error!!! Can you explain what is happening here?
 </div>
 <p><strong>So how do we fix this?</strong> Actually, there are several ways this could be done. Click on the tabs below to check out 3 possible solutions.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset" data-group="layers">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Fix option 1</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Fix option 2</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Fix option 3</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Fix option 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Fix option 2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Fix option 3</a></li></ul>
 <div class="tab-content" data-group="layers">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>One option is to modify the <code>.default</code> argument <code>Responses</code> so that the values are copied over from the original column but as a number rather than the original character value. The function <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> does the conversion.</p>
+<p>One option is to modify the <code>.default</code> argument <code>Responses</code> so that the values are copied over from the original column but as a number rather than the original character value. The function <code>as.numeric()</code> does the conversion.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>understanding_t1_step3_v1 <span class="ot">&lt;-</span> understanding_t1 <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">mutate</span>(<span class="at">Responses_corrected =</span> <span class="fu">case_match</span>(Responses, <span class="co"># column of the values to recode</span></span>
@@ -591,12 +630,10 @@ Error!!! Can you explain what is happening here?
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>Change the numeric values on the right side of the <code>~</code> to character. Then in a second step, we would need to turn the character column into a numeric type. Again, we have several options to do so. We could either use the <code>parse_number()</code> function we encountered earlier during the demographics wrangling or the <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> function.</p>
+<p>Change the numeric values on the right side of the <code>~</code> to character. Then in a second step, we would need to turn the character column into a numeric type. Again, we have several options to do so. We could either use the <code>parse_number()</code> function we encountered earlier during the demographics wrangling or the <code>as.numeric()</code> function.</p>
 <ul>
-<li>V1: <code>Responses_corrected = parse_number(Responses_corrected)</code>
-</li>
-<li>V2: <code>Responses_corrected = as.numeric(Responses_corrected)</code>
-</li>
+<li>V1: <code>Responses_corrected = parse_number(Responses_corrected)</code></li>
+<li>V2: <code>Responses_corrected = as.numeric(Responses_corrected)</code></li>
 </ul>
 <p>Just pay attention that you are still working <em>within</em> the <code>mutate()</code> function.</p>
 <div class="cell">
@@ -635,7 +672,7 @@ Your Turn
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Choose the option that works best for you to <strong>modify the code of <code>understanding_t1</code></strong> above that didn’t work/ gave you an error message. Once you do that, you should be able to calculate the <strong>mean Understanding Score per participant</strong>. Store the average scores in a variable called <code>Time1_Understanding_OS</code>. If you need help, refer to the hint below or use Chapter 2 Activity 4 (<a href="02-wrangling.html#sec-ch2_act4"><span>Section&nbsp;2.4</span></a>) as guidance.</p>
+<p>Choose the option that works best for you to <strong>modify the code of <code>understanding_t1</code></strong> above that didn’t work/ gave you an error message. Once you do that, you should be able to calculate the <strong>mean Understanding Score per participant</strong>. Store the average scores in a variable called <code>Time1_Understanding_OS</code>. If you need help, refer to the hint below or use Chapter 2 Activity 4 (<a href="02-wrangling.html#sec-ch2_act4" class="quarto-xref"><span>Section 2.4</span></a>) as guidance.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -699,36 +736,30 @@ Single pipe of activity 3
 </div>
 </div>
 </div>
-</section></section><section id="sec-wrangling2_act4" class="level2" data-number="3.4"><h2 data-number="3.4" class="anchored" data-anchor-id="sec-wrangling2_act4">
-<span class="header-section-number">3.4</span> Activity 4: Survey of Attitudes Toward Statistics (SATS-28)</h2>
-<section id="the-main-goal-is-to-compute-the-mean-sats-28-score-for-each-of-the-4-subscales-per-participant-for-time-point-1." class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-sats-28-score-for-each-of-the-4-subscales-per-participant-for-time-point-1.">The main goal is to compute the mean SATS-28 score for each of the 4 subscales per participant for time point 1.</h4>
+</section>
+</section>
+<section id="sec-wrangling2_act4" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-wrangling2_act4"><span class="header-section-number">3.4</span> Activity 4: Survey of Attitudes Toward Statistics (SATS-28)</h2>
+<section id="the-main-goal-is-to-compute-the-mean-sats-28-score-for-each-of-the-4-subscales-per-participant-for-time-point-1." class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-sats-28-score-for-each-of-the-4-subscales-per-participant-for-time-point-1.">The main goal is to compute the mean SATS-28 score for each of the 4 subscales per participant for time point 1.</h4>
 <p>Looking at the SATS data at time point 1, you determine that</p>
 <ul>
-<li>individual item columns are <select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option></select>, and</li>
-<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option>
-<option value="x">no</option>
-<option value="answer">some</option></select> reverse-coded items in this questionnaire.</li>
+<li>individual item columns are <select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option></select>, and</li>
+<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option><option value="x">no</option><option value="answer">some</option></select> reverse-coded items in this questionnaire.</li>
 <li>Additionally, we are looking to compute the means for the 4 different subscales of the SAT-28 which are <input class="webex-solveme nospaces ignorecase" size="6" data-answer="[&quot;Affect&quot;]">, <input class="webex-solveme nospaces ignorecase" size="20" data-answer="[&quot;Cognitive Competence&quot;]">, <input class="webex-solveme nospaces ignorecase" size="5" data-answer="[&quot;Value&quot;]">, and <input class="webex-solveme nospaces ignorecase" size="10" data-answer="[&quot;Difficulty&quot;]">.</li>
 </ul>
 <p>This scenario is slightly more tricky than the previous ones due to the reverse-coding and the 4 subscales. So, let’s tackle this step by step again:</p>
 <ul>
-<li>
-<strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and every SATS28 column from time point 1 (e.g., from <code>SATS28_1_Affect_Time1</code> to <code>SATS28_28_Difficulty_Time1</code>) and store them in an object called <code>sats_t1</code>
-</li>
-<li>
-<strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can recode the labels into values (step 3) and calculate the average score (in step 4) more easily</li>
-<li>
-<strong>Step 3</strong>: We need to know which items belong to which subscale - fortunately, we have that information in the variable name and can use the <code>separate()</code> function to access it.</li>
-<li>
-<strong>Step 4</strong>: We need to know which items are reverse-coded and then reverse-score them - unfortunately, the info is only in the codebook and we need to find a work-around. <code>case_when()</code> can help identify and re-score the reverse-coded items.</li>
-<li>
-<strong>Step 5</strong>: Calculate the average SATS score per participant and subscale using <code>group_by()</code> and <code>summarise()</code>
-</li>
-<li>
-<strong>Step 6</strong>: use <code>pivot_wider()</code> to spread out the dataframe into wide format and <code>rename()</code> to tidy up the column names</li>
-</ul></section><section id="steps-1-and-2-select-and-pivot-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="steps-1-and-2-select-and-pivot-1">Steps 1 and 2: select and pivot</h4>
+<li><strong>Step 1</strong>: Select the relevant columns <code>Code</code>, and every SATS28 column from time point 1 (e.g., from <code>SATS28_1_Affect_Time1</code> to <code>SATS28_28_Difficulty_Time1</code>) and store them in an object called <code>sats_t1</code></li>
+<li><strong>Step 2</strong>: Pivot the data from wide format to long format using <code>pivot_longer()</code> so we can recode the labels into values (step 3) and calculate the average score (in step 4) more easily</li>
+<li><strong>Step 3</strong>: We need to know which items belong to which subscale - fortunately, we have that information in the variable name and can use the <code>separate()</code> function to access it.</li>
+<li><strong>Step 4</strong>: We need to know which items are reverse-coded and then reverse-score them - unfortunately, the info is only in the codebook and we need to find a work-around. <code>case_when()</code> can help identify and re-score the reverse-coded items.</li>
+<li><strong>Step 5</strong>: Calculate the average SATS score per participant and subscale using <code>group_by()</code> and <code>summarise()</code></li>
+<li><strong>Step 6</strong>: use <code>pivot_wider()</code> to spread out the dataframe into wide format and <code>rename()</code> to tidy up the column names</li>
+</ul>
+</section>
+<section id="steps-1-and-2-select-and-pivot-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="steps-1-and-2-select-and-pivot-1">Steps 1 and 2: select and pivot</h4>
 <p>The selecting and pivoting are exactly the same way as we already practiced in the other 2 questionnaires. Apply them here to this questionnaire.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
@@ -770,17 +801,17 @@ Solution for steps 1 and 2
 </div>
 </div>
 </div>
-</section><section id="step-3-separate-subscale-information" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="step-3-separate-subscale-information">Step 3: separate Subscale information</h4>
+</section>
+<section id="step-3-separate-subscale-information" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="step-3-separate-subscale-information">Step 3: separate Subscale information</h4>
 <p>If you look at the <code>Items</code> column more closely, you can see that there is information on the <code>Questionnaire</code>, the <code>Item_number</code>, the <code>Subscale</code>, and the <code>Timepoint</code> the data was collected at.</p>
 <p>We can separate the information into separate columns using the <code>separate()</code> function. The function’s first argument is the column to separate, then define <code>into</code> which columns you want the original column to split up, and lastly, define the separator <code>sep</code> (here an underscore). For our example, we would write:</p>
 <ul>
-<li>V1: <code>separate(Items, into = c("SATS", "Item_number", "Subscale", "Time"), sep = "_")</code>
-</li>
+<li>V1: <code>separate(Items, into = c("SATS", "Item_number", "Subscale", "Time"), sep = "_")</code></li>
 </ul>
 <p>However, we don’t need all of those columns, so we could just drop the ones we are not interested in by replacing them with <code>NA</code>.</p>
 <ul>
-<li>V2: <code>separate(Items, into = c(NA, "Item_number", "Subscale", NA), sep = "_")</code>
-</li>
+<li>V2: <code>separate(Items, into = c(NA, "Item_number", "Subscale", NA), sep = "_")</code></li>
 </ul>
 <p>We might also add an extra argument of <code>convert = TRUE</code> to have numeric columns (i.e., <code>Item_number</code>) converted to numeric as opposed to keeping them as characters. Saves us typing a few quotation marks later in Step 4.</p>
 <div class="cell">
@@ -788,16 +819,16 @@ Solution for steps 1 and 2
 <span id="cb14-2"><a href="#cb14-2"></a>  <span class="co"># Step 3</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a>  <span class="fu">separate</span>(Items, <span class="at">into =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"Item_number"</span>, <span class="st">"Subscale"</span>, <span class="cn">NA</span>), <span class="at">sep =</span> <span class="st">"_"</span>, <span class="at">convert =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section><section id="step-4-identifying-reverse-coded-items-and-then-correct-them" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="step-4-identifying-reverse-coded-items-and-then-correct-them">Step 4: identifying reverse-coded items and then correct them</h4>
+</section>
+<section id="step-4-identifying-reverse-coded-items-and-then-correct-them" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="step-4-identifying-reverse-coded-items-and-then-correct-them">Step 4: identifying reverse-coded items and then correct them</h4>
 <p>We can use <code>case_when()</code> within the <code>mutate()</code> function here to create a new column <code>FW_RV</code> that stores information on whether the item is a reverse-coded item or not.</p>
 <p><code>case_when()</code> works similarly to <code>case_match()</code>, however <code>case_match()</code> only allows us to “recode” values (i.e., replace one value with another), whereas <code>case_when()</code> is more flexible. It allows us to use <strong>conditional statements</strong> on the left side of the tilde which is useful when you want to change only <em>some</em> of the data based on specific conditions.</p>
 <p>Looking at the codebook, it seems that items 2, 3, 4, 6, 7, 8, 9, 12, 13, 16, 17, 19, 20, 21, 23, 25, 26, 27, and 28 are reverse-coded. The rest are forward-coded.</p>
 <p>We want to tell R now, that</p>
 <ul>
-<li>
-<strong>if</strong> the <code>Item_number</code> is any of those numbers listed above, R should write “Reverse” into the new column <code>FW_RV</code> we are creating. Since we have a few possible matches for <code>Item_number</code>, we need the Boolean expression <code>%in%</code> rather than <code>==</code>.</li>
-<li>
-<strong>if</strong> <code>Item_number</code> is none of those numbers, then we would like the word “Forward” in the <code>FW_RV</code> column to appear. We can achieve that by specifying a <code>.default</code> argument again, but this time we want a “word” rather than a value from another column.</li>
+<li><strong>if</strong> the <code>Item_number</code> is any of those numbers listed above, R should write “Reverse” into the new column <code>FW_RV</code> we are creating. Since we have a few possible matches for <code>Item_number</code>, we need the Boolean expression <code>%in%</code> rather than <code>==</code>.</li>
+<li><strong>if</strong> <code>Item_number</code> is none of those numbers, then we would like the word “Forward” in the <code>FW_RV</code> column to appear. We can achieve that by specifying a <code>.default</code> argument again, but this time we want a “word” rather than a value from another column.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>sats_t1 <span class="ot">&lt;-</span> sats_t1 <span class="sc">%&gt;%</span> </span>
@@ -808,24 +839,17 @@ Solution for steps 1 and 2
 </div>
 <p>Moving on to correcting the scores: Once again, we can use <code>case_when ()</code> within the <code>mutate()</code> function to create another <strong>conditional statement</strong>. This time, the condition is:</p>
 <ul>
-<li>
-<strong>if</strong> <code>FW_RV</code> column has a value of “Reverse” then we would like to turn all 1 into 7, 2 into 6, etc.</li>
-<li>
-<strong>if</strong> <code>FW_RV</code> column has a value of “Forward” then we would like to keep the score from the <code>Response</code> column</li>
+<li><strong>if</strong> <code>FW_RV</code> column has a value of “Reverse” then we would like to turn all 1 into 7, 2 into 6, etc.</li>
+<li><strong>if</strong> <code>FW_RV</code> column has a value of “Forward” then we would like to keep the score from the <code>Response</code> column</li>
 </ul>
 <p>There is a quick way and a not-so-quick way to achieve the actual <strong>reverse-coding</strong>.</p>
 <ul>
-<li>
-<strong>Option 1 (quick)</strong>: The easiest way to reverse-code scores is to take the maximum value of the scale, add 1 unit, and subtract the original value. For example, on a 5-point Likert scale, it would be 6 minus the original rating; for a 7-point Likert scale, 8 minus the original rating, etc. (see <em>Option 1</em> tab).</li>
-<li>
-<strong>Option 2 (not so quick)</strong>: This involves using two conditional statements (see <em>Option 2</em> tab).</li>
+<li><strong>Option 1 (quick)</strong>: The easiest way to reverse-code scores is to take the maximum value of the scale, add 1 unit, and subtract the original value. For example, on a 5-point Likert scale, it would be 6 minus the original rating; for a 7-point Likert scale, 8 minus the original rating, etc. (see <em>Option 1</em> tab).</li>
+<li><strong>Option 2 (not so quick)</strong>: This involves using two conditional statements (see <em>Option 2</em> tab).</li>
 </ul>
 <p>Use the one you find more intuitive.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Option 1</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Option 2</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">Option 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Option 2</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>Here we are using a Boolean expression to check if the string “Reverse” is present in the <code>FW_RV</code> column. If this condition is <code>TRUE</code>, the value in the new column we’re creating, <code>Scores_corrected</code>, will be calculated as 8 minus the value from the Response column. If the condition is FALSE (handled by the .default argument), the original values from the <code>Response</code> column will be retained.</p>
@@ -880,12 +904,14 @@ Show <code>check_coding</code> output
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>check_coding</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">FW_RV</th>
 <th style="text-align: right;">Response</th>
 <th style="text-align: right;">Scores_corrected</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">Reverse</td>
@@ -965,7 +991,9 @@ Show <code>check_coding</code> output
 </div>
 </div>
 </div>
-</section><section id="step-5" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="step-5">Step 5</h4>
+</section>
+<section id="step-5" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="step-5">Step 5</h4>
 <p>Now that we know everything worked out as intended, we can calculate the mean scores of each subscale for each participant in <code>sats_t1</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1013,7 +1041,9 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="step-6" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="step-6">Step 6</h4>
+</section>
+<section id="step-6" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="step-6">Step 6</h4>
 <p>The final step is to transform the data back into wide format, ensuring that each subscale has its own column. This will make it easier to join the data objects later on. In <code>pivot_wider()</code>, the first argument, <code>names_from</code>, specifies the column you want to use for your new column headings. The second argument, <code>values_from</code>, tells R which column should provide the cell values.</p>
 <p>We should also <strong>rename the column names</strong> to match those in the codebook. Conveniently, we can use a function called <code>rename()</code> that works exactly like <code>select()</code> (following the pattern <code>new_name = old_name</code>), but it keeps all other column names the same rather than reducing the number of columns.</p>
 <div class="cell">
@@ -1040,7 +1070,7 @@ Show final <code>sats_t1</code> output
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">head</span>(sats_t1, <span class="at">n =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 4%">
 <col style="width: 20%">
@@ -1048,13 +1078,15 @@ Show final <code>sats_t1</code> output
 <col style="width: 23%">
 <col style="width: 19%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Code</th>
 <th style="text-align: right;">SATS28_Affect_Time1_mean</th>
 <th style="text-align: right;">SATS28_CognitiveCompetence_Time1_mean</th>
 <th style="text-align: right;">SATS28_Difficulty_Time1_mean</th>
 <th style="text-align: right;">SATS28_Value_Time1_mean</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">AD03</td>
@@ -1143,30 +1175,24 @@ Single pipe of activity 4
 </div>
 </div>
 </div>
-</section></section><section id="activity-5-error-mode-perceptions-of-supervisory-support" class="level2" data-number="3.5"><h2 data-number="3.5" class="anchored" data-anchor-id="activity-5-error-mode-perceptions-of-supervisory-support">
-<span class="header-section-number">3.5</span> Activity 5 (Error Mode): Perceptions of supervisory support</h2>
-<section id="the-main-goal-is-to-compute-the-mean-score-for-perceived-supervisory-support-per-participant." class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-score-for-perceived-supervisory-support-per-participant.">The main goal is to compute the mean score for perceived supervisory support per participant.</h4>
+</section>
+</section>
+<section id="activity-5-error-mode-perceptions-of-supervisory-support" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="activity-5-error-mode-perceptions-of-supervisory-support"><span class="header-section-number">3.5</span> Activity 5 (Error Mode): Perceptions of supervisory support</h2>
+<section id="the-main-goal-is-to-compute-the-mean-score-for-perceived-supervisory-support-per-participant." class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="the-main-goal-is-to-compute-the-mean-score-for-perceived-supervisory-support-per-participant.">The main goal is to compute the mean score for perceived supervisory support per participant.</h4>
 <p>Looking at the supervisory support data, you determine that</p>
 <ul>
-<li>individual item columns are <select class="webex-select"><option value="blank"></option>
-<option value="answer">numeric</option>
-<option value="x">character</option></select>, and</li>
-<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option>
-<option value="x">no</option>
-<option value="answer">some</option></select> reverse-coded items in this questionnaire.</li>
+<li>individual item columns are <select class="webex-select"><option value="blank"></option><option value="answer">numeric</option><option value="x">character</option></select>, and</li>
+<li>according to the codebook, there are <select class="webex-select"><option value="blank"></option><option value="x">no</option><option value="answer">some</option></select> reverse-coded items in this questionnaire.</li>
 </ul>
 <p>I have outlined my steps as follows:</p>
 <ul>
-<li>
-<strong>Step 1</strong>: Reverse-code the single column first because that’s less hassle than having to do that with conditional statements (<code>Supervisor_15_R</code>). <code>mutate()</code> is my friend.</li>
-<li>
-<strong>Step 2</strong>: I want to filter out everyone who failed the attention check in <code>Supervisor_7</code>. I can do this with a Boolean expression within the <code><a href="https://rdrr.io/r/stats/filter.html">filter()</a></code> function. The correct response was “completely disagree” which is 1.</li>
-<li>
-<strong>Step 3</strong>: Select their id from time point 2 and all the columns that start with the word “super”, apart from <code>Supervisor_7</code> and the original <code>Supervisor_15_R</code> column</li>
-<li>
-<strong>Step 4</strong>: pivot into long format so I can calculate the averages better</li>
-<li>
-<strong>Step 5</strong>: calculate the average scores per participant</li>
+<li><strong>Step 1</strong>: Reverse-code the single column first because that’s less hassle than having to do that with conditional statements (<code>Supervisor_15_R</code>). <code>mutate()</code> is my friend.</li>
+<li><strong>Step 2</strong>: I want to filter out everyone who failed the attention check in <code>Supervisor_7</code>. I can do this with a Boolean expression within the <code>filter()</code> function. The correct response was “completely disagree” which is 1.</li>
+<li><strong>Step 3</strong>: Select their id from time point 2 and all the columns that start with the word “super”, apart from <code>Supervisor_7</code> and the original <code>Supervisor_15_R</code> column</li>
+<li><strong>Step 4</strong>: pivot into long format so I can calculate the averages better</li>
+<li><strong>Step 5</strong>: calculate the average scores per participant</li>
 </ul>
 <p>I’ve started coding but there are some errors in my code. Help me find and fix all of them. Try to go through the code line by line and read the error messages.</p>
 <div class="cell">
@@ -1220,15 +1246,15 @@ Reveal solution
 </div>
 <ul>
 <li>Note that the <strong>semantic error</strong> in line 2 will not give you an error message.</li>
-<li>Were you thrown off by the <code>starts_with("Super")</code> expression in line 4? <code>starts_with()</code> and <code>ends_with()</code> are great alternatives to selecting columns via <code>:</code> But, using <code>select(Code, Supervisor_1:Supervisor_6, Supervisor_8:Supervisor_14)</code> would have given us the same result. <em>[I admit, that one was perhaps a bit mean]</em>
-</li>
+<li>Were you thrown off by the <code>starts_with("Super")</code> expression in line 4? <code>starts_with()</code> and <code>ends_with()</code> are great alternatives to selecting columns via <code>:</code> But, using <code>select(Code, Supervisor_1:Supervisor_6, Supervisor_8:Supervisor_14)</code> would have given us the same result. <em>[I admit, that one was perhaps a bit mean]</em></li>
 </ul>
 </div>
 </div>
 </div>
-</section></section><section id="activity-6-join-everything-together-with-_join" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="activity-6-join-everything-together-with-_join">
-<span class="header-section-number">3.6</span> Activity 6: Join everything together with <code>???_join()</code>
-</h2>
+</section>
+</section>
+<section id="activity-6-join-everything-together-with-_join" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="activity-6-join-everything-together-with-_join"><span class="header-section-number">3.6</span> Activity 6: Join everything together with <code>???_join()</code></h2>
 <p>Time to join all the relevant data files into a single dataframe, which will be used in the next chapters on data visualization. There are four ways to join data: <code>inner_join()</code>, <code>left_join()</code>, <code>right_join()</code>, and <code>full_join()</code>. Each function behaves differently in terms of what information is retained from the two data objects. Here is a quick overview:</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1242,39 +1268,42 @@ Info on mutating joins
 <div class="callout-body-container callout-body">
 <p>You have 4 types of join functions you could make use of. Click on the panels to know more</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true"><code>inner_join()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false"><code>left_join()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false"><code>right_join()</code></a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false"><code>full_join()</code></a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true"><code>inner_join()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false"><code>left_join()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false"><code>right_join()</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-4" role="tab" aria-controls="tabset-3-4" aria-selected="false"><code>full_join()</code></a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
 <p><code>inner_join()</code> returns only the rows where the values in the column specified in the <code>by =</code> statement match in both tables.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/inner-join.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">inner_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption></figure>
+<figure class="figure">
+<p><a href="images/inner-join.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="inner_join(): gif by Garrick Aden-Buie"><img src="images/inner-join.gif" class="img-fluid figure-img" alt="inner_join(): gif by Garrick Aden-Buie"></a></p>
+<figcaption>inner_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption>
+</figure>
 </div>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
 <p><code>left_join()</code> retains the complete first (left) table and adds values from the second (right) table that have matching values in the column specified in the <code>by =</code> statement. Rows in the left table with no match in the right table will have missing values (<code>NA</code>) in the new columns.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/left-join.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">left_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption></figure>
+<figure class="figure">
+<p><a href="images/left-join.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="left_join(): gif by Garrick Aden-Buie"><img src="images/left-join.gif" class="img-fluid figure-img" alt="left_join(): gif by Garrick Aden-Buie"></a></p>
+<figcaption>left_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption>
+</figure>
 </div>
 </div>
 <div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
 <p><code>right_join()</code> retains the complete second (right) table and adds values from the first (left) table that have matching values in the column specified in the <code>by =</code> statement. Rows in the right table with no match in the left table will have missing values (<code>NA</code>) in the new columns.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/right-join.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">right_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption></figure>
+<figure class="figure">
+<p><a href="images/right-join.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="right_join(): gif by Garrick Aden-Buie"><img src="images/right-join.gif" class="img-fluid figure-img" alt="right_join(): gif by Garrick Aden-Buie"></a></p>
+<figcaption>right_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption>
+</figure>
 </div>
 </div>
 <div id="tabset-3-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-4-tab">
 <p><code>full_join()</code> returns all rows and all columns from both tables. <code>NA</code> values fill unmatched rows.</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/full-join.gif" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">full_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption></figure>
+<figure class="figure">
+<p><a href="images/full-join.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="full_join(): gif by Garrick Aden-Buie"><img src="images/full-join.gif" class="img-fluid figure-img" alt="full_join(): gif by Garrick Aden-Buie"></a></p>
+<figcaption>full_join(): gif by <a href="https://www.garrickadenbuie.com/project/tidyexplain/" target="_blank">Garrick Aden-Buie</a></figcaption>
+</figure>
 </div>
 </div>
 </div>
@@ -1311,10 +1340,11 @@ No <code>by</code> argument in the code above?
 <p>More info on joins can be found <a href="https://www.tidyverse.org/blog/2023/01/dplyr-1-1-0-joins/" target="_blank">https://www.tidyverse.org/blog/2023/01/dplyr-1-1-0-joins/</a></p>
 </div>
 </div>
-<p>And this is basically the dataset we need for <a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a> and <a href="05-dataviz2.html"><span>Chapter&nbsp;5</span></a>.</p>
-</section><section id="activity-7-knit-and-export" class="level2" data-number="3.7"><h2 data-number="3.7" class="anchored" data-anchor-id="activity-7-knit-and-export">
-<span class="header-section-number">3.7</span> Activity 7: Knit and export</h2>
-<p>Knit the <code>.Rmd</code> file to ensure everything runs as expected. Once it does, export the data object <code>data_prp_final</code> as a csv for use in the <a href="04-dataviz.html"><span>Chapter&nbsp;4</span></a>. Name it something meaningful, something like <code>data_prp_for_ch4.csv</code>.</p>
+<p>And this is basically the dataset we need for <a href="04-dataviz.html" class="quarto-xref"><span>Chapter 4</span></a> and <a href="05-dataviz2.html" class="quarto-xref"><span>Chapter 5</span></a>.</p>
+</section>
+<section id="activity-7-knit-and-export" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="activity-7-knit-and-export"><span class="header-section-number">3.7</span> Activity 7: Knit and export</h2>
+<p>Knit the <code>.Rmd</code> file to ensure everything runs as expected. Once it does, export the data object <code>data_prp_final</code> as a csv for use in the <a href="04-dataviz.html" class="quarto-xref"><span>Chapter 4</span></a>. Name it something meaningful, something like <code>data_prp_for_ch4.csv</code>.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1333,32 +1363,26 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="test-your-knowledge-and-challenge-yourself" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></h2>
-<section id="knowledge-check" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="knowledge-check">Knowledge check</h3>
-<section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
-<p>When using <code>mutate()</code>, which additional function could you use to recode an existing variable? <select class="webex-select"><option value="blank"></option>
-<option value="x">arrange()</option>
-<option value="x">filter()</option>
-<option value="answer">case_match()</option>
-<option value="x">case_when()</option></select></p>
-</section><section id="question-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
-<p>When using <code>mutate()</code>, which additional function could you use to create a new variable based on one or multiple conditional statements? <select class="webex-select"><option value="blank"></option>
-<option value="x">arrange()</option>
-<option value="x">filter()</option>
-<option value="x">case_match()</option>
-<option value="answer">case_when()</option></select></p>
-</section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
-<p>Which of the following functions would you use if you wanted to join two data sets by their shared identifier? <select class="webex-select"><option value="blank"></option>
-<option value="answer">inner_join()</option>
-<option value="x">left_join()</option>
-<option value="x">right_join()</option>
-<option value="x">full_join()</option></select></p>
-</section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
-<p>Your data object contains a column <code>Score</code> with numbers, but they have been read in incorrectly as a character datatype. Which of the following functions would <em>not</em> work for fixing this issue? <select class="webex-select"><option value="blank"></option>
-<option value="x">parse_number()</option>
-<option value="answer">factor(Score)</option>
-<option value="x">mutate(Score = as.numeric(Score))</option>
-<option value="x">as.numeric()</option></select></p>
+</section>
+<section id="test-your-knowledge-and-challenge-yourself" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge-and-challenge-yourself"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge and challenge yourself</span></h2>
+<section id="knowledge-check" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="knowledge-check">Knowledge check</h3>
+<section id="question-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+<p>When using <code>mutate()</code>, which additional function could you use to recode an existing variable? <select class="webex-select"><option value="blank"></option><option value="x">arrange()</option><option value="x">filter()</option><option value="answer">case_match()</option><option value="x">case_when()</option></select></p>
+</section>
+<section id="question-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+<p>When using <code>mutate()</code>, which additional function could you use to create a new variable based on one or multiple conditional statements? <select class="webex-select"><option value="blank"></option><option value="x">arrange()</option><option value="x">filter()</option><option value="x">case_match()</option><option value="answer">case_when()</option></select></p>
+</section>
+<section id="question-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+<p>Which of the following functions would you use if you wanted to join two data sets by their shared identifier? <select class="webex-select"><option value="blank"></option><option value="answer">inner_join()</option><option value="x">left_join()</option><option value="x">right_join()</option><option value="x">full_join()</option></select></p>
+</section>
+<section id="question-4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+<p>Your data object contains a column <code>Score</code> with numbers, but they have been read in incorrectly as a character datatype. Which of the following functions would <em>not</em> work for fixing this issue? <select class="webex-select"><option value="blank"></option><option value="x">parse_number()</option><option value="answer">factor(Score)</option><option value="x">mutate(Score = as.numeric(Score))</option><option value="x">as.numeric()</option></select></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1372,19 +1396,18 @@ Explain this answer
 <div id="callout-20" class="callout-20-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<code>parse_number()</code> from the <code>readr</code> package extracts numeric values from strings, so this would work.</li>
-<li>
-<code>factor(Score)</code>: This would <em>not</em> work as expected because it converts the column into a factor, not a numeric datatype, leading to incorrect results if numeric operations are needed.</li>
-<li>
-<code>mutate(Score = as.numeric(Score))</code>: This would work too because <code>mutate()</code> can be used in combination with <code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code> to create a new numeric column or override the existing character column.</li>
-<li>
-<code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code>: This would also work to convert a character column to numeric. Without mutate, you could use it in a BaseR way, e.g., <code>data$Score &lt;- as.numeric(data$Score)</code> (<em>shudder, BaseR!!! But effective</em>)</li>
+<li><code>parse_number()</code> from the <code>readr</code> package extracts numeric values from strings, so this would work.</li>
+<li><code>factor(Score)</code>: This would <em>not</em> work as expected because it converts the column into a factor, not a numeric datatype, leading to incorrect results if numeric operations are needed.</li>
+<li><code>mutate(Score = as.numeric(Score))</code>: This would work too because <code>mutate()</code> can be used in combination with <code>as.numeric()</code> to create a new numeric column or override the existing character column.</li>
+<li><code>as.numeric()</code>: This would also work to convert a character column to numeric. Without mutate, you could use it in a BaseR way, e.g., <code>data$Score &lt;- as.numeric(data$Score)</code> (<em>shudder, BaseR!!! But effective</em>)</li>
 </ul>
 </div>
 </div>
 </div>
-</section></section><section id="challenge-yourself" class="level3 unnumbered"><h3 class="unnumbered anchored" data-anchor-id="challenge-yourself">Challenge yourself</h3>
+</section>
+</section>
+<section id="challenge-yourself" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="challenge-yourself">Challenge yourself</h3>
 <p>If you want to <strong>challenge yourself</strong> and further apply the skills from Chapter 3, you could wrangle the data from <code>dog_data_raw</code> (<a href="data/data_pair_coding.zip" title="download">lab data</a>) for one of the other questionnaires. There are plenty of options to choose from:</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
@@ -1401,10 +1424,8 @@ Difficulty level: easy
 <ul>
 <li>recode column <code>Live_Pets</code> so the values read yes and no rather than 1 and 2</li>
 <li>recode <code>Year_of_Study</code> so they have the labels from the codebook rather than the numbers</li>
-<li>reverse-code the <code>Homesickness</code> scale for <code>_pre</code> and <code>_post</code>
-</li>
-<li>renaming the columns of the other one-item scales as <code>Stress_pre</code>, <code>Stress_post</code>, <code>Engagement_pre</code> and <code>Engagement_post</code>
-</li>
+<li>reverse-code the <code>Homesickness</code> scale for <code>_pre</code> and <code>_post</code></li>
+<li>renaming the columns of the other one-item scales as <code>Stress_pre</code>, <code>Stress_post</code>, <code>Engagement_pre</code> and <code>Engagement_post</code></li>
 </ul>
 <p>Any of these tasks should be doable in one step. No need to select or pivot anything. You could just modify <code>dog_data_raw</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
@@ -1565,16 +1586,11 @@ Hints
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>
-<strong>Step 1</strong>: Select all relevant columns, such as participant ID and all the items that belong to the questionnaire that participants completed after the intervention</li>
-<li>
-<strong>Step 2</strong>: Pivot the data from wide format to long format so we can reverse-score and calculate the average score more easily</li>
-<li>
-<strong>Step 3</strong>: Recode the initial responses so that the new column has numbers instead of labels</li>
-<li>
-<strong>Step 4</strong>: Reverse-score the items that are labelled as “Reverse” in the codebook and then reverse-score them</li>
-<li>
-<strong>Step 5</strong>: Group by and summarise to calculate the mean Score</li>
+<li><strong>Step 1</strong>: Select all relevant columns, such as participant ID and all the items that belong to the questionnaire that participants completed after the intervention</li>
+<li><strong>Step 2</strong>: Pivot the data from wide format to long format so we can reverse-score and calculate the average score more easily</li>
+<li><strong>Step 3</strong>: Recode the initial responses so that the new column has numbers instead of labels</li>
+<li><strong>Step 4</strong>: Reverse-score the items that are labelled as “Reverse” in the codebook and then reverse-score them</li>
+<li><strong>Step 5</strong>: Group by and summarise to calculate the mean Score</li>
 </ul>
 </div>
 </div>
@@ -1664,7 +1680,7 @@ Difficulty level: extra hard
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 3%">
 <col style="width: 4%">
@@ -1688,7 +1704,8 @@ Difficulty level: extra hard
 <col style="width: 4%">
 <col style="width: 5%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">RID</th>
 <th style="text-align: right;">PN1_1</th>
 <th style="text-align: right;">PN1_2</th>
@@ -1710,7 +1727,8 @@ Difficulty level: extra hard
 <th style="text-align: right;">PN2_8</th>
 <th style="text-align: right;">PN2_9</th>
 <th style="text-align: right;">PN2_10</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -1836,13 +1854,15 @@ Difficulty level: extra hard
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">RID</th>
 <th style="text-align: left;">Stage</th>
 <th style="text-align: right;">PANAS_NA</th>
 <th style="text-align: right;">PANAS_PA</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
@@ -1893,21 +1913,14 @@ Hints
 <div class="callout-body-container callout-body">
 <p><strong>Start by mapping out the steps</strong></p>
 <ul>
-<li>
-<strong>Step 1</strong>: select all relevant columns, such as participant ID and all the items that belong to PANAs scale (pos, neg, pre, and post)</li>
-<li>
-<strong>Step 2</strong>: pivot the data from wide format to long format. You want to do that for ALL columns that are not the participant id. The data object should have 3 columns and 5680 observations, i.e.&nbsp;each participant has 20 rows.</li>
-<li>
-<strong>Step 3</strong>: All of the items will have the structure <code>PN1_1</code>. Use separate to split the information across 2 columns. First column has information about the <code>Stage</code>, second column should turn into an <code>Item_number</code> and it should convert into a numeric column in the process to save you typing quotation marks in Step 5.<br>
+<li><strong>Step 1</strong>: select all relevant columns, such as participant ID and all the items that belong to PANAs scale (pos, neg, pre, and post)</li>
+<li><strong>Step 2</strong>: pivot the data from wide format to long format. You want to do that for ALL columns that are not the participant id. The data object should have 3 columns and 5680 observations, i.e.&nbsp;each participant has 20 rows.</li>
+<li><strong>Step 3</strong>: All of the items will have the structure <code>PN1_1</code>. Use separate to split the information across 2 columns. First column has information about the <code>Stage</code>, second column should turn into an <code>Item_number</code> and it should convert into a numeric column in the process to save you typing quotation marks in Step 5.<br>
 </li>
-<li>
-<strong>Step 4</strong>: recode the <code>Stage</code> column you just created so that everything that starts with PN1 relates to “pre” and PN2 as post.</li>
-<li>
-<strong>Step 5</strong>: identify the subscales positive affect (PA) and negative affect (NA) by item number and recode them. This requires a conditional statement.</li>
-<li>
-<strong>Step 6</strong>: group by and summarise to calculate the mean Score</li>
-<li>
-<strong>Step 7</strong>: pivot, so that you have the 2 PANAS subscales presented in separate columns (see table above). You might need an extra step if the columns aren’t labelled exactly as shown in the table above.</li>
+<li><strong>Step 4</strong>: recode the <code>Stage</code> column you just created so that everything that starts with PN1 relates to “pre” and PN2 as post.</li>
+<li><strong>Step 5</strong>: identify the subscales positive affect (PA) and negative affect (NA) by item number and recode them. This requires a conditional statement.</li>
+<li><strong>Step 6</strong>: group by and summarise to calculate the mean Score</li>
+<li><strong>Step 7</strong>: pivot, so that you have the 2 PANAS subscales presented in separate columns (see table above). You might need an extra step if the columns aren’t labelled exactly as shown in the table above.</li>
 </ul>
 </div>
 </div>
@@ -1956,239 +1969,478 @@ Solution for <strong>Challenge yourself - extra hard</strong>
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -2229,6 +2481,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -2297,13 +2576,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -2338,18 +2619,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -2381,11 +2651,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -2395,8 +2704,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -2408,7 +2726,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -2452,6 +2893,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2477,6 +2919,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2535,28 +3003,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./02-wrangling.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./02-wrangling.html" class="pagination-link" aria-label="Data wrangling I">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Data wrangling I</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04-dataviz.html" class="pagination-link">
+      <a href="./04-dataviz.html" class="pagination-link" aria-label="Data viz I">
         <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Data viz I</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":false,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

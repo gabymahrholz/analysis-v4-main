@@ -1,8 +1,11 @@
 {
-  "hash": "7a1e47689f372828cced3a1f1c866d07",
+  "hash": "55672cd216ea161f89799fec8e6b18a0",
   "result": {
-    "markdown": "# 2B Lab 7 Week 9  {.unnumbered}\n\n\n\n\n\n\n**This is the pair coding activity related to @sec-factorial.**\n\n\n",
-    "supporting": [],
+    "engine": "knitr",
+    "markdown": "# 2B Lab 7 Week 9  {.unnumbered}\n\n\n\n\n\n\n\n\n\n\n**This is the pair coding activity related to @sec-factorial.**\n\n\n",
+    "supporting": [
+      "pc-B06_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],

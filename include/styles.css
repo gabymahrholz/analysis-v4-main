@@ -1,0 +1,20 @@
+/* belt-and-braces: kill any external-link pseudo-element on the banner link */
+#quarto-margin-sidebar .brand-banner a.no-external-icon::after,
+.brand-banner a.no-external-icon::after,
+a.no-external-icon.external::after {
+  content: none !important;
+  background: none !important;
+  -webkit-mask: none !important;
+  mask: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+}
+
+/* add a bit more gap below the banner */
+#quarto-margin-sidebar .brand-banner {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bs-border-color, #e5e5e5);
+}

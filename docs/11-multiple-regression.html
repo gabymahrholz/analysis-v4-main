@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 11&nbsp; Multiple regression</title>
+
+<title>11&nbsp; Multiple regression – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./11-multiple-regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./11-multiple-regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +216,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +302,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +391,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,44 +432,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
   <li><a href="#activity-1-setup-download-the-data" id="toc-activity-1-setup-download-the-data" class="nav-link" data-scroll-target="#activity-1-setup-download-the-data"><span class="header-section-number">11.1</span> Activity 1: Setup &amp; download the data</a></li>
   <li><a href="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" id="toc-activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="nav-link" data-scroll-target="#activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">11.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</a></li>
-  <li>
-<a href="#activity-3-compute-descriptives" id="toc-activity-3-compute-descriptives" class="nav-link" data-scroll-target="#activity-3-compute-descriptives"><span class="header-section-number">11.3</span> Activity 3: Compute descriptives</a>
+  <li><a href="#activity-3-compute-descriptives" id="toc-activity-3-compute-descriptives" class="nav-link" data-scroll-target="#activity-3-compute-descriptives"><span class="header-section-number">11.3</span> Activity 3: Compute descriptives</a>
   <ul class="collapse">
-<li><a href="#well-being" id="toc-well-being" class="nav-link" data-scroll-target="#well-being"><span class="header-section-number">11.3.1</span> Well-being</a></li>
+  <li><a href="#well-being" id="toc-well-being" class="nav-link" data-scroll-target="#well-being"><span class="header-section-number">11.3.1</span> Well-being</a></li>
   <li><a href="#screentime" id="toc-screentime" class="nav-link" data-scroll-target="#screentime"><span class="header-section-number">11.3.2</span> Screentime</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#activity-4-recreating-the-plot-from-the-paper" id="toc-activity-4-recreating-the-plot-from-the-paper" class="nav-link" data-scroll-target="#activity-4-recreating-the-plot-from-the-paper"><span class="header-section-number">11.4</span> Activity 4: Recreating the plot from the paper</a></li>
-  <li>
-<a href="#activity-5-dataframe-for-the-regression-model" id="toc-activity-5-dataframe-for-the-regression-model" class="nav-link" data-scroll-target="#activity-5-dataframe-for-the-regression-model"><span class="header-section-number">11.5</span> Activity 5: Dataframe for the regression model</a>
+  <li><a href="#activity-5-dataframe-for-the-regression-model" id="toc-activity-5-dataframe-for-the-regression-model" class="nav-link" data-scroll-target="#activity-5-dataframe-for-the-regression-model"><span class="header-section-number">11.5</span> Activity 5: Dataframe for the regression model</a>
   <ul class="collapse">
-<li><a href="#final-data-wrangling-steps" id="toc-final-data-wrangling-steps" class="nav-link" data-scroll-target="#final-data-wrangling-steps"><span class="header-section-number">11.5.1</span> Final data wrangling steps</a></li>
+  <li><a href="#final-data-wrangling-steps" id="toc-final-data-wrangling-steps" class="nav-link" data-scroll-target="#final-data-wrangling-steps"><span class="header-section-number">11.5.1</span> Final data wrangling steps</a></li>
   <li><a href="#mean-centering-variables" id="toc-mean-centering-variables" class="nav-link" data-scroll-target="#mean-centering-variables"><span class="header-section-number">11.5.2</span> Mean-centering variables</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#activity-6-compute-the-regression-confidence-intervals-and-effect-size" id="toc-activity-6-compute-the-regression-confidence-intervals-and-effect-size" class="nav-link" data-scroll-target="#activity-6-compute-the-regression-confidence-intervals-and-effect-size"><span class="header-section-number">11.6</span> Activity 6: Compute the regression, confidence intervals, and effect size</a></li>
   <li><a href="#ch11_act_7" id="toc-ch11_act_7" class="nav-link" data-scroll-target="#ch11_act_7"><span class="header-section-number">11.7</span> Activity 7: Visualising interactions</a></li>
   <li><a href="#activity-8-check-assumptions" id="toc-activity-8-check-assumptions" class="nav-link" data-scroll-target="#activity-8-check-assumptions"><span class="header-section-number">11.8</span> Activity 8: Check assumptions</a></li>
   <li><a href="#activity-9-sensitivity-power-analysis" id="toc-activity-9-sensitivity-power-analysis" class="nav-link" data-scroll-target="#activity-9-sensitivity-power-analysis"><span class="header-section-number">11.9</span> Activity 9: Sensitivity power analysis</a></li>
   <li><a href="#activity-10-the-write-up" id="toc-activity-10-the-write-up" class="nav-link" data-scroll-target="#activity-10-the-write-up"><span class="header-section-number">11.10</span> Activity 10: The write-up</a></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./11-multiple-regression.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="sec-reg_mult" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Multiple regression</span></span></h1>
 </div>
 
@@ -428,7 +491,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="intended-learning-outcomes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+
+</header>
+
+
+<section id="intended-learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter you should be able to:</p>
 <ul>
 <li>Apply and interpret multiple linear regression models.</li>
@@ -437,26 +505,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Calculate statistical power for a multiple regression model.</li>
 </ul>
 <p>In the previous chapter, we have looked at simple regressions - predicting an outcome variable using one predictor variable. In this chapter, we will expand on that and look at scenarios where we predict an outcome using more than one predictor in the model - hence, multiple regression.</p>
-</section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
-</section><section id="activity-1-setup-download-the-data" class="level2" data-number="11.1"><h2 data-number="11.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data">
-<span class="header-section-number">11.1</span> Activity 1: Setup &amp; download the data</h2>
+</section>
+<section id="individual-walkthrough" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+</section>
+<section id="activity-1-setup-download-the-data" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data"><span class="header-section-number">11.1</span> Activity 1: Setup &amp; download the data</h2>
 <p>This week, we will be working with a new dataset. Follow the steps below to set up your project:</p>
 <ul>
-<li>
-<strong>Create a new project</strong> and name it something meaningful (e.g., “2B_chapter11”, or “11_multiple_regression”). See <a href="01-basics.html#sec-project"><span>Section&nbsp;1.2</span></a> if you need some guidance.</li>
-<li>
-<strong>Create a new <code>.Rmd</code> file</strong> and save it to your project folder. See <a href="01-basics.html#sec-rmd"><span>Section&nbsp;1.3</span></a> if you need help.</li>
+<li><strong>Create a new project</strong> and name it something meaningful (e.g., “2B_chapter11”, or “11_multiple_regression”). See <a href="01-basics.html#sec-project" class="quarto-xref"><span>Section 1.2</span></a> if you need some guidance.</li>
+<li><strong>Create a new <code>.Rmd</code> file</strong> and save it to your project folder. See <a href="01-basics.html#sec-rmd" class="quarto-xref"><span>Section 1.3</span></a> if you need help.</li>
 <li>Delete everything after the setup code chunk (e.g., line 12 and below)</li>
-<li>
-<strong>Download the new dataset</strong> here: <a href="data/data_ch11.zip" title="download">data_ch11.zip</a>. The zip folder includes:
+<li><strong>Download the new dataset</strong> here: <a href="data/data_ch11.zip" title="download">data_ch11.zip</a>. The zip folder includes:
 <ul>
 <li>the demographics data file (<code>Przybylski_2017_demographics.csv</code>)</li>
 <li>the screentime data file (<code>Przybylski_2017_screentime.csv</code>)</li>
 <li>the wellbeing data file (<code>Przybylski_2017_wellbeing.csv</code>), and the</li>
 <li>the codebook (<code>Przybylski_2017_Codebook.xlsx</code>).</li>
-</ul>
-</li>
-<li>Extract the data file from the zip folder and place it in your project folder. If you need help, see <a href="01-basics.html#sec-download_data_ch1"><span>Section&nbsp;1.4</span></a>.</li>
+</ul></li>
+<li>Extract the data file from the zip folder and place it in your project folder. If you need help, see <a href="01-basics.html#sec-download_data_ch1" class="quarto-xref"><span>Section 1.4</span></a>.</li>
 </ul>
 <p><strong>Citation</strong></p>
 <blockquote class="blockquote">
@@ -475,8 +542,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Screen time values were recoded to reflect hours according to the codebook.</li>
 <li>Rows with missing values were removed from <code>screentime.csv</code> and <code>wellbeing.csv</code>.</li>
 <li>A codebook was created for the selected variables.</li>
-</ul></section><section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="11.2"><h2 data-number="11.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data">
-<span class="header-section-number">11.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
+</ul>
+</section>
+<section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">11.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
 <p>Today, we will use the following packages <code>tidyverse</code>, <code>sjPlot</code>, <code>performance</code>, and <code>pwr</code>, along with the three data files from the Przybylski and Weinstein (2017) study.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>???</span>
@@ -513,29 +582,19 @@ Solution
 <p>As always, take a moment to familiarise yourself with the data before starting your analysis.</p>
 <p>Once you have explored the data objects and the codebook, try and answer the following questions:</p>
 <ul>
-<li>The variable <strong>Gender</strong> is located in the object named <select class="webex-select"><option value="blank"></option>
-<option value="answer">demo</option>
-<option value="x">wellbeing</option>
-<option value="x">screentime</option></select>.</li>
-<li>The <strong>wellbeing data</strong> is in <select class="webex-select"><option value="blank"></option>
-<option value="x">long</option>
-<option value="answer">wide</option></select> format and contains observations from <input class="webex-solveme nospaces" size="7" data-answer="[&quot;102580&quot;,&quot;102,580&quot;]"> participants.</li>
+<li>The variable <strong>Gender</strong> is located in the object named <select class="webex-select"><option value="blank"></option><option value="answer">demo</option><option value="x">wellbeing</option><option value="x">screentime</option></select>.</li>
+<li>The <strong>wellbeing data</strong> is in <select class="webex-select"><option value="blank"></option><option value="x">long</option><option value="answer">wide</option></select> format and contains observations from <input class="webex-solveme nospaces" size="7" data-answer="[&quot;102580&quot;,&quot;102,580&quot;]"> participants.</li>
 <li>The <strong>wellbeing questionnaire</strong> has <input class="webex-solveme nospaces" size="2" data-answer="[&quot;14&quot;]"> items.</li>
 <li>Individual participants in this dataset are identified by the variable <input class="webex-solveme nospaces" size="6" data-answer="[&quot;Serial&quot;]">, which allows us to link information across the three tables.</li>
-<li>Are there any missing data points? <select class="webex-select"><option value="blank"></option>
-<option value="x">Yes</option>
-<option value="answer">No</option></select>
-</li>
+<li>Are there any missing data points? <select class="webex-select"><option value="blank"></option><option value="x">Yes</option><option value="answer">No</option></select></li>
 </ul>
-<section id="potential-research-question-hypthesis" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="potential-research-question-hypthesis">Potential Research Question &amp; Hypthesis</h4>
+<section id="potential-research-question-hypthesis" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="potential-research-question-hypthesis">Potential Research Question &amp; Hypthesis</h4>
 <p>There is ongoing debate about how smartphones affect well-being, particularly among children and teenagers. Therefore, we will examine whether smartphone use predicts mental well-being and whether this relationship varies by gender among adolescents.</p>
 <ul>
-<li>
-<strong>Potential research question</strong>: “Does smartphone use predict mental well-being, and does this relationship differ between male and female adolescents?”</li>
-<li>
-<strong>Null Hypothesis (H<sub>0</sub>)</strong>: “Smartphone use does not predict mental well-being, and there is no difference in this relationship between male and female adolescents.”</li>
-<li>
-<strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Smartphone use is a significant predictor of mental well-being, and the effect of smartphone use on well-being differs between male and female adolescents.”</li>
+<li><strong>Potential research question</strong>: “Does smartphone use predict mental well-being, and does this relationship differ between male and female adolescents?”</li>
+<li><strong>Null Hypothesis (H<sub>0</sub>)</strong>: “Smartphone use does not predict mental well-being, and there is no difference in this relationship between male and female adolescents.”</li>
+<li><strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Smartphone use is a significant predictor of mental well-being, and the effect of smartphone use on well-being differs between male and female adolescents.”</li>
 </ul>
 <p>Note that in this analysis, we have:</p>
 <ul>
@@ -544,19 +603,19 @@ Solution
 <li>A categorical independent variable (IV)/Predictor: gender</li>
 </ul>
 <p><em>* these variables are only quasi-continuous, inasmuch as only discrete values are possible. However, there are a sufficient number of discrete categories that we can treat them as effectively continuous.</em></p>
-</section></section><section id="activity-3-compute-descriptives" class="level2" data-number="11.3"><h2 data-number="11.3" class="anchored" data-anchor-id="activity-3-compute-descriptives">
-<span class="header-section-number">11.3</span> Activity 3: Compute descriptives</h2>
+</section>
+</section>
+<section id="activity-3-compute-descriptives" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="activity-3-compute-descriptives"><span class="header-section-number">11.3</span> Activity 3: Compute descriptives</h2>
 <p>Today, most of the data wrangling will be done in the upcoming activities. To streamline the process, we will move “Computing descriptives” forward.</p>
-<section id="well-being" class="level3" data-number="11.3.1"><h3 data-number="11.3.1" class="anchored" data-anchor-id="well-being">
-<span class="header-section-number">11.3.1</span> Well-being</h3>
+<section id="well-being" class="level3" data-number="11.3.1">
+<h3 data-number="11.3.1" class="anchored" data-anchor-id="well-being"><span class="header-section-number">11.3.1</span> Well-being</h3>
 <p>We need to do some initial data wrangling on <code>wellbeing</code>.</p>
 <p>For each participant, compute the total score for the mental health questionnaire. Store the output in a new data object called <code>wemwbs</code>.</p>
 <p>The new dataset should have two variables:</p>
 <ul>
-<li>
-<code>Serial</code> - the participant ID.</li>
-<li>
-<code>WEMWBS_sum</code> - the total WEMWBS score.</li>
+<li><code>Serial</code> - the participant ID.</li>
+<li><code>WEMWBS_sum</code> - the total WEMWBS score.</li>
 </ul>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -596,7 +655,7 @@ Hint
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Means and standard deviations should not be an issue at this stage, but how would you calculate the minimum and the maximum?</p>
-<p>We briefly covered this in <a href="02-wrangling.html"><span>Chapter&nbsp;2</span></a>, and the solution is more intuitive than you might think…</p>
+<p>We briefly covered this in <a href="02-wrangling.html" class="quarto-xref"><span>Chapter 2</span></a>, and the solution is more intuitive than you might think…</p>
 </div>
 </div>
 </div>
@@ -612,7 +671,7 @@ Solution
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Yes, that’s right! The functions <code><a href="https://rdrr.io/r/base/Extremes.html">min()</a></code> and <code><a href="https://rdrr.io/r/base/Extremes.html">max()</a></code> are used to calculate the minimum and maximum values, respectively.</p>
+<p>Yes, that’s right! The functions <code>min()</code> and <code>max()</code> are used to calculate the minimum and maximum values, respectively.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>wemwbs <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">summarise</span>(<span class="at">mean =</span> <span class="fu">mean</span>(WEMWBS_sum),</span>
@@ -621,19 +680,23 @@ Solution
 <span id="cb4-5"><a href="#cb4-5"></a>            <span class="at">max =</span> <span class="fu">max</span>(WEMWBS_sum))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: right;">mean</th>
 <th style="text-align: right;">sd</th>
 <th style="text-align: right;">min</th>
 <th style="text-align: right;">max</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">47.52189</td>
 <td style="text-align: right;">9.546374</td>
 <td style="text-align: right;">14</td>
 <td style="text-align: right;">70</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -641,8 +704,9 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="screentime" class="level3" data-number="11.3.2"><h3 data-number="11.3.2" class="anchored" data-anchor-id="screentime">
-<span class="header-section-number">11.3.2</span> Screentime</h3>
+</section>
+<section id="screentime" class="level3" data-number="11.3.2">
+<h3 data-number="11.3.2" class="anchored" data-anchor-id="screentime"><span class="header-section-number">11.3.2</span> Screentime</h3>
 <p>We need to calculate the means and standard deviations for smartphone use (in hours) during the week and on the weekend.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
@@ -665,25 +729,29 @@ Solution
 <span id="cb5-5"><a href="#cb5-5"></a>            <span class="at">smart_weekend_sd =</span> <span class="fu">sd</span>(Smart_we))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 26%">
 <col style="width: 23%">
 <col style="width: 26%">
 <col style="width: 23%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">smart_weekday_mean</th>
 <th style="text-align: right;">smart_weekday_sd</th>
 <th style="text-align: right;">smart_weekend_mean</th>
 <th style="text-align: right;">smart_weekend_sd</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">2.910655</td>
 <td style="text-align: right;">2.33917</td>
 <td style="text-align: right;">3.517003</td>
 <td style="text-align: right;">2.497139</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -691,12 +759,16 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="activity-4-recreating-the-plot-from-the-paper" class="level2" data-number="11.4"><h2 data-number="11.4" class="anchored" data-anchor-id="activity-4-recreating-the-plot-from-the-paper">
-<span class="header-section-number">11.4</span> Activity 4: Recreating the plot from the paper</h2>
+</section>
+</section>
+<section id="activity-4-recreating-the-plot-from-the-paper" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="activity-4-recreating-the-plot-from-the-paper"><span class="header-section-number">11.4</span> Activity 4: Recreating the plot from the paper</h2>
 <p>If there’s a challenge in this session, this is it! Our task is to wrangle the data and recreate the plot from the original article (shown below).</p>
 <div class="quarto-figure quarto-figure-center">
-<figure class="figure"><p><img src="images/figure_Przybylski.jpeg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Fig. 1. Mental well-being as a function of daily digital-screen time on weekdays and weekends. Results are shown separately for time spent (a) watching TV and movies, (b) playing video games, (c) using computers, and (d) using smartphones. Error bars denote the 95% confidence intervals for the observed means. (Przybylski &amp; Weinstein, 2017)</figcaption></figure>
+<figure class="figure">
+<p><a href="images/figure_Przybylski.jpeg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fig. 1. Mental well-being as a function of daily digital-screen time on weekdays and weekends. Results are shown separately for time spent (a) watching TV and movies, (b) playing video games, (c) using computers, and (d) using smartphones. Error bars denote the 95% confidence intervals for the observed means. (Przybylski &amp; Weinstein, 2017)"><img src="images/figure_Przybylski.jpeg" class="img-fluid figure-img" alt="Fig. 1. Mental well-being as a function of daily digital-screen time on weekdays and weekends. Results are shown separately for time spent (a) watching TV and movies, (b) playing video games, (c) using computers, and (d) using smartphones. Error bars denote the 95% confidence intervals for the observed means. (Przybylski &amp; Weinstein, 2017)"></a></p>
+<figcaption>Fig. 1. Mental well-being as a function of daily digital-screen time on weekdays and weekends. Results are shown separately for time spent (a) watching TV and movies, (b) playing video games, (c) using computers, and (d) using smartphones. Error bars denote the 95% confidence intervals for the observed means. (Przybylski &amp; Weinstein, 2017)</figcaption>
+</figure>
 </div>
 <p>The graph shows that smartphone use of more than 1 hour per day is associated with increasingly negative well-being.</p>
 <p>We can plot the relationship between well-being and hours of technology use, split into four categories of technology (video games, computers, smartphones, TV).</p>
@@ -751,14 +823,11 @@ Hints
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>Step 1: uses <code>pivot_longer()</code>
-</li>
+<li>Step 1: uses <code>pivot_longer()</code></li>
 <li>Step 2: remember the <code>separate()</code> function. It will come in handy here. And the separator needs to be “_“.</li>
 <li>Step 3: requires a simple recoding of the values, no conditional statements necessary</li>
-<li>Step 4: <code>inner_join()</code>
-</li>
-<li>Step 5: think about what column you need to <code>group_by()</code> before you can <code>summarise()</code>
-</li>
+<li>Step 4: <code>inner_join()</code></li>
+<li>Step 5: think about what column you need to <code>group_by()</code> before you can <code>summarise()</code></li>
 </ul>
 </div>
 </div>
@@ -815,7 +884,11 @@ using the `.groups` argument.</code></pre>
 <span id="cb8-7"><a href="#cb8-7"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Hours of Technology Use"</span>,</span>
 <span id="cb8-8"><a href="#cb8-8"></a>       <span class="at">y =</span> <span class="st">"Mean Well-Being Score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="11-multiple-regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="11-multiple-regression_files/figure-html/unnamed-chunk-9-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="11-multiple-regression_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -831,10 +904,8 @@ More info on plot parameters
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li>The <code>aes(linetype = …)</code> argument controls the type of line (e.g., solid or dotted). Here, we used it to differentiate between weekdays and weekends. More on line types can be found here: <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html" target="_blank">https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html</a>
-</li>
-<li>To change the shape of the points, we set <code>shape</code> inside <code>aes()</code>, linking it to the day type. However, by default, the shapes appeared as dots and triangles, whereas the original plot suggests dots and squares. We corrected this using <code>scale_shape_manual()</code>. More on point shapes can be found here: <a href="https://www.sthda.com/english/wiki/ggplot2-point-shapes" target="_blank">https://www.sthda.com/english/wiki/ggplot2-point-shapes</a>
-</li>
+<li>The <code>aes(linetype = …)</code> argument controls the type of line (e.g., solid or dotted). Here, we used it to differentiate between weekdays and weekends. More on line types can be found here: <a href="https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html" target="_blank">https://sape.inf.usi.ch/quick-reference/ggplot2/linetype.html</a></li>
+<li>To change the shape of the points, we set <code>shape</code> inside <code>aes()</code>, linking it to the day type. However, by default, the shapes appeared as dots and triangles, whereas the original plot suggests dots and squares. We corrected this using <code>scale_shape_manual()</code>. More on point shapes can be found here: <a href="https://www.sthda.com/english/wiki/ggplot2-point-shapes" target="_blank">https://www.sthda.com/english/wiki/ggplot2-point-shapes</a></li>
 </ul>
 <p>If you are looking really closely, you will notice that the order of the categories is slightly different, and that the x- and y-axis ranges extend a bit further. Feel free to fix that yourself.</p>
 <p>Hmm. Actually, it seems the original authors created four separate plots and then combined them using a package like <code>patchwork</code>. Here, we used facets rather than creating those individual plots. That also means that the axis labels span across all plots rather than being repeated for each. Plus, the legend appears on the side instead of within each plot.</p>
@@ -842,14 +913,15 @@ More info on plot parameters
 </div>
 </div>
 </div>
-</section><section id="activity-5-dataframe-for-the-regression-model" class="level2" data-number="11.5"><h2 data-number="11.5" class="anchored" data-anchor-id="activity-5-dataframe-for-the-regression-model">
-<span class="header-section-number">11.5</span> Activity 5: Dataframe for the regression model</h2>
+</section>
+<section id="activity-5-dataframe-for-the-regression-model" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="activity-5-dataframe-for-the-regression-model"><span class="header-section-number">11.5</span> Activity 5: Dataframe for the regression model</h2>
 <p>Now, we shift our focus to our hypothetical research question:</p>
 <blockquote class="blockquote">
 <p>“Does smartphone use predict mental well-being, and does this relationship differ between male and female adolescents?”</p>
 </blockquote>
-<section id="final-data-wrangling-steps" class="level3" data-number="11.5.1"><h3 data-number="11.5.1" class="anchored" data-anchor-id="final-data-wrangling-steps">
-<span class="header-section-number">11.5.1</span> Final data wrangling steps</h3>
+<section id="final-data-wrangling-steps" class="level3" data-number="11.5.1">
+<h3 data-number="11.5.1" class="anchored" data-anchor-id="final-data-wrangling-steps"><span class="header-section-number">11.5.1</span> Final data wrangling steps</h3>
 <p>Create a new data object that contains the average daily smartphone use per participant, averaged across weekdays and weekends.</p>
 <p>Since Przybylski and Weinstein’s findings suggest that smartphone use exceeding one hour per day is associated with increasingly negative well-being, we will filter the data to include only participants who use a smartphone for more than one hour per day.</p>
 <p>We have already structured much of the data when creating <code>screen_long</code>, so we have two options:</p>
@@ -970,9 +1042,10 @@ Joining with `by = join_by(Serial)`</code></pre>
 </div>
 </div>
 </div>
-</section><section id="mean-centering-variables" class="level3" data-number="11.5.2"><h3 data-number="11.5.2" class="anchored" data-anchor-id="mean-centering-variables">
-<span class="header-section-number">11.5.2</span> Mean-centering variables</h3>
-<p>As you have seen in the lectures, when you have continuous variables in a regression model, it is often sensible to transform them by <strong>mean centering</strong>. You mean center a predictor <code>X</code> by subtracting the mean of the predictor (<code>X_centered = X - mean(X)</code>) or you can use the <code><a href="https://rdrr.io/r/base/scale.html">scale()</a></code> function. This has two useful consequences:</p>
+</section>
+<section id="mean-centering-variables" class="level3" data-number="11.5.2">
+<h3 data-number="11.5.2" class="anchored" data-anchor-id="mean-centering-variables"><span class="header-section-number">11.5.2</span> Mean-centering variables</h3>
+<p>As you have seen in the lectures, when you have continuous variables in a regression model, it is often sensible to transform them by <strong>mean centering</strong>. You mean center a predictor <code>X</code> by subtracting the mean of the predictor (<code>X_centered = X - mean(X)</code>) or you can use the <code>scale()</code> function. This has two useful consequences:</p>
 <ul>
 <li><p>The model intercept represents the predicted value of <span class="math inline">\(Y\)</span> when the predictor variable is at its mean, rather than at zero in the unscaled version.</p></li>
 <li><p>When interactions are included in the model, significant effects can be interpreted as the overall effect of a predictor on the outcome (i.e., a main effect) rather than its effect at a specific level of another predictor (i.e., a simple effect).</p></li>
@@ -980,17 +1053,13 @@ Joining with `by = join_by(Serial)`</code></pre>
 <p>For categorical predictors with two levels, these become coded as -.5 and .5 (because the mean of these two values is 0). This is also known as deviation coding.</p>
 <p>If we used dummy coding (i.e., leaving the categorical predictor as “Male” and “Female or unknown; default for R) instead of deviation coding, the interpretation would change slightly:</p>
 <ul>
-<li>
-<strong>Dummy-coding interpretation</strong>: The intercept represents the predicted outcome for the reference group (coded as 0), and the coefficient for the categorical predictor represents the difference in the outcome between the two groups.</li>
-<li>
-<strong>Deviation-coding interpretation</strong>: The intercept represents the overall mean outcome across both groups, and the coefficient for the categorical predictor represents the average difference between the two groups, centered around zero.</li>
+<li><strong>Dummy-coding interpretation</strong>: The intercept represents the predicted outcome for the reference group (coded as 0), and the coefficient for the categorical predictor represents the difference in the outcome between the two groups.</li>
+<li><strong>Deviation-coding interpretation</strong>: The intercept represents the overall mean outcome across both groups, and the coefficient for the categorical predictor represents the average difference between the two groups, centered around zero.</li>
 </ul>
 <p>Use <code>mutate()</code> to add two new variables to <code>data_smartphone</code>:</p>
 <ul>
-<li>
-<code>average_hours_centered</code>: calculated as a mean-centered version of the <code>total_hours</code> predictor</li>
-<li>
-<code>gender_recoded</code>: recode Gender .5 for “Male” and -.5 for “Female or unknown”.</li>
+<li><code>average_hours_centered</code>: calculated as a mean-centered version of the <code>total_hours</code> predictor</li>
+<li><code>gender_recoded</code>: recode Gender .5 for “Male” and -.5 for “Female or unknown”.</li>
 </ul>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -1018,10 +1087,12 @@ Solution
 </div>
 </div>
 </div>
-</section></section><section id="activity-6-compute-the-regression-confidence-intervals-and-effect-size" class="level2" data-number="11.6"><h2 data-number="11.6" class="anchored" data-anchor-id="activity-6-compute-the-regression-confidence-intervals-and-effect-size">
-<span class="header-section-number">11.6</span> Activity 6: Compute the regression, confidence intervals, and effect size</h2>
-<p>For the data in <code>data_smartphone</code>, use the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function to calculate the multiple regression model:</p>
-<p><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i} + \beta_2 X_{2i} + \beta_3 X_{3i} + e_i\)</span></p>
+</section>
+</section>
+<section id="activity-6-compute-the-regression-confidence-intervals-and-effect-size" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="activity-6-compute-the-regression-confidence-intervals-and-effect-size"><span class="header-section-number">11.6</span> Activity 6: Compute the regression, confidence intervals, and effect size</h2>
+<p>For the data in <code>data_smartphone</code>, use the <code>lm()</code> function to calculate the multiple regression model:</p>
+<p><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_{1i}  + \beta_2 X_{2i}  + \beta_3 X_{3i} + e_i\)</span></p>
 <p>where</p>
 <ul>
 <li><p><span class="math inline">\(Y_i\)</span> is the well-being score for participant <span class="math inline">\(i\)</span>;</p></li>
@@ -1071,16 +1142,9 @@ Your Turn
 <p>The functions you’ll use are the same as last time, except that this model includes multiple predictors and an interaction term.</p>
 <p>Answer the following questions:</p>
 <ul>
-<li><p>The interaction between smartphone use and gender is shown by the variable <select class="webex-select"><option value="blank"></option>
-<option value="x">average_hours_centered</option>
-<option value="x">gender_recoded0.5</option>
-<option value="answer">average_hours_centered:gender_recoded0.5</option></select>, and this interaction was <select class="webex-select"><option value="blank"></option>
-<option value="answer">significant</option>
-<option value="x">non-significant</option></select> at the <span class="math inline">\(\alpha = .05\)</span> level.</p></li>
+<li><p>The interaction between smartphone use and gender is shown by the variable <select class="webex-select"><option value="blank"></option><option value="x">average_hours_centered</option><option value="x">gender_recoded0.5</option><option value="answer">average_hours_centered:gender_recoded0.5</option></select>, and this interaction was <select class="webex-select"><option value="blank"></option><option value="answer">significant</option><option value="x">non-significant</option></select> at the <span class="math inline">\(\alpha = .05\)</span> level.</p></li>
 <li><p>To 2 decimal places, adjusted <span class="math inline">\(R^2\)</span> suggests the overall model explains what percentage of the variance in well-being scores? <input class="webex-solveme nospaces" size="4" data-answer="[&quot;9.38&quot;]"></p></li>
-<li><p>The <em>p</em>-value for the overall model fit is <code>&lt;2e-16</code>. Is this statistically significant? <select class="webex-select"><option value="blank"></option>
-<option value="answer">Yes</option>
-<option value="">No</option></select>. How would you note that p-value in APA style when writing up the results? <input class="webex-solveme nospaces" size="8" data-answer="[&quot;p<.001&quot;,&quot;p < .001&quot;]"></p></li>
+<li><p>The <em>p</em>-value for the overall model fit is <code>&lt;2e-16</code>. Is this statistically significant? <select class="webex-select"><option value="blank"></option><option value="answer">Yes</option><option value="">No</option></select>. How would you note that p-value in APA style when writing up the results? <input class="webex-solveme nospaces" size="8" data-answer="[&quot;p<.001&quot;,&quot;p < .001&quot;]"></p></li>
 <li><p>What is the observed effect size (in <span class="math inline">\(f^2\)</span>) for the study to 3 decimal places? <input class="webex-solveme nospaces" data-tol="0.001" size="5" data-answer="[&quot;0.103&quot;,&quot;.103&quot;]"></p></li>
 </ul>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
@@ -1156,8 +1220,9 @@ average_hours_centered:gender_recoded0.5  0.3796615  0.5244376</code></pre>
 </div>
 </div>
 </div>
-</section><section id="ch11_act_7" class="level2" data-number="11.7"><h2 data-number="11.7" class="anchored" data-anchor-id="ch11_act_7">
-<span class="header-section-number">11.7</span> Activity 7: Visualising interactions</h2>
+</section>
+<section id="ch11_act_7" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="ch11_act_7"><span class="header-section-number">11.7</span> Activity 7: Visualising interactions</h2>
 <p>It is very difficult to understand an interaction from the coefficient alone, so your best bet is visualising the interaction to help you understand the results and communicate your results to your readers.</p>
 <p>There is a great package called <code>sjPlot</code> which takes regression models and helps you plot them in different ways. We will demonstrate plotting interactions, but for further information and options, see the <a href="https://strengejacke.github.io/sjPlot/articles/plot_interactions.html" target="_blank">online documentation</a>.</p>
 <p>To plot the interaction, you need the model object (not the summary), specify “pred” as the <code>type</code> as we want to plot predictions, and add the <code>terms</code> you want to plot.</p>
@@ -1166,12 +1231,16 @@ average_hours_centered:gender_recoded0.5  0.3796615  0.5244376</code></pre>
 <span id="cb21-2"><a href="#cb21-2"></a>           <span class="at">type =</span> <span class="st">"pred"</span>, </span>
 <span id="cb21-3"><a href="#cb21-3"></a>           <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"average_hours_centered"</span>, <span class="st">"gender_recoded"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="11-multiple-regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="11-multiple-regression_files/figure-html/unnamed-chunk-17-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="11-multiple-regression_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p>What is the most reasonable interpretation of the interaction?</p>
-<div id="radio_WIUBBLPGTO" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WIUBBLPGTO" value="answer"><span>smartphone use was more negatively associated with wellbeing for girls than for boys</span></label><label><input type="radio" autocomplete="off" name="radio_WIUBBLPGTO" value="x"><span>there is no evidence for gender differences in the relationship between smartphone use and well-being</span></label><label><input type="radio" autocomplete="off" name="radio_WIUBBLPGTO" value="x"><span>smartphone use harms boys more than girls</span></label><label><input type="radio" autocomplete="off" name="radio_WIUBBLPGTO" value="x"><span>smartphone use harms girls more than boys</span></label>
+<div id="radio_RRAORNXCFB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RRAORNXCFB" value="x"> <span>smartphone use harms girls more than boys</span></label><label><input type="radio" autocomplete="off" name="radio_RRAORNXCFB" value="answer"> <span>smartphone use was more negatively associated with wellbeing for girls than for boys</span></label><label><input type="radio" autocomplete="off" name="radio_RRAORNXCFB" value="x"> <span>smartphone use harms boys more than girls</span></label><label><input type="radio" autocomplete="off" name="radio_RRAORNXCFB" value="x"> <span>there is no evidence for gender differences in the relationship between smartphone use and well-being</span></label>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1206,7 +1275,10 @@ Example of a more tidy plot
 <span id="cb22-6"><a href="#cb22-6"></a>       <span class="at">title =</span> <span class="st">""</span>) <span class="sc">+</span> </span>
 <span id="cb22-7"><a href="#cb22-7"></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="11-multiple-regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="11-multiple-regression_files/figure-html/unnamed-chunk-18-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="11-multiple-regression_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
@@ -1214,8 +1286,10 @@ Example of a more tidy plot
 </div>
 </div>
 </div>
-</section><section id="activity-8-check-assumptions" class="level2" data-number="11.8"><h2 data-number="11.8" class="anchored" data-anchor-id="activity-8-check-assumptions">
-<span class="header-section-number">11.8</span> Activity 8: Check assumptions</h2>
+</div>
+</section>
+<section id="activity-8-check-assumptions" class="level2" data-number="11.8">
+<h2 data-number="11.8" class="anchored" data-anchor-id="activity-8-check-assumptions"><span class="header-section-number">11.8</span> Activity 8: Check assumptions</h2>
 <p>Now it’s time to test those pesky assumptions. The assumptions for multiple regression are the same as simple regression but there is one additional assumption, that of multicollinearity. This is the idea that predictor variables should not be too highly correlated.</p>
 <p>Assumptions are:</p>
 <ol type="1">
@@ -1227,7 +1301,7 @@ Example of a more tidy plot
 <li>There should be homoscedasticity (homogeneity of variance, but for the residuals).</li>
 <li>Multicollinearity: predictor variables should not be too highly correlated.</li>
 </ol>
-<p>We can use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> function for diagnostic plots or the <code>check_model()</code> from the <code>performance</code> package.</p>
+<p>We can use the <code>plot()</code> function for diagnostic plots or the <code>check_model()</code> from the <code>performance</code> package.</p>
 <p>One difference from when we used <code>check_model()</code> previously is that rather than just letting it run all the tests it wants, we are going to specify which tests to stop it throwing an error.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1250,25 +1324,42 @@ Important
 <span id="cb23-5"><a href="#cb23-5"></a>                      <span class="st">"linearity"</span>, </span>
 <span id="cb23-6"><a href="#cb23-6"></a>                      <span class="st">"homogeneity"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="11-multiple-regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="11-multiple-regression_files/figure-html/unnamed-chunk-19-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="11-multiple-regression_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
-<section id="assumptions-1-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumptions-1-3">Assumptions 1-3</h4>
+</div>
+<section id="assumptions-1-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumptions-1-3">Assumptions 1-3</h4>
 <p>From the work we have done so far, we know that we meet assumptions 1-3.</p>
-</section><section id="assumption-4-linearity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-4-linearity">Assumption 4: Linearity</h4>
+</section>
+<section id="assumption-4-linearity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-4-linearity">Assumption 4: Linearity</h4>
 <p>We already know from looking at the scatterplot that the relationship is linear, but the residual plot also confirms this.</p>
-</section><section id="assumption-5-normality-of-residuals" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-5-normality-of-residuals">Assumption 5: Normality of residuals</h4>
+</section>
+<section id="assumption-5-normality-of-residuals" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-5-normality-of-residuals">Assumption 5: Normality of residuals</h4>
 <p>The residuals look good in both plots and this provides an excellent example of why it’s often better to visualise than rely on statistics. With a sample size this large, any statistical diagnostic tests will be highly significant as they are sensitive to sample size.</p>
-</section><section id="assumption-6-homoscedasticity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-6-homoscedasticity">Assumption 6: Homoscedasticity</h4>
-<p>The plot is missing the reference line. Fun fact, this took us several days of our lives and asking for help on social media to figure out. The reason the line is not there is because the data set is so large that is creates a memory issue. However, if you use the <code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> version, it does show the reference line.</p>
+</section>
+<section id="assumption-6-homoscedasticity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-6-homoscedasticity">Assumption 6: Homoscedasticity</h4>
+<p>The plot is missing the reference line. Fun fact, this took us several days of our lives and asking for help on social media to figure out. The reason the line is not there is because the data set is so large that is creates a memory issue. However, if you use the <code>plot()</code> version, it does show the reference line.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">plot</span>(mod, <span class="at">which =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="11-multiple-regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="11-multiple-regression_files/figure-html/unnamed-chunk-20-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="11-multiple-regression_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 <p>It is not perfect, but the reference line is roughly flat to suggest there are no serious issues with homoscedasticity.</p>
-</section><section id="assumption-7-multicollinearity" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-7-multicollinearity">Assumption 7: Multicollinearity</h4>
+</section>
+<section id="assumption-7-multicollinearity" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-7-multicollinearity">Assumption 7: Multicollinearity</h4>
 <p>From the collinearity plot, we can see that both main effects and the interaction term are in the “green zone” which is great. Howeverm we can also test this statistically using <code>check_collinearity()</code> to produce VIF (variance inflation factor) and tolerance values.</p>
 <p>Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor is not actually adding any unique variance to the model, it’s just really strongly related to other predictors. <a href="https://statisticalhorizons.com/multicollinearity" target="_blank">You can read more about this online</a>. Thankfully, VIF is not affected by large samples like other statistical diagnostic tests.</p>
 <p>There are various rules of thumb, but most converge on a <strong>VIF of above 2 - 2.5</strong> for any one predictor to be problematic. Here we are well under 2 for all 3 terms of the model.</p>
@@ -1276,7 +1367,7 @@ Important
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">check_collinearity</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 30%">
 <col style="width: 7%">
@@ -1287,7 +1378,8 @@ Important
 <col style="width: 13%">
 <col style="width: 14%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">Term</th>
 <th style="text-align: right;">VIF</th>
 <th style="text-align: right;">VIF_CI_low</th>
@@ -1296,7 +1388,8 @@ Important
 <th style="text-align: right;">Tolerance</th>
 <th style="text-align: right;">Tolerance_CI_low</th>
 <th style="text-align: right;">Tolerance_CI_high</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">average_hours_centered</td>
@@ -1333,32 +1426,24 @@ Important
 </div>
 </div>
 </div>
-</section></section><section id="activity-9-sensitivity-power-analysis" class="level2" data-number="11.9"><h2 data-number="11.9" class="anchored" data-anchor-id="activity-9-sensitivity-power-analysis">
-<span class="header-section-number">11.9</span> Activity 9: Sensitivity power analysis</h2>
+</section>
+</section>
+<section id="activity-9-sensitivity-power-analysis" class="level2" data-number="11.9">
+<h2 data-number="11.9" class="anchored" data-anchor-id="activity-9-sensitivity-power-analysis"><span class="header-section-number">11.9</span> Activity 9: Sensitivity power analysis</h2>
 <p>As usual, we want to calculate the smallest effect size that our study was able to detect, given our design and sample size.</p>
 <p>To do this, we use the <code>pwr.f2.test()</code> function from the <code>pwr</code> package. This is the same as in chapter 10 for simple linear regression. Remember the arguments for this function:</p>
 <ul>
-<li>
-<code>u</code> = Numerator degrees of freedom. This the number of coefficients you have in your model (minus the intercept)</li>
-<li>
-<code>v</code> = Denominator degrees of freedom. This is calculated as <span class="math inline">\(v=n-u-1\)</span>, where <span class="math inline">\(n\)</span> is the number of participants.</li>
-<li>
-<code>f2</code> = The effect size. Here we are solving the effect size, so this parameter is left out</li>
-<li>
-<code>sig.level</code> = The significance level of your study. This is usually set to 0.05</li>
-<li>
-<code>power</code> = The power level of your study. This is usually set to 0.8, but let’s go for 0.99 this time (just because we have such a large number of participants)</li>
+<li><code>u</code> = Numerator degrees of freedom. This the number of coefficients you have in your model (minus the intercept)</li>
+<li><code>v</code> = Denominator degrees of freedom. This is calculated as <span class="math inline">\(v=n-u-1\)</span>, where <span class="math inline">\(n\)</span> is the number of participants.</li>
+<li><code>f2</code> = The effect size. Here we are solving the effect size, so this parameter is left out</li>
+<li><code>sig.level</code> = The significance level of your study. This is usually set to 0.05</li>
+<li><code>power</code> = The power level of your study. This is usually set to 0.8, but let’s go for 0.99 this time (just because we have such a large number of participants)</li>
 </ul>
 <p>Run the sensitivity power analysis and then answer the following questions:</p>
 <ul>
-<li>To 4 decimal places, what is the smallest effect size that this study could reliably detect? <input class="webex-solveme nospaces" size="0.0004" data-answer="[&quot;.0004&quot;]">
-</li>
+<li>To 4 decimal places, what is the smallest effect size that this study could reliably detect? <input class="webex-solveme nospaces" size="0.0004" data-answer="[&quot;.0004&quot;]"></li>
 </ul>
-<p>Since the observed effect size from our inferential statistics was <select class="webex-select"><option value="blank"></option>
-<option value="x">smaller</option>
-<option value="answer">larger</option></select> than the effect you could reliably detect with this design, the test was <select class="webex-select"><option value="blank"></option>
-<option value="answer">sufficiently powered</option>
-<option value="">underpowered</option></select> to detect the observed effect.</p>
+<p>Since the observed effect size from our inferential statistics was <select class="webex-select"><option value="blank"></option><option value="x">smaller</option><option value="answer">larger</option></select> than the effect you could reliably detect with this design, the test was <select class="webex-select"><option value="blank"></option><option value="answer">sufficiently powered</option><option value="">underpowered</option></select> to detect the observed effect.</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1388,14 +1473,18 @@ Solution
 </div>
 </div>
 </div>
-</section><section id="activity-10-the-write-up" class="level2" data-number="11.10"><h2 data-number="11.10" class="anchored" data-anchor-id="activity-10-the-write-up">
-<span class="header-section-number">11.10</span> Activity 10: The write-up</h2>
+</section>
+<section id="activity-10-the-write-up" class="level2" data-number="11.10">
+<h2 data-number="11.10" class="anchored" data-anchor-id="activity-10-the-write-up"><span class="header-section-number">11.10</span> Activity 10: The write-up</h2>
 <p>All continuous predictors were mean-centered and deviation coding was used for categorical predictors. The results of the regression indicated that the model significantly predicted wellbeing <span class="math inline">\((F(3, 71029) = 2451, p &lt; .001, R^2_{Adjusted} = .094, f^2 = 0.103)\)</span>, accounting for 9.4% of the variance. Total screen time was a significant negative predictor of wellbeing scores <span class="math inline">\((\beta = -0.77, 95\% CI = [-0.82, -0.73], p &lt; .001\)</span>), as was gender <span class="math inline">\((\beta = 5.14, p &lt; .001\)</span>), with girls having lower wellbeing scores than boys. Importantly, there was a significant interaction between screen time and gender <span class="math inline">\((\beta = 0.45, 95\% CI = [0.38, 0.52], p &lt; .001\)</span>), meaning that smartphone use was more negatively associated with well-being for girls than for boys. Therefore, we reject the null hypothesis in favour of H<sub>1</sub>, as smartphone use significantly predicted wellbeing and this relationship differed between boys and girls. The analysis was sufficiently powered to detect this effect.</p>
-</section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
-<section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+</section>
+<section id="test-your-knowledge" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+<section id="question-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
 <p><strong>What is the main purpose of a multiple regression analysis?</strong></p>
-<div id="radio_NOLLQTOZRD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NOLLQTOZRD" value="answer"><span>To predict or explain changes in an outcome variable based on multiple predictor variables.</span></label><label><input type="radio" autocomplete="off" name="radio_NOLLQTOZRD" value="x"><span>To determine whether there is an association between two variables, without assuming causality.</span></label><label><input type="radio" autocomplete="off" name="radio_NOLLQTOZRD" value="x"><span>To test whether one predictor variable explains the outcome variable while ignoring other potential influences.</span></label><label><input type="radio" autocomplete="off" name="radio_NOLLQTOZRD" value="x"><span>To compare means between two groups and determine if they are significantly different.</span></label>
+<div id="radio_KGGICRZWWE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KGGICRZWWE" value="answer"> <span>To predict or explain changes in an outcome variable based on multiple predictor variables.</span></label><label><input type="radio" autocomplete="off" name="radio_KGGICRZWWE" value="x"> <span>To compare means between two groups and determine if they are significantly different.</span></label><label><input type="radio" autocomplete="off" name="radio_KGGICRZWWE" value="x"> <span>To determine whether there is an association between two variables, without assuming causality.</span></label><label><input type="radio" autocomplete="off" name="radio_KGGICRZWWE" value="x"> <span>To test whether one predictor variable explains the outcome variable while ignoring other potential influences.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
@@ -1418,11 +1507,13 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+</section>
+<section id="question-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
 <p><strong>A researcher investigates whether a student’s exam performance can be predicted by their hours of study and test anxiety levels.</strong></p>
 <p><strong>Which of the following correctly specifies the multiple regression model in R?</strong></p>
-<div id="radio_HRUXZKVUYL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HRUXZKVUYL" value="answer"><span>lm(Exam_Score ~ Study_Hours + Test_Anxiety, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_HRUXZKVUYL" value="x"><span>lm(Study_Hours ~ Exam_Score + Test_Anxiety, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_HRUXZKVUYL" value="x"><span>lm(Exam_Score ~ Study_Hours * Test_Anxiety, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_HRUXZKVUYL" value="x"><span>lm(Test_Anxiety ~ Study_Hours + Exam_Score, data = student_data)</span></label>
+<div id="radio_KKOISKAGDB" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KKOISKAGDB" value="x"> <span>lm(Test_Anxiety ~ Study_Hours + Exam_Score, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_KKOISKAGDB" value="answer"> <span>lm(Exam_Score ~ Study_Hours + Test_Anxiety, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_KKOISKAGDB" value="x"> <span>lm(Study_Hours ~ Exam_Score + Test_Anxiety, data = student_data)</span></label><label><input type="radio" autocomplete="off" name="radio_KKOISKAGDB" value="x"> <span>lm(Exam_Score ~ Study_Hours * Test_Anxiety, data = student_data)</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
@@ -1445,12 +1536,14 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+</section>
+<section id="question-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
 <p><strong>A multiple regression model is used to predict life satisfaction based on sleep quality and daily screen time. The output includes the following regression equation:</strong></p>
 <p><span class="math inline">\(Life Satisfaction = 50.2 + 1.8 * Sleep Quality − 0.9 * ScreenTime\)</span></p>
 <p><strong>How should the coefficient for Sleep Quality (1.8) be interpreted??</strong></p>
-<div id="radio_XWXMTGVXQL" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XWXMTGVXQL" value="answer"><span>For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, holding screen time constant.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXMTGVXQL" value="x"><span>A one-unit increase in sleep quality always leads to a 1.8-point increase in life satisfaction.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXMTGVXQL" value="x"><span>A one-unit increase in sleep quality may lead to a decrease in life satisfaction, depending on screen time.</span></label><label><input type="radio" autocomplete="off" name="radio_XWXMTGVXQL" value="x"><span>For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, regardless of screen time.</span></label>
+<div id="radio_KDXAGUMALO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KDXAGUMALO" value="x"> <span>For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, regardless of screen time.</span></label><label><input type="radio" autocomplete="off" name="radio_KDXAGUMALO" value="answer"> <span>For each one-unit increase in sleep quality, life satisfaction is expected to increase by 1.8, holding screen time constant.</span></label><label><input type="radio" autocomplete="off" name="radio_KDXAGUMALO" value="x"> <span>A one-unit increase in sleep quality may lead to a decrease in life satisfaction, depending on screen time.</span></label><label><input type="radio" autocomplete="off" name="radio_KDXAGUMALO" value="x"> <span>A one-unit increase in sleep quality always leads to a 1.8-point increase in life satisfaction.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
@@ -1474,10 +1567,12 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+</section>
+<section id="question-4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
 <p><strong>A multiple regression model predicts self-esteem based on social support and stress levels. The output includes an interaction term for social support and stress with a p-value of .007. What does this suggest?</strong></p>
-<div id="radio_BYOEFRPYEK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_BYOEFRPYEK" value="answer"><span>The relationship between stress and self-esteem depends on social support.</span></label><label><input type="radio" autocomplete="off" name="radio_BYOEFRPYEK" value="x"><span>Social support and stress both influence self-esteem, but they do not interact.</span></label><label><input type="radio" autocomplete="off" name="radio_BYOEFRPYEK" value="x"><span>The interaction term suggests that social support and stress are highly correlated and should be removed from the model.</span></label><label><input type="radio" autocomplete="off" name="radio_BYOEFRPYEK" value="x"><span>Social support directly improves self-esteem, so the interaction term is unnecessary.</span></label>
+<div id="radio_BPRHHYSPSJ" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_BPRHHYSPSJ" value="x"> <span>Social support directly improves self-esteem, so the interaction term is unnecessary.</span></label><label><input type="radio" autocomplete="off" name="radio_BPRHHYSPSJ" value="answer"> <span>The relationship between stress and self-esteem depends on social support.</span></label><label><input type="radio" autocomplete="off" name="radio_BPRHHYSPSJ" value="x"> <span>The interaction term suggests that social support and stress are highly correlated and should be removed from the model.</span></label><label><input type="radio" autocomplete="off" name="radio_BPRHHYSPSJ" value="x"> <span>Social support and stress both influence self-esteem, but they do not interact.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
@@ -1503,239 +1598,478 @@ Explain this answer
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1776,6 +2110,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1844,13 +2205,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1885,18 +2248,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1928,11 +2280,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1942,8 +2333,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1955,7 +2355,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1999,6 +2522,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -2024,6 +2548,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -2082,28 +2632,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./10-regression.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./10-regression.html" class="pagination-link" aria-label="Simple regression">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Simple regression</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./12-one-way-anova.html" class="pagination-link">
+      <a href="./12-one-way-anova.html" class="pagination-link" aria-label="One-way ANOVA">
         <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">One-way ANOVA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

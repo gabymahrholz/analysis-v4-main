@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
 <meta name="description" content="Data skills book for Level 2 Psychology students at the School of Psychology and Neuroscience at the University of Glasgow">
-<title>Analysis - 8&nbsp; Paired t-test</title>
+
+<title>8&nbsp; Paired t-test – Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -54,6 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }
 </style>
 
+
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -73,13 +77,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -88,60 +102,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
   }
-}</script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script><link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 <link rel="stylesheet" href="include/booktem.css">
 <link rel="stylesheet" href="include/webex.css">
 <link rel="stylesheet" href="include/glossary.css">
 <link rel="stylesheet" href="include/style.css">
 <link rel="stylesheet" href="include/custom.scss">
+<link rel="stylesheet" href="include/styles.css">
 </head>
+
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./08-paired.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
-      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./08-paired.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Analysis</a> 
         <div class="sidebar-tools-main">
     <div class="dropdown">
-      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Share"><i class="bi bi-share"></i></a>
+      <a href="" title="Share" id="quarto-navigation-tool-dropdown-0" class="quarto-navigation-tool dropdown-toggle px-1" data-bs-toggle="dropdown" aria-expanded="false" role="link" aria-label="Share"><i class="bi bi-share"></i></a>
       <ul class="dropdown-menu" aria-labelledby="quarto-navigation-tool-dropdown-0">
-<li>
+          <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://twitter.com/intent/tweet?url=|url|">
-              <i class="bi bi-bi-twitter pe-1"></i>
+              <i class="bi bi-twitter pe-1"></i>
             Twitter
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.facebook.com/sharer/sharer.php?u=|url|">
-              <i class="bi bi-bi-facebook pe-1"></i>
+              <i class="bi bi-facebook pe-1"></i>
             Facebook
             </a>
           </li>
           <li>
             <a class="dropdown-item sidebar-tools-main-item" href="https://www.linkedin.com/sharing/share-offsite/?url=|url|">
-              <i class="bi bi-bi-linkedin pe-1"></i>
+              <i class="bi bi-linkedin pe-1"></i>
             LinkedIn
             </a>
           </li>
       </ul>
-</div>
+    </div>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
     </div>
@@ -153,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-<li class="sidebar-item">
+        <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Overview</span></a>
@@ -161,14 +216,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">INDIVIDUAL WALKTHROUGH CHAPTERS</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-basics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Projects and R Markdown</span></span></a>
@@ -247,17 +302,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
  <span class="menu-text">IN-LAB: PAIR-CODING</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./pc-A01.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2A Lab 1 Week 2</span></a>
@@ -336,17 +391,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
  <span class="menu-text">Appendices</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">
-<li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./appendix-a-installing-r.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">A</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
@@ -377,38 +432,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </li>
       </ul>
-</li>
+  </li>
     </ul>
-</div>
-</nav><div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
+<div class="brand-banner">
+  <a class="no-external-icon" href="https://psyteachr.github.io/" target="_blank" rel="noopener">
+    <img class="nolightbox" src="images/logos/PsyTeachR_books.png" alt="PsyTeachR Books">
+    </a>
+    </div>
+</div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
+  <li><a href="#intended-learning-outcomes" id="toc-intended-learning-outcomes" class="nav-link active" data-scroll-target="#intended-learning-outcomes">Intended Learning Outcomes</a></li>
   <li><a href="#individual-walkthrough" id="toc-individual-walkthrough" class="nav-link" data-scroll-target="#individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></a></li>
   <li><a href="#activity-1-setup" id="toc-activity-1-setup" class="nav-link" data-scroll-target="#activity-1-setup"><span class="header-section-number">8.1</span> Activity 1: Setup</a></li>
   <li><a href="#activity-2-library-and-data-for-today" id="toc-activity-2-library-and-data-for-today" class="nav-link" data-scroll-target="#activity-2-library-and-data-for-today"><span class="header-section-number">8.2</span> Activity 2: Library and data for today</a></li>
   <li><a href="#activity-3-preparing-the-dataframe" id="toc-activity-3-preparing-the-dataframe" class="nav-link" data-scroll-target="#activity-3-preparing-the-dataframe"><span class="header-section-number">8.3</span> Activity 3: Preparing the dataframe</a></li>
   <li><a href="#activity-4-compute-descriptives" id="toc-activity-4-compute-descriptives" class="nav-link" data-scroll-target="#activity-4-compute-descriptives"><span class="header-section-number">8.4</span> Activity 4: Compute descriptives</a></li>
-  <li>
-<a href="#activity-5-create-an-appropriate-plot" id="toc-activity-5-create-an-appropriate-plot" class="nav-link" data-scroll-target="#activity-5-create-an-appropriate-plot"><span class="header-section-number">8.5</span> Activity 5: Create an appropriate plot</a>
+  <li><a href="#activity-5-create-an-appropriate-plot" id="toc-activity-5-create-an-appropriate-plot" class="nav-link" data-scroll-target="#activity-5-create-an-appropriate-plot"><span class="header-section-number">8.5</span> Activity 5: Create an appropriate plot</a>
   <ul class="collapse">
-<li><a href="#option-1-congruent-and-incongruent-trials" id="toc-option-1-congruent-and-incongruent-trials" class="nav-link" data-scroll-target="#option-1-congruent-and-incongruent-trials"><span class="header-section-number">8.5.1</span> Option 1: congruent and incongruent trials</a></li>
+  <li><a href="#option-1-congruent-and-incongruent-trials" id="toc-option-1-congruent-and-incongruent-trials" class="nav-link" data-scroll-target="#option-1-congruent-and-incongruent-trials"><span class="header-section-number">8.5.1</span> Option 1: congruent and incongruent trials</a></li>
   <li><a href="#option-2-difference-scores-between-congruent-and-incongruent-trials" id="toc-option-2-difference-scores-between-congruent-and-incongruent-trials" class="nav-link" data-scroll-target="#option-2-difference-scores-between-congruent-and-incongruent-trials"><span class="header-section-number">8.5.2</span> Option 2: difference scores between congruent and incongruent trials</a></li>
-  </ul>
-</li>
+  </ul></li>
   <li><a href="#activity-6-check-assumptions" id="toc-activity-6-check-assumptions" class="nav-link" data-scroll-target="#activity-6-check-assumptions"><span class="header-section-number">8.6</span> Activity 6: Check assumptions</a></li>
   <li><a href="#activity-7-compute-a-paired-t-test-and-effect-size" id="toc-activity-7-compute-a-paired-t-test-and-effect-size" class="nav-link" data-scroll-target="#activity-7-compute-a-paired-t-test-and-effect-size"><span class="header-section-number">8.7</span> Activity 7: Compute a paired t-test and effect size</a></li>
   <li><a href="#activity-8-sensitivity-power-analysis" id="toc-activity-8-sensitivity-power-analysis" class="nav-link" data-scroll-target="#activity-8-sensitivity-power-analysis"><span class="header-section-number">8.8</span> Activity 8: Sensitivity power analysis</a></li>
   <li><a href="#activity-9-the-write-up" id="toc-activity-9-the-write-up" class="nav-link" data-scroll-target="#activity-9-the-write-up"><span class="header-section-number">8.9</span> Activity 9: The write-up</a></li>
   <li><a href="#sec-alternative_paired" id="toc-sec-alternative_paired" class="nav-link" data-scroll-target="#sec-alternative_paired"><span class="header-section-number">8.10</span> Activity 10: Non-parametric alternative</a></li>
   <li><a href="#test-your-knowledge" id="toc-test-your-knowledge" class="nav-link" data-scroll-target="#test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></a></li>
-  </ul></nav>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./01-basics.html">INDIVIDUAL WALKTHROUGH CHAPTERS</a></li><li class="breadcrumb-item"><a href="./08-paired.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></a></li></ol></nav>
+<div class="quarto-title">
 <h1 class="title"><span id="sec-paired" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Paired t-test</span></span></h1>
 </div>
 
@@ -422,22 +487,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
-</header><section id="intended-learning-outcomes" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+
+</header>
+
+
+<section id="intended-learning-outcomes" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter you should be able to:</p>
 <ul>
 <li>Compute a paired t-test and effectively report the results.</li>
 <li>Understand when to use a non-parametric equivalent of the paired t-test, compute it, and report the results.</li>
-</ul></section><section id="individual-walkthrough" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
-</section><section id="activity-1-setup" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="activity-1-setup">
-<span class="header-section-number">8.1</span> Activity 1: Setup</h2>
-<p>In this chapter, we will continue working with the dataset from the study by Zwaan et al.&nbsp;(2018). Have a look at <a href="07-independent.html"><span>Chapter&nbsp;7</span></a> or the SupMats document if you need a refresher on the Simon Task data.</p>
+</ul>
+</section>
+<section id="individual-walkthrough" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+</section>
+<section id="activity-1-setup" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="activity-1-setup"><span class="header-section-number">8.1</span> Activity 1: Setup</h2>
+<p>In this chapter, we will continue working with the dataset from the study by Zwaan et al.&nbsp;(2018). Have a look at <a href="07-independent.html" class="quarto-xref"><span>Chapter 7</span></a> or the SupMats document if you need a refresher on the Simon Task data.</p>
 <ul>
 <li>Open last week’s project</li>
 <li>Create a new <code>.Rmd</code> file and save it to your project folder</li>
 <li>Delete everything after the setup code chunk (e.g., line 12 and below)</li>
-</ul></section><section id="activity-2-library-and-data-for-today" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="activity-2-library-and-data-for-today">
-<span class="header-section-number">8.2</span> Activity 2: Library and data for today</h2>
-<p>Today, we will need the following packages <code>rstatix</code>, <code>tidyverse</code>, <code>qqplotr</code>, <code>lsr</code>, and <code>pwr</code>. You should have all the necessary packages installed from previous chapters already. If not, you can install them via the console (see <a href="01-basics.html#sec-install_packages"><span>Section&nbsp;1.5.1</span></a> for more details).</p>
+</ul>
+</section>
+<section id="activity-2-library-and-data-for-today" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="activity-2-library-and-data-for-today"><span class="header-section-number">8.2</span> Activity 2: Library and data for today</h2>
+<p>Today, we will need the following packages <code>rstatix</code>, <code>tidyverse</code>, <code>qqplotr</code>, <code>lsr</code>, and <code>pwr</code>. You should have all the necessary packages installed from previous chapters already. If not, you can install them via the console (see <a href="01-basics.html#sec-install_packages" class="quarto-xref"><span>Section 1.5.1</span></a> for more details).</p>
 <p>Again, load the <code>rstatix</code> package before <code>tidyverse</code>. Then read in the data from <code>MeansSimonTask.csv</code> and the demographics information from <code>DemoSimonTask.csv</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load in the packages</span></span>
@@ -477,14 +553,13 @@ Solution
 <p>As usual, take some time to familiarise yourself with the data before starting the within-subjects t-test.</p>
 <p>Today, we will focus on the Simon effect itself. Remember that the Simon effect predicts shorter response times for congruent trials compared to incongruent trials. Therefore, we are inclined to propose a directional hypothesis.</p>
 <ul>
-<li>
-<strong>Potential research question</strong>: “Is there a significant difference in response times between congruent and incongruent trials in a Simon task?”</li>
-<li>
-<strong>Null Hypothesis (H<sub>0</sub>)</strong>: “There is no significant difference in response times between congruent and incongruent trials in a Simon task.”</li>
-<li>
-<strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Response times for congruent trials are significantly shorter than those for incongruent trials in a Simon task.” or phrased differently “Participants will respond significantly faster in congruent trials than in incongruent trials in a Simon task.”</li>
-</ul></section><section id="activity-3-preparing-the-dataframe" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="activity-3-preparing-the-dataframe">
-<span class="header-section-number">8.3</span> Activity 3: Preparing the dataframe</h2>
+<li><strong>Potential research question</strong>: “Is there a significant difference in response times between congruent and incongruent trials in a Simon task?”</li>
+<li><strong>Null Hypothesis (H<sub>0</sub>)</strong>: “There is no significant difference in response times between congruent and incongruent trials in a Simon task.”</li>
+<li><strong>Alternative Hypothesis (H<sub>1</sub>)</strong>: “Response times for congruent trials are significantly shorter than those for incongruent trials in a Simon task.” or phrased differently “Participants will respond significantly faster in congruent trials than in incongruent trials in a Simon task.”</li>
+</ul>
+</section>
+<section id="activity-3-preparing-the-dataframe" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="activity-3-preparing-the-dataframe"><span class="header-section-number">8.3</span> Activity 3: Preparing the dataframe</h2>
 <p>Again, we need to <strong>calculate the mean response time (RT) for both congruent and incongruent trials per participant</strong>. As we did last week, we can also <strong>compute the Simon effect</strong> as the difference score between incongruent and congruent trials.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -503,7 +578,7 @@ Tip
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 13%">
 <col style="width: 7%">
@@ -514,7 +589,8 @@ Tip
 <col style="width: 13%">
 <col style="width: 14%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">participant</th>
 <th style="text-align: left;">gender</th>
 <th style="text-align: right;">age</th>
@@ -523,7 +599,8 @@ Tip
 <th style="text-align: right;">congruent</th>
 <th style="text-align: right;">incongruent</th>
 <th style="text-align: right;">simon_effect</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">T1</td>
@@ -639,8 +716,9 @@ You could have also…
 </div>
 </div>
 </div>
-</section><section id="activity-4-compute-descriptives" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="activity-4-compute-descriptives">
-<span class="header-section-number">8.4</span> Activity 4: Compute descriptives</h2>
+</section>
+<section id="activity-4-compute-descriptives" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="activity-4-compute-descriptives"><span class="header-section-number">8.4</span> Activity 4: Compute descriptives</h2>
 <p>We want to compute means and standard deviations for both the <code>congruent</code> and the <code>incongruent</code> trials. Then, we will subtract the mean RT of the congruent trials from the mean RT of the incongruent trials to calculate the average difference score between the two conditions.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>descriptives <span class="ot">&lt;-</span> simon_effect <span class="sc">%&gt;%</span> </span>
@@ -654,7 +732,7 @@ You could have also…
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 19%">
 <col style="width: 16%">
@@ -663,22 +741,26 @@ You could have also…
 <col style="width: 11%">
 <col style="width: 11%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: right;">mean_congruent</th>
 <th style="text-align: right;">sd_congruent</th>
 <th style="text-align: right;">mean_incongruent</th>
 <th style="text-align: right;">sd_incongruent</th>
 <th style="text-align: right;">diff</th>
 <th style="text-align: right;">sd_diff</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: right;">427.6528</td>
 <td style="text-align: right;">74.17418</td>
 <td style="text-align: right;">462.0785</td>
 <td style="text-align: right;">74.69692</td>
 <td style="text-align: right;">34.42571</td>
 <td style="text-align: right;">21.59876</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
@@ -696,15 +778,16 @@ Note
 <p>Notice that we did not have to use <code>group_by()</code> here because the data is already in wide format.</p>
 </div>
 </div>
-</section><section id="activity-5-create-an-appropriate-plot" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="activity-5-create-an-appropriate-plot">
-<span class="header-section-number">8.5</span> Activity 5: Create an appropriate plot</h2>
-<section id="option-1-congruent-and-incongruent-trials" class="level3" data-number="8.5.1"><h3 data-number="8.5.1" class="anchored" data-anchor-id="option-1-congruent-and-incongruent-trials">
-<span class="header-section-number">8.5.1</span> Option 1: congruent and incongruent trials</h3>
+</section>
+<section id="activity-5-create-an-appropriate-plot" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="activity-5-create-an-appropriate-plot"><span class="header-section-number">8.5</span> Activity 5: Create an appropriate plot</h2>
+<section id="option-1-congruent-and-incongruent-trials" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="option-1-congruent-and-incongruent-trials"><span class="header-section-number">8.5.1</span> Option 1: congruent and incongruent trials</h3>
 <p>To create an appropriate plot, we need the data in long format. This format should include a <code>congruency</code> column containing the labels for congruent and incongruent trials, and a <code>mean_RT</code> column to store the corresponding mean response times. <strong>Each participant should now have two rows in the dataset.</strong></p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 13%">
 <col style="width: 8%">
@@ -715,7 +798,8 @@ Note
 <col style="width: 13%">
 <col style="width: 10%">
 </colgroup>
-<thead><tr class="header">
+<thead>
+<tr class="header">
 <th style="text-align: left;">participant</th>
 <th style="text-align: left;">gender</th>
 <th style="text-align: right;">age</th>
@@ -724,7 +808,8 @@ Note
 <th style="text-align: right;">simon_effect</th>
 <th style="text-align: left;">congruency</th>
 <th style="text-align: right;">mean_RT</th>
-</tr></thead>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">T1</td>
@@ -831,7 +916,10 @@ Solution for the plot
 <span id="cb6-5"><a href="#cb6-5"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Congruency"</span>, <span class="at">y =</span> <span class="st">"mean Response Time"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="08-paired_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="08-paired_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="08-paired_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
@@ -839,8 +927,10 @@ Solution for the plot
 </div>
 </div>
 </div>
-</section><section id="option-2-difference-scores-between-congruent-and-incongruent-trials" class="level3" data-number="8.5.2"><h3 data-number="8.5.2" class="anchored" data-anchor-id="option-2-difference-scores-between-congruent-and-incongruent-trials">
-<span class="header-section-number">8.5.2</span> Option 2: difference scores between congruent and incongruent trials</h3>
+</div>
+</section>
+<section id="option-2-difference-scores-between-congruent-and-incongruent-trials" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="option-2-difference-scores-between-congruent-and-incongruent-trials"><span class="header-section-number">8.5.2</span> Option 2: difference scores between congruent and incongruent trials</h3>
 <p>We could have displayed the difference scores between the two conditions directly. This approach would use the <code>simon_effect</code> object without requiring additional data wrangling, as the difference scores are already stored in the <code>simon_effect</code> column.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
@@ -882,20 +972,31 @@ Solution for the plot
 <span id="cb8-5"><a href="#cb8-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
 <span id="cb8-6"><a href="#cb8-6"></a>       <span class="at">y =</span> <span class="st">"Difference in mean Response Time scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="08-paired_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="08-paired_files/figure-html/unnamed-chunk-13-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="08-paired_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
 </div>
 </div>
 </div>
 </div>
 </div>
-</section></section><section id="activity-6-check-assumptions" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="activity-6-check-assumptions">
-<span class="header-section-number">8.6</span> Activity 6: Check assumptions</h2>
+</div>
+</section>
+</section>
+<section id="activity-6-check-assumptions" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="activity-6-check-assumptions"><span class="header-section-number">8.6</span> Activity 6: Check assumptions</h2>
 <p>The assumptions for a paired t-test are fairly similar to the one-sample t-test.</p>
-<section id="assumption-1-continuous-dv" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-1-continuous-dv">Assumption 1: Continuous DV</h4>
+<section id="assumption-1-continuous-dv" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-1-continuous-dv">Assumption 1: Continuous DV</h4>
 <p>The dependent variable needs to be measured at interval or ratio level. We can confirm that by looking at either the columns <code>congruent</code> and <code>incongruent</code> in the object <code>simon_effect</code>. Or the variable <code>mean_RT</code> in <code>simon_effect_long</code>. This assumption holds.</p>
-</section><section id="assumption-2-data-are-independent" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-2-data-are-independent">Assumption 2: Data are independent</h4>
+</section>
+<section id="assumption-2-data-are-independent" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-2-data-are-independent">Assumption 2: Data are independent</h4>
 <p>For a paired t-test this assumption applies to the <strong>pair of values</strong>, i.e., each pair of values needs to be from a separate participant. We assume this assumption holds for our data.</p>
-</section><section id="assumption-3-normality" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="assumption-3-normality">Assumption 3: Normality</h4>
+</section>
+<section id="assumption-3-normality" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="assumption-3-normality">Assumption 3: Normality</h4>
 <p>This assumption requires the <strong>difference scores</strong> to be approximately normally distributed. We cannot see that from the violin-boxplot above (Option 1) and have to plot the difference score, i.e., variable <code>simon_effect</code>.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -938,11 +1039,7 @@ Solution
 <div class="callout-body-container callout-body">
 <p>Explore the three possible approaches in the tabs below.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist">
-<li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Option 1: Q-Q plot</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Option 2: Violin-boxplot of the difference score</a></li>
-<li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Option 3: Shapiro-Wilk test</a></li>
-</ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Option 1: Q-Q plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Option 2: Violin-boxplot of the difference score</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Option 3: Shapiro-Wilk test</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
@@ -951,7 +1048,11 @@ Solution
 <span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">stat_qq_line</span>(<span class="at">colour =</span> <span class="st">"#FB8D61"</span>) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a>  <span class="fu">stat_qq_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="08-paired_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="08-paired_files/figure-html/unnamed-chunk-14-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="08-paired_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -965,7 +1066,11 @@ Solution
 <span id="cb10-5"><a href="#cb10-5"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>,</span>
 <span id="cb10-6"><a href="#cb10-6"></a>       <span class="at">y =</span> <span class="st">"Difference in mean Response Time scores"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="08-paired_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><a href="08-paired_files/figure-html/unnamed-chunk-15-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="08-paired_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></a></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -1003,10 +1108,12 @@ Note
 <p>This evaluation requires either visual inspection or relying on statistical tests. However, as pointed out in previous chapters, both approaches have limitations and neither provides an absolute answer. Instead of seeking perfection, focus on whether any deviations from normality meaningfully impact the validity of your results.</p>
 </div>
 </div>
-<p><strong>If any of the assumptions are violated, use the non-parametric equivalent to the paired t-test, see <a href="#sec-alternative_paired"><span>Section&nbsp;8.10</span></a>.</strong></p>
-</section></section><section id="activity-7-compute-a-paired-t-test-and-effect-size" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="activity-7-compute-a-paired-t-test-and-effect-size">
-<span class="header-section-number">8.7</span> Activity 7: Compute a paired t-test and effect size</h2>
-<p>We can use the <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function again to compute the paired t-test. However, we are stuck with the BaseR pattern <code>data$column</code> once more.</p>
+<p><strong>If any of the assumptions are violated, use the non-parametric equivalent to the paired t-test, see <a href="#sec-alternative_paired" class="quarto-xref"><span>Section 8.10</span></a>.</strong></p>
+</section>
+</section>
+<section id="activity-7-compute-a-paired-t-test-and-effect-size" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="activity-7-compute-a-paired-t-test-and-effect-size"><span class="header-section-number">8.7</span> Activity 7: Compute a paired t-test and effect size</h2>
+<p>We can use the <code>t.test()</code> function again to compute the paired t-test. However, we are stuck with the BaseR pattern <code>data$column</code> once more.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -1019,17 +1126,15 @@ Rant about BaseR and reminiscing about the “good old days”
 </div>
 <div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>In case you haven’t picked it up by now, I am not much a fan of <code>data$column</code> (i.e., wide format) and prefer the <code>DV ~ IV</code> (i.e., long format) pattern. And there was a time when the <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function allowed to add an extra argument <code>paired = TRUE</code> to the <em>formula version</em> but that is no longer the case. 😭😭😭 Now, the argument <em>only</em> works on the default method, specifying arguments x and y separately. And because the default version doesn’t allow us to add a <code>data =</code> argument, we have to revert to <code>data$column</code>.</p>
+<p>In case you haven’t picked it up by now, I am not much a fan of <code>data$column</code> (i.e., wide format) and prefer the <code>DV ~ IV</code> (i.e., long format) pattern. And there was a time when the <code>t.test()</code> function allowed to add an extra argument <code>paired = TRUE</code> to the <em>formula version</em> but that is no longer the case. 😭😭😭 Now, the argument <em>only</em> works on the default method, specifying arguments x and y separately. And because the default version doesn’t allow us to add a <code>data =</code> argument, we have to revert to <code>data$column</code>.</p>
 <p>PS: Carolina disagrees with me and prefers some BaseR every now and then. And that’s totally fine, too - different researchers and coders have their own preferences, which you may have already noticed in the way you code.</p>
 </div>
 </div>
 </div>
 <p>Long story short, here are the arguments you need from the data object in wide format (in this case data object <code>simon_effect</code>):</p>
 <ul>
-<li>
-<code>data$column</code> for condition 1</li>
-<li>
-<code>data$column</code> for condition 2</li>
+<li><code>data$column</code> for condition 1</li>
+<li><code>data$column</code> for condition 2</li>
 <li>the extra argument <code>paired = TRUE</code> to tell the function we are conducting a paired rather than a two-sample t-test</li>
 </ul>
 <div class="cell">
@@ -1057,7 +1162,7 @@ mean difference
 <li>a 95% confidence interval,</li>
 <li>and the mean difference score between both conditions (which also matches with our descriptives above).</li>
 </ul>
-<p>The <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function does not give us an <strong>effect size</strong>, so, again, we have to compute it ourselves. We can use the <code>CohensD()</code> function from the <code>lsr</code> package as we did for the one-sample and the two-sample t-test. We can use the formula approach here as well, and add the extra argument <code>method = "paired"</code>.</p>
+<p>The <code>t.test()</code> function does not give us an <strong>effect size</strong>, so, again, we have to compute it ourselves. We can use the <code>CohensD()</code> function from the <code>lsr</code> package as we did for the one-sample and the two-sample t-test. We can use the formula approach here as well, and add the extra argument <code>method = "paired"</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">cohensD</span>(simon_effect<span class="sc">$</span>congruent, simon_effect<span class="sc">$</span>incongruent, <span class="at">method =</span> <span class="st">"paired"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1089,8 +1194,9 @@ the grouping factor</code></pre>
 </div>
 </div>
 </div>
-</section><section id="activity-8-sensitivity-power-analysis" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="activity-8-sensitivity-power-analysis">
-<span class="header-section-number">8.8</span> Activity 8: Sensitivity power analysis</h2>
+</section>
+<section id="activity-8-sensitivity-power-analysis" class="level2" data-number="8.8">
+<h2 data-number="8.8" class="anchored" data-anchor-id="activity-8-sensitivity-power-analysis"><span class="header-section-number">8.8</span> Activity 8: Sensitivity power analysis</h2>
 <p>As with the other t-test, we are conducting a sensitivity power analysis to determine the minimum effect size detectable with the number of participants we have in our sample (here n = 160), alpha of 0.05 and power of 0.8. This will tell us if our analysis was sufficiently powered or not.</p>
 <p>The function we will use again is <code>pwr.t.test()</code> from the <code>pwr</code> package. The arguments in the formula are the same as for the one-sample t-test; we just need to adjust the number of participants and set the type to “paired”.</p>
 <div class="cell">
@@ -1109,13 +1215,15 @@ NOTE: n is number of *pairs*</code></pre>
 </div>
 </div>
 <p>The minimum effect size we could reliably detect is 0.22. Our actual effect size was 1.59, so this analysis was sufficiently powered. YAY!</p>
-</section><section id="activity-9-the-write-up" class="level2" data-number="8.9"><h2 data-number="8.9" class="anchored" data-anchor-id="activity-9-the-write-up">
-<span class="header-section-number">8.9</span> Activity 9: The write-up</h2>
+</section>
+<section id="activity-9-the-write-up" class="level2" data-number="8.9">
+<h2 data-number="8.9" class="anchored" data-anchor-id="activity-9-the-write-up"><span class="header-section-number">8.9</span> Activity 9: The write-up</h2>
 <p>We hypothesised that there would be a significant difference in the response times between congruent <span class="math inline">\((M = 427.65 msec, SD = 74.17 msec)\)</span> and incongruent trials <span class="math inline">\((M = 462.08 msec, SD = 74.70 msec)\)</span> of a Simon task. On average, participants were faster in the congruent compared to the incongruent condition <span class="math inline">\((M_{diff} = 34.43 msec, SD_{diff} = 21.60 msec)\)</span>. Using a within-subjects t-test, the effect was found to be significant and of a large magnitude, <span class="math inline">\(t(159) = 20.16, p &lt; .001, d = 1.59\)</span>. Therefore, we reject the null hypothesis in favour of H<sub>1</sub>. The analysis was sufficiently powered to detect this effect.</p>
-</section><section id="sec-alternative_paired" class="level2" data-number="8.10"><h2 data-number="8.10" class="anchored" data-anchor-id="sec-alternative_paired">
-<span class="header-section-number">8.10</span> Activity 10: Non-parametric alternative</h2>
+</section>
+<section id="sec-alternative_paired" class="level2" data-number="8.10">
+<h2 data-number="8.10" class="anchored" data-anchor-id="sec-alternative_paired"><span class="header-section-number">8.10</span> Activity 10: Non-parametric alternative</h2>
 <p>The <strong>Wilcoxon signed-rank test</strong> is the non-parametric equivalent to the paired t-test, comparing the difference between the median for two measurements.</p>
-<p>Before we compute the test, we need to determine some <strong>summary stats</strong> (e.g., here we focus on the median scores) for the congruent and incongruent conditions. Similar to the One-sample Wilcoxon signed-rank test, we can use the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> function again because our data is in wide format.</p>
+<p>Before we compute the test, we need to determine some <strong>summary stats</strong> (e.g., here we focus on the median scores) for the congruent and incongruent conditions. Similar to the One-sample Wilcoxon signed-rank test, we can use the <code>summary()</code> function again because our data is in wide format.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">summary</span>(simon_effect)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1135,7 +1243,7 @@ NOTE: n is number of *pairs*</code></pre>
                     Max.   :741.5   Max.   :727.9   Max.   :103.84  </code></pre>
 </div>
 </div>
-<p>Now we can move on to the <strong>Wilcoxon signed-rank test</strong>. We will use the <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> function again, but add the argument <code>paired = TRUE</code>.</p>
+<p>Now we can move on to the <strong>Wilcoxon signed-rank test</strong>. We will use the <code>wilcox.test()</code> function again, but add the argument <code>paired = TRUE</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">wilcox.test</span>(simon_effect<span class="sc">$</span>congruent, simon_effect<span class="sc">$</span>incongruent, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1157,7 +1265,7 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>We could have also run a <strong>One-sample Wilcoxon signed-rank test</strong> on the difference score, but instead of comparing that to a population median (as we did in <a href="06-chi-square-one-sample.html#sec-alternative_one_sample"><span>Section&nbsp;6.6</span></a>), we would compare it to 0 to assess whether the median difference between paired observations is significantly different from zero.</p>
+<p>We could have also run a <strong>One-sample Wilcoxon signed-rank test</strong> on the difference score, but instead of comparing that to a population median (as we did in <a href="06-chi-square-one-sample.html#sec-alternative_one_sample" class="quarto-xref"><span>Section 6.6</span></a>), we would compare it to 0 to assess whether the median difference between paired observations is significantly different from zero.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">wilcox.test</span>(simon_effect<span class="sc">$</span>simon_effect, <span class="at">mu =</span> <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1179,7 +1287,7 @@ The V values are different between the 2 approaches - Does that matter?
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Yes and no. The order in which you input variables into the function will affect the value of V - has to do with how the ranks are getting assigned. In our column <code>simon_effect</code> we subtracted congruent RT from incongruent RT. To have the exact equivalent, we will need to switch the columns in the <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> function.</p>
+<p>Yes and no. The order in which you input variables into the function will affect the value of V - has to do with how the ranks are getting assigned. In our column <code>simon_effect</code> we subtracted congruent RT from incongruent RT. To have the exact equivalent, we will need to switch the columns in the <code>wilcox.test()</code> function.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">wilcox.test</span>(simon_effect<span class="sc">$</span>incongruent, simon_effect<span class="sc">$</span>congruent, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1208,13 +1316,14 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre><code>[1] -10.72532</code></pre>
 </div>
 </div>
-<p>To calculate an <strong>effect size</strong>, we would need to use the function <code>wilcox_effsize()</code> from the <code>rstatix</code> package. Unlike, the <code><a href="https://rdrr.io/r/stats/wilcox.test.html">wilcox.test()</a></code> and the <code><a href="https://rdrr.io/r/stats/t.test.html">t.test()</a></code> function, <code>wilcox_effsize()</code> expects data to be in <strong>long format</strong> to be able to use the <code>DV ~ IV</code> pattern. Fortunately, we still have that available in <code>simon_effect_long</code>. We also need to add the argument <code>paired = TRUE</code>.</p>
+<p>To calculate an <strong>effect size</strong>, we would need to use the function <code>wilcox_effsize()</code> from the <code>rstatix</code> package. Unlike, the <code>wilcox.test()</code> and the <code>t.test()</code> function, <code>wilcox_effsize()</code> expects data to be in <strong>long format</strong> to be able to use the <code>DV ~ IV</code> pattern. Fortunately, we still have that available in <code>simon_effect_long</code>. We also need to add the argument <code>paired = TRUE</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">wilcox_effsize</span>(<span class="at">data =</span> simon_effect_long, <span class="at">formula =</span> mean_RT <span class="sc">~</span> congruency, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="kable-table">
-<table class="table table-sm table-striped small">
-<thead><tr class="header">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
 <th style="text-align: left;">.y.</th>
 <th style="text-align: left;">group1</th>
 <th style="text-align: left;">group2</th>
@@ -1222,8 +1331,10 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <th style="text-align: right;">n1</th>
 <th style="text-align: right;">n2</th>
 <th style="text-align: left;">magnitude</th>
-</tr></thead>
-<tbody><tr class="odd">
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td style="text-align: left;">mean_RT</td>
 <td style="text-align: left;">congruent</td>
 <td style="text-align: left;">incongruent</td>
@@ -1231,18 +1342,22 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <td style="text-align: right;">160</td>
 <td style="text-align: right;">160</td>
 <td style="text-align: left;">large</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
 </div>
 <p>Now we have all the numbers to <strong>write this up</strong>:</p>
 <p>A Wilcoxon signed-rank test was conducted to determine whether there was a significant difference in response times between congruent <span class="math inline">\((Mdn = 411.3 msec)\)</span> and incongruent trials <span class="math inline">\((Mdn = 449.7 msec)\)</span> in a Simon task. Median response times of Congruent trials were significantly faster <span class="math inline">\((Mdn = 34.77 msec)\)</span> than incongruent trials, <span class="math inline">\(Z = -10.73, p &lt; .001, r = .848\)</span>. The difference can be classified as large according to Cohen (1992). Therefore, we reject the null hypothesis in favour of H<sub>1</sub>.</p>
-</section><section id="test-your-knowledge" class="level2 unnumbered"><h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
-<section id="question-1" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+</section>
+<section id="test-your-knowledge" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+<section id="question-1" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
 <p><strong>What is the main purpose of an paired-samples t-test?</strong></p>
-<div id="radio_WPCVHZNWVP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WPCVHZNWVP" value="x"><span>To compare means between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_WPCVHZNWVP" value="x"><span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_WPCVHZNWVP" value="x"><span>To test for differences in variances between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_WPCVHZNWVP" value="answer"><span>To compare means between two related groups</span></label>
+<div id="radio_PRGTDKKACX" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PRGTDKKACX" value="x"> <span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_PRGTDKKACX" value="x"> <span>To compare means between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_PRGTDKKACX" value="answer"> <span>To compare means between two related groups</span></label><label><input type="radio" autocomplete="off" name="radio_PRGTDKKACX" value="x"> <span>To test for differences in variances between two independent groups</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
@@ -1260,10 +1375,12 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-2" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+</section>
+<section id="question-2" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
 <p><strong>Which of the following is a key assumption of the paired t-test?</strong></p>
-<div id="radio_JVWDCUWWFD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JVWDCUWWFD" value="x"><span>The two samples are independent.</span></label><label><input type="radio" autocomplete="off" name="radio_JVWDCUWWFD" value="answer"><span>The differences between paired observations are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_JVWDCUWWFD" value="x"><span>The two groups have equal variances.</span></label><label><input type="radio" autocomplete="off" name="radio_JVWDCUWWFD" value="x"><span>The dependent variable is categorical.</span></label>
+<div id="radio_PHFBMZZGPP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PHFBMZZGPP" value="answer"> <span>The differences between paired observations are normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_PHFBMZZGPP" value="x"> <span>The dependent variable is categorical.</span></label><label><input type="radio" autocomplete="off" name="radio_PHFBMZZGPP" value="x"> <span>The two groups have equal variances.</span></label><label><input type="radio" autocomplete="off" name="radio_PHFBMZZGPP" value="x"> <span>The two samples are independent.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
@@ -1281,10 +1398,12 @@ Explain this answer
 </div>
 </div>
 </div>
-</section><section id="question-3" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+</section>
+<section id="question-3" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
 <p><strong>What is the null hypothesis for a paired t-test?</strong></p>
-<div id="radio_OXLCRCIQAS" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_OXLCRCIQAS" value="answer"><span>The differences between paired observations are equal to zero.</span></label><label><input type="radio" autocomplete="off" name="radio_OXLCRCIQAS" value="x"><span>The variances of the two samples are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_OXLCRCIQAS" value="x"><span>The means of two independent groups are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_OXLCRCIQAS" value="x"><span>There is no relationship between two variables.</span></label>
+<div id="radio_HDBLPSFQWT" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HDBLPSFQWT" value="x"> <span>The means of two independent groups are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_HDBLPSFQWT" value="answer"> <span>The differences between paired observations are equal to zero.</span></label><label><input type="radio" autocomplete="off" name="radio_HDBLPSFQWT" value="x"> <span>The variances of the two samples are equal.</span></label><label><input type="radio" autocomplete="off" name="radio_HDBLPSFQWT" value="x"> <span>There is no relationship between two variables.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
@@ -1301,34 +1420,25 @@ Explain this answer
 <p>The paired t-test specifically tests whether the mean difference between paired observations (e.g., pre-test and post-test scores) is zero, indicating no systematic difference.</p>
 <p>Why the other options are incorrect:</p>
 <ul>
-<li>
-<strong>The means of two independent groups are equal</strong>: This describes the null hypothesis for an independent t-test, not a paired t-test. The paired t-test is used for related groups or repeated measures, not independent groups.</li>
-<li>
-<strong>The variances of the two samples are equal</strong>: This is an assumption that applies to the independent t-test, which compares two unrelated groups. The paired t-test does not test variances; it focuses on the differences between paired observations.</li>
-<li>
-<strong>There is no relationship between two variables</strong>: This is not the null hypothesis for a paired t-test. It relates more to correlation or regression analyses, which assess relationships between variables, not mean differences.</li>
+<li><strong>The means of two independent groups are equal</strong>: This describes the null hypothesis for an independent t-test, not a paired t-test. The paired t-test is used for related groups or repeated measures, not independent groups.</li>
+<li><strong>The variances of the two samples are equal</strong>: This is an assumption that applies to the independent t-test, which compares two unrelated groups. The paired t-test does not test variances; it focuses on the differences between paired observations.</li>
+<li><strong>There is no relationship between two variables</strong>: This is not the null hypothesis for a paired t-test. It relates more to correlation or regression analyses, which assess relationships between variables, not mean differences.</li>
 </ul>
 </div>
 </div>
 </div>
-</section><section id="question-4" class="level4 unnumbered"><h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+</section>
+<section id="question-4" class="level4 unnumbered">
+<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
 <p><strong>A paired-samples t-test was conducted to compare sleep quality scores with (<em>M</em> = 7.5, <em>SD</em> = 1.8) and without (<em>M</em> = 6.0, <em>SD</em> = 1.9) white noise, <em>t</em>(29) = 4.55, <em>p</em> &lt; .001, <em>d</em> = 0.82. Answer the questions below.</strong></p>
 <ul>
-<li>How many participants were included in the study? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;30&quot;]">
-</li>
-<li>What is the effect size, and how would you describe its magnitude? The effect size is <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.82&quot;]"> and of <select class="webex-select"><option value="blank"></option>
-<option value="x">small</option>
-<option value="x">medium</option>
-<option value="answer">large</option></select> magnitude.</li>
-<li>Is the result statistically significant? <select class="webex-select"><option value="blank"></option>
-<option value="answer">The result is statistically significant because p &lt; .001</option>
-<option value="x">The result is statistically non-significant because p &lt; .001</option></select>
-</li>
+<li>How many participants were included in the study? <input class="webex-solveme nospaces" size="2" data-answer="[&quot;30&quot;]"></li>
+<li>What is the effect size, and how would you describe its magnitude? The effect size is <input class="webex-solveme nospaces" size="4" data-answer="[&quot;0.82&quot;]"> and of <select class="webex-select"><option value="blank"></option><option value="x">small</option><option value="x">medium</option><option value="answer">large</option></select> magnitude.</li>
+<li>Is the result statistically significant? <select class="webex-select"><option value="blank"></option><option value="x">The result is statistically non-significant because p &lt; .001</option><option value="answer">The result is statistically significant because p &lt; .001</option></select></li>
 <li>Based on the means and standard deviations, how would you summarise the direction of the effect?
-<div id="radio_UDJOVZUCRU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_UDJOVZUCRU" value="x"><span>The direction of the effect cannot be determined from the output.</span></label><label><input type="radio" autocomplete="off" name="radio_UDJOVZUCRU" value="x"><span>Sleep quality was the same in both conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_UDJOVZUCRU" value="answer"><span>Sleep quality was higher with white noise than without white noise.</span></label><label><input type="radio" autocomplete="off" name="radio_UDJOVZUCRU" value="x"><span>Sleep quality was higher without white noise than with white noise.</span></label>
-</div>
-</li>
+<div id="radio_KUHYDDQNXF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KUHYDDQNXF" value="x"> <span>The direction of the effect cannot be determined from the output.</span></label><label><input type="radio" autocomplete="off" name="radio_KUHYDDQNXF" value="x"> <span>Sleep quality was the same in both conditions.</span></label><label><input type="radio" autocomplete="off" name="radio_KUHYDDQNXF" value="answer"> <span>Sleep quality was higher with white noise than without white noise.</span></label><label><input type="radio" autocomplete="off" name="radio_KUHYDDQNXF" value="x"> <span>Sleep quality was higher without white noise than with white noise.</span></label>
+</div></li>
 </ul>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
@@ -1351,239 +1461,478 @@ Explain these answers
 </div>
 
 
-</section></section></main><!-- /main --><script>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script>
+
+
 
 /* update total correct if #webex-total_correct exists */
+
 update_total_correct = function() {
+
   console.log("webex: update total_correct");
 
+
+
   var t = document.getElementsByClassName("webex-total_correct");
+
   for (var i = 0; i < t.length; i++) {
+
     p = t[i].parentElement;
+
     var correct = p.getElementsByClassName("webex-correct").length;
+
     var solvemes = p.getElementsByClassName("webex-solveme").length;
+
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
+
     var selects = p.getElementsByClassName("webex-select").length;
 
+
+
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
+
   }
+
 }
+
+
 
 /* webex-solution button toggling function */
+
 b_func = function() {
+
   console.log("webex: toggle hide");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('open')) {
+
     cl.remove("open");
+
   } else {
+
     cl.add("open");
+
   }
+
 }
+
+
 
 /* check answers */
+
 check_func = function() {
+
   console.log("webex: check answers");
 
+
+
   var cl = this.parentElement.classList;
+
   if (cl.contains('unchecked')) {
+
     cl.remove("unchecked");
+
     this.innerHTML = "Hide Answers";
+
   } else {
+
     cl.add("unchecked");
+
     this.innerHTML = "Show Answers";
+
   }
+
 }
+
+
 
 /* function for checking solveme answers */
+
 solveme_func = function(e) {
+
   console.log("webex: check solveme");
 
+
+
   var real_answers = JSON.parse(this.dataset.answer);
+
   var my_answer = this.value;
+
   var cl = this.classList;
+
   if (cl.contains("ignorecase")) {
+
     my_answer = my_answer.toLowerCase();
+
   }
+
   if (cl.contains("nospaces")) {
+
     my_answer = my_answer.replace(/ /g, "")
+
   }
+
+
 
   if (my_answer == "") {
+
     cl.remove("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else if (real_answers.includes(my_answer)) {
+
     cl.add("webex-correct");
+
     cl.remove("webex-incorrect");
+
   } else {
+
     cl.add("webex-incorrect");
+
     cl.remove("webex-correct");
+
   }
+
+
 
   // match numeric answers within a specified tolerance
+
   if(this.dataset.tol > 0){
+
     var tol = JSON.parse(this.dataset.tol);
+
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
+
     if (matches.reduce((a, b) => a + b, 0) > 0) {
+
       cl.add("webex-correct");
+
     } else {
+
       cl.remove("webex-correct");
+
     }
+
   }
+
+
 
   // added regex bit
+
   if (cl.contains("regex")){
+
     answer_regex = RegExp(real_answers.join("|"))
+
     if (answer_regex.test(my_answer)) {
+
       cl.add("webex-correct");
+
     }
+
   }
 
+
+
   update_total_correct();
+
 }
 
+
+
 /* function for checking select answers */
+
 select_func = function(e) {
+
   console.log("webex: check select");
+
+
 
   var cl = this.classList
 
+
+
   /* add style */
+
   cl.remove("webex-incorrect");
+
   cl.remove("webex-correct");
+
   if (this.value == "answer") {
+
     cl.add("webex-correct");
+
   } else if (this.value != "blank") {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 /* function for checking radiogroups answers */
+
 radiogroups_func = function(e) {
+
   console.log("webex: check radiogroups");
 
+
+
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
+
   var cl = checked_button.parentElement.classList;
+
   var labels = checked_button.parentElement.parentElement.children;
 
+
+
   /* get rid of styles */
+
   for (i = 0; i < labels.length; i++) {
+
     labels[i].classList.remove("webex-incorrect");
+
     labels[i].classList.remove("webex-correct");
+
   }
+
+
 
   /* add style */
+
   if (checked_button.value == "answer") {
+
     cl.add("webex-correct");
+
   } else {
+
     cl.add("webex-incorrect");
+
   }
 
+
+
   update_total_correct();
+
 }
+
+
 
 window.onload = function() {
+
   console.log("webex onload");
+
   /* set up solution buttons */
+
   var buttons = document.getElementsByTagName("button");
 
+
+
   for (var i = 0; i < buttons.length; i++) {
+
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
+
       buttons[i].onclick = b_func;
+
     }
+
   }
+
+
 
   var check_sections = document.getElementsByClassName("webex-check");
+
   console.log("check:", check_sections.length);
+
   for (var i = 0; i < check_sections.length; i++) {
+
     check_sections[i].classList.add("unchecked");
 
+
+
     let btn = document.createElement("button");
+
     btn.innerHTML = "Show Answers";
+
     btn.classList.add("webex-check-button");
+
     btn.onclick = check_func;
+
     check_sections[i].appendChild(btn);
 
+
+
     let spn = document.createElement("span");
+
     spn.classList.add("webex-total_correct");
+
     check_sections[i].appendChild(spn);
+
   }
+
+
 
   /* set up webex-solveme inputs */
+
   var solveme = document.getElementsByClassName("webex-solveme");
 
+
+
   for (var i = 0; i < solveme.length; i++) {
+
     /* make sure input boxes don't auto-anything */
+
     solveme[i].setAttribute("autocomplete","off");
+
     solveme[i].setAttribute("autocorrect", "off");
+
     solveme[i].setAttribute("autocapitalize", "off");
+
     solveme[i].setAttribute("spellcheck", "false");
+
     solveme[i].value = "";
 
+
+
     /* adjust answer for ignorecase or nospaces */
+
     var cl = solveme[i].classList;
+
     var real_answer = solveme[i].dataset.answer;
+
     if (cl.contains("ignorecase")) {
+
       real_answer = real_answer.toLowerCase();
+
     }
+
     if (cl.contains("nospaces")) {
+
       real_answer = real_answer.replace(/ /g, "");
+
     }
+
     solveme[i].dataset.answer = real_answer;
 
+
+
     /* attach checking function */
+
     solveme[i].onkeyup = solveme_func;
+
     solveme[i].onchange = solveme_func;
 
+
+
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
+
+
 
   /* set up radiogroups */
+
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
+
   for (var i = 0; i < radiogroups.length; i++) {
+
     radiogroups[i].onchange = radiogroups_func;
+
   }
+
+
 
   /* set up selects */
+
   var selects = document.getElementsByClassName("webex-select");
+
   for (var i = 0; i < selects.length; i++) {
+
     selects[i].onchange = select_func;
+
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
+
   }
 
+
+
   update_total_correct();
+
 }
 
-</script><script>
+
+
+</script>
+
+<script>
+
 // open rdrr links externally ----
 
+
+
 var exlinks = document.querySelectorAll("a[href^='https://rdrr.io']");
+
 var exlink_func = function(){
+
   window.open(this.href);
+
   return false;
+
 };
+
 for (var i = 0; i < exlinks.length; i++) {
+
     exlinks[i].addEventListener('click', exlink_func, false);
+
 }
+
+
 
 // visible second sidebar in mobile ----
 
+
+
 function move_sidebar() {
+
   var toc = document.getElementById("TOC");
+
   var small_sidebar = document.querySelector("#quarto-sidebar .sidebar-menu-container");
+
   var right_sidebar = document.getElementById("quarto-margin-sidebar");
 
+
+
   if (window.innerWidth < 768) {
+
     small_sidebar.append(toc);
+
   } else {
+
     right_sidebar.append(toc);
+
   }
+
 }
+
 move_sidebar();
+
 window.onresize = move_sidebar;
-</script><script id="quarto-html-after-body" type="application/javascript">
+
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1624,6 +1973,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       } else {
         el.classList.add('notransition');
       }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
     }
   }
   const toggleColorMode = (alternate) => {
@@ -1692,13 +2068,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return localAlternateSentinel;
     }
   }
-  let localAlternateSentinel = 'default';
+  const darkModeDefault = false;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
   // Dark / light mode switch
   window.quartoToggleColorScheme = () => {
     // Read the current dark / light value 
     let toAlternate = !hasAlternateSentinel();
     toggleColorMode(toAlternate);
     setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
   };
   // Ensure there is a toggle, if there isn't float one in the top right
   if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
@@ -1733,18 +2111,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1776,11 +2143,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1790,8 +2196,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1803,7 +2218,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1847,6 +2385,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1872,6 +2411,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1930,28 +2495,67 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./07-independent.html" class="pagination-link">
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./07-independent.html" class="pagination-link" aria-label="Two-sample t-test">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Two-sample t-test</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09-correlation.html" class="pagination-link">
+      <a href="./09-correlation.html" class="pagination-link" aria-label="Correlations">
         <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Correlations</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer">
+<footer class="footer">
+  <div class="nav-footer">
     <div class="nav-footer-left">
       &nbsp;
     </div>   
-    <div class="nav-footer-center">CC-BY (2024) Gaby Mahrholz Carolina E. Kuepper-Tetzel</div>
+    <div class="nav-footer-center">
+<p>CC-BY (2025) Gaby Mahrholz Carolina E. Kuepper-Tetzel</p>
+</div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":false,"selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
 
 
 </body></html>

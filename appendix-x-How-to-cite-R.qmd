@@ -9,12 +9,24 @@ To get the citation for the version of R you are using, simply run the `citation
 ```{r citation}
 citation()
 ```
+To extract the version of R you are using, run `R.version.string`
+
+```{r}
+R.version.string
+```
+
 
 To generate the citation for any packages you are using, you can also use the `citation()` function with the name of the package you wish to cite.
 
 ```{r cite-tidy}
 citation("tidyverse")
 ```
+Some citations will already display the version, but if they don't, use `packageVersion()` and add the package.
+
+```{r}
+packageVersion("tidyverse")
+```
+
 
 To generate the citation for the version of RStudio you are using, you can use the `RStudio.Vesion()` function:
 
@@ -22,8 +34,7 @@ To generate the citation for the version of RStudio you are using, you can use t
 RStudio.Version()
 ```
 
-Finally, here's an example of how that might look in the write-up of your method section:
+Finally, here's an example of how that might look in the write-up of your report:
 
-> Analysis was conducted using R (R Core Team, 2020), RStudio (Rstudio Team, 2020), and the tidyverse package (Wickham, 2017).
+> Analysis was conducted using R (Version 4.5.1; R Core Team, 2025), RStudio (Version 2024.12.1+563; Posit Team, 2025), and the tidyverse package (Version 2.0.0; Wickham, 2019).
 
-As noted, you may not have to do this for a while, but come back to this when you do because it's important to give the open-source community credit for their work.
