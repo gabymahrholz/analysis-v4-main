@@ -24,7 +24,7 @@ From here on, we will explore inferential statistics, including chi-square test,
 To help you choose the most appropriate test, refer to the simplified flowchart below. It guides you based on the types of variables - whether they are categorical or continuous.
 
 
-![Simplified flowchart to help select the most appropriate test (created with [drawio](https://draw.io/){target="_blank"}). [View larger version](images/Flowchart_tests_drawio.png){target="_blank"}](images/Flowchart_tests_drawio.png)
+![Simplified flowchart to help select the most appropriate test (created with [drawio](https://draw.io/){target="_blank"}). To view a larger version, click on the image or click [here](images/Flowchart_tests_drawio.png){target="_blank"}](images/Flowchart_tests_drawio.png)
 
 Each test is discussed in its respective chapter with guidance on when and how to apply it:
 
