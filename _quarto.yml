@@ -89,7 +89,6 @@ bibliography: include/references.bib
 csl: include/apa.csl
 format:
   html:
-    minimal: true
     theme:
       light:
       - flatly
