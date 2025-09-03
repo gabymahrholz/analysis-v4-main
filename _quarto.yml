@@ -89,7 +89,7 @@ bibliography: include/references.bib
 csl: include/apa.csl
 format:
   html:
-    link-external-icon: false
+    minimal: true
     theme:
       light:
       - flatly
@@ -106,7 +106,9 @@ format:
     - include/custom.scss
     - include/styles.css
     df-print: kable
-    code-link: true
+    code-link: false
+    code-annotations: false
+    anchor-sections: false
     code-fold: false
     code-line-numbers: true
     code-overflow: wrap

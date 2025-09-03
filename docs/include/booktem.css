@@ -53,11 +53,38 @@ pre {
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 
-/* fix code wrap with line numbers */
+
+/* fix code wrap with line numbers 
 pre > code.sourceCode > span {
   text-indent: -4em;
   padding-left: 4em;
 }
+
+*/
+
+/* --- Code wrapping alignment --- */
+
+/* When line numbers are ON */
+pre.numberSource > code.sourceCode > span {
+  display: inline-block;
+  /* width of the number gutter; tweak if your lines hit 3+ digits */
+  padding-left: 4em;
+  text-indent: -4em;
+  white-space: pre-wrap;   /* allow wrapping */
+}
+
+/* When line numbers are OFF */
+pre:not(.numberSource) > code.sourceCode > span {
+  display: inline;
+  padding-left: 0;
+  text-indent: 0;
+}
+
+/* Prevent negative indent from being clipped */
+pre.numberSource { overflow: visible; }
+
+
+
 
 /* special styles */
 

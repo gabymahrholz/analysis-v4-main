@@ -69,11 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/logo_analysis.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -496,7 +491,7 @@ window.Quarto = {
 
 
 <section id="intended-learning-outcomes" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+<h2 class="unnumbered" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter you should be able to:</p>
 <ul>
 <li>Apply and interpret a one-way ANOVA.</li>
@@ -505,10 +500,10 @@ window.Quarto = {
 </ul>
 </section>
 <section id="individual-walkthrough" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+<h2 class="unnumbered" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
 </section>
 <section id="activity-1-setup-download-the-data" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="activity-1-setup-download-the-data"><span class="header-section-number">12.1</span> Activity 1: Setup &amp; download the data</h2>
+<h2 data-number="12.1" data-anchor-id="activity-1-setup-download-the-data"><span class="header-section-number">12.1</span> Activity 1: Setup &amp; download the data</h2>
 <p>This week, we will be working with a new dataset. Follow the steps below to set up your project:</p>
 <ul>
 <li><strong>Create a new project</strong> and name it something meaningful (e.g., “2B_chapter12”, or “12_anova”). See <a href="01-basics.html#sec-project" class="quarto-xref"><span>Section 1.2</span></a> if you need some guidance.</li>
@@ -537,7 +532,7 @@ window.Quarto = {
 </ul>
 </section>
 <section id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">12.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
+<h2 data-number="12.2" data-anchor-id="activity-2-load-in-the-library-read-in-the-data-and-familiarise-yourself-with-the-data"><span class="header-section-number">12.2</span> Activity 2: Load in the library, read in the data, and familiarise yourself with the data</h2>
 <p>Today, we will use several packages: <code>effectsize</code>, <code>rstatix</code>, <code>tidyverse</code>, <code>qqplotr</code>, <code>car</code>, <code>emmeans</code>, and <code>pwr</code>, and, of course, the dataset <code>James_2015_Expt_2.csv</code>. The order in which the packages are loaded matters today. I believe we have used all of these packages before, but if you need help installing them, see <a href="01-basics.html#sec-install_packages" class="quarto-xref"><span>Section 1.5.1</span></a> for more details.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>???</span>
@@ -582,7 +577,7 @@ Solution
 </ul>
 </section>
 <section id="activity-3-preparing-the-dataframe" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="activity-3-preparing-the-dataframe"><span class="header-section-number">12.3</span> Activity 3: Preparing the dataframe</h2>
+<h2 data-number="12.3" data-anchor-id="activity-3-preparing-the-dataframe"><span class="header-section-number">12.3</span> Activity 3: Preparing the dataframe</h2>
 <p>Let’s start by wrangling the data we need for today’s analysis:</p>
 <ul>
 <li>Convert the <code>Condition</code> column into a factor and replace its values with descriptive labels.</li>
@@ -615,7 +610,7 @@ Solution
 </div>
 </section>
 <section id="activity-4-compute-descriptives" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="activity-4-compute-descriptives"><span class="header-section-number">12.4</span> Activity 4: Compute descriptives</h2>
+<h2 data-number="12.4" data-anchor-id="activity-4-compute-descriptives"><span class="header-section-number">12.4</span> Activity 4: Compute descriptives</h2>
 <p>Now, we can calculate the means and standard deviations for each experimental group.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -695,7 +690,7 @@ Solution
 </div>
 </section>
 <section id="activity-5-create-an-appropriate-plot" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="activity-5-create-an-appropriate-plot"><span class="header-section-number">12.5</span> Activity 5: Create an appropriate plot</h2>
+<h2 data-number="12.5" data-anchor-id="activity-5-create-an-appropriate-plot"><span class="header-section-number">12.5</span> Activity 5: Create an appropriate plot</h2>
 <p>Now, let’s visualise the data. The original paper uses a bar plot, but we’ll create a more informative plot instead.</p>
 <ul>
 <li>Generate a violin-boxplot with the number of intrusive memories on the y-axis and experimental group on the x-axis.</li>
@@ -723,7 +718,7 @@ Solution
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="12-one-way-anova_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="12-one-way-anova_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="12-one-way-anova_files/figure-html/unnamed-chunk-7-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="12-one-way-anova_files/figure-html/unnamed-chunk-7-1.png" width="672" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -734,9 +729,9 @@ Solution
 </div>
 </section>
 <section id="activity-6-store-the-anova-model-and-check-assumptions" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="activity-6-store-the-anova-model-and-check-assumptions"><span class="header-section-number">12.6</span> Activity 6: Store the ANOVA model and check assumptions</h2>
+<h2 data-number="12.6" data-anchor-id="activity-6-store-the-anova-model-and-check-assumptions"><span class="header-section-number">12.6</span> Activity 6: Store the ANOVA model and check assumptions</h2>
 <section id="the-anova-model" class="level3" data-number="12.6.1">
-<h3 data-number="12.6.1" class="anchored" data-anchor-id="the-anova-model"><span class="header-section-number">12.6.1</span> The ANOVA model</h3>
+<h3 data-number="12.6.1" data-anchor-id="the-anova-model"><span class="header-section-number">12.6.1</span> The ANOVA model</h3>
 <p>Before testing assumptions, we first need to store the ANOVA model.</p>
 <p>For designs with equal group sizes, we could use the <code>aov()</code> function from the <code>stats</code> package, which is part of <code>Base R</code>. The formula for <code>aov()</code> is:</p>
 <div class="cell">
@@ -755,18 +750,18 @@ Solution
 </div>
 </section>
 <section id="assumption-checks" class="level3" data-number="12.6.2">
-<h3 data-number="12.6.2" class="anchored" data-anchor-id="assumption-checks"><span class="header-section-number">12.6.2</span> Assumption checks</h3>
+<h3 data-number="12.6.2" data-anchor-id="assumption-checks"><span class="header-section-number">12.6.2</span> Assumption checks</h3>
 <p>Now that we have stored the model, we can proceed with the assumption checks. For a one-way independent ANOVA, the assumptions are the same as those for an independent t-test.</p>
 <section id="assumption-1-continuous-dv" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="assumption-1-continuous-dv">Assumption 1: Continuous DV</h4>
+<h4 class="unnumbered" data-anchor-id="assumption-1-continuous-dv">Assumption 1: Continuous DV</h4>
 <p>The dependent variable must be measured at interval or ratio level. We can confirm that by looking at <code>Intrusions</code>.</p>
 </section>
 <section id="assumption-2-data-are-independent" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="assumption-2-data-are-independent">Assumption 2: Data are independent</h4>
+<h4 class="unnumbered" data-anchor-id="assumption-2-data-are-independent">Assumption 2: Data are independent</h4>
 <p>There should be no relationship between the observations. Scores in one condition or observation should not influence scores in another. We assume this assumption holds for our data.</p>
 </section>
 <section id="assumption-3-the-residuals-of-the-dv-should-be-normally-distributed" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="assumption-3-the-residuals-of-the-dv-should-be-normally-distributed">Assumption 3: The residuals of the DV should be normally distributed</h4>
+<h4 class="unnumbered" data-anchor-id="assumption-3-the-residuals-of-the-dv-should-be-normally-distributed">Assumption 3: The residuals of the DV should be normally distributed</h4>
 <p>Again, this assumption applies to <strong>each group</strong>.</p>
 <p>There are several ways to test normality, and here we will use QQ plots from the <code>qqplotr</code> package.</p>
 <div class="cell">
@@ -780,7 +775,7 @@ Solution
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><a href="12-one-way-anova_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="12-one-way-anova_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></a></p>
+<p><a href="12-one-way-anova_files/figure-html/unnamed-chunk-11-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="12-one-way-anova_files/figure-html/unnamed-chunk-11-1.png" width="672" class="figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -788,7 +783,7 @@ Solution
 <p>Overall, the assumption of normality appears to hold.</p>
 </section>
 <section id="assumption-4-homoscedasticity-homogeneity-of-variance" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="assumption-4-homoscedasticity-homogeneity-of-variance">Assumption 4: Homoscedasticity (homogeneity of variance)</h4>
+<h4 class="unnumbered" data-anchor-id="assumption-4-homoscedasticity-homogeneity-of-variance">Assumption 4: Homoscedasticity (homogeneity of variance)</h4>
 <p>This assumption requires the variances across the four groups to be similar (i.e., homoscedasticity). If the variances differ significantly between groups, this is known as heteroscedasticity.</p>
 <p>We can test this using <strong>Levene’s Test for Equality of Variance</strong>, available in the <code>car</code> package. The <code>leveneTest()</code> function takes the formula <code>DV ~ IV</code> and the data object as arguments. Here’s how to apply it:</p>
 <div class="cell">
@@ -828,7 +823,7 @@ Solution
 </section>
 </section>
 <section id="activity-7-compute-a-one-way-anova" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="activity-7-compute-a-one-way-anova"><span class="header-section-number">12.7</span> Activity 7: Compute a one-way ANOVA</h2>
+<h2 data-number="12.7" data-anchor-id="activity-7-compute-a-one-way-anova"><span class="header-section-number">12.7</span> Activity 7: Compute a one-way ANOVA</h2>
 <p>We can compute the ANOVA output using the <code>anova_test()</code> function from the <code>rstatix</code> package. This function supports both model and formula input and allows additional arguments, such as specifying the type of ANOVA, calculating effect sizes, or manually defining within- or between-subject factors.</p>
 <p>More information can be found on the <a href="https://www.rdocumentation.org/packages/rstatix/versions/0.7.2/topics/anova_test" target="_blank">rdocumentation support page</a></p>
 <p>In this example, we will use <code>anova_test()</code> on the model <code>mod</code>. Since <code>mod</code> already contains the data and formula, we only need to specify a few additional arguments:</p>
@@ -1010,9 +1005,9 @@ What do I do if my One-way ANOVA uses a within-subject design???
 </div>
 </section>
 <section id="activity-8-compute-post-hoc-tests-and-effect-sizes" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="activity-8-compute-post-hoc-tests-and-effect-sizes"><span class="header-section-number">12.8</span> Activity 8: Compute post-hoc tests and effect sizes</h2>
+<h2 data-number="12.8" data-anchor-id="activity-8-compute-post-hoc-tests-and-effect-sizes"><span class="header-section-number">12.8</span> Activity 8: Compute post-hoc tests and effect sizes</h2>
 <section id="post-hoc-comparisons" class="level3" data-number="12.8.1">
-<h3 data-number="12.8.1" class="anchored" data-anchor-id="post-hoc-comparisons"><span class="header-section-number">12.8.1</span> Post-hoc comparisons</h3>
+<h3 data-number="12.8.1" data-anchor-id="post-hoc-comparisons"><span class="header-section-number">12.8.1</span> Post-hoc comparisons</h3>
 <p>So far, we know that the model is significant, meaning there are differences between groups. However, we do not yet know which groups differ from one another.</p>
 <p>One approach would be to run independent Welch t-tests for each pairwise comparison between the four groups (1 vs 2, 1 vs 3, 1 vs 4, etc.). This would involve some data wrangling (e.g., filtering and dropping factor levels) which is quite time-consuming. Furthermore, we would need to apply corrections for multiple comparisons manually. (Even though, note that the original authors did not mention whether or not they corrected for multiple comparisons.)</p>
 <p><strong>A quicker and more efficient way</strong> to perform these comparisons is by using the <code>emmeans()</code> function from the <code>emmeans</code> package. This function computes all possible pairwise t-tests and automatically applies a correction for multiple comparisons to the p-values.</p>
@@ -1050,7 +1045,7 @@ P value adjustment: bonferroni method for 6 tests </code></pre>
 </ol>
 </section>
 <section id="effect-sizes-for-each-comparison" class="level3" data-number="12.8.2">
-<h3 data-number="12.8.2" class="anchored" data-anchor-id="effect-sizes-for-each-comparison"><span class="header-section-number">12.8.2</span> Effect sizes for each comparison</h3>
+<h3 data-number="12.8.2" data-anchor-id="effect-sizes-for-each-comparison"><span class="header-section-number">12.8.2</span> Effect sizes for each comparison</h3>
 <p>To compute effect sizes, we can use the <code>cohens_d</code> function from the <code>rstatix</code> package.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">cohens_d</span>(<span class="at">data =</span> james_data, </span>
@@ -1141,7 +1136,7 @@ P value adjustment: bonferroni method for 6 tests </code></pre>
 </section>
 </section>
 <section id="activity-9-sensitivity-power-analysis" class="level2" data-number="12.9">
-<h2 data-number="12.9" class="anchored" data-anchor-id="activity-9-sensitivity-power-analysis"><span class="header-section-number">12.9</span> Activity 9: Sensitivity power analysis</h2>
+<h2 data-number="12.9" data-anchor-id="activity-9-sensitivity-power-analysis"><span class="header-section-number">12.9</span> Activity 9: Sensitivity power analysis</h2>
 <p>As always, we want to determine the smallest effect size that this study could detect, given its design and sample size.</p>
 <p>To do this, we use the <code>pwr.anova.test()</code> function from the <code>pwr</code> package. The key arguments for this function are:</p>
 <ul>
@@ -1190,7 +1185,7 @@ NOTE: n is number in each group</code></pre>
 <p>The smallest effect size (Cohen’s <span class="math inline">\(f\)</span>) that can be detected with four groups, 18 participants in each group, a significance level of 0.05, and 80% power was <span class="math inline">\(f = .40\)</span>. This was smaller than the effect size determined by the ANOVA (<span class="math inline">\(\eta_p^2 = 0.143; f = 0.41)\)</span>. Therefore, the study was sufficiently powered.</p>
 </section>
 <section id="activity-10-the-write-up" class="level2" data-number="12.10">
-<h2 data-number="12.10" class="anchored" data-anchor-id="activity-10-the-write-up"><span class="header-section-number">12.10</span> Activity 10: The write-up</h2>
+<h2 data-number="12.10" data-anchor-id="activity-10-the-write-up"><span class="header-section-number">12.10</span> Activity 10: The write-up</h2>
 <p>A one-way between-subjects ANOVA was conducted on the 7-day diary post-intervention to examine the effect of cognitive task on overall intrusion scores. The analysis revealed a statistically significant effect, <span class="math inline">\(F(3, 68) = 3.79, p = .014, \eta_p^2 = 0.143\)</span>.</p>
 <p>Since the ANOVA result was significant, post-hoc pairwise comparisons were conducted with Bonferroni corrections for multiple comparisons to identify which groups differed significantly.</p>
 <p>Comparisons demonstrated that the reactivation-plus-Tetris group <span class="math inline">\((M = 1.89, SD = 1.75)\)</span> experienced significantly fewer intrusive memories compared to the no-task control group <span class="math inline">\((M = 5.11, SD = 4.23)\)</span>, <span class="math inline">\(t(68) = 3.04, p_{adj} = .020, d = 1.00\)</span>. This effect is considered large.</p>
@@ -1198,9 +1193,9 @@ NOTE: n is number in each group</code></pre>
 <p>There were no significant differences between the no-task control group and the Tetris-only group <span class="math inline">\((t(68) = 1.15, p_{adj} = 1, d = 0.34)\)</span>, the no-task control group and the reactivation-only group <span class="math inline">\((t(68) = 0.26, p_{adj} = 1, d = 0.07)\)</span>, the reactivation-plus-Tetris group and the Tetris-only group <span class="math inline">\((t(68) = 1.89, p_{adj} = .379, d = 0.84)\)</span>, or the Tetris-only group and the reactivation-only group <span class="math inline">\((t(68) = 0.89, p_{adj} = 1, d = 0.30)\)</span>.</p>
 </section>
 <section id="test-your-knowledge" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+<h2 class="unnumbered" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
 <section id="question-1" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+<h4 class="unnumbered" data-anchor-id="question-1">Question 1</h4>
 <p><strong>Why do we use a one-way ANOVA instead of multiple independent t-tests when comparing three or more groups?</strong></p>
 <div id="radio_GXGJCKPVLB" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_GXGJCKPVLB" value="x"> <span>ANOVA is the only test that works when sample sizes are unequal.</span></label><label><input type="radio" autocomplete="off" name="radio_GXGJCKPVLB" value="x"> <span>ANOVA does not require the dependent variable to be normally distributed.</span></label><label><input type="radio" autocomplete="off" name="radio_GXGJCKPVLB" value="answer"> <span>ANOVA reduces the risk of Type I errors caused by multiple comparisons.</span></label><label><input type="radio" autocomplete="off" name="radio_GXGJCKPVLB" value="x"> <span>ANOVA can test for interactions between independent variables.</span></label>
@@ -1230,7 +1225,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-2" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+<h4 class="unnumbered" data-anchor-id="question-2">Question 2</h4>
 <p><strong>Which assumption must be met for an ANOVA to be valid?</strong></p>
 <div id="radio_BBNBLAQSSU" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_BBNBLAQSSU" value="x"> <span>The groups must have different sample sizes.</span></label><label><input type="radio" autocomplete="off" name="radio_BBNBLAQSSU" value="x"> <span>The independent variable must be measured on an interval scale.</span></label><label><input type="radio" autocomplete="off" name="radio_BBNBLAQSSU" value="x"> <span>Each group must have an equal mean before running ANOVA.</span></label><label><input type="radio" autocomplete="off" name="radio_BBNBLAQSSU" value="answer"> <span>The residuals of the dependent variable should be normally distributed in each group.</span></label>
@@ -1262,7 +1257,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-3" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+<h4 class="unnumbered" data-anchor-id="question-3">Question 3</h4>
 <p><strong>After finding a significant ANOVA result, which of the following statements about post-hoc tests is true?</strong></p>
 <div id="radio_QDKBWPOQGN" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_QDKBWPOQGN" value="x"> <span>Post-hoc tests are unnecessary unless more than five groups are being compared.</span></label><label><input type="radio" autocomplete="off" name="radio_QDKBWPOQGN" value="answer"> <span>Post-hoc tests help identify which specific groups differ after a significant ANOVA result.</span></label><label><input type="radio" autocomplete="off" name="radio_QDKBWPOQGN" value="x"> <span>Post-hoc tests should only be conducted if Levene’s test is significant.</span></label><label><input type="radio" autocomplete="off" name="radio_QDKBWPOQGN" value="x"> <span>A significant ANOVA result automatically tells us which groups are different without further tests.</span></label>
@@ -1292,7 +1287,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-4" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+<h4 class="unnumbered" data-anchor-id="question-4">Question 4</h4>
 <p><strong>A researcher reports an effect size of ηₚ² = 0.02 after conducting a one-way ANOVA. How should this effect size be interpreted?</strong></p>
 <div id="radio_XFOOLJXMTM" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_XFOOLJXMTM" value="x"> <span>Moderate effect</span></label><label><input type="radio" autocomplete="off" name="radio_XFOOLJXMTM" value="answer"> <span>Small effect</span></label><label><input type="radio" autocomplete="off" name="radio_XFOOLJXMTM" value="x"> <span>Large effect</span></label><label><input type="radio" autocomplete="off" name="radio_XFOOLJXMTM" value="x"> <span>Cannot determine without the F-ratio</span></label>
@@ -1951,13 +1946,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -2039,316 +2027,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
     }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
 });
 </script>
 <nav class="page-navigation">
@@ -2377,7 +2055,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":false,"descPosition":"bottom","closeEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"loop":false,"selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

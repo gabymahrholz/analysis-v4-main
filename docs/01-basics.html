@@ -69,11 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="./images/logos/logo_analysis.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -478,7 +473,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="intended-learning-outcomes" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
+<h2 class="unnumbered" data-anchor-id="intended-learning-outcomes">Intended Learning Outcomes</h2>
 <p>By the end of this chapter, you should be able to:</p>
 <ul>
 <li>Re-familiarise yourself with setting up projects</li>
@@ -487,25 +482,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 <section id="individual-walkthrough" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
+<h2 class="unnumbered" data-anchor-id="individual-walkthrough"><span style="color: #F39C12; text-transform: uppercase;">Individual Walkthrough</span></h2>
 </section>
 <section id="r-and-r-studio" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="r-and-r-studio"><span class="header-section-number">1.1</span> R and R Studio</h2>
+<h2 data-number="1.1" data-anchor-id="r-and-r-studio"><span class="header-section-number">1.1</span> R and R Studio</h2>
 <p>Remember, R is a programming language that you will write code in and RStudio is an Integrated Development Environment (IDE) which makes working with R easier as it’s more user friendly. You need both components for this course.</p>
 <p>If this is not ringing any bells yet, have a quick browse through the <a href="https://psyteachr.github.io/data-skills-v2/sec-intro.html?q=RMark#sec-intro-r" target="_blank">materials from year 1</a> to refresh your memory.</p>
 <section id="r-server" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="r-server"><span class="header-section-number">1.1.1</span> R server</h3>
+<h3 data-number="1.1.1" data-anchor-id="r-server"><span class="header-section-number">1.1.1</span> R server</h3>
 <p>Use the server <em>only</em> if you are unable to install R and RStudio on your computer (e.g., if you are using a Chromebook) or if you encounter issues while installing R on your own machine. Otherwise, you should install R and RStudio directly on your own computer. R and RStudio are already installed on the <em>R server</em>.</p>
 <p>You will find the link to the server on Moodle.</p>
 </section>
 <section id="installing-r-and-rstudio-on-your-computer" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="installing-r-and-rstudio-on-your-computer"><span class="header-section-number">1.1.2</span> Installing R and RStudio on your computer</h3>
+<h3 data-number="1.1.2" data-anchor-id="installing-r-and-rstudio-on-your-computer"><span class="header-section-number">1.1.2</span> Installing R and RStudio on your computer</h3>
 <p>The <a href="https://psyteachr.github.io/RSetGo/" target="_blank">RSetGo book</a> provides detailed instructions on how to install R and RStudio on your computer. It also includes links to walkthroughs for installing R on different types of computers and operating systems.</p>
 <p>If you had R and RStudio installed on your computer last year, we recommend updating to the latest versions. In fact, it’s a good practice to update them at the start of each academic year. Detailed guidance can be found in <a href="appendix-b-updating-packages.html" class="quarto-xref"><span>Appendix B</span></a>.</p>
 <p>Once you have installed or updated R and RStudio, return to this chapter.</p>
 </section>
 <section id="settings-for-reproducibility" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="settings-for-reproducibility"><span class="header-section-number">1.1.3</span> Settings for Reproducibility</h3>
+<h3 data-number="1.1.3" data-anchor-id="settings-for-reproducibility"><span class="header-section-number">1.1.3</span> Settings for Reproducibility</h3>
 <p>By now, you should be aware that the Psychology department at the University of Glasgow places a strong emphasis on reproducibility, open science, and raising awareness about questionable research practices (QRPs) and how to avoid them. Therefore, it’s important that you work in a reproducible manner so that others (and your future self) can understand and check your work. This also makes it easier for you to reuse your work in the future.</p>
 <p>Always start with a clear workspace. If your <code>Global Environment</code> contains anything from a previous session, you can’t be certain whether your current code is working as intended or if it’s using objects created earlier.</p>
 <p>To ensure a clean and reproducible workflow, there are a few settings you should adjust immediately after installing or updating RStudio. In <if>Tools &gt; Global Options… General tab</if></p>
@@ -515,7 +510,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/rstudio_settings_reproducibility.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Reproducibility settings in Global Options"><img src="images/rstudio_settings_reproducibility.png" class="img-fluid figure-img" alt="Reproducibility settings in Global Options"></a></p>
+<p><a href="images/rstudio_settings_reproducibility.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Reproducibility settings in Global Options"><img src="images/rstudio_settings_reproducibility.png" alt="Reproducibility settings in Global Options" class="figure-img"></a></p>
 <figcaption>Reproducibility settings in Global Options</figcaption>
 </figure>
 </div>
@@ -535,7 +530,7 @@ Tip for keeping taps on parentheses
 <p>To enable the feature, go to <if>Tools &gt; Global Options… Code tab &gt; Display tab</if> and tick the last checkbox “Use rainbow parentheses”</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/rainbow.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Enable Rainbow parenthesis"><img src="images/rainbow.PNG" class="img-fluid figure-img" alt="Enable Rainbow parenthesis"></a></p>
+<p><a href="images/rainbow.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Enable Rainbow parenthesis"><img src="images/rainbow.PNG" alt="Enable Rainbow parenthesis" class="figure-img"></a></p>
 <figcaption>Enable Rainbow parenthesis</figcaption>
 </figure>
 </div>
@@ -544,7 +539,7 @@ Tip for keeping taps on parentheses
 </div>
 </section>
 <section id="rstudio-panes" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="rstudio-panes"><span class="header-section-number">1.1.4</span> RStudio panes</h3>
+<h3 data-number="1.1.4" data-anchor-id="rstudio-panes"><span class="header-section-number">1.1.4</span> RStudio panes</h3>
 <p>RStudio has four main panes each in a quadrant of your screen:</p>
 <ul>
 <li>Source pane</li>
@@ -608,7 +603,7 @@ Quiz
 </section>
 </section>
 <section id="sec-project" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="sec-project"><span class="header-section-number">1.2</span> Activity 1: Creating a new project</h2>
+<h2 data-number="1.2" data-anchor-id="sec-project"><span class="header-section-number">1.2</span> Activity 1: Creating a new project</h2>
 <p>It’s important to create a new RStudio project whenever you start a new project. This practice makes it easier to work in multiple contexts, such as when analysing different datasets simultaneously. Each RStudio project has its own folder location, workspace, and working directories, which keeps all your data and RMarkdown documents organised in one place.</p>
 <p>Last year, you learnt how to create projects on the server, so you already know the steps. If cannot quite recall how that was done, go back to the <a href="https://psyteachr.github.io/data-skills-v2/sec-intro.html?q=RMark#new-project" target="_blank">Level 1 materials</a>.</p>
 <p>On your own computer, open RStudio, and complete the following steps in this order:</p>
@@ -622,7 +617,7 @@ Quiz
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/project_setup.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Creating a new project"><img src="images/project_setup.gif" class="img-fluid figure-img" alt="Creating a new project"></a></p>
+<p><a href="images/project_setup.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Creating a new project"><img src="images/project_setup.gif" alt="Creating a new project" class="figure-img"></a></p>
 <figcaption>Creating a new project</figcaption>
 </figure>
 </div>
@@ -657,7 +652,7 @@ Don’t nest projects
 </div>
 </section>
 <section id="sec-rmd" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="sec-rmd"><span class="header-section-number">1.3</span> Activity 2: Create a new R Markdown file</h2>
+<h2 data-number="1.3" data-anchor-id="sec-rmd"><span class="header-section-number">1.3</span> Activity 2: Create a new R Markdown file</h2>
 <ul>
 <li>Open a new R Markdown document: click <if>File &gt; New File &gt; R Markdown</if> or click on the little page icon with a green plus sign (top left).</li>
 <li>Give it a meaningful <code>Title</code> (e.g., Level 2 chapter 1) - you can also change the title later. Feel free to add your name or GUID in the <code>Author</code> field author name. Keep the <code>Default Output Format</code> as HTML.</li>
@@ -666,28 +661,28 @@ Don’t nest projects
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Rmd_setup.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Creating a new .Rmd file"><img src="images/Rmd_setup.gif" class="img-fluid figure-img" alt="Creating a new .Rmd file"></a></p>
+<p><a href="images/Rmd_setup.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Creating a new .Rmd file"><img src="images/Rmd_setup.gif" alt="Creating a new .Rmd file" class="figure-img"></a></p>
 <figcaption>Creating a new <code>.Rmd</code> file</figcaption>
 </figure>
 </div>
 <p>Remember, an R Markdown document or <code>.Rmd</code> has “white space” (i.e., the markdown for formatted text) and “grey parts” (i.e., code chunks) in the default colour scheme (see <a href="#fig-rmd" class="quarto-xref">Figure&nbsp;<span>1.1</span></a>). R Markdown is a powerful tool for creating dynamic documents because it allows you to integrate code and regular text seamlessly. You can then knit your <code>.Rmd</code> using the <code>knitr</code> package to create a final document as either a webpage (HTML), a PDF, or a Word document (.docx). We’ll only knit to HTML documents in this course.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/rm_components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="R markdown anatomy (image from https://intro2r.com/r-markdown-anatomy.html)"><img src="images/rm_components.png" class="img-fluid figure-img" alt="R markdown anatomy (image from https://intro2r.com/r-markdown-anatomy.html)"></a></p>
+<p><a href="images/rm_components.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="R markdown anatomy (image from https://intro2r.com/r-markdown-anatomy.html)"><img src="images/rm_components.png" alt="R markdown anatomy (image from https://intro2r.com/r-markdown-anatomy.html)" class="figure-img"></a></p>
 <figcaption>R markdown anatomy (image from <a href="https://intro2r.com/r-markdown-anatomy.html" target="_blank">https://intro2r.com/r-markdown-anatomy.html</a>)</figcaption>
 </figure>
 </div>
 <section id="markdown" class="level3" data-number="1.3.1">
-<h3 data-number="1.3.1" class="anchored" data-anchor-id="markdown"><span class="header-section-number">1.3.1</span> Markdown</h3>
+<h3 data-number="1.3.1" data-anchor-id="markdown"><span class="header-section-number">1.3.1</span> Markdown</h3>
 <p>The markdown space in an <code>.Rmd</code> is ideal for writing notes that explain your code and document your thought process. Use this space to clarify what your code is doing, why certain decisions were made, and any insights or conclusions you have drawn along the way. These notes are invaluable when revisiting your work later, helping you (or others) understand the rationale behind key decisions, such as setting inclusion/exclusion criteria or interpreting the results of assumption tests. Effectively documenting your work in the markdown space enhances both the clarity and reproducibility of your analysis.</p>
 <p>The markdown space offers a variety of formatting options to help you organise and present your notes effectively. Here are a few of them that can enhance your documentation:</p>
 <section id="heading-levels" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="heading-levels">Heading levels</h4>
+<h4 class="unnumbered" data-anchor-id="heading-levels">Heading levels</h4>
 <p>There is a variety of <strong>heading levels</strong> to make use of, using the <code>#</code> symbol.</p>
 <div class="columns">
 <div class="column">
 <section id="you-would-incorporate-this-into-your-text-as" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="you-would-incorporate-this-into-your-text-as">You would incorporate this into your text as:</h5>
+<h5 class="unnumbered" data-anchor-id="you-would-incorporate-this-into-your-text-as">You would incorporate this into your text as:</h5>
 <p># Heading level 1</p>
 <p>## Heading level 2</p>
 <p>### Heading level 3</p>
@@ -697,8 +692,8 @@ Don’t nest projects
 </section>
 </div><div class="column">
 <section id="and-it-will-be-displayed-in-your-knitted-html-file-as" class="level5 unnumbered">
-<h5 class="unnumbered anchored" data-anchor-id="and-it-will-be-displayed-in-your-knitted-html-file-as">And it will be displayed in your knitted html file as:</h5>
-<p><a href="images/heading_levels.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/heading_levels.PNG" class="img-fluid"></a></p>
+<h5 class="unnumbered" data-anchor-id="and-it-will-be-displayed-in-your-knitted-html-file-as">And it will be displayed in your knitted html file as:</h5>
+<p><a href="images/heading_levels.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="images/heading_levels.PNG"></a></p>
 </section>
 </div>
 </div>
@@ -721,7 +716,7 @@ ERROR: My heading levels don’t render properly when knitting
 </div>
 </section>
 <section id="unordered-and-ordered-lists" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="unordered-and-ordered-lists">Unordered and ordered lists</h4>
+<h4 class="unnumbered" data-anchor-id="unordered-and-ordered-lists">Unordered and ordered lists</h4>
 <p>You can also include <strong>unordered lists</strong> and <strong>ordered lists</strong>. Click on the tabs below to see how they are incorporated</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">unordered lists</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">ordered lists</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">ordered lists magic</a></li></ul>
@@ -798,7 +793,7 @@ My list items don’t render properly when knitting
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>The great thing though is that you don’t need to know your alphabet or number sequences. R markdown will fix that for you</p>
 <p>If I type into my <code>.Rmd</code>…</p>
-<p><a href="images/list_magic.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/list_magic.PNG" class="img-fluid"></a></p>
+<p><a href="images/list_magic.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="images/list_magic.PNG"></a></p>
 <p>…it will be rendered in the knitted HTML output as…</p>
 <ol start="3" type="1">
 <li>list item 3</li>
@@ -844,7 +839,7 @@ ERROR: The labels of the sub-items are not what I thought they would be. You sai
 </div>
 </section>
 <section id="emphasis" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="emphasis">Emphasis</h4>
+<h4 class="unnumbered" data-anchor-id="emphasis">Emphasis</h4>
 <p>Include <strong>emphasis</strong> to draw attention to keywords in your text:</p>
 <table class="caption-top table">
 <thead>
@@ -872,7 +867,7 @@ ERROR: The labels of the sub-items are not what I thought they would be. You sai
 </section>
 </section>
 <section id="sec-chunks" class="level3" data-number="1.3.2">
-<h3 data-number="1.3.2" class="anchored" data-anchor-id="sec-chunks"><span class="header-section-number">1.3.2</span> Code chunks</h3>
+<h3 data-number="1.3.2" data-anchor-id="sec-chunks"><span class="header-section-number">1.3.2</span> Code chunks</h3>
 <p>Everything you write inside the <strong>code chunks</strong> will be interpreted as code and executed by R. Code chunks start with <code>```</code> followed by an <code>{r}</code> which specifies the coding language R, some space for code, and ends with <code>```</code>. If you accidentally delete one of those backticks, your code won’t run and/or your text parts will be interpreted as part of the code chunks or vice versa. This should be evident from the colour change - more white than expected typically indicates missing starting backticks, whilst too much grey/not enough white suggests missing ending backticks. But no need to fret if that happens - just add the missing backticks manually.</p>
 <p>You can <strong>insert a new code chunk</strong> in several ways:</p>
 <ul>
@@ -883,10 +878,10 @@ ERROR: The labels of the sub-items are not what I thought they would be. You sai
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-rmd" class="quarto-float quarto-figure quarto-figure-center anchored">
+<div id="fig-rmd" class="quarto-float quarto-figure quarto-figure-center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-rmd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="images/default_highlighted.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;1.1: Default .Rmd with highlighting - names in pink and knitr display options in purple"><img src="images/default_highlighted.png" class="img-fluid figure-img"></a>
+<a href="images/default_highlighted.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Figure&nbsp;1.1: Default .Rmd with highlighting - names in pink and knitr display options in purple"><img src="images/default_highlighted.png" class="figure-img"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rmd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1.1: Default <code>.Rmd</code> with highlighting - names in pink and knitr display options in purple
@@ -961,7 +956,7 @@ Important
 <p>One last thing: In your newly created <code>.Rmd</code> file, delete everything below line 12 (keep the set-up code chunk) and save your <code>.Rmd</code> by clicking on the disc symbol.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/delete_12.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Delete everything below line 12"><img src="images/delete_12.gif" class="img-fluid figure-img" alt="Delete everything below line 12"></a></p>
+<p><a href="images/delete_12.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Delete everything below line 12"><img src="images/delete_12.gif" alt="Delete everything below line 12" class="figure-img"></a></p>
 <figcaption>Delete everything below line 12</figcaption>
 </figure>
 </div>
@@ -997,7 +992,7 @@ Solution
 </section>
 </section>
 <section id="sec-download_data_ch1" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="sec-download_data_ch1"><span class="header-section-number">1.4</span> Activity 3: Download the data</h2>
+<h2 data-number="1.4" data-anchor-id="sec-download_data_ch1"><span class="header-section-number">1.4</span> Activity 3: Download the data</h2>
 <p>The data for chapters 1-3. Download it here: <a href="data/data_ch1.zip" title="download">data_ch1.zip</a>. There are 2 csv files contained in a zip folder. One is the data file we are going to use today <code>prp_data_reduced.csv</code> and the other is an Excel file <code>prp_codebook</code> that explains the variables in the data.</p>
 <p>The first step is to <strong>unzip the zip folder</strong> so that the files are placed within the same folder as your project.</p>
 <ul>
@@ -1027,7 +1022,7 @@ Screenshots for “unzipping a zip folder”
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/pic1.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="images/pic1.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="images/pic1.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="images/pic1.PNG" class="quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1036,7 +1031,7 @@ Screenshots for “unzipping a zip folder”
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/pic23.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="images/pic23.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="images/pic23.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="images/pic23.PNG" class="quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1045,7 +1040,7 @@ Screenshots for “unzipping a zip folder”
 <div class="quarto-layout-cell" style="flex-basis: 100.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/pic45.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/pic45.PNG" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
+<p><a href="images/pic45.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="images/pic45.PNG" class="quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 </div>
@@ -1079,9 +1074,9 @@ Screenshots for “unzipping a zip folder”
 </ul>
 </section>
 <section id="activity-4-installing-packages-loading-packages-and-reading-in-data" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="activity-4-installing-packages-loading-packages-and-reading-in-data"><span class="header-section-number">1.5</span> Activity 4: Installing packages, loading packages, and reading in data</h2>
+<h2 data-number="1.5" data-anchor-id="activity-4-installing-packages-loading-packages-and-reading-in-data"><span class="header-section-number">1.5</span> Activity 4: Installing packages, loading packages, and reading in data</h2>
 <section id="sec-install_packages" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="sec-install_packages"><span class="header-section-number">1.5.1</span> Installing packages</h3>
+<h3 data-number="1.5.1" data-anchor-id="sec-install_packages"><span class="header-section-number">1.5.1</span> Installing packages</h3>
 <p>When you install R and RStudio for the first time (or after an update), most of the packages we will be using won’t be pre-installed. Before you can load new packages like <code>tidyverse</code>, you will need to install them.</p>
 <p>If you try to load a package that has not been installed yet, you will receive an error message that looks something like this: <code>Error in library(tidyverse) : there is no package called 'tidyverse'</code>.</p>
 <p>To fix this, simply install the package first. <strong>In the console</strong>, type the command <code>install.packages("tidyverse")</code>. This <strong>only needs to be done once after a fresh installation</strong>. After that, you will be able to load the <code>tidyverse</code> package into your library whenever you open RStudio.</p>
@@ -1101,7 +1096,7 @@ Install packages from the console only
 <p>Note, there will be other packages used in later chapters that will also need to be installed before their first use, so this error is not limited to <code>tidyverse</code>.</p>
 </section>
 <section id="loading-packages-and-reading-in-data" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="loading-packages-and-reading-in-data"><span class="header-section-number">1.5.2</span> Loading packages and reading in data</h3>
+<h3 data-number="1.5.2" data-anchor-id="loading-packages-and-reading-in-data"><span class="header-section-number">1.5.2</span> Loading packages and reading in data</h3>
 <p>The first step is to load in the packages we need and read in the data. Today, we’ll only be using <code>tidyverse</code>, and <code>read_csv()</code> will help us store the data from <code>prp_data_reduced.csv</code> in an object called data_prp.</p>
 <p>Copy the code into a code chunk in your <code>.Rmd</code> file and run it. You can either click the <code>green error</code> to run the entire code chunk, or use the shortcut <code>Ctrl + Enter</code> (Windows) or <code>Cmd + Enter</code> (Mac) to run a line of code/ pipe from the Rmd.</p>
 <div class="cell">
@@ -1133,14 +1128,14 @@ dbl (74): Gender, Secondyeargrade, Opptional_mod, Research_exp, Plan_prereg,...
 </section>
 </section>
 <section id="sec-familiarise" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="sec-familiarise"><span class="header-section-number">1.6</span> Activity 5: Familiarise yourself with the data</h2>
+<h2 data-number="1.6" data-anchor-id="sec-familiarise"><span class="header-section-number">1.6</span> Activity 5: Familiarise yourself with the data</h2>
 <ul>
 <li>Look at the <strong>Codebook</strong> to get a feel of the variables in the dataset and how they have been measured. Note that some of the columns were deleted in the dataset you have been given.</li>
 <li>You’ll notice that some questionnaire data was collected at 2 different time points (i.e., SATS28, QRPs, Understanding_OS)</li>
 <li>some of the data was only collected at one time point (i.e., supervisor judgements, OS_behav items, and Included_prereg variables are t2-only variables)</li>
 </ul>
 <section id="first-glimpse-at-the-data" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="first-glimpse-at-the-data"><span class="header-section-number">1.6.1</span> First glimpse at the data</h3>
+<h3 data-number="1.6.1" data-anchor-id="first-glimpse-at-the-data"><span class="header-section-number">1.6.1</span> First glimpse at the data</h3>
 <p>Before you start wrangling your data, it is important to understand what kind of data you’re working with and what the format of your dataframe looks like.</p>
 <p>As you may have noticed, <code>read_csv()</code> provides a <strong>message</strong> listing the data types in your dataset and how many columns are of each type. Plus, it shows a few examples columns for each data type.</p>
 <p>To obtain more detailed information about your data, you have several options. Click on the individual tabs to see the different options available. Test them out in your own <code>.Rmd</code> file and use whichever method you prefer (but do it).</p>
@@ -1164,7 +1159,7 @@ Warning
 <p>In the <code>Global Environment</code>, click the blue arrow icon next to the object name <code>data_prp</code>. This action will expand the object, revealing details about its columns. The <code>$</code> symbol is commonly used in Base R to access a specific column within your dataframe.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/data_prp.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Visual inspection of the data"><img src="images/data_prp.PNG" class="img-fluid figure-img" alt="Visual inspection of the data"></a></p>
+<p><a href="images/data_prp.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-13" title="Visual inspection of the data"><img src="images/data_prp.PNG" alt="Visual inspection of the data" class="figure-img"></a></p>
 <figcaption>Visual inspection of the data</figcaption>
 </figure>
 </div>
@@ -1389,7 +1384,7 @@ Hang on, where is the rest of my data? Why do I only see 50 columns?
 <p>One common source of confusion is not seeing all your columns when you open up a data object as a tab. This is because RStudio shows you a maximum of 50 columns at a time. If you have more than 50 columns, navigate with the arrows to see the remaining columns.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/50_col.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Showing 50 columns at a time"><img src="images/50_col.PNG" class="img-fluid figure-img" alt="Showing 50 columns at a time"></a></p>
+<p><a href="images/50_col.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-14" title="Showing 50 columns at a time"><img src="images/50_col.PNG" alt="Showing 50 columns at a time" class="figure-img"></a></p>
 <figcaption>Showing 50 columns at a time</figcaption>
 </figure>
 </div>
@@ -1432,7 +1427,7 @@ Explain the solution
 <p>The <strong>data type information</strong> actually comes from the output when using the <code>read_csv()</code> function. Did you notice the information on <strong>Column specification</strong> (see screenshot below)?</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/col_spec.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="message from read_csv() when reading in the data"><img src="images/col_spec.PNG" class="img-fluid figure-img" alt="message from read_csv() when reading in the data"></a></p>
+<p><a href="images/col_spec.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-15" title="message from read_csv() when reading in the data"><img src="images/col_spec.PNG" alt="message from read_csv() when reading in the data" class="figure-img"></a></p>
 <figcaption>message from <code>read_csv()</code> when reading in the data</figcaption>
 </figure>
 </div>
@@ -1464,7 +1459,7 @@ Possible solution
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/knitted_markdown.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="The output rendered in a knitted html file"><img src="images/knitted_markdown.PNG" class="img-fluid figure-img" alt="The output rendered in a knitted html file"></a></p>
+<p><a href="images/knitted_markdown.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-16" title="The output rendered in a knitted html file"><img src="images/knitted_markdown.PNG" alt="The output rendered in a knitted html file" class="figure-img"></a></p>
 <figcaption>The output rendered in a knitted html file</figcaption>
 </figure>
 </div>
@@ -1475,7 +1470,7 @@ Possible solution
 </div>
 </section>
 <section id="sec-datatypes" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2" class="anchored" data-anchor-id="sec-datatypes"><span class="header-section-number">1.6.2</span> Data types</h3>
+<h3 data-number="1.6.2" data-anchor-id="sec-datatypes"><span class="header-section-number">1.6.2</span> Data types</h3>
 <p>Each variable has a <strong>data type</strong>, such as numeric (numbers), character (text), and logical (TRUE/FALSE values), or a special class of factor. As you have just seen, our <code>data_prp</code> only has character and numeric columns (so far).</p>
 <p><strong>Numeric data</strong> can be double (<code>dbl</code>) or integer (<code>int</code>). Doubles can have decimal places (e.g., 1.1). Integers are the whole numbers (e.g., 1, 2, -1) and are displayed with the suffix L (e.g., 1L). This is not overly important but might leave you less puzzled the next time you see an L after a number.</p>
 <p><strong>Characters</strong> (also called “strings”) is anything written between quotation marks. This is usually text, but in special circumstances, a number can be a character if it placed within quotation marks. This can happen when you are recoding variables. It might not be too obvious at the time, but you won’t be able to calculate anything if the number is a character</p>
@@ -1565,7 +1560,7 @@ Possible solution
 <p>A <strong>factor</strong> is a specific type of integer or character that lets you assign the order of the categories. This becomes useful when you want to display certain categories in “the correct order” either in a dataframe (see <em>arrange</em>) or when plotting (see <a href="04-dataviz.html" class="quarto-xref"><span>Chapter 4</span></a>/ <a href="05-dataviz2.html" class="quarto-xref"><span>Chapter 5</span></a>).</p>
 </section>
 <section id="variable-types" class="level3" data-number="1.6.3">
-<h3 data-number="1.6.3" class="anchored" data-anchor-id="variable-types"><span class="header-section-number">1.6.3</span> Variable types</h3>
+<h3 data-number="1.6.3" data-anchor-id="variable-types"><span class="header-section-number">1.6.3</span> Variable types</h3>
 <p>You’ve already encountered them in <a href="https://psyteachr.github.io/data-skills-v2/intro-to-probability.html" target="_blank">Level 1</a> but let’s refresh. Variables can be classified as <strong>continuous</strong> (numbers) or <strong>categorical</strong> (labels).</p>
 <p><strong>Categorical</strong> variables are properties you can count. They can be <strong>nominal</strong>, where the categories don’t have an order (e.g., gender) or <strong>ordinal</strong> (e.g., Likert scales either with numeric values 1-7 or with character labels such as “agree”, “neither agree nor disagree”, “disagree”). Categorical data may also be <strong>factors</strong> rather than characters.</p>
 <p><strong>Continuous variables</strong> are properties you can measure and calculate sums/ means/ etc. They may be rounded to the nearest whole number, but it should make sense to have a value between them. Continuous variables always have a <strong>numeric</strong> data type (i.e.&nbsp;<code>integer</code> or <code>double</code>).</p>
@@ -1805,12 +1800,12 @@ Revealing the mystery code that created <code>data_quiz</code>
 </section>
 </section>
 <section id="test-your-knowledge" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
+<h2 class="unnumbered" data-anchor-id="test-your-knowledge"><span style="color: #F39C12; text-transform: uppercase;">Test your knowledge</span></h2>
 <p>Are you ready for some knowledge check questions to test your understanding of the chapter? We also have some faulty codes. See if you can spot what’s wrong with them.</p>
 <section id="knowledge-check" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="knowledge-check">Knowledge check</h3>
+<h3 class="unnumbered" data-anchor-id="knowledge-check">Knowledge check</h3>
 <section id="question-1" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-1">Question 1</h4>
+<h4 class="unnumbered" data-anchor-id="question-1">Question 1</h4>
 One of the key first steps when we open RStudio is to:
 <div id="radio_QKTCMQBHFN" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_QKTCMQBHFN" value="x"> <span>put on some music as we will be here a while</span></label><label><input type="radio" autocomplete="off" name="radio_QKTCMQBHFN" value="answer"> <span>open an existing project or create a new one</span></label><label><input type="radio" autocomplete="off" name="radio_QKTCMQBHFN" value="x"> <span>make a coffee</span></label><label><input type="radio" autocomplete="off" name="radio_QKTCMQBHFN" value="x"> <span>check out the news</span></label>
@@ -1833,7 +1828,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-2" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-2">Question 2</h4>
+<h4 class="unnumbered" data-anchor-id="question-2">Question 2</h4>
 <p>When using the default environment colour settings for RStudio, what colour would the background of a code chunk be in R Markdown? <select class="webex-select"><option value="blank"></option><option value="x">red</option><option value="x">white</option><option value="x">green</option><option value="answer">grey</option></select></p>
 <p>When using the default environment colour settings for RStudio, what colour would the background of normal text be in R Markdown? <select class="webex-select"><option value="blank"></option><option value="x">red</option><option value="answer">white</option><option value="x">green</option><option value="x">grey</option></select></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
@@ -1854,7 +1849,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-3" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-3">Question 3</h4>
+<h4 class="unnumbered" data-anchor-id="question-3">Question 3</h4>
 Code chunks start and end with:
 <div id="radio_HVMTQDDEXW" class="webex-radiogroup">
 <label><input type="radio" autocomplete="off" name="radio_HVMTQDDEXW" value="x"> <span>three single quotes</span></label><label><input type="radio" autocomplete="off" name="radio_HVMTQDDEXW" value="answer"> <span>three backticks</span></label><label><input type="radio" autocomplete="off" name="radio_HVMTQDDEXW" value="x"> <span>three double quotes</span></label><label><input type="radio" autocomplete="off" name="radio_HVMTQDDEXW" value="x"> <span>three single asterisks</span></label>
@@ -1877,7 +1872,7 @@ Explain this answer
 </div>
 </section>
 <section id="question-4" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-4">Question 4</h4>
+<h4 class="unnumbered" data-anchor-id="question-4">Question 4</h4>
 <p>What is the correct way to include a code chunk in RMarkdown that will be executed but neither the code nor its output will be shown in the final HTML document? <select class="webex-select"><option value="blank"></option><option value="x">{r, echo=FALSE}</option><option value="x">{r, eval=FALSE}</option><option value="answer">{r, include=FALSE}</option><option value="x">{r, results=‘hide’}</option></select></p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
@@ -1903,10 +1898,10 @@ Explain this answer
 </section>
 </section>
 <section id="error-mode" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="error-mode">Error mode</h3>
+<h3 class="unnumbered" data-anchor-id="error-mode">Error mode</h3>
 <p>Some of these codes have mistakes in them, other code chunks are not quite producing what was aimed for. Your task is to spot anything faulty, explain why the things happened, and perhaps try to fix them.</p>
 <section id="question-5" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-5">Question 5</h4>
+<h4 class="unnumbered" data-anchor-id="question-5">Question 5</h4>
 <p>You want to read in data with the <code>read_csv()</code> function. You have just stated R, created a new <code>.Rmd</code> file, and typed the following code into your code chunk.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1931,14 +1926,14 @@ Explain the solution
 </div>
 </section>
 <section id="question-6" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-6">Question 6</h4>
+<h4 class="unnumbered" data-anchor-id="question-6">Question 6</h4>
 <p>You want to read in data with the <code>read_csv()</code> function. This time, you are certain you have loaded in tidyverse first. The code is as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb23-2"><a href="#cb23-2"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The error message shows <code>'data.csv' does not exist in current working directory</code>. You check your folder and it looks like this:</p>
-<p><a href="images/error_ch1_01.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="images/error_ch1_01.PNG" class="img-fluid"></a></p>
+<p><a href="images/error_ch1_01.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="images/error_ch1_01.PNG"></a></p>
 <p>Why is there an error message?</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
@@ -1964,7 +1959,7 @@ Explain the solution
 </div>
 </section>
 <section id="question-7" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-7">Question 7</h4>
+<h4 class="unnumbered" data-anchor-id="question-7">Question 7</h4>
 <p>You want to load <code>tidyverse</code> into the library. The code is as follows:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1990,9 +1985,9 @@ Explain the solution
 </div>
 </section>
 <section id="question-8" class="level4 unnumbered">
-<h4 class="unnumbered anchored" data-anchor-id="question-8">Question 8</h4>
+<h4 class="unnumbered" data-anchor-id="question-8">Question 8</h4>
 <p>You knitted your <code>.Rmd</code> into a html but the output is not as expected. You see the following:</p>
-<p><a href="images/error_knitted.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="images/error_knitted.PNG" class="img-fluid"></a></p>
+<p><a href="images/error_knitted.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="images/error_knitted.PNG"></a></p>
 <p>Why did the file not knit properly?</p>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
@@ -2007,7 +2002,7 @@ Explain the solution
 <div id="callout-30" class="callout-30-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>There is a backtick missing in the code chunk. If you check your <code>.Rmd</code> file, you can see that the code chunk does not show up in grey which means it’s one of the 3 backticks at the beginning of the chunk.</p>
-<p><a href="images/error_ch1_08.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="images/error_ch1_08.PNG" class="img-fluid"></a></p>
+<p><a href="images/error_ch1_08.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="images/error_ch1_08.PNG"></a></p>
 <p>FIX: Add a single backtick manually where it’s missing.</p>
 </div>
 </div>
@@ -2650,13 +2645,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   } else {
     toggleColorMode(false);
   }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
   const isCodeAnnotation = (el) => {
     for (const clz of el.classList) {
       if (clz.startsWith('code-annotation-')) {                     
@@ -2738,316 +2726,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
     }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
-          }
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
-        return container.innerHTML
-      } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      // TODO in 1.5, we should make sure this works without a callout special case
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
-      }
-    }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
-          }
-        } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
-            if (note !== null) {
-              const html = processXRef(id, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
 });
 </script>
 <nav class="page-navigation">
@@ -3076,7 +2754,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"loop":false,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
