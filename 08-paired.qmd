@@ -272,8 +272,7 @@ The dependent variable needs to be measured at interval or ratio level. We can c
 
 #### Assumption 2: Data are independent {.unnumbered}
 
-For a paired t-test this assumption applies to the **pair of values**, i.e., each pair of values needs to be from a separate participant. We assume this assumption holds for our data.
-
+For a paired t-test, first, we need to check that we have both measures for each participant (i.e., no missing values). The assumption of independence applies then to the **pair of values**, i.e., each pair of values needs to be from a separate participant. We assume this assumption holds for our data.
 
 
 #### Assumption 3: Normality {.unnumbered}

@@ -50,7 +50,7 @@ The data and supplementary materials are available on OSF: [https://osf.io/ghv6m
 
 ## Activity 2: Library and data for today
 
-Today, we’ll be using the following packages: `rstatix`, `tidyverse`, `car`, `lsr`, and `pwr`. You may need to install the packages before using them (see @sec-install_packages if you need some help). Make sure that `rstatix` is loaded in before tidyverse to avoid masking certain functions that we will need later.
+Today, we’ll be using the following packages: `rstatix`, `tidyverse`, `car`, `lsr`, and `pwr`. You may need to install the packages before using them (see @sec-install_packages if you need some help). Make sure that `rstatix` is loaded in before `tidyverse` to avoid masking certain functions that we will need later.
 
 We will also read in the data from `MeansSimonTask.csv`  and the demographic information from `DemoSimonTask.csv`.
 

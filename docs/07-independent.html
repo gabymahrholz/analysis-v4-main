@@ -535,7 +535,7 @@ window.Quarto = {
 </section>
 <section id="activity-2-library-and-data-for-today" class="level2" data-number="7.2">
 <h2 data-number="7.2" data-anchor-id="activity-2-library-and-data-for-today"><span class="header-section-number">7.2</span> Activity 2: Library and data for today</h2>
-<p>Today, we’ll be using the following packages: <code>rstatix</code>, <code>tidyverse</code>, <code>car</code>, <code>lsr</code>, and <code>pwr</code>. You may need to install the packages before using them (see <a href="01-basics.html#sec-install_packages" class="quarto-xref"><span>Section 1.5.1</span></a> if you need some help). Make sure that <code>rstatix</code> is loaded in before tidyverse to avoid masking certain functions that we will need later.</p>
+<p>Today, we’ll be using the following packages: <code>rstatix</code>, <code>tidyverse</code>, <code>car</code>, <code>lsr</code>, and <code>pwr</code>. You may need to install the packages before using them (see <a href="01-basics.html#sec-install_packages" class="quarto-xref"><span>Section 1.5.1</span></a> if you need some help). Make sure that <code>rstatix</code> is loaded in before <code>tidyverse</code> to avoid masking certain functions that we will need later.</p>
 <p>We will also read in the data from <code>MeansSimonTask.csv</code> and the demographic information from <code>DemoSimonTask.csv</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load in the packages</span></span>
@@ -1225,8 +1225,8 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <section id="question-1" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-1">Question 1</h4>
 <p><strong>What is the main purpose of an independent t-test?</strong></p>
-<div id="radio_XNXRFFHMPV" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_XNXRFFHMPV" value="x"> <span>To compare means between two related groups</span></label><label><input type="radio" autocomplete="off" name="radio_XNXRFFHMPV" value="answer"> <span>To compare means between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_XNXRFFHMPV" value="x"> <span>To test for differences in variances between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_XNXRFFHMPV" value="x"> <span>To assess the correlation between two continuous variables</span></label>
+<div id="radio_FGPAIOZPCA" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_FGPAIOZPCA" value="x"> <span>To compare means between two related groups</span></label><label><input type="radio" autocomplete="off" name="radio_FGPAIOZPCA" value="x"> <span>To assess the correlation between two continuous variables</span></label><label><input type="radio" autocomplete="off" name="radio_FGPAIOZPCA" value="x"> <span>To test for differences in variances between two independent groups</span></label><label><input type="radio" autocomplete="off" name="radio_FGPAIOZPCA" value="answer"> <span>To compare means between two independent groups</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -1248,8 +1248,8 @@ Explain this answer
 <section id="question-2" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-2">Question 2</h4>
 <p><strong>Which of the following is a key assumption of the two-sample t-test that should be considered?</strong></p>
-<div id="radio_CZAOZKIQDE" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_CZAOZKIQDE" value="x"> <span>The independent variable is normally distributed</span></label><label><input type="radio" autocomplete="off" name="radio_CZAOZKIQDE" value="x"> <span>The dependent variable is categorical</span></label><label><input type="radio" autocomplete="off" name="radio_CZAOZKIQDE" value="answer"> <span>The observations are independent of each other</span></label><label><input type="radio" autocomplete="off" name="radio_CZAOZKIQDE" value="x"> <span>The sample sizes must be equal</span></label>
+<div id="radio_DQAZVXGMWS" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DQAZVXGMWS" value="x"> <span>The independent variable is normally distributed</span></label><label><input type="radio" autocomplete="off" name="radio_DQAZVXGMWS" value="x"> <span>The dependent variable is categorical</span></label><label><input type="radio" autocomplete="off" name="radio_DQAZVXGMWS" value="answer"> <span>The observations are independent of each other</span></label><label><input type="radio" autocomplete="off" name="radio_DQAZVXGMWS" value="x"> <span>The sample sizes must be equal</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
@@ -1271,8 +1271,8 @@ Explain this answer
 <section id="question-3" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-3">Question 3</h4>
 <p><strong>How can you recognise the difference between the output of a Student’s t-test and a Welch t-test?</strong></p>
-<div id="radio_GFRPWRJRFQ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_GFRPWRJRFQ" value="x"> <span>The Welch t-test uses medians instead of means, unlike the Student’s t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_GFRPWRJRFQ" value="answer"> <span>The Welch t-test reports non-integer degrees of freedom, while the Student’s t-test reports integer degrees of freedom.</span></label><label><input type="radio" autocomplete="off" name="radio_GFRPWRJRFQ" value="x"> <span>The Welch t-test includes a confidence interval, while the Student’s t-test does not.</span></label><label><input type="radio" autocomplete="off" name="radio_GFRPWRJRFQ" value="x"> <span>The Welch t-test reports an effect size directly, while the Student’s t-test does not.</span></label>
+<div id="radio_WYSVHRDHSO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WYSVHRDHSO" value="answer"> <span>The Welch t-test reports non-integer degrees of freedom, while the Student’s t-test reports integer degrees of freedom.</span></label><label><input type="radio" autocomplete="off" name="radio_WYSVHRDHSO" value="x"> <span>The Welch t-test includes a confidence interval, while the Student’s t-test does not.</span></label><label><input type="radio" autocomplete="off" name="radio_WYSVHRDHSO" value="x"> <span>The Welch t-test uses medians instead of means, unlike the Student’s t-test.</span></label><label><input type="radio" autocomplete="off" name="radio_WYSVHRDHSO" value="x"> <span>The Welch t-test reports an effect size directly, while the Student’s t-test does not.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
@@ -1300,8 +1300,8 @@ Explain this answer
 <section id="question-4" class="level4 unnumbered">
 <h4 class="unnumbered" data-anchor-id="question-4">Question 4</h4>
 <p><strong>You perform an independent t-test and find <span class="math inline">\(t(48)=2.10,p=.042,d=0.58\)</span>. How would you interpret these results?</strong></p>
-<div id="radio_KGJEQDQEXK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KGJEQDQEXK" value="answer"> <span>There is a significant difference between the two groups, with a medium effect size.</span></label><label><input type="radio" autocomplete="off" name="radio_KGJEQDQEXK" value="x"> <span>There is no significant difference between the two groups</span></label><label><input type="radio" autocomplete="off" name="radio_KGJEQDQEXK" value="x"> <span>There is a significant difference between the two groups, with a small effect size.</span></label><label><input type="radio" autocomplete="off" name="radio_KGJEQDQEXK" value="x"> <span>There is a significant difference between the two groups, with a large effect size.</span></label>
+<div id="radio_RWHHSHCZWO" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_RWHHSHCZWO" value="x"> <span>There is no significant difference between the two groups</span></label><label><input type="radio" autocomplete="off" name="radio_RWHHSHCZWO" value="x"> <span>There is a significant difference between the two groups, with a small effect size.</span></label><label><input type="radio" autocomplete="off" name="radio_RWHHSHCZWO" value="answer"> <span>There is a significant difference between the two groups, with a medium effect size.</span></label><label><input type="radio" autocomplete="off" name="radio_RWHHSHCZWO" value="x"> <span>There is a significant difference between the two groups, with a large effect size.</span></label>
 </div>
 <div class="callout callout-style-default callout-caution no-icon callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
@@ -2375,7 +2375,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom","loop":false});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

@@ -450,6 +450,15 @@ sats_t1 <- sats_t1 %>%
          SATS28_Difficulty_Time1_mean = Difficulty)
 ```
 
+::: {.callout-note}
+## select vs rename
+
+In this example, you could technically use either `select()` or `rename()`. Since `sats_t1` only has 5 columns, selecting and renaming them at the same time would work fine — you’d just need to remember to include the `Code` column. 
+
+However, imagine you had a dataframe with 156 columns and you only wanted to rename 3 of them. Using `select()` would mean retyping every single column you want to keep, which would be a massive time sink (unless you actually want to end up with only 3 columns in your dataframe). If you want to keep all the columns, `rename()` is much more efficient, because it simply updates the names you specify while leaving everything else unchanged.
+:::
+
+
 ::: {.callout-caution collapse="true" icon="false"}
 
 ## Show final `sats_t1` output

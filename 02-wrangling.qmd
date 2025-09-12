@@ -238,6 +238,12 @@ demo_by_gender <- data_prp %>%
 demo_by_gender
 ```
 
+
+::: {.callout-note}
+We used `summarise()` here because we wanted percentages alongside counts in a summary table. If you want to add percentages (or any new variable) to an existing dataframe without collapsing it, use `mutate()`.
+:::
+
+
 ::: {.callout-tip collapse="true"}
 
 ## Tip for decimal places - use `round()`
@@ -519,7 +525,9 @@ Which function of the Wickham Six would NOT modify the original dataframe? `r mc
 | `summarise()`| Creates a new dataframe returning one row for each combination of grouping variables |
 
 
-Technically, the first five functions operate on the existing data object, making adjustments like sorting the data (e.g., with `arrange()`), reducing the number of rows (e.g., with `filter()`), reducing the number of columns (e.g., with `select()`), or adding new columns (e.g., with `mutate()`). In contrast, `summarise()` fundamentally alters the structure of the original dataframe by generating a completely new dataframe that contains only summary statistics, rather than retaining the original rows and columns.
+Technically, the first five functions operate on the existing data object, making adjustments such as sorting the data (e.g., with `arrange()`), reducing the number of rows (e.g., with `filter()`), reducing the number of columns (e.g., with `select()`), or adding new columns (e.g., with `mutate()`). 
+
+In contrast, `summarise()` changes the structure of the original dataframe by creating a new data object that contains only summary statistics instead of the original rows and columns. When combined with `group_by()`, this new data object retains only the grouping variables and the summary statistics defined in `summarise()` for each group.
 
 :::
 
