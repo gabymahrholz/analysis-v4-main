@@ -287,7 +287,6 @@ mod <- aov_ez(id = "Participant_ID",
        type = 3,
        anova_table = list(es = "pes"))
 ```
-
 :::
 
 

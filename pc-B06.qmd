@@ -8,3 +8,182 @@ library(webexercises)
 **This is the pair coding activity related to @sec-factorial.**
 
 
+## Task 1: Open the R project for the lab {.unnumbered}
+
+## Task 2: Create a new `.Rmd` file {.unnumbered}
+
+## Task 3: Load in the library and read in the data {.unnumbered}
+
+The data should already be in your project folder. If you want a fresh copy, you can download the data again here: [data_pair_coding](data/data_pair_coding.zip "download").
+
+We are using the packages `afex`, `tidyverse`, `performance`, `emmeans`, and `effectsize` today.
+
+Today, we need to read in `dog_data_clean_wide.csv` and `dog_data_clean_long`. 
+
+```{r reading in data for me, echo=FALSE, message=FALSE}
+library(afex)
+library(tidyverse)
+library(performance)
+library(emmeans)
+library(effectsize)
+
+dog_data_wide <- read_csv("data/dog_data_clean_wide.csv")
+dog_data_long <- read_csv("data/dog_data_clean_long.csv")
+
+dog_factorial_anova <- dog_data_long %>%
+  select(RID, Year_of_Study, Stage, SHS) %>% 
+  drop_na() %>% 
+  group_by(RID) %>% 
+  mutate(RID_count = n()) %>% 
+  filter(RID_count == 2)
+
+mod <- aov_ez(id = "RID",
+       data = dog_factorial_anova, 
+       between = "Year_of_Study", 
+       within = "Stage",
+       dv = "SHS", 
+       type = 3,
+       anova_table = list(es = "pes")) 
+
+```
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r eval=FALSE}
+library(afex)
+library(tidyverse)
+library(performance)
+library(emmeans)
+library(effectsize)
+
+dog_data_wide <- read_csv("dog_data_clean_wide.csv")
+dog_data_long <- read_csv("dog_data_clean_long.csv")
+  
+```
+:::
+
+## Task 4: Tidy data & Selecting variables of interest  {.unnumbered}
+
+
+Let's define a potential research question:
+
+**How does the Year of Study (1st, 2nd, 3rd, 4th, 5th or above) and Time point (pre- and post-intervention scores) affect perceived Happiness?**
+
+This is a 2 x 5 mixed factorial ANOVA, with one `r mcq(c(x = "between-subjects factor", answer = "within-subjects factor"))` (Stage: pre vs. post) and one `r mcq(c(answer = "between-subjects factor", x = "within-subjects factor"))` (year of study: 1st, 2nd, 3rd, 4th, 5th or above). The `r mcq(c(x = "independent", answer = "dependent"))` variable is self-reported Happiness Score.
+
+Not much tidying to do today. All the variables and average scores are already tidied up in `dog_data_long`. We just need to check for missing values in our variables of interest. Best to do this on a reduced dataframe.
+
+* select the variables of interest and store them in a new data object called `dog_factorial_anova`
+* check for missing values and remove participants who did not have pre- and post-intervention Happiness recorded
+
+
+::: {.callout-note collapse="true" icon="false"}
+
+## Hints
+
+* You need 4 variables: Participant ID, Year of Study, Time point of recording (i.e., pre- or post-intervention), and the self-reported Happiness scores.
+* You should have identified 1 participant who did not complete both ratings. There are 2 options on how to achieve that: 
+  * Option 1: identify the missing value visually and filter out their participant ID (works well with smaller dataframes, but not very reproducible) 
+  * Option 2: remove the missing value line first and then add a new columns to count how often each participant is now represented in the data object and then only include Participants with a count of 2 ratings in this case (which is the more reproducible option and more appropriate with larger dataframes or when there are loads of missing values).
+
+:::
+
+::: {.callout-caution collapse="true" icon="false"}
+
+## Solution
+
+
+```{r}
+## Option 1
+dog_factorial_anova <- dog_data_long %>%
+  select(RID, Year_of_Study, Stage, SHS) %>% 
+  filter(RID != 12)
+
+## Option 2
+dog_factorial_anova <- dog_data_long %>%
+  select(RID, Year_of_Study, Stage, SHS) %>% 
+  drop_na() %>% 
+  group_by(RID) %>% 
+  mutate(RID_count = n()) %>% 
+  filter(RID_count == 2)
+
+```
+
+:::
+
+
+
+## Task 5: Model creating & Assumption checks {.unnumbered}
+
+Now, let's create our ANOVA model.
+
+According to our research question we have the following model variables *(use the spelling of the variable names in `dog_factorial_anova`)*: 
+
+* Dependent Variable (DV): `r fitb("SHS")`, assessed pre- and post-intervention
+* Independent Variable 1 (IV 1): `r fitb("Year_of_Study")` (1st, 2nd, 3rd, 4th, 5th or above) 
+* Independent Variable 2 (IV 2): `r fitb("Stage")` (pre- and post-intervention scores)
+
+
+As a reminder, the ANOVA model has the following structure:
+
+```{r eval=FALSE}
+mod <- aov_ez(id = "NULL",
+       data = NULL, 
+       between = "NULL", 
+       within = "NULL",
+       dv = "NULL", 
+       type = 3,
+       anova_table = list(es = "NULL"))
+
+```
+
+
+Let’s use this template to fill in our variables of interest and store the model in a separate object called `mod`. The effect size should be partial eta squared (`"pes"`):
+
+::: {.callout-caution collapse="true" icon="false"} 
+
+## Solution 
+
+```{r eval=FALSE}
+mod <- aov_ez(id = "RID",
+       data = dog_factorial_anova, 
+       between = "Year_of_Study", 
+       within = "Stage",
+       dv = "SHS", 
+       type = 3,
+       anova_table = list(es = "pes")) 
+```
+
+:::
+
+
+Let's check some assumptions.
+
+```{r}
+check_model(mod)
+check_homogeneity(mod, method = "levene")
+```
+
+Are the following assumptions met or violated?
+
+* Assumption 1: Continuous DV? `r mcq(c(answer = "Assumption met", "Assumption violated"))`
+* Assumption 2: Data are independent? `r mcq(c(answer = "Assumption met", "Assumption violated"))`
+* Assumption 3: Normality? `r mcq(c(answer = "Assumption met", "Assumption violated"))`
+* Assumption 4: Homoscedasticity? `r mcq(c(answer = "Assumption met", "Assumption violated"))`
+
+
+
+## Task 6: Interpreting the output {.unnumbered}
+
+Call the model object to view the ANOVA results:
+
+```{r}
+mod
+```
+
+How do you interpret the results?
+
+`r longmcq(sample(c(answer = "The main effect of Year of Study and the interaction are not significant, but the main effect of timepoint is.", x = "The main effect of Year of Study and the interaction are significant, but the main effect of timepoint is not.", x = "The effect size (ηₚ² = 0.067) suggests a small effect of timepoint on the outcome variable.", x = "The F-value (F = 19.86) indicates a large effect of timepoint on the outcome variable.")))`
+
